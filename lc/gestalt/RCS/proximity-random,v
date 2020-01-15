@@ -1,0 +1,44 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.10.25.21.47.50;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Oct 25 22:47:50 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# ........x...x...x..........x...x
+
+my $paused = 0;
+
+sub bang {
+    my $self = shift;
+    return if $paused;
+    my $line = $self->line(0);
+    $line =~ s/(.)(.*)/$2$1/;
+    my $char = $1;
+    $self->line(0, $line);
+    $self->modified;
+
+    return unless $char eq 'x';
+
+    $self->t({speed => 10, sample => pick()});
+    
+}
+
+sub pick { "made/" . int(rand(7)) }@

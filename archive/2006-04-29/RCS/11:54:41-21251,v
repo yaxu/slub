@@ -1,0 +1,28 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2006.04.29.10.54.41;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Apr 29 11:54:41 2006
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->t({sample => "mouth/0"});
+}@

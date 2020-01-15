@@ -1,0 +1,35 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.11.24.21.33.57;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Wed Nov 24 21:33:57 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    my $point = $self->sin(10);
+    my $play;
+    if (rand() > $point) {
+        $play = $self->{bangs} % 4;
+    }
+    else {
+        $play = rand() > 0.75;
+    }
+}@

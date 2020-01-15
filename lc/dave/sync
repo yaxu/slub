@@ -1,0 +1,101 @@
+# 968
+# 110
+# 110
+# 1228261186.21
+
+my $metro = 0;
+
+my $bpm = 110;
+use Time::HiRes;
+use Net::OpenSoundControl::Client;
+
+my $adeip = "111.112.113.4";
+my $daveip = "158.223.59.95";
+my $haskport = 6040;
+my $haskosc;
+my $adeosc;
+sub bang {
+    my $self = shift;
+    $self->line(2, $self->{tpm});
+    if ($metro) {
+        if ($self->{bangs} % 4 == 0) {
+            $self->t({sample => "drumtraks/2",
+                      speed => ($self->{bangs} % 16 == 0 ? 1.25 : 1)
+                     }
+                    );
+        }
+    }
+
+    if ($self->{bangs} % 8 == 0) {
+        $self->line(0, $self->{bangs});
+        $self->modified;
+        $self->ade();
+    }
+    if ($bpm != $self->{bpmer}) {
+#        $self->{c}->bpm_send($bpm);
+         $self->bpm($bpm);
+        $self->{bpmer} = $bpm;
+        if (not $adeosc) {
+          $adeosc = Net::OpenSoundControl::Client->new(Host => $adeip,
+                                                       Port => 1777
+                                                      );
+        }
+        if (not $haskosc) {
+          $haskosc = Net::OpenSoundControl::Client->new(Host => "127.0.0.1",
+                                                        Port => $haskport
+                                                       );
+warn("hm: $haskosc\n");
+        }
+
+        warn("send bpm change\n");
+        $adeosc->send(['/PureEvents/SetBPM',
+                       'f', $self->{tpm}
+                      ]
+                     );
+        $haskosc->send(['/bpm',
+                        'f', $self->{tpm},
+                        'f', $self->{start},
+                        'i', $self->{total_ticks}
+                       ]
+                      );
+      $self->line(3, $self->{start});
+    }
+
+    $self->vbang();
+    if ($self->{bangs} % (16 * 32) == 0) {
+        $self->vbar(4);
+    }
+}
+
+##
+
+{
+    my $daveosc;
+    my $foo;
+    sub ade {
+        my ($self) = @_;
+        $self->line(1, $self->{bpmer});
+        if ($self->{bangs} % 16 == 0) {
+          if (not $daveosc) {
+              $daveosc =
+                 Net::OpenSoundControl::Client->new(Host => $daveip,
+                                                    Port => 4000
+                                                   );
+          }
+#         Time::HiRes::sleep(0.0002);
+          $daveosc->send(['/sync', 'i', 8, 'f', $self->{tpm}])
+             if $daveosc;
+        }
+                 
+        if (not $adeosc) {
+          $adeosc = Net::OpenSoundControl::Client->new(Host => $adeip,
+                                                       Port => 1777
+                                                      );
+        }
+        #Time::HiRes::sleep(0.1);
+        $adeosc->send(['/PureEvents/ReleasePendingEvents', 
+                       'f', $self->{tpm}
+                      ]
+                     ) if $adeosc;
+    }
+}

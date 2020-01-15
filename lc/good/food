@@ -1,0 +1,53 @@
+my $dry = 0;
+
+sub bang {
+    my $self = shift;
+    $self->{foo} ||= 0.1;
+    if (!$dry) {
+      if ($self->{bangs} % 128 == 0) {
+         $self->{foo} += 0.2 - rand(0.1);
+         while ($self->{foo} > 1) {
+           $self->{foo}--
+         }
+         while ($self->{foo} < 0) {
+           $self->{foo}++;
+         }
+      }
+    }
+    else {
+      $self->{foo} = 0.01;
+    }
+    if ($self->{bangs} % 32 == 0) {
+
+        $self->t({sample => "made/5", volume => 2,
+                  delay => $self->{foo}, delay2 => $self->{foo},
+                  accellerate => -0.00001, shape => 0,
+                  #loops => 9,
+                  pan => 0.8, pan_to => -0.8
+                 }
+                );
+    }
+    if ($self->{bangs} % 16 == 8) {
+        $self->t({sample => "made/0", volume => 3,
+                  delay => $self->{foo}, speed => 3,
+                  loops => rand() > 0.5 ? 1 : 2,
+                 }
+                );
+    }
+
+    if ($self->{bangs} % 4 ==0) {
+       $self->t({sample => "drum/0", volume => 7});
+    }
+    if ($self->{bangs} % 8 ==4) {
+       $self->t({sample => "future/6", volume => 7, speed => 8.9, loops => 2.1,
+                 pan => -0.8, accellerate => -0.00001
+                }
+               );
+       $self->t({sample => "future/6", volume => 7, speed => 9, loops => 2,
+                 pan => 0.8
+                }
+               );
+    }
+
+
+}

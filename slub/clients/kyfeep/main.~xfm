@@ -1,0 +1,133 @@
+object mainform: Tmainform
+  Left = 209
+  Top = 133
+  AutoScroll = False
+  Caption = 'mainform'
+  ClientHeight = 308
+  ClientWidth = 528
+  Color = clBackground
+  Font.Color = clBlack
+  Font.Height = 8
+  Font.Name = 'adobe-helvetica'
+  Font.Pitch = fpVariable
+  Font.Style = []
+  ParentFont = False
+  PixelsPerInch = 75
+  TextHeight = 11
+  TextWidth = 4
+  object mainpanel: TPanel
+    Left = 0
+    Top = 0
+    Width = 528
+    Height = 308
+    Align = alClient
+    BevelInner = bvLowered
+    BevelWidth = 2
+    TabOrder = 0
+    object PaintBox1: TPaintBox
+      Left = 4
+      Top = 4
+      Width = 520
+      Height = 300
+      Align = alClient
+      OnClick = PaintBox1Click
+    end
+    object StringGrid1: TStringGrid
+      Left = 8
+      Top = 8
+      Width = 158
+      Height = 80
+      BorderStyle = bsNone
+      ColCount = 16
+      DefaultColWidth = 8
+      DefaultRowHeight = 8
+      FixedCols = 0
+      RowCount = 8
+      FixedRows = 0
+      GridLineWidth = 2
+      ScrollBars = ssNone
+      TabOrder = 1
+    end
+    object feeppanel: TPanel
+      Left = 408
+      Top = 8
+      Width = 113
+      Height = 81
+      BevelWidth = 2
+      TabOrder = 0
+      Visible = False
+      object SpeedButton2: TSpeedButton
+        Left = 88
+        Top = 56
+        Width = 17
+        Height = 17
+        Glyph.Data = {
+          7A010000424D7601000000000000760000002800000020000000100000000100
+          04000000000000010000120B0000120B00001000000010000000000000000000
+          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+          333333FFFFFFFFFFFFF33000077777770033377777777777773F000007888888
+          00037F3337F3FF37F37F00000780088800037F3337F77F37F37F000007800888
+          00037F3337F77FF7F37F00000788888800037F3337777777337F000000000000
+          00037F3FFFFFFFFFFF7F00000000000000037F77777777777F7F000FFFFFFFFF
+          00037F7F333333337F7F000FFFFFFFFF00037F7F333333337F7F000FFFFFFFFF
+          00037F7F333333337F7F000FFFFFFFFF00037F7F333333337F7F000FFFFFFFFF
+          00037F7F333333337F7F000FFFFFFFFF07037F7F33333333777F000FFFFFFFFF
+          0003737FFFFFFFFF7F7330099999999900333777777777777733}
+        NumGlyphs = 2
+        OnClick = SpeedButton2Click
+      end
+      object feepname: TLabel
+        Left = 8
+        Top = 8
+        Width = 19
+        Height = 11
+        Caption = 'name'
+        Font.Color = clBlack
+        Font.Height = 8
+        Font.Name = 'adobe-helvetica'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+      end
+      object nameedit: TEdit
+        Left = 32
+        Top = 8
+        Width = 57
+        Height = 19
+        CharCase = ecLowerCase
+        TabOrder = 1
+      end
+      object typecombo: TComboBox
+        Left = 32
+        Top = 32
+        Width = 73
+        Height = 19
+        CharCase = ecLowerCase
+        AutoComplete = True
+        ItemHeight = 13
+        Items.Strings = (
+          'Etab'
+          'Etab1'
+          'Foo')
+        ItemIndex = 2
+        Sorted = True
+        TabOrder = 2
+        Text = 'Foo'
+      end
+      object Label1: TLabel
+        Left = 8
+        Top = 32
+        Width = 16
+        Height = 11
+        Caption = 'type'
+        Font.Color = clBlack
+        Font.Height = 8
+        Font.Name = 'adobe-helvetica'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+      end
+    end
+  end
+end

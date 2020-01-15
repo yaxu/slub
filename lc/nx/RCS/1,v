@@ -1,0 +1,181 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2007.01.05.00.32.41;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2007.01.05.00.29.35;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Jan  5 00:29:35 2007
+@
+
+
+1.2
+log
+@Fri Jan  5 00:32:41 2007
+@
+text
+@# 5 <<+ silence
+# oh
+
+use YAML;
+my $chunksize = 4;
+my $loops = 5;
+my $sample = "newnotes/0";
+
+my $scripts = 
+    {volume => "1 + 18 <<+ 0 <<< 4 <<+ silence",
+     speed  => "4 + 8 <<- sine(0.1)",
+    };
+
+my $ops = {'<<+' => sub {mask(shift, 100, @@_)},
+           '<<-' => sub {mask(shift, 0, @@_)  },
+           '<<<' => sub {rotate(shift, @@_)   },
+           '-'   => sub {minus(shift, @@_)    },
+           '+'   => sub {plus(shift, @@_)     },
+          };
+
+sub bang {
+    my $self = shift;
+    my $seq = $self->{seq} || '';
+
+    my $sound = {};
+    foreach my $name (keys %$scripts) {
+        $sound->{$name} = $self->nextbit($name);
+    }
+
+    warn(Dump $sound);
+
+    $self->t({sample =>  $sample, loops => $loops,
+              speed  => $sound->{speed} / 4,
+              volume => 2,
+              shape => 0.1,
+              #delay => 0.1,
+              #delay2 => 0.1,
+              #$sound->{volume},
+             }
+            ) if $sound->{volume};
+
+    $self->modified;
+}
+
+sub nextbit {
+    my ($self, $name) = @@_;
+    my $seq = $self->{seqs}->{$name};
+    if ((not $seq) or (not @@$seq)) {
+        my $script = $scripts->{$name};
+        $seq = $self->parse($script, $chunksize);
+    }
+    my $result = shift(@@$seq);
+    $self->{seqs}->{$name} = $seq;
+    return($result);
+}
+
+sub parse {
+    my ($self, $script, $chunksize) = @@_;
+
+    my $result;
+
+    $script =~ s/^\s+//;
+    $script =~ s/\s+$//;
+    my @@tokens = split(/\s+/, $script);
+    my $generator = pop(@@tokens);
+    my $param;
+    if ($generator =~ s/\((.*)\)//) {
+        $param = $1;
+    }
+    my $func = "gen_$generator";
+    if ($self->can($func)) {
+       $result = $self->$func($chunksize, $param);
+    }
+
+    while (@@tokens) {
+       my $op = pop @@tokens;
+       my $value = pop @@tokens;
+
+       my $func = $ops->{$op};
+
+       if (not $func) {
+           warn("parse error: no op '$op'\n");
+       }
+       else {
+           $func->($self, $value, $result);
+       }
+    }
+
+    return($result);
+}
+
+
+sub gen_silence {
+    my ($self, $chunksize) = @@_;
+    return [map {0} (0 .. ($chunksize - 1))];
+}
+
+sub gen_sine {
+    my ($self, $chunksize, $param) = @@_;
+    my $result = [];
+    $param ||= 1;
+    foreach my $i (0 .. $chunksize - 1) {
+      push(@@$result, sin(($i + $self->{bangs}) / $param));
+    }
+
+    return($result);
+}
+
+sub mask {
+    my ($self, $maskvalue, $mod, $stream) = @@_;
+    my $point = $self->{bangs};
+    warn("point: $point $maskvalue $mod " . scalar(@@$stream) . "\n");
+    foreach my $i (0 .. @@$stream - 1) {
+        if (($point + $i) % $mod == 0) {
+            $stream->[$i] = $maskvalue;
+        }
+    }
+}
+
+sub rotate {
+    my ($self, $rotvalue, $stream) = @@_;
+    foreach my $foo (0 .. $rotvalue - 1) {
+       push(@@$stream, shift(@@$stream));
+    }
+}
+
+sub plus {
+    my ($self, $plusvalue, $stream) = @@_;
+    foreach my $i (0 .. @@$stream - 1) {
+        $stream->[$i] += $plusvalue
+           if $stream->[$i];
+    }
+}
+
+sub minus {
+    my ($self, $minusvalue, $stream) = @@_;
+    foreach my $i (0 .. @@$stream - 1) {
+        $stream->[$i] -= $minusvalue
+            if $stream->[$i];
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d34 5
+a38 1
+              volume => 2, #$sound->{volume},
+@

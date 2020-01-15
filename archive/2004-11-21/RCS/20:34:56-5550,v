@@ -1,0 +1,112 @@
+head	1.4;
+access;
+symbols;
+locks
+	alex:1.4; strict;
+comment	@# @;
+
+
+1.4
+date	2004.11.21.20.56.51;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2004.11.21.20.55.01;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2004.11.21.20.52.53;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.11.21.20.34.56;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Nov 21 20:34:56 2004
+@
+
+
+1.4
+log
+@Sun Nov 21 20:56:51 2004
+@
+text
+@my $flip;
+sub bang {
+    my $self = shift;
+
+    if ($flip) {
+        if ($self->{bangs} % 8 == 0) {
+            $self->trigger({sample => "can/1", rate => 50});
+        }
+        if ($self->{bangs} % 4 == 0) {
+            $self->trigger({sample => "diphone2/" . int(rand(16)),
+                            rate => 50, ts => 100
+                           }
+                          );
+        }
+    }
+    else {
+        if ($self->{bangs} % 3 == 0) {
+            $self->trigger({sample => "can/" . $self->{foo}++});
+        }
+    }
+    
+    if (rand > 0.95) {
+       $flip = not $flip;
+    }
+}@
+
+
+1.3
+log
+@Sun Nov 21 20:55:01 2004
+@
+text
+@d9 6
+@
+
+
+1.2
+log
+@Sun Nov 21 20:52:53 2004
+@
+text
+@d7 1
+a7 1
+            $self->play({num => 25, ts => 100});
+d11 3
+a13 1
+        $self->play({num => 30});
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+d4 5
+a8 6
+    if ($self->{bangs} % 8 == 0) {
+        $self->play({num => 30, formfreq => 30,
+                     bwfreq => 10,
+                     offset => rand, ts => 100, pan => 0.2 + rand(0.6)
+                    }
+                   );
+d10 6
+a15 6
+    if ($self->{bangs} % 12 == 0) {
+        $self->play({num => 30, formfreq => 40 + ($self->sin(10) * 20),
+                     bwfreq => 11,
+                     offset => rand, ts => 110, pan => 0.2 + rand(0.6)
+                    }
+                   );
+@

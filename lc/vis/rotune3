@@ -1,0 +1,19 @@
+# s>^<<
+# <^i>
+# ^>p<
+# 144
+
+sub bang {
+    my $self = shift;
+
+    if ($self->{bangs} % 4 == 0) {
+        $self->t({speed => 50, sample => "sine/5",
+                  scale => "equal",
+                  duration => 30000,
+                  volume => 0.2, pan => 1- rand(2),
+                  envelope_name => 'percussive',
+                  delay => 0.2
+                 }
+                );
+    }
+}

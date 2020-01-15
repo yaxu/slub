@@ -1,0 +1,104 @@
+use Word;
+
+
+# fe _
+# ^
+# fe
+
+my $hi = 0;
+my $bpmdiv = 4;
+my $fingerspeed = 0.01;
+my $sendosc = 1;
+
+my $velocity_d = sub{1.5};
+my $loss_d = sub{-0.0001};
+my $alpha_d = sub{10};
+my $tension_d = sub{0.8 + rand(0.01)};
+my $mass_t = sub{1};
+my $offset = 0;
+
+sub fiddle {
+    my $self = shift;
+    my $line = $self->line(3);
+    my @foo = split(/\s+/, $line);
+    if (rand() > 0.95) {
+        my $a = rand(@foo);
+        my $b = rand(@foo);
+       ($foo[$a], $foo[$b]) = ($foo[$b], $foo[$a]);
+    }
+
+    $line = join(' ', @foo);
+    $self->line(3, $line);
+}
+
+sub manip {
+    my $word = shift;
+    $word =~ s/(.)\?/rand() > 0.5 ? $1 : ''/eg;
+    $word =~ s/\(([^\)]+)\)\?/rand() > 0.5 ? $1 : ''/eg;
+    $word =~ s/(.):(.)/rand() > 0.5 ? $1 : $2/eg;
+    $word =~ s/(.)/$1/g;
+    return($word);
+}
+
+sub bang {
+    my $self = shift;
+    my $l = $self->{l};
+#    $self->scbps(1.5) unless $self->{foob}++;
+#    $self->fiddle();
+
+    $self->{dave} ||=
+        Net::OpenSoundControl::Client->new(Host => '111.112.113.2',
+                                           Port => 4444
+                                          );
+
+    if ($self->{bangs} % $bpmdiv == 0) {
+      my $words = $self->line(3);
+      my @words = split(/\s+/, $words);
+      $l = ($self->{bangs}/$bpmdiv + $offset) % scalar(@words);
+      my $word = $words[$l];
+      my $position = 0;
+      if ($words =~ /((\S+\s*){$l})/) {
+        $position = length($1);
+      }
+      $self->line(4, (' ' x $position) . '^');
+      $word = manip($word);
+      $self->line(5, (' ' x $position) . $word);
+      $self->play($word);
+      my $lines = $self->code->[3] . "\n" . $self->code->[4] . "\n" .
+          $self->code->[5] . "\n";# . $self->code->[rand(@{$self->code})];
+#    $lines .= `figlet S L U B`;
+      $lines =~ s/\#//g;
+      $self->{dave}->send(['/show-code', 's', $lines, 'f', 2
+                          ])
+        if $sendosc and $word =~ /[a-z]/;
+
+    }
+    $self->modified();
+}
+
+
+sub play {
+    my $obj = shift;
+    my $word = shift;
+    while ($word =~ /([bcdfghjklmnpqrstvwxyz]*)([aeiou])/g) {
+        my $cs = $1;
+        my $v = $2;
+        #$cs = 'w' if !$cs;
+        my $h = Word::lookup($v);
+        warn("v: $v t: $h->{tension}\n");
+        my $func = $hi ? 'tension_hi' : 'tension_lo';
+        $obj->$func($h->{tension} + $tension_d->($self) );
+        $func = $hi ? 'loss_hi' : 'loss_lo';
+        $obj->$func($h->{loss} + $loss_d->());
+        foreach my $c (split(//, $cs)) {
+            $h = {%{Word::lookup($c)}};
+            $h->{velocity} += $velocity_d->();
+            $h->{velocity} += ($h->{velocity_delta} || 0);
+            $h->{alpha} += $alpha_d->();
+            $h->{mass} *= $mass_t->();
+            $func = $hi ? 'vector_hi' : 'vector_lo';
+            $obj->$func($h);
+            sleep($fingerspeed);
+        }
+    }
+}

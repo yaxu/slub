@@ -1,0 +1,8 @@
+sub bang {
+    my $self = shift;
+    my $bing = $self->{bangs} % 32 > 20 ? 1 : 0;
+   $self->t({sample => "off/0", volume => 5,
+             delay => 0.1, shape => 0.9
+            }
+           ) if $self->{bangs} % ($bing ? 8 : 6) == 0;
+}

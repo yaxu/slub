@@ -1,0 +1,27 @@
+# 0.017
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 64 == 16) {
+        $self->t({sample => "notes/5", volume => 0.03, accellerate => 0.00001,
+                  speed => 0.1
+                 }
+                );
+    }
+    return;
+    $self->{seq} ||= [0.01, 0.017, 0.012, 0.015];
+    my $note = $self->{seq}->[0];
+    if ($self->{bangs} % 64 == 0) {
+        push(@{$self->{seq}}, shift(@{$self->{seq}}));
+    }
+    $self->line(0, $note);
+    if ($self->{bangs} % 64 < 32 and $self->{bangs} % 64 > 16 
+        and $self->{bangs} % 2) {
+        $self->t({sample => "metal/0", volume => 0.03,
+                  accellerate => 0.00000001,
+                  speed => $note * 3
+                 }
+                );
+
+    }
+    $self->modified();
+}

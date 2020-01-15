@@ -1,0 +1,509 @@
+head	1.22;
+access;
+symbols;
+locks
+	alex:1.22; strict;
+comment	@# @;
+
+
+1.22
+date	2005.11.26.19.02.21;	author alex;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2005.11.26.19.01.44;	author alex;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2005.11.24.23.28.55;	author alex;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2005.11.24.21.17.25;	author alex;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2005.11.24.21.13.16;	author alex;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2005.11.24.21.12.41;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2005.11.24.14.13.47;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2005.11.24.13.30.59;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2005.11.24.12.19.53;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2005.11.24.11.49.14;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2005.11.24.11.43.45;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2005.11.24.11.41.25;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2005.11.24.11.41.02;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2005.11.24.11.35.04;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2005.11.24.11.28.32;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2005.11.24.11.26.42;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2005.11.24.10.40.25;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2005.11.24.10.34.42;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.11.24.10.34.29;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.11.24.10.33.28;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.11.24.10.30.29;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.11.24.10.24.59;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Thu Nov 24 10:24:59 2005
+@
+
+
+1.22
+log
+@Sat Nov 26 19:02:21 2005
+@
+text
+@use Net::OpenSoundControl::Client;
+use Math::Trig;
+
+my $osc;
+
+sub bang {
+    my $self = shift;
+    $self->bpm(120) unless $self->{foo}++;
+    $self->modified();
+
+    my $turn = pi * 2 * (($self->{bangs} % 64) / 64);
+    my $c = 0 ;
+    my @@nums = (4, 6, 8);
+    foreach my $i (@@nums) {
+        if ($self->{bangs} % $i == 0) {
+            my $pan = $self->sin(10);
+            $self->v({x => 0.25 + 0.5 * $pan, y => 0.5,
+                      speed => 6,
+                      direction => pi * 2 * ($c / @@nums) + $turn,
+                      width => 3,
+                      length => 4,
+                      volume => 4, image => "daisy"
+                     }
+                    );
+            $self->t({sample => "can/$i",
+                      pan => 1 - ($pan * 2)
+                     }
+                    )
+        } 
+        ++$c;
+    }
+}@
+
+
+1.21
+log
+@Sat Nov 26 19:01:44 2005
+@
+text
+@d8 1
+a8 1
+#    $self->bpm(120) unless $self->{foo}++;
+d22 1
+a22 1
+                      volume => 4
+@
+
+
+1.20
+log
+@Thu Nov 24 23:28:55 2005
+@
+text
+@d8 1
+a8 1
+    $self->bpm(120) unless $self->{foo}++;
+d25 4
+a28 4
+#            $self->t({sample => "can/$i",
+#                      pan => 1 - ($pan * 2)
+#                     }
+#                    )
+@
+
+
+1.19
+log
+@Thu Nov 24 21:17:25 2005
+@
+text
+@d8 1
+a8 1
+    $self->bpm(60) unless $self->{foom}++;
+d25 4
+a28 4
+            $self->t({sample => "can/$i",
+                      pan => 1 - ($pan * 2)
+                     }
+                    )
+@
+
+
+1.18
+log
+@Thu Nov 24 21:13:16 2005
+@
+text
+@d16 2
+a17 1
+            $self->v({x => 0.5, y => 0.25 + 0.5 * $self->sin(10),
+d25 4
+d32 1
+a32 1
+}
+@
+
+
+1.17
+log
+@Thu Nov 24 21:12:41 2005
+@
+text
+@a27 19
+
+                                           Port => 12000
+                                          );
+
+    $osc->send(
+               ['/trigger',
+                # x y
+                'f', $x, 'f', $y,
+                # speed
+                'f', $speed,
+                # direction
+                'f', $direction,
+                # volume
+                'f', $volume,
+                # width length
+                'f', $width, 'f', $length
+               ]
+              );
+}@
+
+
+1.16
+log
+@Thu Nov 24 14:13:47 2005
+@
+text
+@a28 12
+sub v {
+    my ($self, $p) = @@_;
+    my $x         = ($p->{x}         || 150);
+    my $y         = ($p->{y}         || 150);
+    my $speed     = ($p->{speed}     || 1);
+    my $direction = ($p->{direction} || 0);
+    my $width     = ($p->{width}     || 1);
+    my $length    = ($p->{length}    || 2);
+    my $volume    = ($p->{volume}    || 1);
+
+    my $osc = $self->{osc} ||=
+        Net::OpenSoundControl::Client->new(Host => 'localhost',
+@
+
+
+1.15
+log
+@Thu Nov 24 13:30:59 2005
+@
+text
+@d16 2
+a17 1
+            $self->v({x => 300, y => 250 + 100 * $self->sin(10), speed => 4,
+d19 3
+a21 3
+                      width => 5,
+                      length => 7,
+                      volume => 8
+@
+
+
+1.14
+log
+@Thu Nov 24 12:19:53 2005
+@
+text
+@d8 1
+a8 1
+    $self->code(1, "hello");
+d11 1
+a11 1
+    my $turn = pi * 2 * (($self->{bangs} % 32) / 32);
+d16 1
+a16 1
+            $self->v({x => 300, y => 250 + rand(100), speed => rand(7),
+d57 1
+a57 1
+}
+@
+
+
+1.13
+log
+@Thu Nov 24 11:49:14 2005
+@
+text
+@d16 1
+a16 1
+            $self->v({x => 300, y => 300, speed => 2,
+d18 3
+a20 3
+                      width => 3,
+                      length => 2,
+                      volume => 3
+d51 1
+@
+
+
+1.12
+log
+@Thu Nov 24 11:43:45 2005
+@
+text
+@d18 1
+a18 1
+                      width => 1,
+d51 1
+@
+
+
+1.11
+log
+@Thu Nov 24 11:41:25 2005
+@
+text
+@d20 1
+a20 1
+                      volume => 1
+@
+
+
+1.10
+log
+@Thu Nov 24 11:41:02 2005
+@
+text
+@d19 2
+a20 1
+                      length => 2
+d36 1
+@
+
+
+1.9
+log
+@Thu Nov 24 11:35:04 2005
+@
+text
+@d13 1
+a13 1
+    my @@nums = (4, 6, 8, 9,10, 12);
+@
+
+
+1.8
+log
+@Thu Nov 24 11:28:31 2005
+@
+text
+@d11 13
+a23 13
+    my $turn = PI * (($self->{bangs} % 32) / 32);
+    if ($self->{bangs} % 1 == 0) {
+        my $max = 5;
+        foreach my $i (3 .. $max) {
+            if ($self->{bangs} % $i == 0) {
+                $self->v({x => 300, y => 300, speed => 2,
+                          direction => (pi * 2) * ($i / $max) + $turn,
+                          width => 1.5,
+                          length => 6
+                         }
+                        );
+            }
+         } 
+@
+
+
+1.7
+log
+@Thu Nov 24 11:26:42 2005
+@
+text
+@d11 1
+d13 2
+a14 2
+        my $max = 10;
+        foreach my $i (10 .. $max) {
+d17 2
+a18 2
+                          direction => (pi * 2) * ($i / $max),
+                          width => 3,
+@
+
+
+1.6
+log
+@Thu Nov 24 10:40:25 2005
+@
+text
+@d12 2
+a13 2
+        my $max = 5;
+        foreach my $i (3 .. $max) {
+d15 1
+a15 1
+                $self->v({x => 150, y => 150, speed => 1,
+d17 2
+a18 2
+                          width => 1,
+                          length => 2
+@
+
+
+1.5
+log
+@Thu Nov 24 10:34:42 2005
+@
+text
+@d12 1
+a12 1
+        my $max = 12;
+@
+
+
+1.4
+log
+@Thu Nov 24 10:34:29 2005
+@
+text
+@d27 1
+a27 1
+    my $p = shift;
+@
+
+
+1.3
+log
+@Thu Nov 24 10:33:28 2005
+@
+text
+@d28 6
+a33 6
+    my $x         = $p->{x}         || 150;
+    my $y         = $p->{y}         || 150;
+    my $speed     = $p->{speed}     || 1;
+    my $direction = $p->{direction} || 0;
+    my $width     = $p->{width}     || 1;
+    my $length    = $p->{length}    || 2;
+@
+
+
+1.2
+log
+@Thu Nov 24 10:30:29 2005
+@
+text
+@d12 9
+a20 19
+      $osc ||=
+        Net::OpenSoundControl::Client->new(Host => 'localhost',
+                                           Port => 12000
+                                          );
+      my $max = 12;
+      foreach my $i (3 .. $max) {
+          if ($self->{bangs} % $i == 0) {
+            $osc->send(
+                       ['/trigger',
+                       # x y
+                       'f', 150, 'f', 150,
+                       # speed
+                       'f', 1, 
+                       # direction
+                       'f', (pi * 2) * ($i / $max),
+                       # width length
+                       'f', 1, 'f', 2
+                      ]
+                     );
+d35 4
+d40 12
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d34 13
+a46 1
+}@

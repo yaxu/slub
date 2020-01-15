@@ -1,0 +1,50 @@
+# 1 90
+
+my @seq = (70, 78, 90);
+my @mods = (1, 2, 4, 8);
+my $mod = 1;
+
+sub bang {
+      my $self = shift;
+
+      my $width  = 6;
+      my $size   = $width * @seq;
+      my $point  = ($self->{bangs} % $size);
+      my $note   = $seq[int($point / $width)];
+      my $first  = (not ($point % $width));
+
+      #$mod = $mods[rand @mods] if $first;
+      $mod = $mods[rand @mods] unless $self->{bangs} % 4;
+      $self->code->[0] = "# $mod $note";
+     
+      if (not ($self->{bangs} % $mod)) {
+
+          $self->play({num      => $note - 12,
+                       formfreq => 10 + rand(40), 
+                       bwfreq   => 15, 
+                       ts       => 100,
+                       gain     => 30,
+                      }
+                     ) unless $self->{bangs} % 2;
+     }
+    $self->save("chip");
+
+    $self->modified;
+}
+
+##
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./scala/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    $self->message("saved.");
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}

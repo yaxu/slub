@@ -1,0 +1,40 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.02.13.20.28.48;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Feb 13 20:28:48 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# 1
+
+sub bang {
+    my $self = shift;
+    my $foo = (($self->{bangs} % 64) > 32) ? 1 : 0;
+    $self->line(0, $foo);
+    if (($self->{bangs} % ($foo ? 12 : 16)) == 0) {
+        $self->t({sample => "moog/$foo", volume => 0.2,
+                  speed => ($foo ? -1 : 1),
+                  envelope_name => 'tri',
+                  pan => ($foo ? -1 : 1),
+                 }
+                );
+    }
+    $self->modified;
+}@

@@ -1,0 +1,34 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.09.13.20.41.10;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Sep 13 21:41:10 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 16 > 11;
+    if ($self->{bangs} % ($foo ? 1 : 2) == 0) {
+        $self->trigger({sample => "incoming/4",
+                        pan    => $self->sin(4),
+                       }
+                      );
+    }
+}@

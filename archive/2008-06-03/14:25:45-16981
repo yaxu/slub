@@ -1,0 +1,15 @@
+# hi there
+
+sub bang {
+    my $self = shift;
+
+    my $osc = 
+      $self->{meshosc} ||=
+        Net::OpenSoundControl::Client->new(Host => 'localhost', Port => 6010);
+
+    $self->line(0, "hi there");
+    if ($self->{bangs} % 4 == 0) {
+        $osc->send(['/strike', 'f', 1, 'f', 1]);
+    }
+    $self->modified;
+}

@@ -1,0 +1,18 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0) {
+        $self->trigger({sample => "future/0",
+                        ts => 100,
+                        browndel => 10
+                       }
+                      );
+    }
+    if ($self->{bangs} % 4 == 2) {
+        $self->trigger({sample => "future/22",
+                        ts => 100,
+                        browndel => 0,
+                        rate => 136,
+                       }
+                      );
+    }
+}

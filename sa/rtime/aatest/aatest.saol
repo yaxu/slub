@@ -1,0 +1,268 @@
+
+//
+//    SAOL Resonator-Based Physical Model Library
+//    This file: Plucked string
+//    Copyright (C) 2000  Regents of the University of California
+//
+//    This license also covers the SASL file in this directory.
+//    The MIDI file is public domain, thanks to http://www.mutopiaproject.org
+//
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License (Version 2) as
+//    published by the Free Software Foundation.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+//    Original Author: John Wawrzynek
+//    Maintainer: John Lazzaro, lazzaro@cs.berkeley.edu
+//
+
+//
+// If you're interested in extending this model, don't modify this
+// file directly; see the README in sfront/lib/reson/ instead.
+//
+
+//
+//
+// Global block for scaling string prototype
+//
+
+global {
+
+  srate 44100;
+  krate 1050;
+
+  // hand-tuned version of qscale = 0.0393432*exp(0.0615256*x) for q scaling
+
+  table string_qscale(expseg, -1, 
+			 0,  0.5*0.0393432, 
+                        128, 0.5*0.0393432*exp(0.0615256*128));
+
+
+  // implements gscale = 0.04*(1/70.0337)*exp(0.0735272*rms_x) for g scaling
+  
+  table string_gscale(expseg, -1, 0, 0.04*(1/70.0337), 128,
+			 0.04*(1/70.0337)*exp(0.0735272*128));
+			 
+
+  // vel table holds status for each note
+  //
+  //  -1  -- no instr active for this note
+  //   0  -- instr active, no new strikes
+  // > 0  -- new note strike, value of MIDIvel
+
+  table string_vel(step, 128 , 0, -1, 128);
+
+  ksig string_poly;               // number of active notes at once
+
+  sequence(string_kbd, string_audio);
+
+}
+
+//
+// The resinit iopcode initializes the resonance model for the thing being
+// struck or plucked.
+//
+
+iopcode string_resinit(ivar a[10], ivar b[10], 
+		ivar g[10], ivar notenum)
+
+{
+  ivar r[10], freq[10], q[10];
+  ivar j, scale, norm;
+  imports exports table string_qscale;
+  imports exports table string_gscale;
+
+  // set f/q/g for prototype bar
+
+  norm = tableread(string_qscale, int(notenum));
+  scale = cpsmidi(notenum)/220;
+
+  freq[0] = 440*scale;  q[0] = 300*norm;  
+  freq[1] = 880*scale;  q[1] = 300*norm;  
+  freq[2] = 1320*scale; q[2] = 300*norm;  
+  freq[3] = 1760*scale; q[3] = 300*norm;  
+  freq[4] = 2200*scale; q[4] = 300*norm;  
+  freq[5] = 2640*scale; q[5] = 300*norm;  
+  freq[6] = 3080*scale; q[6] = 320*norm;  
+  freq[7] = 3520*scale; q[7] = 300*norm;  
+  freq[8] = 3960*scale; q[8] = 190*norm;  
+  freq[9] = 4400*scale; q[9] = 300*norm;  
+
+  norm = tableread(string_gscale, int(notenum));
+
+  g[0] = (freq[0] < s_rate/2) ? norm*0.7  : 0.0;
+  g[1] = (freq[1] < s_rate/2) ? norm*0.8  : 0.0;
+  g[2] = (freq[2] < s_rate/2) ? norm*0.6  : 0.0;
+  g[3] = (freq[3] < s_rate/2) ? norm*0.7  : 0.0;
+  g[4] = (freq[4] < s_rate/2) ? norm*0.7  : 0.0;
+  g[5] = (freq[5] < s_rate/2) ? norm*0.8  : 0.0;
+  g[6] = (freq[6] < s_rate/2) ? norm*0.95 : 0.0;
+  g[7] = (freq[7] < s_rate/2) ? norm*0.76 : 0.0;
+  g[8] = (freq[8] < s_rate/2) ? norm*0.87 : 0.0;
+  g[9] = (freq[9] < s_rate/2) ? norm*0.76 : 0.0;
+
+  // compute actual resonator coefficients
+
+  j = 0;
+  while ( j < 10)
+    {
+      r[j] = exp(-freq[j]/(s_rate*q[j]));
+      a[j] = 2*r[j]*cos(2* 3.14159265358979323846 *(freq[j]/s_rate));
+      b[j] = - r[j]*r[j];
+      j = j + 1;
+    }
+
+}
+
+//
+// The strikeinit iopcode initializes the pluck model.
+//
+
+iopcode string_strikeinit(ivar aa, ivar ab, ivar sg, ivar vw, 
+			     ivar vwn, ivar notenum)
+
+{
+  ivar ar, afreq;
+
+  afreq = 2000;  // attack resonator frequency 
+
+  // Compute resonator bank coefficients
+
+  ar = exp(-2* 3.14159265358979323846 *(afreq/s_rate));
+  aa = 2*ar;
+  ab = -ar*ar;
+
+  vw = (1/127) ; // keyboard normalization curve
+  sg = 0.004;      // "signal gain" empirical constant (should not scale).
+  vwn = 0.02;      // velocity scaling for nm
+  
+}
+
+//
+//
+// k-pass semantics for the pluck model
+//
+
+kopcode string_strikeupdate(ksig ky[1], ksig nm, ksig silent, 
+	                 ksig notenum, ivar vw, ivar vwn)
+
+{
+  imports exports table string_vel;
+  imports exports ksig string_poly;
+  ksig exit, count;
+
+  count = silent ? (count + 1) : max(count - 1, 0);
+  if (((count > 5) && (itime > 0.25)) || exit)
+    {
+      if (!exit)
+	{
+	  turnoff;
+	  exit = 1;
+	  tablewrite(string_vel, int(notenum), -1);
+	  string_poly   = string_poly   - 1;
+	}
+      ky[0] = 0;
+    }
+  else
+    {
+      if (tableread(string_vel, int(notenum)) > 0)
+	{
+	  ky[0] = vw*tableread(string_vel, int(notenum));
+	  nm = ky[0]*vwn;
+	  tablewrite(string_vel, int(notenum), 0);
+	}
+      else
+	{
+	  ky[0] = 0;
+	}
+    }
+}
+
+//
+// Instr for creating audio output.
+//
+
+instr string_audio(notenum) {
+
+  ivar a[10], b[10], g[10];
+  ivar aa, ab, sg, vw, vwn;
+  ksig nm, ky[1], silent;
+  asig out;
+
+  asig y[10], y1[10], y2[10]; 
+  asig sy[10];
+  asig ay, ay1, ay2, dummy, x;
+
+  // happens at i-rate
+
+  string_resinit(a, b, g, notenum);
+  string_strikeinit(aa, ab, sg, vw, vwn, notenum);
+
+  // happens at k-rate
+
+  silent = (rms(out) < 8e-4);
+  string_strikeupdate(ky, nm, silent, notenum, vw, vwn);
+
+  // happens at a-rate
+
+  dummy = 0;                          // until optimizer improves
+
+  ay = aa*ay1 + ab*ay2 + ky[dummy];   // attack resonator
+  x = (arand(nm) + sg)*ay;
+
+  y = a*y1 + b*y2 + x;                // resonator bank
+
+  ay2 = ay1;                          // update filter state
+  ay1 = (abs(ay)>1e-30) ? ay : 0.0; 
+
+  ky[dummy] = 0;
+  y2 = y1; 
+  y1 = y;
+
+  sy = g*y;                           // gain adjust
+  out = (sy[0]+sy[1]+sy[2]+sy[3]+sy[4]+sy[5]+sy[6]+sy[7]+sy[8]+sy[9]) ;                 // sum over sy[]
+
+  output(out);
+
+}
+
+
+//
+// Instr for handling MIDI control input. Updates string_vel table.
+//
+
+instr string_kbd(pitch, velocity) preset 1   
+
+{ 
+  imports exports table string_vel;
+  imports exports ksig string_poly;
+  ksig vval, kpitch;
+
+  // happens at k-rate
+
+  vval = velocity;
+  kpitch = pitch;
+  if (tableread(string_vel, int(kpitch)) == -1)
+    {
+      if (string_poly   < 24)
+	{
+	  tablewrite(string_vel, int(pitch), vval);
+	  instr string_audio(0, -1, pitch);
+	  string_poly   = string_poly   + 1;
+	}
+    }
+  else
+    {
+      tablewrite(string_vel, int(pitch), vval);
+    }
+
+  turnoff;
+}

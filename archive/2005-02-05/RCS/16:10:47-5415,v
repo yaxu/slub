@@ -1,0 +1,52 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2005.02.05.16.16.59;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.02.05.16.10.47;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Feb  5 16:10:47 2005
+@
+
+
+1.2
+log
+@Sat Feb  5 16:16:59 2005
+@
+text
+@sub bang {
+    my $self = shift;
+    return if rand(1) > 0.5;
+    $self->t({sample => "breaks152/$self->{bangs}",
+              speed => rand > 0.5 ? 1 : 0.5,
+              pan   => $self->sin(1),
+              shape => 0,
+
+             }
+            );
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+d7 2
+a8 1
+              shape => 0
+@

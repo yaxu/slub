@@ -1,0 +1,16 @@
+
+sub bang {
+    my $self = shift;
+
+    if ($self->{bangs} % 4 == 0) {
+       $self->t({sample => "made/6", loops => 10, speed => -0.5,
+                 accellerate => -0.000001
+                }
+               );
+       $self->t({sample => "made/6", loops => 20, speed => 0.51,
+                 accellerate => -0.000001
+                }
+               );
+
+    }
+}

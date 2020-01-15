@@ -1,0 +1,10 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0) {
+        $self->trigger({sample => "chin/0",
+                        browndel => 10,
+                        ts => 40
+                       }
+                      );
+    }
+}

@@ -1,0 +1,85 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2004.11.26.22.00.05;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.11.26.21.57.38;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Nov 26 21:57:38 2004
+@
+
+
+1.2
+log
+@Fri Nov 26 22:00:05 2004
+@
+text
+@# 66
+use YAML;
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0
+        or
+        ($self->{bangs} % 4 == 2 and rand() > 0.2)
+       ) {
+    $self->{perms} ||= perms(space => 16, things => 4);
+    unless($self->{combo} and @@{$self->{combo}}) {
+       $self->{combo} = $self->render([10, 5, 6, 8]);
+    }
+    my $num = 60 + shift(@@{$self->{combo}});
+    my $pan = int rand(2);
+    $self->play({formfreq => 1, bwfreq => 90, ts => 20,
+                 num => $num, filter => 400,
+                 gain => 1000, pan => $pan
+                }
+               );
+    $self->play({formfreq => 1, bwfreq => 40, ts => 20,
+                 num => $num - 4, filter => 400,
+                 gain => 1500, pan => !$pan
+                }
+               );
+    $self->code->[0] = "# $num";
+    $self->modified;
+    }
+}
+
+sub render {
+    my $self = shift;
+    my $result;
+    my $line = shift;
+    my $perms = $self->{perms};
+    my $point = ($self->sin(10) * @@$perms);
+    my $runlengths = $perms->[$point];
+    foreach my $c (0 .. @@$runlengths -1) {
+        my $note = $line->[$c % @@$line];
+        push(@@$result, ($note) x $runlengths->[$c]);
+    }
+    return($result);
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# 65
+d5 4
+a8 1
+    if ($self->{bangs} % 2 == 0) {
+@

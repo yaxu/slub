@@ -1,0 +1,23 @@
+my $vowels = ['a', 'e', 'i', 'o', 'u'];
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 6 == 0) {
+        $self->t({pan => $self->sin(),
+                  sample => "sine/5",
+                  speed => 32,
+                  loops => 8,
+                  vowel => 'e',
+                  scale => 'equal'
+                 }
+                );
+        $self->t({pan => $self->sin(),
+                  sample => "sine/5",
+                  accellerate => -0.00001,
+                  speed => 24,
+                  loops => 32, 
+                  scale => 'equal'
+                 }
+                );
+    }
+}

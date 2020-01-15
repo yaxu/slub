@@ -1,0 +1,38 @@
+sub bang {
+    my $self = shift;
+    $self->bpm(157) unless $self->{foo}++;
+    if ($self->{bangs} % 4 == 0 and rand() > 0.1) {
+        my $speed = 2;
+        if (rand() > 0.8)  {
+          $speed -= 1;
+        }
+        if (rand() > 0.8) {
+          $speed = 0 - $speed;
+        }
+        $self->v({volume => 30,
+                  x => 0.5,
+                  direction => ($speed > 0 ? pi/2 : pi + pi /2),
+                  speed => 7,
+                  curve => rand(0.25),
+                  reverb => 10, image => "cat", length => 6, width => 3,
+                  
+                 }
+                );
+        my $breakvol = 0.35;
+        $self->t({sample => "breaks157/0", volume => $breakvol,
+                  speed => $speed / 2, 
+                  envelope_name => "chop",
+                  delay => rand(0.01),
+                  pan => -1
+                 }
+                );
+        $self->t({sample => "breaks157/0",
+                  volume => $breakvol,
+                  speed => $speed / 2,
+                  envelope_name => "chop",
+                  delay => rand(0.01),
+                  pan => 1
+                 }
+                );
+    }
+}

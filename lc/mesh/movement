@@ -1,0 +1,64 @@
+
+# move out, average mallet, tense, resonant skin
+
+my $tension = 0.8;
+my $alpha = 1;
+my $mass = 1;
+my $velocity = 0.5;
+my $loss = 1;
+my $rand = 1;
+my @move = (# x y speed angle
+           ['across', -8, 0,  0.00001, pi/2],
+           ['diagonal', -8, -3, 0.000011, pi /2.6],
+           ['in', -8, 0, 0.000005, pi/2],
+           ['out', 0, 0, 0.000005, pi/2],
+           ['static edge', 0, 3.99, 0, 0],
+           ['static middle', 0, 0, 0, 0]
+          );
+
+my @mallets = (# mass alpha
+              ['average', 1, 1],
+              ['heavy stiff', 14, 0.2],
+              ['heavy soft', 3, 2],
+              ['light stiff', 0.5, 0.1],
+              ['light soft', 0.5, 3],
+             );
+
+my @skins = (# tension loss
+             ['average', 1, 1],
+             ['tense, lossy', 1.1, 0.999],
+             ['loose, lossy', 0.9, 0.999],
+             ['tense, resonant', 1.1, 1.03],
+             ['loose, resonant', 0.9, 1.03],
+            );
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 1 == 0) {
+        my ($setting, $mallet, $skin);
+        if ($rand) {
+          $setting = $move[rand @move];
+          $mallet = $mallets[rand @mallets];
+          $skin = $skins[rand @skins];
+        }
+        else {
+          $setting = shift(@move);   push(@move, $setting);
+          $mallet = shift(@mallets); push(@mallets, $mallet);
+          $skin = shift(@skins);     push(@skins, $skin);
+        }
+
+   
+        $self->line(1, 'move ' . $setting->[0] . ", " . $mallet->[0]
+                    . ' mallet, ' . $skin->[0] . ' skin');
+        $self->tension($skin->[1]);
+        $self->loss($skin->[2]);
+        $self->vector({x => $setting->[1], y => $setting->[2],
+                   speed => $setting->[3], angle => $setting->[4],
+                   mass => $mallet->[1], alpha => $mallet->[2],
+                   velocity => $velocity
+                  }
+                 );
+    }
+
+    $self->modified();
+}

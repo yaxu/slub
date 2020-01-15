@@ -1,0 +1,1009 @@
+head	1.43;
+access;
+symbols;
+locks
+	alex:1.43; strict;
+comment	@# @;
+
+
+1.43
+date	2008.11.29.13.28.09;	author alex;	state Exp;
+branches;
+next	1.42;
+
+1.42
+date	2008.11.29.13.28.00;	author alex;	state Exp;
+branches;
+next	1.41;
+
+1.41
+date	2008.09.18.06.36.10;	author alex;	state Exp;
+branches;
+next	1.40;
+
+1.40
+date	2008.08.26.19.36.28;	author alex;	state Exp;
+branches;
+next	1.39;
+
+1.39
+date	2008.08.26.18.41.47;	author alex;	state Exp;
+branches;
+next	1.38;
+
+1.38
+date	2008.08.26.18.40.18;	author alex;	state Exp;
+branches;
+next	1.37;
+
+1.37
+date	2008.08.26.18.35.49;	author alex;	state Exp;
+branches;
+next	1.36;
+
+1.36
+date	2008.08.26.13.00.50;	author alex;	state Exp;
+branches;
+next	1.35;
+
+1.35
+date	2008.08.26.12.59.52;	author alex;	state Exp;
+branches;
+next	1.34;
+
+1.34
+date	2008.08.26.12.58.33;	author alex;	state Exp;
+branches;
+next	1.33;
+
+1.33
+date	2008.08.26.12.58.19;	author alex;	state Exp;
+branches;
+next	1.32;
+
+1.32
+date	2008.08.26.12.58.00;	author alex;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	2008.08.26.12.57.55;	author alex;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	2008.08.15.14.12.43;	author alex;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	2008.08.15.13.58.14;	author alex;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	2008.08.13.10.59.43;	author alex;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	2008.08.12.15.48.49;	author alex;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	2008.08.11.13.20.46;	author alex;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2008.08.11.13.19.39;	author alex;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2008.08.11.13.18.17;	author alex;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2008.08.07.19.02.37;	author alex;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2008.08.07.11.56.42;	author alex;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2008.08.07.11.56.21;	author alex;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2008.08.06.22.06.54;	author alex;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2008.08.06.22.04.37;	author alex;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2008.08.05.11.41.44;	author alex;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2008.08.05.11.40.57;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2008.08.05.11.37.56;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2008.08.05.11.37.49;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2008.08.05.11.37.20;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2008.08.05.11.36.00;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2008.08.05.11.29.44;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2008.08.05.11.29.36;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2008.08.05.11.28.05;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2008.08.05.11.28.00;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2008.08.04.15.46.19;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2008.08.04.15.45.41;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.08.04.15.45.37;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.08.04.15.45.21;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.07.31.20.43.48;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.07.31.20.43.14;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.07.31.20.42.53;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.07.31.20.40.17;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Thu Jul 31 21:40:17 2008
+@
+
+
+1.43
+log
+@Sat Nov 29 13:28:09 2008
+@
+text
+@use Word;
+
+
+# be
+# ^
+# be
+
+my $hi = 1;
+my $bpmdiv = 2;
+my $fingerspeed = 0.04;
+my $sendosc = 0;
+
+my $velocity_d = sub{1};
+my $loss_d = sub{-0.001};
+my $alpha_d = sub{0};
+my $tension_d = sub{1 + rand(0.01)};
+my $mass_t = sub{0.6};
+my $offset = 0;
+my $scale = (1/4) * 3;
+
+sub fiddle {
+    my $self = shift;
+    my $line = $self->line(3);
+    my @@foo = split(/\s+/, $line);
+    if (rand() > 0.95) {
+        my $a = rand(@@foo);
+        my $b = rand(@@foo);
+       ($foo[$a], $foo[$b]) = ($foo[$b], $foo[$a]);
+    }
+
+    $line = join(' ', @@foo);
+    $self->line(3, $line);
+}
+
+sub manip {
+    my $word = shift;
+    $word =~ s/(.)\?/rand() > 0.5 ? $1 : ''/eg;
+    $word =~ s/\(([^\)]+)\)\?/rand() > 0.5 ? $1 : ''/eg;
+    $word =~ s/(.):(.)/rand() > 0.5 ? $1 : $2/eg;
+    $word =~ s/(.)/$1/g;
+    return($word);
+}
+
+sub bang {
+    my $self = shift;
+    my $l = $self->{l};
+#    $self->scbps(1.5) unless $self->{foob}++;
+#    $self->fiddle();
+
+    $self->{dave} ||=
+        Net::OpenSoundControl::Client->new(Host => '111.112.113.2',
+                                           Port => 4444
+                                          );
+
+    if ($self->{bangs} % $bpmdiv == 0) {
+      my $words = $self->line(3);
+      my @@words = split(/\s+/, $words);
+      $l = ($self->{bangs}/$bpmdiv + $offset) % scalar(@@words);
+      my $word = $words[$l];
+      my $position = 0;
+      if ($words =~ /((\S+\s*){$l})/) {
+        $position = length($1);
+      }
+      $self->line(4, (' ' x $position) . '^');
+      $word = manip($word);
+      $self->line(5, (' ' x $position) . $word);
+      $self->play($word);
+      my $lines = $self->code->[3] . "\n" . $self->code->[4] . "\n" .
+          $self->code->[5] . "\n";# . $self->code->[rand(@@{$self->code})];
+#    $lines .= `figlet S L U B`;
+      $lines =~ s/\#//g;
+      $self->{dave}->send(['/show-code', 's', $lines, 'f', 2
+                          ])
+        if $sendosc and $word =~ /[a-z]/;
+
+    }
+    $self->modified();
+}
+
+
+sub play {
+    my $obj = shift;
+    my $word = shift;
+    while ($word =~ /([bcdfghjklmnpqrstvwxyz]*)([aeiou])/g) {
+        my $cs = $1;
+        my $v = $2;
+        #$cs = 'w' if !$cs;
+        my $h = Word::lookup($v);
+        warn("v: $v t: $h->{tension}\n");
+        my $func = $hi ? 'tension_hi' : 'tension_lo';
+        $obj->$func($h->{tension} + $tension_d->($self) );
+        $func = $hi ? 'loss_hi' : 'loss_lo';
+        $obj->$func($h->{loss} + $loss_d->());
+        foreach my $c (split(//, $cs)) {
+            $h = {%{Word::lookup($c)}};
+            $h->{velocity} += $velocity_d->();
+            $h->{velocity} += ($h->{velocity_delta} || 0);
+            $h->{alpha} += $alpha_d->();
+            $h->{mass} *= $mass_t->();
+            $h->{x} *= $scale;
+            $h->{y} *= $scale;
+            $func = $hi ? 'vector_hi' : 'vector_lo';
+            $obj->$func($h);
+            sleep($fingerspeed);
+        }
+    }
+}@
+
+
+1.42
+log
+@Sat Nov 29 13:28:00 2008
+@
+text
+@d9 1
+a9 1
+my $bpmdiv = 1;
+@
+
+
+1.41
+log
+@Thu Sep 18 07:36:10 2008
+@
+text
+@d4 3
+a6 3
+# po _ pi _ ti ki
+#    ^
+#    _
+d9 1
+a9 1
+my $bpmdiv = 2;
+@
+
+
+1.40
+log
+@Tue Aug 26 20:36:28 2008
+@
+text
+@d4 3
+a6 3
+# _
+# ^
+# _
+d9 1
+a9 1
+my $bpmdiv = 1;
+d13 1
+a13 1
+my $velocity_d = sub{0};
+d17 1
+a17 1
+my $mass_t = sub{0.1};
+@
+
+
+1.39
+log
+@Tue Aug 26 19:41:47 2008
+@
+text
+@d4 1
+a4 1
+# vive fe tepi ri re ri 
+d6 1
+a6 1
+# vive
+@
+
+
+1.38
+log
+@Tue Aug 26 19:40:18 2008
+@
+text
+@d4 1
+a4 1
+# _
+d6 1
+a6 1
+# _
+@
+
+
+1.37
+log
+@Tue Aug 26 19:35:49 2008
+@
+text
+@d4 3
+a6 3
+# peggifffi _ ve _
+#                ^
+#                _
+@
+
+
+1.36
+log
+@Tue Aug 26 14:00:50 2008
+@
+text
+@d4 3
+a6 3
+# _
+# ^
+# _
+d10 1
+a10 1
+my $fingerspeed = 0.06;
+@
+
+
+1.35
+log
+@Tue Aug 26 13:59:52 2008
+@
+text
+@d4 3
+a6 3
+# koe kere _ pevepe re _ rri _
+#     ^
+#     kere
+@
+
+
+1.34
+log
+@Tue Aug 26 13:58:33 2008
+@
+text
+@d4 3
+a6 3
+# ke _ be re _ rbe
+#    ^
+#    _
+d10 1
+a10 1
+my $fingerspeed = 0.05;
+@
+
+
+1.33
+log
+@Tue Aug 26 13:58:19 2008
+@
+text
+@d4 3
+a6 3
+# ke _ be re
+#      ^
+#      be
+@
+
+
+1.32
+log
+@Tue Aug 26 13:58:00 2008
+@
+text
+@d5 2
+a6 2
+# ^
+# ke
+d16 1
+a16 1
+my $tension_d = sub{4 + rand(0.01)};
+@
+
+
+1.31
+log
+@Tue Aug 26 13:57:55 2008
+@
+text
+@d4 3
+a6 3
+# ke _ be rere
+#      ^
+#      be
+@
+
+
+1.30
+log
+@Fri Aug 15 15:12:43 2008
+@
+text
+@d4 3
+a6 3
+# btebe _ re _
+# ^
+# btebe
+d13 1
+a13 1
+my $velocity_d = sub{0.5};
+d15 1
+a15 1
+my $alpha_d = sub{3};
+d17 1
+a17 1
+my $mass_t = sub{0.4};
+@
+
+
+1.29
+log
+@Fri Aug 15 14:58:13 2008
+@
+text
+@d4 3
+a6 3
+# ri _ re _ bi be? be _
+#                     ^
+#                     _
+d13 1
+a13 1
+my $velocity_d = sub{0};
+d15 3
+a17 3
+my $alpha_d = sub{-0.5};
+my $tension_d = sub{6 + rand(0.01)};
+my $mass_t = sub{0.1};
+@
+
+
+1.28
+log
+@Wed Aug 13 11:59:43 2008
+@
+text
+@d4 3
+a6 3
+# _
+# ^
+# _
+d16 1
+a16 1
+my $tension_d = sub{2 + rand(0.01)};
+d19 1
+d100 2
+@
+
+
+1.27
+log
+@Tue Aug 12 16:48:49 2008
+@
+text
+@d4 3
+a6 3
+# rere _ ri _ tevete _ ti te
+#                    ^
+#                    _
+@
+
+
+1.26
+log
+@Mon Aug 11 14:20:46 2008
+@
+text
+@d4 3
+a6 3
+# bu ku bo ki bu ku bu ki pvpu bo ku bu
+#             ^
+#             bu
+d17 1
+a17 1
+my $mass_t = sub{0.3};
+@
+
+
+1.25
+log
+@Mon Aug 11 14:19:39 2008
+@
+text
+@d5 2
+a6 2
+#                                    ^
+#                                    bu
+@
+
+
+1.24
+log
+@Mon Aug 11 14:18:17 2008
+@
+text
+@d4 3
+a6 3
+# bu _ bo _ bu _ bu _ _ bo _ bu
+#      ^
+#      bo
+@
+
+
+1.23
+log
+@Thu Aug  7 20:02:37 2008
+@
+text
+@d4 3
+a6 3
+# _
+# ^
+# _
+d9 1
+a9 1
+my $bpmdiv = 2;
+@
+
+
+1.22
+log
+@Thu Aug  7 12:56:42 2008
+@
+text
+@d4 3
+a6 3
+# kepi ki _ pipi ku _ ku _
+#                     ^
+#                     ku
+d11 1
+a11 1
+my $sendosc = 1;
+d51 1
+a51 1
+                                           Port => 1234
+@
+
+
+1.21
+log
+@Thu Aug  7 12:56:21 2008
+@
+text
+@d4 3
+a6 3
+# ke ki _ pipi _ _
+#                ^
+#                _
+@
+
+
+1.20
+log
+@Wed Aug  6 23:06:54 2008
+@
+text
+@d4 3
+a6 3
+# _
+# ^
+# _
+d10 1
+a10 1
+my $fingerspeed = 0.01;
+d13 1
+a13 1
+my $velocity_d = sub{0.8};
+d15 3
+a17 3
+my $alpha_d = sub{1};
+my $tension_d = sub{0.8 + rand(0.01)};
+my $mass_t = sub{0.2};
+@
+
+
+1.19
+log
+@Wed Aug  6 23:04:37 2008
+@
+text
+@d4 3
+a6 3
+# vo vo vo ke
+#          ^
+#          ke
+@
+
+
+1.18
+log
+@Tue Aug  5 12:41:44 2008
+@
+text
+@d4 3
+a6 4
+# to _ re _ ri _ _ re _ _ re _ ri _ _ _
+#                       ^
+#                       _
+
+d9 1
+a9 1
+my $bpmdiv = 1;
+d13 6
+a18 6
+my $velocity_d = sub{0.1};
+my $loss_d = sub{-0.0001};
+my $alpha_d = sub{0.5};
+my $tension_d = sub{1.4 + rand(0.01)};
+
+
+d57 1
+a57 1
+      $l = $self->{bangs} % scalar(@@words);
+d98 1
+@
+
+
+1.17
+log
+@Tue Aug  5 12:40:57 2008
+@
+text
+@d5 2
+a6 2
+#           ^
+#           ri
+d9 1
+a9 1
+my $hi = 0;
+@
+
+
+1.16
+log
+@Tue Aug  5 12:37:56 2008
+@
+text
+@d4 3
+a6 3
+# te _ _ _ 
+# ^
+# te
+d9 1
+a9 1
+my $hi = 1;
+d17 1
+a17 1
+my $tension_d = sub{1.4};
+@
+
+
+1.15
+log
+@Tue Aug  5 12:37:49 2008
+@
+text
+@d5 2
+a6 2
+#        ^
+#        _
+@
+
+
+1.14
+log
+@Tue Aug  5 12:37:20 2008
+@
+text
+@d4 3
+a6 3
+# te _ ru _ poke ti _ te _ _ tee _ boke _ te te
+#                                ^
+#                                _
+d11 1
+a11 1
+my $fingerspeed = 0.06;
+@
+
+
+1.13
+log
+@Tue Aug  5 12:36:00 2008
+@
+text
+@d4 3
+a6 3
+# tue _ ruru _ poke ruri _ te _ _ tee _ boke _ te tue
+#                             ^
+#                             _
+@
+
+
+1.12
+log
+@Tue Aug  5 12:29:44 2008
+@
+text
+@d4 3
+a6 3
+# te re bete _ lemru _
+#              ^
+#              lemru
+d10 2
+a11 2
+my $bpmdiv = 2;
+my $fingerspeed = 0.04;
+d15 1
+a15 1
+my $loss_d = sub{-0.0009};
+d58 1
+a58 1
+      $l = 0 if ($l >= @@words);
+d75 1
+a75 2
+      $l++;
+      $self->{l} = $l;
+@
+
+
+1.11
+log
+@Tue Aug  5 12:29:36 2008
+@
+text
+@d4 1
+a4 1
+# te re bete _ lemu _
+d6 1
+a6 1
+#              lemu
+@
+
+
+1.10
+log
+@Tue Aug  5 12:28:05 2008
+@
+text
+@d4 3
+a6 3
+# be be pe
+#    ^
+#    be
+d14 2
+a15 2
+my $velocity_d = sub{0.2};
+my $loss_d = sub{-0.00001};
+d17 1
+a17 1
+my $tension_d = sub{1};
+@
+
+
+1.9
+log
+@Tue Aug  5 12:28:00 2008
+@
+text
+@d5 2
+a6 2
+# ^
+# be
+d11 1
+a11 1
+my $fingerspeed = 0.01;
+@
+
+
+1.8
+log
+@Mon Aug  4 16:46:19 2008
+@
+text
+@d4 1
+a4 1
+# tu _ _ _
+d6 1
+a6 1
+# tu
+d14 3
+a16 3
+my $velocity_d = sub{0.1};
+my $loss_d = sub{-0.0010};
+my $alpha_d = sub{1};
+@
+
+
+1.7
+log
+@Mon Aug  4 16:45:41 2008
+@
+text
+@d4 3
+a6 3
+# tu bu:i bu mu:i bu tu:a bu mubu
+#                         ^
+#                         bu
+d11 1
+a11 1
+my $fingerspeed = 0.07;
+@
+
+
+1.6
+log
+@Mon Aug  4 16:45:37 2008
+@
+text
+@d5 2
+a6 2
+#    ^
+#    bu
+@
+
+
+1.5
+log
+@Mon Aug  4 16:45:21 2008
+@
+text
+@d5 2
+a6 2
+#                            ^
+#                            mubu
+@
+
+
+1.4
+log
+@Thu Jul 31 21:43:48 2008
+@
+text
+@d5 2
+a6 2
+#                         ^
+#                         bu
+a55 2
+      $l++;
+#      $l++ unless rand() > 0.5;
+d75 1
+@
+
+
+1.3
+log
+@Thu Jul 31 21:43:14 2008
+@
+text
+@d5 2
+a6 2
+#                 ^
+#                 bu
+@
+
+
+1.2
+log
+@Thu Jul 31 21:42:53 2008
+@
+text
+@d4 3
+a6 3
+# tu bu bu mu bu tu bu mubu
+#                   ^
+#                   bu
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d5 2
+a6 2
+#                      ^
+#                      mubu
+@

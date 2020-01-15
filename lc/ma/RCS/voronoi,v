@@ -1,0 +1,122 @@
+head	1.3;
+access;
+symbols;
+locks
+	alex:1.3; strict;
+comment	@# @;
+
+
+1.3
+date	2006.01.29.01.44.28;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2006.01.28.15.59.19;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2006.01.28.15.19.47;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Jan 28 15:19:47 2006
+@
+
+
+1.3
+log
+@Sun Jan 29 01:44:27 2006
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->vbang();
+    if ($self->{bangs} % (16 * 16) == 0) {
+        $self->vbar(4);
+    }
+}@
+
+
+1.2
+log
+@Sat Jan 28 15:59:19 2006
+@
+text
+@a0 7
+# 2016
+# 140
+
+my $metro = 0;
+
+my $bpm = 140;
+
+d3 3
+a5 4
+    if ($self->{bangs} % 16 == 0) {
+        $self->line(0, $self->{bangs});
+        $self->modified;
+        $self->voronoi();
+a6 43
+    if ($self->{bangs} % 16 == 0) {
+        $self->vevent(0.5);
+    }
+    if ($bpm != $self->{bpmer}) {
+        $self->bpm($bpm);
+        $self->{bpmer} = $bpm;
+    }
+
+    if ($metro) {
+        if ($self->{bangs} % 4 == 0) {
+            $self->t({sample => "drumtraks/2",
+                      speed => ($self->{bangs} % 16 == 0 ? 1.25 : 1)
+                     }
+                    );
+        }
+    }
+}
+
+##
+
+{
+    my $daveosc;
+    sub voronoi {
+        my ($self) = @@_;
+        $self->line(1, $self->{tpm});
+        if (not $daveosc) {
+            $daveosc = Audio::OSC::Client->new(Host => '127.0.0.1',
+                                               Port => 12000
+                                              );
+        }
+        $daveosc->send(['/bang']);
+    }
+    sub vevent {
+        my ($self) = @@_;
+        $self->line(1, $self->{tpm});
+        if (not $daveosc) {
+            $daveosc = Audio::OSC::Client->new(Host => '127.0.0.1',
+                                               Port => 12000
+                                              );
+        }
+        $daveosc->send(['/voronoi']);
+    }
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# 1056
+d13 4
+a16 1
+        $self->ade();
+d47 11
+@

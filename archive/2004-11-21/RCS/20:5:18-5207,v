@@ -1,0 +1,41 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.11.21.20.05.18;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Nov 21 20:05:18 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@my $foo;
+sub bang {
+    my $self = shift;
+    
+    if ($self->{bangs} % 8 == 0 and rand(3) > 2) {
+       $self->trigger({sample => "can/0", rate => 50});
+       $foo = int(rand(5));
+    }
+    if ($self->{bangs} % 4 == 0) {
+        if ($foo > 0) {
+            $foo--;
+        }
+        else {
+            $self->trigger({sample => "can/0", rate => 40});
+        }
+    }
+}@

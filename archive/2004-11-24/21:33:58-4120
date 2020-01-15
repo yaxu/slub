@@ -1,0 +1,30 @@
+sub bang {
+    my $self = shift;
+    if (rand() > 0.5) {
+    if ($self->{bangs} % 4 == 0)  {
+
+       my $offset = 0;
+
+    $self->trigger({sample => "chin/" . int(rand(10)),
+                    offset => $offset, pan => 0.5 + rand(0.3),
+                    rate => (rand() > 0.9 ? 40 : 100),
+                    ts => 100, browndel => 100
+                   }
+                  )
+    }
+    if ($self->{bangs} % 6 == 0)  {                                       
+       my $rand = rand(0.1);
+       my $offset = 0;
+
+    $self->trigger({sample => "chin/" . int(rand(10)),                        
+                    offset => $offset, pan => rand(0.3),
+                    rate => (rand() > 0.9 ? 40 : 80),
+                    ts => 100, browndel => 100
+                   } 
+                  )
+    }}
+    if ($self->{bangs} % 10 == 0) {
+         my $foo = $self->{bangs} % 8 == 0 ? 100 : 10;
+         $self->noise({filter => 1000, ts => $foo});
+    }
+}

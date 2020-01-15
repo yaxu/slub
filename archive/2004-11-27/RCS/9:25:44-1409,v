@@ -1,0 +1,46 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.11.27.09.25.44;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Nov 27 09:25:44 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# 15!
+my $quiet = 0;
+sub bang {
+    my $self = shift;
+    if ($quiet > 0) {
+      $quiet--;
+    }
+    elsif ($self->{bangs} % 4 == 0) {
+        my $foo = ($self->{bangs} % 7 == 0);
+        $self->trigger({sample => "drum/0",
+                        rate => 50 + ($foo ? 50 : 0),
+                        ts => 100,
+                        browndel => $self->{foo}++
+                       }
+                      );
+        if ($foo) {
+           $self->modified;
+           $quiet = 8 + int(rand(10));
+           $self->code->[0] = "# $quiet!";
+        }
+    }
+}@

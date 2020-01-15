@@ -1,0 +1,361 @@
+head	1.17;
+access;
+symbols;
+locks
+	alex:1.17; strict;
+comment	@# @;
+
+
+1.17
+date	2005.12.11.12.50.04;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2005.11.26.18.15.58;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2005.11.25.16.20.35;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2005.11.25.16.20.15;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2005.11.24.23.29.07;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2005.11.24.23.21.00;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2005.11.24.22.23.22;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2005.11.24.22.10.14;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2005.11.24.22.09.46;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2005.11.24.21.43.55;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2005.11.24.21.12.13;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2005.11.24.21.06.48;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2005.11.24.21.06.10;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.11.24.21.04.50;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.11.24.21.00.43;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.11.24.20.52.33;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.11.24.20.49.49;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Thu Nov 24 20:49:49 2005
+@
+
+
+1.17
+log
+@Sun Dec 11 12:50:04 2005
+@
+text
+@my @@vowels = qw(a e i o u);
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0) {
+        my $point = ($self->{bangs} % (4*4)) / 4;
+        $self->v({volume => 30,
+                  direction => ((pi / 2) * $point),
+                  length => 2,
+                  width => 4,
+                  speed => 10,
+                  reverb => 4,
+                  #curve => 0.15, image => "daisy"
+                 }
+                );
+#        $self->v({volume => 30,
+#                  direction => ((pi / 1) * $point),
+        #          length => 2,
+        #          width => 4,
+        #          speed => 10,
+        #          reverb => 4,
+        #          #curve => 0.15, image => "cat"
+        #         }
+        #        );
+
+
+        $self->t({sample => "kurt/4", 
+                  vowel => $vowels[$point], loops => 3, delay => 0.3
+                 }
+                );
+    }
+
+}@
+
+
+1.16
+log
+@Sat Nov 26 18:15:58 2005
+@
+text
+@d15 2
+a16 2
+        #$self->v({volume => 30,
+        #          direction => ((pi / 1) * $point),
+d26 4
+a29 4
+#        $self->t({sample => "kurt/4", 
+#                  vowel => $vowels[$point], loops => 3, delay => 0.3
+#                 }
+#                );
+@
+
+
+1.15
+log
+@Fri Nov 25 16:20:35 2005
+@
+text
+@d5 1
+a5 1
+        my $point = ($self->{bangs} % (4*8)) / 8;
+d12 1
+a12 10
+                  curve => 0.15, image => "daisy"
+                 }
+                );
+        $self->v({volume => 30,
+                  direction => ((pi / 1) * $point),
+                  length => 2,
+                  width => 4,
+                  speed => 10,
+                  reverb => 4,
+                  curve => 0.15, image => "cat"
+d15 9
+@
+
+
+1.14
+log
+@Fri Nov 25 16:20:15 2005
+@
+text
+@d16 1
+a16 1
+                  direction => ((pi / 2) * $point),
+d21 1
+a21 1
+                  curve => 0.15, image => "daisy"
+@
+
+
+1.13
+log
+@Thu Nov 24 23:29:07 2005
+@
+text
+@d5 1
+a5 1
+        my $point = ($self->{bangs} % (4*4)) / 4;
+d10 1
+a10 1
+                  speed => 3,
+d12 1
+a12 1
+                  curve => 0.01,
+d15 11
+@
+
+
+1.12
+log
+@Thu Nov 24 23:21:00 2005
+@
+text
+@d15 4
+a18 4
+        $self->t({sample => "kurt/4", 
+                  vowel => $vowels[$point], loops => 3, delay => 0.3
+                 }
+                );
+@
+
+
+1.11
+log
+@Thu Nov 24 22:23:22 2005
+@
+text
+@d15 4
+a18 4
+        #$self->t({sample => "drumtraks/4", 
+        #          vowel => $vowels[$point], loops => 7, delay => 0.3
+        #         }
+        #        );
+@
+
+
+1.10
+log
+@Thu Nov 24 22:10:14 2005
+@
+text
+@d12 1
+a12 5
+                  curve => 0.01
+                 }
+                );
+        $self->t({sample => "drumtraks/4", 
+                  vowel => $vowels[$point], loops => 7, delay => 0.3
+d15 4
+@
+
+
+1.9
+log
+@Thu Nov 24 22:09:46 2005
+@
+text
+@d6 1
+a6 1
+        $self->v({volume => 10,
+@
+
+
+1.8
+log
+@Thu Nov 24 21:43:55 2005
+@
+text
+@d8 9
+a16 1
+                  length => 2, width => 4, speed => 3, reverb => 10,
+a18 2
+        #$self->t({sample => "drumtraks/4", 
+        #          vowel => $vowels[$point]});
+d20 1
+@
+
+
+1.7
+log
+@Thu Nov 24 21:12:13 2005
+@
+text
+@d11 2
+a12 2
+        $self->t({sample => "drumtraks/4", 
+                  vowel => $vowels[$point]});
+@
+
+
+1.6
+log
+@Thu Nov 24 21:06:48 2005
+@
+text
+@d1 1
+d5 3
+a7 1
+        $self->v({volume => 10, direction => pi,
+d11 2
+a12 1
+        $self->t({sample => "drumtraks/4"});
+@
+
+
+1.5
+log
+@Thu Nov 24 21:06:10 2005
+@
+text
+@d4 1
+a4 1
+        $self->v({volume => 10, direction => 1,
+@
+
+
+1.4
+log
+@Thu Nov 24 21:04:50 2005
+@
+text
+@d8 1
+@
+
+
+1.3
+log
+@Thu Nov 24 21:00:43 2005
+@
+text
+@d4 2
+a5 2
+        $self->v({volume => 10, direction => 1, image => "seedlings",
+                  length => 3, width => 4
+@
+
+
+1.2
+log
+@Thu Nov 24 20:52:33 2005
+@
+text
+@d4 4
+a7 1
+        $self->v({volume => 3, direction => pi});
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 3
+a5 1
+    $self->v({});
+@

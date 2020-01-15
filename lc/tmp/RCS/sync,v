@@ -1,0 +1,50 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2006.01.02.10.16.13;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Jan  2 10:16:13 2006
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# 592
+
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0) {
+        $self->ping();
+        $self->line(2, $self->{foo}++);
+        $self->modified();
+    }
+}
+
+##
+
+{
+    my $pingosc;
+    sub ping {
+        my ($self) = @@_;
+        if (not $pingosc) {
+            $pingosc = Net::OSC->new;
+            $pingosc->server(hostname => '127.0.0.1', port => 6010);
+        }
+        $pingosc->command('/trigger');
+        $pingosc->send_message;
+    }
+}@

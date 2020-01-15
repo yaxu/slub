@@ -1,0 +1,144 @@
+# hello 1.
+# 2079
+
+my $actors = [Thing->new, Shy->new, Foo->new, Bar->new];
+my $stats;
+
+sub init {
+    my $self = shift;
+    $self->{loop} = [];
+    $self->{loopsize} = 32;
+    $self->{actors} = $actors;
+    $stats = $self->{stats} = {};
+    $self->{init}++;
+}
+
+sub bang {
+    my $self = shift;
+    $self->init() unless $self->{init}; 
+    foreach my $actor (@$actors) {
+        if ($actor->bang) {
+            $self->t({sample => $actor->sample, speed => $actor->speed,
+                      shape  => $actor->shape
+                     }
+                    );
+            $self->line(1, $self->{bangs});
+        }
+    }
+    $self->line(0, "hello $self->{init}.");
+    $self->modified;
+}
+
+package Thing;
+
+sub new {
+    my $package = shift;
+    my $p = shift;
+    $p ||= {};
+    bless($p, $package);
+}
+sub shape {0}
+sub speed {
+    1;
+}
+
+sub bang {
+    my $self = shift;
+    my $result = 0;
+    my $pkg = ref($self);
+    my $kind = $stats->{$pkg};
+    my $other = undef;
+    while (my ($key, $value) = each(%$stats)) {
+        if ($key ne $pkg) {
+            if (not defined $other) {
+                $other = $value;
+            }
+            elsif ($value < $other) {
+                $other = $value;
+            }
+        }
+    }
+    if (((not defined $kind) or $kind >= $self->min_distance_from_kind)
+        and
+        ((not defined $other) or $other >= $self->min_distance_from_other)
+       ) {
+       $result = 1;
+       $stats->{$pkg} = 1;
+    }
+    else {
+        $stats->{$pkg}++;
+    }
+    return($result);
+}
+
+sub min_distance_from_kind {
+    10;
+}
+
+sub min_distance_from_other {
+    6;
+}
+
+sub sample {
+    'drum/1'
+}
+
+
+package Shy;
+
+use base qw/Thing/;
+
+sub min_distance_from_kind {
+    12;
+}
+
+sub min_distance_from_other {
+    4;
+}
+sub shape { 0.8 }
+sub sample {
+    'noise/4';
+}
+sub speed {0.1}
+
+package Foo;
+
+use base qw/Thing/;
+
+sub min_distance_from_kind {
+    8;
+}
+
+sub min_distance_from_other {
+    4;
+}
+sub speed {
+    0.2
+}
+sub sample {
+    'sid/3';
+}
+
+package Bar;
+
+use base qw/Thing/;
+
+sub min_distance_from_kind {
+    16;
+}
+
+sub min_distance_from_other {
+    6;
+}
+
+sub sample {
+    'sid/5';
+}
+
+sub shape {
+    0.7
+}
+
+sub speed {
+    rand > 0.5 ? 0.2 : 0.25;
+}

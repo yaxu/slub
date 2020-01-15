@@ -1,0 +1,95 @@
+
+my $bpm = 140;
+
+my $speed = 1;
+
+
+sub bang {
+    my $self = shift;
+    return if not $speed;;
+    if ($self->{bangs} % (256 / $speed)== 0) {
+       $self->vbar();
+    }
+
+    #$self->sinewave();
+    $self->break();
+    $self->tune();
+    $self->taptap();
+    #$self->zigzag;
+    #$self->vbang();
+    for (1 .. $speed) {
+        $self->vbang();
+    }
+    $self->checkbpm();
+}
+
+sub zigzag {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0) {
+       $self->vsite(0.25);
+    }
+    elsif ($self->{bangs} % 16 == 8) {
+       $self->vsite(0.75);
+    }
+}
+
+sub taptap {
+    my $self = shift;
+    if ($self->{bangs} % int(6 + rand(2)) == 0) {
+       $self->t({sample => "can/4", loops => 1});
+       $self->vsite(0.65);
+    }
+}
+
+sub tune {
+    my $self = shift;
+    if ($self->{bangs} % (4 + ($self->{bing}++ % 10)) == 0) {
+       my $foo = (($self->{bop} += 3) % 5);
+       $self->vsite(0.4 - 0.05 * $foo);
+       $self->t({sample => "sine/5", duration => 70000 + rand(60000),
+                 speed => 1 + $foo + 30,
+                 scale => 'equal',  
+                 delay => 0.15,
+                 accellerate => -0.00001, vowel => 'a',
+                 delay2 => 0.2,
+                 pan => rand() > 0.5 ? -0.25 : 0.25, volume => 2
+                }
+               );
+    }
+}
+
+sub break {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0 or $self->{bangs} % 16 == 10
+        or $self->{bangs} % 16 == 6
+       ) {
+        $self->t({sample => "drumtraks/6", volume => 0.35});
+        $self->vsite(0.9);
+    }
+
+    if ($self->{bangs} % 16 == 8) {
+        $self->t({sample => "drumtraks/4", volume => 0.3, loops => 0.4});
+        $self->vsite(0.75);
+    }
+    if ($self->{bangs} % 16 == 12) {
+        $self->t({sample => "drumtraks/5", volume => 0.2, loops => 0.4});
+        $self->vsite(0.75);
+    }
+}
+
+sub sinewave {
+    my $self = shift;
+    return if ($self->{bangs} % 4 != 0);
+
+    my $foo = ($self->{bangs} / 20) * (3.12 / 2);
+    $self->vsite((CORE::sin($foo) + 1) / 4 + 0.25);
+    $self->vsite((CORE::sin($foo + 3.14159) + 1) / 4 + 0.25);
+}
+
+sub checkbpm {
+    my $self = shift;
+    if ($bpm != $self->{set}) {
+       $self->{set} = $bpm;
+       $self->bpm($bpm);
+    }
+}

@@ -1,0 +1,83 @@
+head	1.3;
+access;
+symbols;
+locks
+	alex:1.3; strict;
+comment	@# @;
+
+
+1.3
+date	2008.07.12.22.15.38;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.07.12.22.15.07;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.07.12.22.14.11;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Jul 12 23:14:11 2008
+@
+
+
+1.3
+log
+@Sat Jul 12 23:15:38 2008
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 2 == 0) {
+      my $b = $self->{foop}++;
+      $self->{foo} ||= 0.03;
+      $self->t({sample => "tim1/12", 
+                speed => 2 + (($b % 2) * 2) + rand($self->{foo}),
+                pan =>  -0.75 + (($b % 2) * 1.5),
+                volume => 1.2, shape => 0.9
+               }
+              );
+
+      if ($b % 32 > 16 ? ($b % 3) : ($b % 3 == 0)) {
+        $self->t({sample => "tim0/9", duration => 10000 + rand(50000),
+                  speed => 0.75 + rand($self->{foo}),
+                  pan =>  0.75 - (($b % 2) * 1.5), volume => 1
+                 }
+                );
+      }
+
+      if ($b % 32 == 0) {
+         $self->{foo} = rand(0.03);
+      }
+   }
+}@
+
+
+1.2
+log
+@Sat Jul 12 23:15:07 2008
+@
+text
+@d14 2
+a15 2
+        $self->t({sample => "tim0/9", duration => 50000,
+                  speed => 0.5 + rand($self->{foo}),
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d14 2
+a15 2
+        $self->t({sample => "tim0/8", duration => 100000,
+                  speed => 2 + rand($self->{foo}),
+@

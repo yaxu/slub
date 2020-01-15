@@ -1,0 +1,12 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 64 == 0) {
+        $self->t({sample => "sine/4",
+                  loops => 90,
+                  speed => 4.1,
+                  accellerate => -0.00006, delay => 0.1, delay2  => 0.2,
+                  shape => 0.9, volume => 0.02
+                 }
+                );
+    }
+}

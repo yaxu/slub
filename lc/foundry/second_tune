@@ -1,0 +1,25 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 2 == 0) {
+      my $b = $self->{foop}++;
+      $self->{foo} ||= 0.03;
+      $self->t({sample => "uxay/0", 
+                speed => -1 + (($b % 2) * 2) + rand($self->{foo}),
+                pan =>  -0.75 + (($b % 2) * 1.5),
+                volume => 1.2, shape => 0.9
+               }
+              );
+
+      if ($b % 32 > 16 ? ($b % 3) : ($b % 3 == 0)) {
+        $self->t({sample => "uxay/1",
+                  speed => 0.9 + rand($self->{foo}),
+                  pan =>  0.75 - (($b % 2) * 1.5), volume => 1
+                 }
+                );
+      }
+
+      if ($b % 32 == 0) {
+         $self->{foo} = rand(0.03);
+      }
+   }
+}

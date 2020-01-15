@@ -1,0 +1,5 @@
+sub bang {
+    my $self = shift;
+    t({sample => "chin/0"})
+        if $self->{bangs} % 4 == 0;
+}

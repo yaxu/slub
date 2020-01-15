@@ -1,0 +1,18 @@
+my @vowels = ('a', 'e', 'i', 'o', 'u');
+
+my $foo = 4;
+sub bang {
+    my $self = shift;
+    if($foo-- > 0) {            
+      t(sample => "mouth/$self->{bangs}",
+        speed => 0.8,
+        shape => 0.9,
+#        vowel => $vowels[rand @vowels]
+       );
+    }
+    else {
+      if ($self->{bangs} % 8 == 0 and rand() > 0.25) {
+        $foo = 3 + int(rand(4));
+      }
+    }
+}

@@ -1,0 +1,92 @@
+# 10101010
+# 010
+my $foo = 0;
+
+my @studied = map { [$_ => info($_)] } comb(8);
+
+my @sifted = 
+  map  { $_->[0] }
+  sort { $b->[1] <=> $a->[1]
+	   || $a->[2] <=> $b->[2]
+       }
+  map  { [$_->[0], $_->[1]->{regularity}, $_->[1]->{count}] }
+  grep { $_->[1]->{distinct} }
+  grep { $_->[0] =~ /1/ }
+  @studied;
+
+my @on = 
+  grep {substr($_, 0, 1) eq '1'}
+  @sifted;
+my @off = 
+  grep {substr($_, 0, 1) eq '0'}
+  @sifted;
+
+sub bang {
+    my $self = shift;
+    if (not length($self->{pat})) {
+       if ($self->{foo}++ % 4 != 3) {
+           $self->{pat} = $on[rand(2)];
+       }
+       else {
+           $self->{pat} = $off[@off - 1 - rand(10)];
+       }
+       $self->line(0, $self->{pat});
+    }
+    $self->{pat} =~ s/(.)//;
+    if ($1 eq '1') {
+       $self->t({sample => "industrial/" . int(1 + rand(1.25) + $self->{bangs} % 8),
+                 pan    => 0.5 - ($self->{bangs} % 16 / 16),
+#                 vowel  => 'e',
+                 speed => 1,
+#                 loops => rand(1.4),
+                 accellerate => -0.00003,
+#                 delay => 0.01, delay2 => 0.001,
+#                 shape => 0.9
+                }
+               );
+    }
+    $self->line(1, $self->{pat});
+    $self->modified;
+}
+
+sub info {
+  my ($line) = @_;
+  
+  my %stats;
+  
+  $stats{on} = (substr($line, 0, 1) eq '1' ? 1 : 0);
+  
+  $stats{count} = $line =~ tr/1/1/;
+  
+  $stats{distinct} = (($line =~ /11/) ? 0 : 1);
+  
+  my $regularity;
+  my $half = length($line) / 2;
+  my $first = substr($line, 0, $half);
+  my $second = substr($line, $half, $half);
+  if ($first eq $second) {
+    $regularity += 2;
+  }
+  if (($first =~ tr/1/1/) == ($second =~ tr/1/1/)) {
+    $regularity += 2;
+  }
+  foreach my $point (0 .. ($half - 1)) {
+    if (substr($first, $point, 1) eq substr($second, $point, 1)) {
+      $regularity++;
+    }
+  }
+  $stats{regularity} = $regularity || 0;
+  return(\%stats);
+}
+
+sub comb {
+  my ($length) = @_;
+  my @result;
+  if ($length > 1) {
+    @result = map {'1' . $_, '0' . $_} comb($length - 1);
+  }
+  else {
+    @result = (1, 0);
+  }
+  return(@result);
+}

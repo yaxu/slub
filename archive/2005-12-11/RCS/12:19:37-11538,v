@@ -1,0 +1,62 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2005.12.11.12.27.14;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.12.11.12.19.37;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Dec 11 12:19:37 2005
+@
+
+
+1.2
+log
+@Sun Dec 11 12:27:14 2005
+@
+text
+@sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 6 == 0;
+    if ($self->{bangs} % 8 == 0 or $foo) {
+        $self->v({volume => 40 + rand(20),
+                  curve => rand(0.1),
+                  speed => 5 + rand(5),
+                  reverb => 5,
+                  length => 10, width => 30, image => "daisy",
+                  direction => ($foo ? 0 : pi)
+                 }
+                );
+        $self->t({sample => "drum/2"});
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 5
+a7 4
+    if ($self->{bangs} % 16 == 0) {
+        $self->v({volume => 40,
+                  curve => rand(2),
+                  speed => 1,
+d9 2
+a10 1
+                  length => 1.6, width => 100,
+d13 1
+@

@@ -1,0 +1,26 @@
+# 592
+
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0) {
+        $self->ping();
+        $self->line(2, $self->{foo}++);
+        $self->modified();
+    }
+}
+
+##
+
+{
+    my $pingosc;
+    sub ping {
+        my ($self) = @_;
+        if (not $pingosc) {
+            $pingosc = Net::OSC->new;
+            $pingosc->server(hostname => '127.0.0.1', port => 6010);
+        }
+        $pingosc->command('/trigger');
+        $pingosc->send_message;
+    }
+}

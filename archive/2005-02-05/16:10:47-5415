@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+    return if rand(1) > 0.5;
+    $self->t({sample => "breaks152/$self->{bangs}",
+              speed => rand > 0.5 ? 1 : 0.5,
+              pan   => $self->sin(1),
+              shape => 0,
+
+             }
+            );
+}

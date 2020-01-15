@@ -1,0 +1,7 @@
+sub bang {
+    my $self = shift;
+    $self->vbang();
+    if ($self->{bangs} % (16 * 16) == 0) {
+        $self->vbar(4);
+    }
+}

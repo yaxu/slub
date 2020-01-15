@@ -1,0 +1,14 @@
+
+my @vowels = ('a', 'e', 'i', 'o', 'u');
+
+sub bang {
+    my $self = shift;
+    my $point = $self->{bangs} % 16;
+    if ($point eq 0 or $point eq 6 or $point eq 10) {
+       $self->t({speed => 1, volume => 0.1
+                 vowel => $vowels[$self->{bangs} % scalar(@vowels)],
+                 sample => "can/0"
+                }
+               );
+    }
+}

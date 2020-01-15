@@ -1,0 +1,32 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 32 == 0) {
+        my $rand = 1 - rand(2);
+ 
+        $self->t({sample => "sine/4", volume => 0.005,
+                  loops => 400,
+                  speed => 6,
+                  pan => $rand,
+                  pan_to => 0 - $rand,
+                  accellerate => -0.00001,
+                  shape => 0.9,
+                 }
+                );
+        $self->t({sample => "sine/4", volume => 0.005,
+                  loops => 300,
+                  speed => 5,
+                  pan => $rand,
+                  pan_to => 0 - $rand,
+                  accellerate => -0.00001,
+                  shape => 0.9
+                 }
+                );
+    }
+    if ($self->{bangs} % 32 >= 16) {
+        $self->t({sample => "chin/0", loops => 3});
+    }
+
+    if ($self->{bangs} % 16 == 0) {
+        $self->t({sample => "future/0"});
+    }
+}

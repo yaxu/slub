@@ -1,0 +1,18 @@
+# 361 1.5
+my $bps = 1.5;
+$ENV{LATENCY} = -0.71;
+sub bang {
+    my $self = shift;
+    $self->line(0, $self->{bangs} . " " . $self->{bps});
+    $self->scbps($bps)
+     unless $self->{bps} == $bps;
+    $self->{bps} = $bps;
+#    $self->latency(0.22);
+if ($self->{bangs} % 4 == 0) {
+    $self->t({sample => "drumtraks/1",
+              speed => $self->{foo}++ % 4 ? 1 : 4,
+              loops => 0.3
+             });
+}
+    $self->modified;
+}

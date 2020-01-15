@@ -1,0 +1,28 @@
+# -0.997347542195282
+my $pi2 = 3.14159265 * 2;
+
+sub bang {
+    my $self = shift;
+    my $b = $self->{bangs};
+
+    my $s = sin(($b / $pi2) / 2);
+    $self->line(0, $s);
+    $self->modified;
+
+#    $self->sine({freq => 60, direction => -0.1, ts => 0.5, clip => 0.1, 
+#                noise => 0, volume => 8, pan => 0.5 * $s,
+#                sin => 1, tri => 1
+#               })
+#      if $self->{bangs} % 8 == 0;
+#    $self->sine({freq => 100, direction => -0.4, ts => 0.5, clip => 0.1,
+#                noise => abs($s), volume => 8, pan => $s,
+#                sin => 1, tri => 1
+#               })
+#      if $self->{bangs} % 8 == 2;
+
+#    $self->sine({freq => 60, direction => 0.1, ts => 0.15, clip => 0.01,
+#                noise => 1 - abs($s), volume => 8, pan => 1 - $s
+#               })
+#      if $self->{bangs} % 4 == 2;
+#    $self->sine({ts => 0.3, clip => 0.1, volume => $s, freq => 80});
+}

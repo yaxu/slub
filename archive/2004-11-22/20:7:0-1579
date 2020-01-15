@@ -1,0 +1,25 @@
+my $flip;
+sub bang {
+    my $self = shift;
+
+    if ($flip) {
+        if ($self->{bangs} % 8 == 0) {
+            $self->trigger({sample => "can/1", rate => 50});
+        }
+        if ($self->{bangs} % 4 == 0) {
+            $self->trigger({sample => "diphone2/" . int(rand(16)),
+                            rate => 50, ts => 100
+                           }
+                          );
+        }
+    }
+    else {
+        if ($self->{bangs} % 3 == 0) {
+            $self->trigger({sample => "can/" . $self->{foo}++});
+        }
+    }
+    
+    if (rand > 0.95) {
+       $flip = not $flip;
+    }
+}

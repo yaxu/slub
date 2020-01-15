@@ -1,0 +1,35 @@
+# 
+my $dir = "/slub/samples/diphone2/";
+opendir(DIR, $dir);
+my @samples = map { $dir . $_ } grep { /\.wav$/i } readdir(DIR);
+
+sub bang {
+    my $self = shift;
+
+    $self->trigger({sample => $samples[rand @samples],
+                    gain   => 200,
+                    ts     => 100,
+                    browndel => 100,
+                   }
+                  );
+     
+    #$self->save("dip");
+    $self->modified;
+}
+
+##
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./scala/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    $self->message("saved.");
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}

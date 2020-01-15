@@ -1,0 +1,90 @@
+head	1.4;
+access;
+symbols;
+locks
+	alex:1.4; strict;
+comment	@# @;
+
+
+1.4
+date	2005.02.19.21.45.53;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.02.19.21.43.29;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.02.19.21.36.53;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.02.19.18.21.43;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Feb 19 18:21:43 2005
+@
+
+
+1.4
+log
+@Sat Feb 19 21:45:53 2005
+@
+text
+@sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 64 < 16 ? 6 : 16;
+    if ($self->{bangs} % 16 > 12) {
+       $foo += rand(2);
+    }
+    if ($self->{bangs} % $foo == 0) {
+       $self->t({sample => "diphone/$self->{bangs}", speed => 0.5,
+                 volume => 0.01,
+                 #accellerate => -0.000003 - rand(0.000002),
+                 #shape => rand(0.8),
+                 #pan => 0.8 - rand(0.8 * 2)
+                }
+               );
+    }
+}@
+
+
+1.3
+log
+@Sat Feb 19 21:43:29 2005
+@
+text
+@d10 3
+a12 3
+                 accellerate => -0.000005,
+                 shape => rand(0.8),
+                 pan => 0.8 - rand(0.8 * 2)
+@
+
+
+1.2
+log
+@Sat Feb 19 21:36:53 2005
+@
+text
+@d9 4
+a12 1
+                 volume => 0.01, accellerate => -0.000005,
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d9 1
+a9 1
+                 volume => 0.1, accellerate => -0.000005,
+@

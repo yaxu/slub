@@ -1,0 +1,15 @@
+sub bang {
+    my $self = shift;
+
+    if ($self->{bangs} % 16 < 4 and $self->{bangs} % 32 > 8) {
+       my $sample = $self->{bangs} % 4;
+       $self->t({sample => "made/$sample", loops => 0.1,
+                 accellerate => -0.00001, speed => 1,
+                 delay => 0.04, volume => 0.04,
+                 shape => 0.8
+                }
+               );
+    }
+
+
+}

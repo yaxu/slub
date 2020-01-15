@@ -1,0 +1,45 @@
+# a...c...
+# a...c......c.a..
+# ^
+# a...c...
+# a...c.....a.c...
+# ^
+my @v = ('a','e','i','o','u');
+sub bang {
+    my $self = shift;
+    my $string = $self->line(0);
+    $string .= reverse(shrink($string));
+    $self->line(1, $string);
+    $self->modified;
+    my $point = $self->{bangs} % length($string);
+    my $chr = substr($string, $point, 1);
+    if (not $chr eq '.') {
+      $self->t({sample => "dr55/"  . ord($chr), speed => 0.5,
+                vowel => 'e', volume => 0.02, loops => 0.5,
+                envelope_name => 'chop'
+               }
+              );
+      $self->line(2, ' ' x $point  . '^');
+    }
+    $string = $self->line(3);
+    $string .= shrink($string);
+    $self->line(4, $string);
+    $self->modified;
+    my $point = $self->{bangs} % length($string);
+    my $chr = substr($string, $point, 1);
+    return if $chr eq '.';
+    $self->t({sample => "drumtraks/"  . ord($chr),
+              speed => 1, vowel => 'e', volume => 0.02,
+              loops => 0.5, envelope_name => 'valley'
+             }
+            );
+
+
+    $self->line(5, ' ' x $point  . '^');
+    $self->modified;
+    #if ($self->{bangs} % 1 == 0) {
+    #   my $foo = $self->line(0);
+    #   $foo =~ s/(.)(.+)/$2$1/;
+    #   $self->line(0, $foo);
+    #}
+}

@@ -1,0 +1,63 @@
+sub bang {
+    my $self = shift;
+    $self->trigger({sample => "gabba/0", gain => 200, ts => 150, pan => 1})
+         unless $self->{bangs} % (int(rand(2) * 4) + 4);
+    $self->trigger({sample => "gabba/0", gain => 200, ts => 150, pan => 0})
+         unless $self->{bangs} % (int(rand(2) * 4) + 4); 
+    $self->trigger({sample => "gabba/0", gain => 200, ts => 150, pan => 1}) 
+         unless $self->{bangs} % (int(rand(2) * 4) + 4); 
+    $self->trigger({sample => "gabba/0", gain => 200, ts => 150, pan => 0}) 
+         unless $self->{bangs} % (int(rand(2) * 4) + 4);  
+}
+
+
+sub bang {
+    my $self = shift;
+    $self->play({num => 40,
+                 ts => 200,
+                 browndel => 10,
+                 formfreq => 1
+                }
+               )
+        unless $self->{bangs} % 8;
+}
+
+
+sub bang {
+    my $self = shift; 
+    my $foo = ($self->{bangs} % 32 < 16);
+    $self->trigger({sample => "future/9",
+                    ts     => 80,
+                    browndel => ($foo ? 0 : 100)
+                   }
+                  ) unless $self->{bangs} % ($foo ? 2 : 3);
+}
+
+
+my $seq = [70, 82];
+
+sub bang {
+    my $self = shift;
+    unless ((2 + $self->{bangs}) % 2) {
+        my $point = shift @$seq;
+        push @$seq, $point;
+        $self->play({num => $point - 24, ts => 300,
+                     formfreq => (20 * $self->sin(10)),
+                     bwfreq => (100 * $self->sin(10)),
+                    }
+                   );
+    }
+}
+
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 16;
+    $self->trigger({sample => "can/$foo",
+                    rate  => 20,
+                    ts    => 150,
+                   }
+                  );
+}
+
+
+

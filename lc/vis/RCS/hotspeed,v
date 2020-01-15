@@ -1,0 +1,122 @@
+head	1.4;
+access;
+symbols;
+locks
+	alex:1.4; strict;
+comment	@# @;
+
+
+1.4
+date	2005.11.25.16.41.37;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.11.25.16.41.24;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.11.25.16.39.42;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.11.25.16.38.54;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Nov 25 16:38:54 2005
+@
+
+
+1.4
+log
+@Fri Nov 25 16:41:37 2005
+@
+text
+@# 27
+my $length = 32;
+my $space = 4;
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % $space == 0) {
+        my $foo = $self->{bangs} % 2 ? 1 : 0;
+        my $num = $foo ? 5 : 4;
+        $self->t({sample => "drumtraks/$num",
+                  speed   => 0.5,
+                  ts     => 30,
+                  volume   => 0.4, delay => 0.03,
+                  pan    => $foo ? -0.4 : 0.4
+                 }
+                );
+         $self->v({$foo 
+                   ? (x=> 0.25, y => 0.25,
+                      length => 4, width => 5, speed => 5,
+                      direction => pi / 3 + pi, image => "daisy"
+                     )
+                   : (x => 0.75, y => 0.75, direction => pi / 3,
+                      speed => 5, image => "daisy"
+                     ),
+                   volume => 40, reverb => 8
+                  }
+                 );
+         my $point = $length - ($self->{foo}++ % $length) - 1;
+         if ($point == 0) {
+             $space = 4;
+         }
+         elsif (rand($length / 2) > $point) { 
+             $space = rand(4) + 1;
+         }
+         $self->code->[0] = "# $point";
+
+    }
+    $self->modified;
+}@
+
+
+1.3
+log
+@Fri Nov 25 16:41:24 2005
+@
+text
+@d1 1
+a1 1
+# 3
+@
+
+
+1.2
+log
+@Fri Nov 25 16:39:42 2005
+@
+text
+@d1 1
+a1 1
+# 10
+d22 1
+a22 1
+                      speed => 5, image => "javier"
+d24 1
+a24 1
+                   volume => 40, reverb => 2
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# 26
+d19 1
+a19 1
+                      direction => pi / 3 + pi, image => "autumn"
+d22 1
+a22 1
+                      speed => 5
+@

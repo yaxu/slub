@@ -1,0 +1,320 @@
+head	1.14;
+access;
+symbols;
+locks
+	alex:1.14; strict;
+comment	@# @;
+
+
+1.14
+date	2006.04.29.20.14.55;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2005.09.04.17.26.15;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2005.09.04.17.22.54;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2005.09.03.18.51.15;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2005.09.03.18.49.56;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2005.09.03.18.49.18;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2005.09.03.18.48.47;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2005.09.03.18.45.38;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2005.09.03.18.44.56;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2005.09.03.18.44.49;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.09.03.18.44.42;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.09.03.18.44.38;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.09.03.18.42.50;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.09.03.18.38.32;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Sep  3 19:38:32 2005
+@
+
+
+1.14
+log
+@Sat Apr 29 21:14:55 2006
+@
+text
+@my $dry = 0;
+
+sub bang {
+    my $self = shift;
+    $self->{foo} ||= 0.1;
+    if (!$dry) {
+      if ($self->{bangs} % 128 == 0) {
+         $self->{foo} += 0.2 - rand(0.1);
+         while ($self->{foo} > 1) {
+           $self->{foo}--
+         }
+         while ($self->{foo} < 0) {
+           $self->{foo}++;
+         }
+      }
+    }
+    else {
+      $self->{foo} = 0.01;
+    }
+    if ($self->{bangs} % 32 == 0) {
+
+        $self->t({sample => "made/5", volume => 2,
+                  delay => $self->{foo}, delay2 => $self->{foo},
+                  accellerate => -0.00001, shape => 0,
+                  #loops => 9,
+                  pan => 0.8, pan_to => -0.8
+                 }
+                );
+    }
+    if ($self->{bangs} % 16 == 8) {
+        $self->t({sample => "made/0", volume => 3,
+                  delay => $self->{foo}, speed => 3,
+                  loops => rand() > 0.5 ? 1 : 2,
+                 }
+                );
+    }
+
+    if ($self->{bangs} % 4 ==0) {
+       $self->t({sample => "drum/0", volume => 7});
+    }
+    if ($self->{bangs} % 8 ==4) {
+       $self->t({sample => "future/6", volume => 7, speed => 8.9, loops => 2.1,
+                 pan => -0.8, accellerate => -0.00001
+                }
+               );
+       $self->t({sample => "future/6", volume => 7, speed => 9, loops => 2,
+                 pan => 0.8
+                }
+               );
+    }
+
+
+}@
+
+
+1.13
+log
+@Sun Sep  4 18:26:15 2005
+@
+text
+@d22 1
+a22 1
+        $self->t({sample => "made/5", volume => 1,
+d26 1
+a26 1
+                  #pan => 0.8, pan_to => -0.8
+d31 1
+a31 1
+        $self->t({sample => "made/0", volume => 0.51,
+@
+
+
+1.12
+log
+@Sun Sep  4 18:22:54 2005
+@
+text
+@d1 2
+d6 1
+a6 1
+    if (0) {
+d17 3
+d24 3
+a26 1
+                  accellerate => -0.0001, shape => 0.9
+@
+
+
+1.11
+log
+@Sat Sep  3 19:51:15 2005
+@
+text
+@d4 10
+a13 8
+    if ($self->{bangs} % 128 == 0) {
+       $self->{foo} += 0.2 - rand(0.1);
+       while ($self->{foo} > 1) {
+         $self->{foo}--
+       }
+       while ($self->{foo} < 0) {
+         $self->{foo}++;
+       }
+d18 2
+a19 1
+                  delay => $self->{foo}, delay2 => $self->{foo}, accellerate => 0.0001
+a23 1
+
+d25 2
+a26 1
+                  delay => $self->{foo}, speed => 2, loops => 6
+@
+
+
+1.10
+log
+@Sat Sep  3 19:49:56 2005
+@
+text
+@d5 1
+a5 1
+       $self->{foo} += 0.3 - rand(0.4);
+@
+
+
+1.9
+log
+@Sat Sep  3 19:49:18 2005
+@
+text
+@d4 1
+a4 1
+    if ($self->{bangs} % 64 == 0) {
+d23 1
+a23 1
+                  delay => 0.01, speed => 2, loops => 6
+@
+
+
+1.8
+log
+@Sat Sep  3 19:48:47 2005
+@
+text
+@d4 1
+a4 1
+    if ($self->{bangs} % 32 == 0) {
+d13 1
+a13 1
+    if ($self->{bangs} % 16 == 0) {
+d16 1
+a16 1
+                  delay => $self->{foo}, delay2 => 0.10, accellerate => 0.0001
+@
+
+
+1.7
+log
+@Sat Sep  3 19:45:38 2005
+@
+text
+@d3 10
+d16 1
+a16 1
+                  delay => 0.9, delay2 => 0.90, accellerate => 0.0001
+@
+
+
+1.6
+log
+@Sat Sep  3 19:44:56 2005
+@
+text
+@d22 6
+a27 1
+       $self->t({sample => "future/6", volume => 7, speed => 9, loops => 2
+@
+
+
+1.5
+log
+@Sat Sep  3 19:44:49 2005
+@
+text
+@d22 1
+a22 1
+       $self->t({sample => "future/6", volume => 7, speed => 9, loops => 4
+@
+
+
+1.4
+log
+@Sat Sep  3 19:44:42 2005
+@
+text
+@d22 1
+a22 1
+       $self->t({sample => "future/6", volume => 7, speed => 9, loops => 5
+@
+
+
+1.3
+log
+@Sat Sep  3 19:44:38 2005
+@
+text
+@d22 3
+a24 1
+       $self->t({sample => "future/6", volume => 7, speed => 9, loops => 5});
+@
+
+
+1.2
+log
+@Sat Sep  3 19:42:50 2005
+@
+text
+@d21 5
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d5 1
+a5 1
+        $self->t({sample => "made/3", volume => 1,
+d10 11
+@

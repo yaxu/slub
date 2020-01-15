@@ -1,0 +1,67 @@
+Artists: Ade Ward<br>
+Date: 15th January, 2000
+
+<pre>
+#!/usr/bin/perl
+
+# "Tune-walker number one" adrian@signwave.co.uk (c) 15/01/00
+# http://www.generative.net/mp3/walk-1.mp3 (1,515kb)
+
+use RealtimeMIDI; # Thanks Alex. Probably called MIDI::Realtime on CPAN
+now.
+
+my $midi = RealtimeMIDI -> new();
+
+$bpm     = 125;                    # I wonder what this does?!
+
+@last    = ( 0, 0, 0, 0, 0, 0, 0); # 7 channels, 7th is bassline
+@pitches = ( 1, 4, 7, 9, 3, 6);    # 6 other channels of notes
+@beats   = ( 1, 7, 4,12,14, 5);    # at different beats of the bar
+
+$bassctr = 0;
+
+while (true) {
+
+ for $beat (1..16) {
+
+  if (($beat-1)%4 eq 0) {
+   playnote(7,47+$pitches[$bassctr]-(int($beat/4)*12)) # on-beat
+  }
+  if (($beat-1)%3 eq 0) {
+   playnote(7,35+$pitches[$bassctr]-(int($beat/6)*12)) # syncopate!
+  }
+
+  for (0..$#pitches) {
+   if (abs($beats[$_]) eq $beat) {
+    playnote($_+1,59+$pitches[$_]);
+   }
+  }
+  select(undef,undef,undef,15/$bpm);
+ }
+
+ $bassctr=($bassctr+1)%$#pitches;
+
+ if (rand(50)<25) { $beats[rand(@beats)]++ }
+             else { $beats[rand(@beats)]-- }
+
+ if (rand(50)<25) { $pitches[rand(@pitches)]+=$pitches[rand(@pitches)] }
+             else { $pitches[rand(@pitches)]-=$pitches[rand(@pitches)] }
+
+ for (0..$#beats)   {   $beats[$_]=wraparound(  $beats[$_],16) }
+ for (0..$#pitches) { $pitches[$_]=wraparound($pitches[$_],12) }
+
+}
+
+sub playnote {
+ $midi -> note($last[$_[0]-1],$_[0],0);   # Note-off
+ $last[$_[0]-1]=$_[1];
+ $midi -> note($last[$_[0]-1],$_[0],127);
+}
+
+sub wraparound {
+ my ($value,$boundary)=@_;
+ while ($value> $boundary) { $value-=$boundary }
+ while ($value<-$boundary) { $value+=$boundary }
+ return $value;
+}
+</pre>

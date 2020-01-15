@@ -1,0 +1,73 @@
+# done.
+# 2_2
+# 15 / 15 
+# 12
+my $seq = [qw/ 1 12 1 12/];
+
+my $scope = 16;
+my $path_length = 4;
+my $wind_power = 0;
+my $map = mapit();
+my @keys = keys %$map;
+my $rendered = render();
+my $period = 2;
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % $period == 0) {
+       my $point = ($self->{bangs} / $period) % @$rendered;
+       $self->code->[3] = "# $rendered->[$point]";
+       $self->play({num => 70 + $rendered->[$point],
+                    formfreq => 3,
+                    bwfreq   => 200,
+                    ts => 50 + rand(10)
+                   }
+                  );
+    }
+    $self->modified;
+}
+
+sub render {
+    my $result = [];
+    foreach my $point (0 .. (@$seq - 1)) {
+        my $from = $seq->[$point];
+        my $to   = $seq->[($point + 1) % @$seq];
+        my $path = $from . '_' . $to;
+        push(@$result, @{$map->{$path}});
+    }
+    return $result;
+}
+
+sub mapit {
+    my $result;
+    my $points = [ 0 .. ( $scope - 1 ) ];
+    foreach my $from (@$points) {
+        foreach my $to (@$points) {
+            $self->code->[2] = "# $from / $to ";
+            $result->{$from . '_' . $to} = path($from, $to);
+        }
+    }
+    $self->code->[0] = "# done.";
+    return($result);
+}
+
+sub path {
+    my ($from, $to) = @_;
+    
+    my $result = [];
+    my $foo = 0;
+    for my $step ( 0 .. ( $path_length - 2 ) ) {
+        my $difference = abs($from - $to);
+        my $power = ($foo++ % (($difference / 2) + 1));
+        $power += int(rand($wind_power)) - int($wind_power / 2);
+        if ($from < $to) {
+            $from += $power;
+        }
+        else {
+            $from -= $power;
+        }
+        push(@$result, $from);
+    }
+    push(@$result, $to);
+    return $result;
+}

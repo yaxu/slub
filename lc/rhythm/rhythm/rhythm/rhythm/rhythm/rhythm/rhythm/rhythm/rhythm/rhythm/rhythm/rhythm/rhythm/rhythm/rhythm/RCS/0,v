@@ -1,0 +1,67 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2006.03.26.22.45.49;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Mar 26 23:45:49 2006
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# 16.4+0!3+2
+# O...O.......O...
+
+my $init = 0;
+
+sub bang {
+    my $self = shift;
+    init() unless $init;
+
+    my $line = $self->line(1);
+    return unless length $line;
+    my $point = $self->{bangs} % length($line);
+    my $chr = substr($line, $point, 1);
+    if ($chr eq 'O') {
+        $self->t({sample => "future/0"});
+    }
+}
+
+sub init {
+  my $string = $self->line(0);
+
+  $string =~ s/^(\d+)//;
+  my $length = $1;
+  my $rhythm = ('.' x $length);
+
+  while($string =~ /(\D+)(\d+)(?=\+(\d+))?/g) {
+    my ($verb, $param, $offset) = ($1, $2, $3);
+    $offset ||= 0;
+    print("$verb / $param / $offset\n");
+    if ($verb eq '.') {
+      $param--;
+      $rhythm =~ s/(?<=,{$offset})(.)(.{$param})/O$2/g;
+    }
+    elsif ($verb eq '!') {
+      $param--;
+      $rhythm =~ s/(?<=.{$offset})(.)(.{$param})/.$2/g;
+    }
+  }
+  $self->line(1, $rhythm);
+  $self->modified;
+}
+
+@

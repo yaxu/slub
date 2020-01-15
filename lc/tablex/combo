@@ -1,0 +1,38 @@
+# 85
+use YAML;
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0
+        or
+        ($self->{bangs} % 4 == 2 and rand() > 0.2)
+       ) {
+    $self->{perms} ||= perms(space => 16, things => 4);
+    unless($self->{combo} and @{$self->{combo}}) {
+       $self->{combo} = $self->render([27, 25, 23, 22]);
+    }
+    my $num = 60 + shift(@{$self->{combo}});
+    my $pan = int rand(2);
+    $self->play({formfreq => 1, bwfreq => 90, ts => 300,
+                 num => $num,
+                 gain => 400
+                }
+               );
+
+    $self->code->[0] = "# $num";
+    $self->modified;
+    }
+}
+
+sub render {
+    my $self = shift;
+    my $result;
+    my $line = shift;
+    my $perms = $self->{perms};
+    my $point = ($self->sin(10) * @$perms);
+    my $runlengths = $perms->[$point];
+    foreach my $c (0 .. @$runlengths -1) {
+        my $note = $line->[$c % @$line];
+        push(@$result, ($note) x $runlengths->[$c]);
+    }
+    return($result);
+}

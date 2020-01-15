@@ -1,0 +1,16 @@
+sub bang {
+    my $self = shift;
+    my $mod = 4;
+    if ($self->{bangs} % ($mod * 3) == 0) {
+       $self->t({sample => "mash/1", speed => 1,
+                 pan => -0.5, pan_to => rand(1),
+                }
+               );
+    }
+    if ($self->{bangs} % $mod == ($mod / 2)) {
+       $self->t({sample => "mash/1", speed => 1,
+                 pan => 0.75, pan_to => 1 - rand(1)
+                }
+               );
+    }
+}

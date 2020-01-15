@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0) {
+        $self->trigger({sample => "sequential/8",
+                        ts => 10,
+                        gain => 30,
+                        browndel => 10 + (40 * $self->sin(100))
+                       }
+                      )
+    }
+}

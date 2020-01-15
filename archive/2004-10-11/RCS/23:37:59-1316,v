@@ -1,0 +1,51 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.10.11.22.37.59;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Oct 11 23:37:59 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@my $seq = [0, 2];
+my $mod = 32;
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % $mod == 0) {
+        $self->{point} = $seq->[($self->{bangs} % (@@$seq * $mod) / $mod)];
+        $self->play({num => 66 + $self->{point},
+                     ts => 800,
+                     gain => 25,
+                     formfreq => 20,
+                     bwfreq => 20,
+                    }
+                   );
+    }
+    if ($self->{bangs} % 3 == 0) {
+        my $foo = $self->{bangs} % $mod > ($mod - 8);
+        my $bar = $self->{bangs} % 8 > 4;
+        $self->play({num  => 58 + $self->{point} + ($foo ? 3 : 0)
+                             + ($bar ? 0 : 3),
+                     ts   => 100,
+                     gain => 30,
+                     formfreq => 10,
+                     bwfreq  => 10,
+                    }
+                   );
+    }
+}@

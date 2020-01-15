@@ -1,0 +1,14 @@
+sub bang {
+    my $self = shift;
+    my $point = $self->{bangs} % 16;
+    if (grep {$_ eq $point} (0, 7)) {
+        my $switch = (($self->{bangs} % 32 > 20) ? 1 : 0);
+        my $num = ($switch ? 62 : 50);
+        $self->play({num => $num,
+                     ts => 50,
+                     formfreq => ($switch ? 30 : 50),
+                     bwfreq => ($switch ? 20 : 100),
+                    }
+                   );
+    }
+}

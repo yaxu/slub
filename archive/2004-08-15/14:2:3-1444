@@ -1,0 +1,9 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0) {
+        beep(100)
+    }
+    elsif ($self->{bangs} % 3 == 0) {
+        beep(1000);
+    }
+}

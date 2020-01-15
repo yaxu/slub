@@ -1,0 +1,86 @@
+head	1.3;
+access;
+symbols;
+locks
+	alex:1.3; strict;
+comment	@# @;
+
+
+1.3
+date	2006.10.20.18.34.41;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2006.10.20.18.33.51;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.04.18.21.10.25;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Apr 18 22:10:25 2005
+@
+
+
+1.3
+log
+@Fri Oct 20 19:34:41 2006
+@
+text
+@# a.e.d...
+# a.e.d.....aed...
+#             ^
+
+sub bang {
+    my $self = shift;
+    my $string = $self->line(0);
+    $string .= shrink($string);
+    $self->line(1, $string);
+    $self->modified;
+    my $point = $self->{bangs} % length($string);
+    my $chr = substr($string, $point, 1);
+    return if $chr eq '.';
+    $self->trigger({sample => "drumtraks/"  . ord($chr),
+                   volume => 0.01, browndel => 100
+             }
+            );
+    $self->line(2, ' ' x $point  . '^');
+    $self->modified;
+    #if ($self->{bangs} % 1 == 0) {
+    #   my $foo = $self->line(0);
+    #   $foo =~ s/(.)(.+)/$2$1/;
+    #   $self->line(0, $foo);
+    #}
+}@
+
+
+1.2
+log
+@Fri Oct 20 19:33:51 2006
+@
+text
+@d1 2
+a2 2
+# a...d...
+# a...d.....a.d...
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+a3 1
+# ^
+d14 2
+a15 2
+    $self->t({sample => "drumtraks/"  . ord($chr),
+              volume => 0.01
+@

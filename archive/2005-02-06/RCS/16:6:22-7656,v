@@ -1,0 +1,35 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.02.06.16.06.22;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Feb  6 16:06:22 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0 and rand() > 0.5) {
+        my $speed = 1.03;
+        if (rand() > 0.9)  {
+          $speed -= 2;
+        }
+        $self->t({sample => "breaks157/0", volume => 0.5, speed => $speed, 
+                  envelope_name => "valley"});
+    }
+}@

@@ -1,0 +1,14 @@
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 4 ? 1 : 0.4;
+    my $bar = $self->{bangs} % 64 > 50 ? 2 : 4;
+    $self->t({speed => $bar / 2,
+              sample => "drumtraks/DT Tom2.wav",
+              pan  => 1 - (2 * $self->sin(4))
+             }
+            ) 
+      if $self->{bangs} % $bar == 0;
+    $self->t({speed => $foo, shape => 0, sample => "drumtraks/DT Tom1.wav"})
+      if $self->{bangs} % 3 == 0;
+    
+}

@@ -1,0 +1,7 @@
+
+
+sub bang {
+  my $self = shift;
+  $self->code->[0] = '# ' . $self->{bangs} . ' / ' . $self->{ticks} . "\n"; 
+  $self->modified;
+}

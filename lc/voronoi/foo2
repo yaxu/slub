@@ -1,0 +1,52 @@
+my $ttl = 100;
+my $init = 0;
+my $start;
+my $min = 40;
+my $max = 60;
+my @data;
+use YAML;
+sub bang {
+    my $self = shift;
+    $self->init_data() unless $init++;
+
+    my $point = (($self->{bangs} - $start) / $ttl);
+    if (not @data) {
+#       exit(0);
+    }
+    warn("$point vs $data[0]->[1]") if @data;
+    while(@data and ($data[0]->[1] <= $point)) {
+       my $datum = shift @data;
+       $self->peep($datum->[0]);
+    }
+}
+
+sub init_data() {
+  warn("init\n");
+  $start = $self->{bangs};
+  open(FH, "/home/alex/Desktop/cvt/output/three_iterations.vor")
+    or die "$!";
+  @data;
+  while (<FH>) {
+    next if /^\#/;
+    my ($x, $y) = (/(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+))/);
+    push(@data, [$x, $y]);
+  }
+  # sort by time
+  @data = sort {$a->[1] <=> $b->[1]} @data;
+  print Dump \@data;
+}
+
+sub peep {
+    my ($self, $speed) = @_;
+
+    $speed *= ($max - $min);
+    $speed += $min;
+
+    $self->t({speed => $speed, sample => "sine/5",
+              scale => "equal",
+              duration => 30000,
+              volume => 0.2, pan => 1- rand(2),
+              envelope_name => 'percussive',
+             }
+            );
+}

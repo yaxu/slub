@@ -1,0 +1,10 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 32 == 0) {
+        $self->noise({ts => 300, filter => 100, gain => 300});
+    }
+    if ($self->{bangs} % 64 == 16) {
+        $self->noise({ts => 300, filter => 140, gain => 100});
+    }
+    
+}

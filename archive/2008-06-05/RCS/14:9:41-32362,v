@@ -1,0 +1,58 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2008.06.05.13.11.13;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.06.05.13.09.41;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Thu Jun  5 14:09:41 2008
+@
+
+
+1.2
+log
+@Thu Jun  5 14:11:13 2008
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 2 == 0) {
+       $self->strike({alpha => 1, mass => 0.01, velocity => 9,
+                      x => 6 - rand(10), y => 6 - rand(10)
+                     }
+                    );
+    }
+    if ($self->{bangs} % 8 == 0) {
+       $self->strike({mass => 0.25 + rand(),
+                      alpha => 1 + ($self->{bangs} % 3),
+                      x => 5.5, y => 2
+                     }
+                    );
+    }
+    $self->tension(0.6 + abs(1 - $self->{bangs} % 32 * 0.05));
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d16 1
+a16 2
+   $self->tension(0.1 + $self->{bangs} % 16 * 0.1);
+
+@

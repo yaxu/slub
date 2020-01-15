@@ -1,0 +1,65 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.02.06.15.51.43;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Feb  6 15:51:43 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# a...c...
+# a...c......c.a..
+#     ^
+# a.a.c.a.
+# a.a.c.a...aaca..
+#       ^
+sub bang {
+    my $self = shift;
+    my $string = $self->line(0);
+    $string .= reverse(shrink($string));
+    $self->line(1, $string);
+    $self->modified;
+    my $point = $self->{bangs} % length($string);
+    my $chr = substr($string, $point, 1);
+    if (not $chr eq '.') {
+      $self->t({sample => "uxay/"  . ord($chr), speed => -1
+               }
+              );
+      $self->line(2, ' ' x $point  . '^');
+    }
+    $string = $self->line(3);
+    $string .= shrink($string);
+    $self->line(4, $string);
+    $self->modified;
+    my $point = $self->{bangs} % length($string);
+    my $chr = substr($string, $point, 1);
+    return if $chr eq '.';
+    $self->t({sample => "dr55/"  . ord($chr),
+              speed => -1
+             }
+            );
+
+
+    $self->line(5, ' ' x $point  . '^');
+    $self->modified;
+    #if ($self->{bangs} % 1 == 0) {
+    #   my $foo = $self->line(0);
+    #   $foo =~ s/(.)(.+)/$2$1/;
+    #   $self->line(0, $foo);
+    #}
+}@

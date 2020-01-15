@@ -1,0 +1,167 @@
+
+global { 
+  interp 0; // what's this?
+  srate 44100; 
+  krate 420; 
+  outchannels 2; // stereo?
+
+  table gabba0( sample , - 1,     "/yaxu/samples/gabba/0.wav"); // sample 0
+  table gabba1( sample , - 1,     "/yaxu/samples/gabba/1.wav"); // sample 1
+  table gabba2( sample , - 1,     "/yaxu/samples/gabba/2.wav"); // sample 2
+  table gabba3( sample , - 1,     "/yaxu/samples/gabba/3.wav"); // sample 3
+
+  table times(empty,17);   // end times for each table
+  ksig inittimes;          // flag to set it
+
+  table midimap(data,128,
+                 0,  1 , 2,  3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+               );
+} 
+
+
+kopcode timeset() {
+    imports exports table gabba0,gabba1,gabba2,gabba3;
+    imports exports table times;
+
+    tablewrite(times, 0, (1/s_rate)*ftlen(gabba0));
+    tablewrite(times, 1, (1/s_rate)*ftlen(gabba1));
+    tablewrite(times, 2, (1/s_rate)*ftlen(gabba2));
+    tablewrite(times, 3, (1/s_rate)*ftlen(gabba3));
+}
+
+
+instr perc(pitch, vel) preset 0 { 
+    ivar pmap, scale, az, el;
+    ksig eflag, etime, kpmap;
+    asig samp;
+
+    imports exports table gabba0,gabba1,gabba2,gabba3;
+    imports exports table midimap, times;
+
+    imports exports table midimap, times;
+    tablemap drumset(gabba0, gabba1, gabba2, gabba3);
+    //imports exports table azimuth, elevation, levels;
+    imports exports ksig inittimes;
+
+
+  if (!inittimes)
+   {
+     inittimes = 1;
+     timeset();
+   }
+
+  pmap = tableread(midimap,pitch);
+  scale = (vel/127)*tableread(levels,pmap);
+  az = tableread(azimuth,pmap);
+  el = tableread(elevation,pmap);
+
+  kpmap = pmap;
+  etime = tableread(times,kpmap);
+  if ((itime>etime)&&(!eflag))
+    {
+      eflag = 1;
+      turnoff;
+    }
+  if ((released)&&(!eflag))
+   {
+     eflag = 1;
+     if (etime>itime)
+      { 
+        extend(etime - itime);
+      }
+   }
+  if (pmap >= 0)
+   {
+     samp = scale*doscil(drumset[pmap]);
+     spatialize(samp,az,el,0);
+     outbus(rvbus,samp);
+   }
+} 
+
+
+instr sine (pitch, vel) preset 1 { 
+
+  // declarations
+  ivar a;       // sets osc f
+  ivar attack,release, attlim, ktime, stime;
+  ksig incr, rel, tot;
+  asig x, y;    // osc state
+  asig init;
+  asig env;
+
+  // **********************
+  // computed during i-pass
+  // **********************
+
+  ktime = 1/k_rate;
+  stime = 1/s_rate;
+
+  // change these for envelope
+  // should be of k-rate granularity
+
+  attack = int(0.001/ktime)*ktime;
+  release = int(0.060/ktime)*ktime;
+
+  attlim = attack - 0.5*ktime;
+
+  // turns MIDI number into 
+  // oscillator constant 
+
+  a = 2.0*sin(3.14159*cpsmidi(pitch - 12)*stime);
+
+  vel = 0.5*vel/128;
+
+  // **********************
+  // computed during k-pass
+  // **********************
+
+  incr = 0;
+  if (released && !rel)
+    {
+      rel = 1;
+      extend(release);
+    }
+  if ((!rel) && (itime < attlim))
+    {
+      incr = vel*stime/attack;
+      tot = tot + vel*ktime/attack;
+    }
+  if (rel)
+    {
+      incr = -tot*stime/(release+2*ktime);
+    }
+    
+
+  // **********************
+  // computed during a-pass
+  // **********************
+
+  if (init == 0)
+    {
+      x = 0.25;
+      init = 1;
+    }
+
+  x = x - a*y;
+  y = y + a*x;
+  env = env + incr;
+  
+  output(env*y);
+
+} 
+
+
+
+
+
+
+
+
+

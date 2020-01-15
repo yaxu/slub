@@ -1,0 +1,33 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2007.06.22.22.57.17;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Jun 22 23:57:17 2007
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    my $foo= $self->{bangs} % 64 > 40 ? 0 : 1;
+    $self->t({sample => "wobble/0", 
+              speed => ($foo ? 2 : 3), pan => 1, pan_to => -1
+             }
+            )
+      unless $self->{bangs} % ($foo ? 8 : 6);
+}@

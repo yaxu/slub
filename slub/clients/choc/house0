@@ -1,0 +1,39 @@
+$VAR1 = [
+          undef,
+          {
+            'strength' => '8',
+            'spread' => '32',
+            'sample' => 'house_CB',
+            'chr' => 'x',
+            'racism' => '8',
+            'number' => '1'
+          },
+          {
+            'strength' => '12',
+            'spread' => '20',
+            'sample' => 'house_FX',
+            'chr' => '~',
+            'racism' => '3',
+            'number' => '2'
+          },
+          ${\$VAR1->[0]},
+          {
+            'strength' => '30',
+            'spread' => '24',
+            'sample' => 'house_OH',
+            'chr' => '-',
+            'racism' => '3',
+            'number' => '4'
+          },
+          ${\$VAR1->[0]},
+          ${\$VAR1->[0]},
+          ${\$VAR1->[0]},
+          {
+            'strength' => '10',
+            'spread' => '16',
+            'sample' => 'house_BD',
+            'chr' => '@',
+            'racism' => '4',
+            'number' => '8'
+          }
+        ];

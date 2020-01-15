@@ -1,0 +1,74 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2004.09.29.23.16.25;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.09.29.23.01.59;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Thu Sep 30 00:01:59 2004
+@
+
+
+1.2
+log
+@Thu Sep 30 00:16:25 2004
+@
+text
+@
+sub bang {
+    my $self = shift;
+    my $switch = $self->{bangs} % 32 > 24;
+    my $foo = $switch ? 6 : 4;
+    if ($self->{bangs} % $foo == 0) {
+        $self->play({num => ($switch ? 80 : 60),
+                     ts => 150,
+                     gain => 30,
+                     formfreq => 20,
+                     bwfreq => 10,
+                     pan => $self->{foo}++ % 2,
+                     browndel => $switch ? 10 : 0,
+                    }
+                   );
+        $self->play({num => ($switch ? 80 : 50),
+                     ts => 150,
+                     gain => 20,
+                     formfreq => 30,
+                     pan => 1 - ($self->{bar}++ % 2),
+                    }
+                   );
+    }
+    my $bar = $switch  ? 3 : 4;
+    if ($self->{bangs} % $bar == 0) {
+        $self->trigger({sample => "drumtraks/2",
+                        browndel => 100,
+                        ts => 6,
+                        gain => 30
+                       }
+                      );
+    }
+
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d12 2
+a13 1
+                     pan => $self->{foo}++ % 2
+@

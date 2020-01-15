@@ -1,0 +1,18 @@
+# .>.>.<.<.<.>
+
+sub bang {
+    my $self = shift;
+    $self->{num} ||= 40;
+    my($foo) = ($self->code->[0] =~ /\s+(\S+)/);
+    $foo =~ s/(.)(.+)/$2$1/;
+    my $point = $1;
+    return if $point eq '.';
+    if ($point eq '>') {
+        $self->{num}++;
+    }   
+    elsif ($point eq '<') {
+        $self->{num}--;
+    }
+    $self->code->[0] = "# $foo";
+    $self->modified;
+}

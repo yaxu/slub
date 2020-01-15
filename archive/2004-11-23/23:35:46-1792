@@ -1,0 +1,25 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0 or $self->{bangs} % 12 == 0) {
+        $self->noise({ts => 60, filter => 200 + 1000 * $self->sin,
+                     }
+                    );
+    }
+    if ($self->{bangs} % 64 == 0) {
+        my $num = 50;
+        $num += (($self->{bangs} % 256) / 64);
+        $self->play({num => $num, formfreq => 2,
+                     bwfreq => 50,
+                     ts => 600
+                    }
+                   );
+    }
+    elsif ($self->{bangs} % 4 == 0 and rand() > 0.4) {
+        $self->play({num => (rand() > 0.6 ? 50 : 62), 
+                     formfreq => 2, 
+                     bwfreq => 120, 
+                     ts => 120
+                    }
+                   );
+    }
+}

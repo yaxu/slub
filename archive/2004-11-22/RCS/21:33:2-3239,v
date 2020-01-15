@@ -1,0 +1,42 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.11.22.21.33.03;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Nov 22 21:33:02 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# .>.>.<.<.<.>
+
+sub bang {
+    my $self = shift;
+    $self->{num} ||= 40;
+    my($foo) = ($self->code->[0] =~ /\s+(\S+)/);
+    $foo =~ s/(.)(.+)/$2$1/;
+    my $point = $1;
+    return if $point eq '.';
+    if ($point eq '>') {
+        $self->{num}++;
+    }   
+    elsif ($point eq '<') {
+        $self->{num}--;
+    }
+    $self->code->[0] = "# $foo";
+    $self->modified;
+}@

@@ -1,0 +1,22 @@
+# 15!
+my $quiet = 0;
+sub bang {
+    my $self = shift;
+    if ($quiet > 0) {
+      $quiet--;
+    }
+    elsif ($self->{bangs} % 4 == 0) {
+        my $foo = ($self->{bangs} % 7 == 0);
+        $self->trigger({sample => "drum/0",
+                        rate => 50 + ($foo ? 50 : 0),
+                        ts => 100,
+                        browndel => $self->{foo}++
+                       }
+                      );
+        if ($foo) {
+           $self->modified;
+           $quiet = 8 + int(rand(10));
+           $self->code->[0] = "# $quiet!";
+        }
+    }
+}

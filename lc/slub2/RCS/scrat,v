@@ -1,0 +1,401 @@
+head	1.21;
+access;
+symbols;
+locks
+	alex:1.21; strict;
+comment	@# @;
+
+
+1.21
+date	2005.08.29.22.33.29;	author alex;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2005.08.29.22.31.47;	author alex;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2005.08.29.22.30.40;	author alex;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2005.06.17.13.49.29;	author alex;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2005.06.17.09.34.37;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2005.06.12.19.26.08;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2005.05.20.18.14.41;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2005.04.18.21.01.32;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2005.04.18.20.52.14;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2005.04.18.20.50.14;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2005.04.18.13.07.41;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2005.04.18.13.06.29;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2005.04.18.13.04.52;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2005.04.18.13.03.05;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2005.04.18.11.49.33;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2005.04.18.11.27.56;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2005.04.18.11.13.36;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.04.18.11.13.14;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.04.18.11.12.42;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.04.18.11.12.11;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.04.18.11.11.17;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Apr 18 12:11:17 2005
+@
+
+
+1.21
+log
+@Mon Aug 29 23:33:29 2005
+@
+text
+@sub bang {
+    my $self = shift;
+
+    $self->t({loops => rand(2),
+              speed => $self->{bangs} % 12 ? 1 : 1.5,
+#              pan => 1 - rand(2),
+              sample => "drumtraks/2",
+              #shape => ($self->{bangs} % 16 == 0 ? 1 : 0),
+              volume => 1,
+              shape => 0.75,
+              delay => $self->{bangs} % 4 ? 0.009 : 0
+             }
+            )
+       if $self->{bangs} % 2 == 0;
+}@
+
+
+1.20
+log
+@Mon Aug 29 23:31:47 2005
+@
+text
+@d11 1
+a11 1
+#              delay => 0.9
+@
+
+
+1.19
+log
+@Mon Aug 29 23:30:40 2005
+@
+text
+@d5 1
+a5 1
+              speed => $self->{bangs} % 6 ? 1 : 1.5,
+d7 1
+a7 1
+              sample => "future/0",
+@
+
+
+1.18
+log
+@Fri Jun 17 14:49:29 2005
+@
+text
+@d5 3
+a7 3
+              # speed => rand() > 0.5 ? 3 : 2,
+              pan => 1 - rand(2),
+              sample => "future/5",
+d9 3
+a11 1
+              volume => 0.004,
+@
+
+
+1.17
+log
+@Fri Jun 17 10:34:37 2005
+@
+text
+@d4 2
+a5 1
+    $self->t({loops => rand(2), speed => rand() > 0.5 ? 3 : 2,
+d7 1
+a7 1
+              sample => "drum/0",
+@
+
+
+1.16
+log
+@Sun Jun 12 20:26:08 2005
+@
+text
+@d4 3
+a6 2
+    $self->t({loops => rand(2),
+              sample => "jungle/1",
+d8 1
+a8 3
+              volume => 0.6,
+              speed => 2,
+              vowel => 'e'
+@
+
+
+1.15
+log
+@Fri May 20 19:14:41 2005
+@
+text
+@d4 2
+a5 3
+    $self->t({loops => rand(2), speed => rand() > 0.5 ? 3 : 2,
+              pan => 1 - rand(2),
+              sample => "drum/0",
+d7 3
+a9 1
+              volume => 0.004,
+@
+
+
+1.14
+log
+@Mon Apr 18 22:01:32 2005
+@
+text
+@d4 1
+a4 1
+    $self->t({loops => rand(1.5), speed => rand() > 0.5 ? 1 : 0.8,
+d8 1
+a8 1
+              volume => 0.004
+@
+
+
+1.13
+log
+@Mon Apr 18 21:52:14 2005
+@
+text
+@d4 1
+a4 1
+    $self->t({loops => rand(1.5), speed => rand() > 0.5 ? 1 : -0.8,
+d6 1
+a6 1
+              sample => "invaders/1",
+@
+
+
+1.12
+log
+@Mon Apr 18 21:50:13 2005
+@
+text
+@d6 1
+a6 1
+              sample => "drumtraks/0",
+@
+
+
+1.11
+log
+@Mon Apr 18 14:07:41 2005
+@
+text
+@d7 1
+a7 1
+              shape => ($self->{bangs} % 16 == 0 ? 1 : 0),
+@
+
+
+1.10
+log
+@Mon Apr 18 14:06:29 2005
+@
+text
+@a2 1
+    my $switch = $self->{bangs} % 64 > 32 ? -0.9 : -0.8;
+d4 1
+a4 1
+    $self->t({loops => rand(1.5), speed => rand() > 0.5 ? 1 : $switch,
+d11 1
+a11 1
+       if $self->{bangs} % 4 == 0;
+@
+
+
+1.9
+log
+@Mon Apr 18 14:04:52 2005
+@
+text
+@d7 2
+a8 2
+              sample => "drumtraks/2",
+              shape => ($self->{bangs} % 16 == 0 ? 0.9 : 0),
+d12 1
+a12 1
+       if $self->{bangs} % 4 == 2;
+@
+
+
+1.8
+log
+@Mon Apr 18 14:03:05 2005
+@
+text
+@d3 3
+a5 1
+    $self->t({loops => rand(1.5), speed => rand() > 0.5 ? 1 : -0.8,
+d12 1
+a12 1
+       if $self->{bangs} % 2 == 0;
+@
+
+
+1.7
+log
+@Mon Apr 18 12:49:33 2005
+@
+text
+@d5 2
+a6 2
+              sample => "drumtraks/0",
+              shape => ($self->{bangs} % 16 == 0 ? 1 : 0),
+@
+
+
+1.6
+log
+@Mon Apr 18 12:27:56 2005
+@
+text
+@d6 2
+a7 1
+              shape => ($self->{bangs} % 16 == 0 ? 1 : 0)
+@
+
+
+1.5
+log
+@Mon Apr 18 12:13:36 2005
+@
+text
+@d10 1
+a10 1
+}
+@
+
+
+1.4
+log
+@Mon Apr 18 12:13:14 2005
+@
+text
+@d3 1
+a3 1
+    $self->t({loops => rand(2), speed => rand() > 0.5 ? 1 : -0.8,
+@
+
+
+1.3
+log
+@Mon Apr 18 12:12:42 2005
+@
+text
+@d3 1
+a3 1
+    $self->t({loops => rand(), speed => rand() > 0.5 ? 1 : -0.8,
+@
+
+
+1.2
+log
+@Mon Apr 18 12:12:11 2005
+@
+text
+@d6 1
+a6 1
+              shape => (rand() > 0.9 ? 1 : 0)
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 4
+a6 2
+    $self->t({loops => rand(), speed => rand() > 0.5 ? 1 : -0.8, pan => 1 - ra
+              sample => "drumtraks/0"
+@

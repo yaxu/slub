@@ -1,0 +1,58 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2008.07.12.22.09.23;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Jul 12 23:09:23 2008
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# 0.612295907809173
+
+my $s = "tim0/6";
+# timmono/6
+sub bang {
+    my $self = shift;
+    $self->{mult} ||= 1;
+    if ($self->{bangs} % 4 == 0) {
+        $self->t({sample => $s, speed => 2 * $self->{mult},
+                  delay => rand(), pan => -0.8,
+                  volume => $self->sin(2), shape => 0
+                 }
+                );
+    }
+    if ($self->{bangs} % 2 == 1) {
+        $self->t({sample => $s, speed => 2.5 * $self->{mult}, pan => 0.8,
+                  volume => 1 - $self->sin(2), delay => 0.009
+                 }
+                );
+    }
+
+    if ($self->{bangs} % 3 == 0) {
+        $self->t({sample => $s, speed => -6 * $self->{mult}, pan => 0,
+                  volume => 1 - $self->sin(2), delay => 0.02
+                 }
+                );
+    }
+if ($self->{bangs} % 16 == 0) {
+   my @@p = (3);
+   $self->{mult} = $p[rand @@p];
+}
+$self->line(0, 1 - $self->sin(10));
+$self->modified;
+}@

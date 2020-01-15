@@ -1,0 +1,46 @@
+# 0
+
+my $v = 1;
+
+sub bang {
+    my $self = shift;
+
+    my $b = $self->{bangs};
+    my $state = $self->line(0);
+    if ($state == 0) {
+        if (($self->{bangs} % 4 == 0 and rand() > 0.9)
+            or $self->{bangs} % 16 == 10
+           ) {
+           $state = 1;
+        }
+    }
+    elsif ($state == 1) {
+        if ($b % 2) {
+            $self->t({sample => "drum/0", volume => $v, speed => 1,
+                      loops => 0.1
+                     }
+                    );
+        }
+        else {
+            $self->t({sample => "uxay/3", volume => $v, speed => 1,
+                      loops => 0.1
+                     }
+                    );
+        }
+        if (($b % 4 == 0 and rand() > 0.6) or $b % 32 == 26) {
+          $state = 2;
+        }
+    }
+    elsif ($state == 2) {
+       $state = 3;
+    }
+    elsif ($state == 3) {
+       $self->t({sample => "drum/0", volume => $v,
+                }
+               );
+       $state = 0;
+    }
+
+    $self->line(0, $state);
+    $self->modified;
+}

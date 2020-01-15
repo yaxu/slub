@@ -1,0 +1,25 @@
+#########################################################
+this is alpha code for using OSC in perl.
+the relevant files seem to be:
+
+sendOSC.pm
+sendOSC.so
+dumpOSC.pm
+
+------------------------
+
+put these in a directory where perl finds them.
+
+see the the scripts in ./examples for usage examples
+
+sending works via a wrapper for the original sendOSC program.
+it per default uses typetags. if you want to disable them you have to tweak
+the make_sendargv subroutine by adding "-notypetags".
+
+dumpOSC is native perl.
+in dumpOSC, the part for non-typetagged parsing is fucked. typetagged seems
+to work pretty well thou.
+
+
+(l+0) 200207, jdl@xdv.org
+http://barely.a.live.fm/pd/OSC/

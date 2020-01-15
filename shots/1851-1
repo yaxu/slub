@@ -1,0 +1,8 @@
+sub bang {
+    my $self = shift;
+
+    # Type something interesting for me to do here......
+
+    $self->code->[3] .= ".";
+    $self->modified;
+}

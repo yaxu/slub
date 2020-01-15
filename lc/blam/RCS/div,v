@@ -1,0 +1,446 @@
+head	1.21;
+access;
+symbols;
+locks
+	alex:1.21; strict;
+comment	@# @;
+
+
+1.21
+date	2006.04.29.19.48.08;	author alex;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2006.04.29.19.44.32;	author alex;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2006.04.29.13.56.30;	author alex;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2006.04.29.13.55.57;	author alex;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2006.04.29.13.45.58;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2006.04.29.13.28.11;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2006.04.29.13.27.46;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2006.04.29.13.25.52;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2006.04.29.13.25.38;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2006.04.29.13.24.26;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2006.04.29.13.23.28;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2006.04.29.10.53.27;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2006.04.29.10.47.39;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2006.04.29.10.46.54;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2006.04.29.10.43.51;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2006.04.29.10.43.05;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2006.04.29.10.42.51;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2006.04.29.10.42.38;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2006.04.29.10.41.05;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2006.04.29.10.35.17;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2006.04.29.10.33.40;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Apr 29 11:33:40 2006
+@
+
+
+1.21
+log
+@Sat Apr 29 20:48:08 2006
+@
+text
+@my $vol = 6;
+
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs};
+    my $c = 0;
+    my $switch = $self->{bangs} % 32 > 12 ? 1 : 0;
+
+    #my $bip = int(rand(4));
+    #my $bip = ($self->{bip}++ % 6);
+    my $bip = 10;
+
+    if($foo % ($foo % ($switch ? 8 : 2)) == 0) {
+       $self->t({sample => "future/0", loops => 0.2, volume => $vol});
+    }
+    return if $c++ > $bip;
+    $foo += 2;
+    if( $foo % ($foo % 4) == 0) {
+       $self->t({sample => "future/0", loops => 0.2, speed => 1,
+                 pan => 0.4, volume => $vol
+                }
+               );
+    }
+    return if $c++ > $bip;
+    $foo += 0;
+    if( $foo % ($foo % 3) == 0) {
+       $self->t({sample => "future/4", loops => 0.2, speed => -9,
+                 pan => 1- rand(2), volume => $vol
+                }
+               );
+    }
+    return if $c++ > $bip;
+    
+
+
+}@
+
+
+1.20
+log
+@Sat Apr 29 20:44:31 2006
+@
+text
+@d14 1
+a14 1
+       $self->t({sample => "future/0", loops => 1, volume => $vol});
+d19 1
+a19 1
+       $self->t({sample => "future/0", loops => 1, speed => 1,
+d27 1
+a27 1
+       $self->t({sample => "future/4", loops => 1, speed => -9,
+a34 10
+    $foo += 3;
+    if( $foo % ($foo % 6) == 0) {
+       $self->t({sample => "gabbalouder/4", loops => 0.3, 
+                 speed => 1,
+                 pan => 0.8, volume => $vol
+                }
+               );
+    }
+
+    return if $c++ > $bip;
+@
+
+
+1.19
+log
+@Sat Apr 29 14:56:30 2006
+@
+text
+@d14 1
+a14 1
+       $self->t({sample => "future/0", loops => 0.2, volume => $vol});
+d19 1
+a19 1
+       $self->t({sample => "future/0", loops => 0.2, speed => 4,
+d27 2
+a28 2
+       $self->t({sample => "future/4", loops => 0.2, speed => -8,
+                 pan => -0.8, volume => $vol
+d38 1
+a38 1
+                 speed => -5 + rand(1),
+@
+
+
+1.18
+log
+@Sat Apr 29 14:55:57 2006
+@
+text
+@d1 1
+a1 1
+my $vol => 3;
+@
+
+
+1.17
+log
+@Sat Apr 29 14:45:58 2006
+@
+text
+@d1 1
+d14 1
+a14 1
+       $self->t({sample => "future/0", loops => 0.2});
+d20 1
+a20 1
+                 pan => 0.4, 
+d28 1
+a28 1
+                 pan => -0.8,
+d39 1
+a39 1
+                 pan => 0.8
+@
+
+
+1.16
+log
+@Sat Apr 29 14:28:11 2006
+@
+text
+@d32 1
+d42 1
+a44 1
+
+@
+
+
+1.15
+log
+@Sat Apr 29 14:27:46 2006
+@
+text
+@d36 1
+a36 1
+                 speed => -7 + rand(3),
+@
+
+
+1.14
+log
+@Sat Apr 29 14:25:52 2006
+@
+text
+@d9 2
+a10 1
+    my $bip = ($self->{bip}++ % 6);
+d35 2
+a36 1
+       $self->t({sample => "gabba/4", loops => 0.2, speed => -8,
+d42 2
+@
+
+
+1.13
+log
+@Sat Apr 29 14:25:38 2006
+@
+text
+@d9 1
+a9 1
+    my $bip = ($self->{bip}++ % 4);
+@
+
+
+1.12
+log
+@Sat Apr 29 14:24:26 2006
+@
+text
+@d1 1
+a1 1
+my $bip = 3;
+d8 2
+a9 1
+    #$bip = int(rand(4));
+@
+
+
+1.11
+log
+@Sat Apr 29 14:23:28 2006
+@
+text
+@d1 1
+a1 1
+my $bip = -1;
+d8 2
+@
+
+
+1.10
+log
+@Sat Apr 29 11:53:27 2006
+@
+text
+@d1 1
+d5 1
+a5 1
+
+d11 1
+a11 1
+
+d19 1
+d27 1
+d36 1
+a36 1
+
+@
+
+
+1.9
+log
+@Sat Apr 29 11:47:39 2006
+@
+text
+@d14 1
+a14 1
+                 pan => 0.4
+@
+
+
+1.8
+log
+@Sat Apr 29 11:46:54 2006
+@
+text
+@d5 2
+a6 1
+    my $switch = $self->{bangs} % 16 > 12 ? 1 : 0;
+@
+
+
+1.7
+log
+@Sat Apr 29 11:43:51 2006
+@
+text
+@d3 4
+a6 1
+    if( $self->{bangs} % ($self->{bangs} % 8) == 0) {
+d9 2
+a10 1
+    my $foo = $self->{bangs} + 2;
+d12 4
+a15 1
+       $self->t({sample => "future/0", loops => 0.2, speed => 4});
+d17 1
+a17 1
+
+d19 4
+a22 1
+       $self->t({sample => "future/4", loops => 0.2, speed => -8});
+d27 4
+a30 1
+       $self->t({sample => "gabba/4", loops => 0.2, speed => -8});
+@
+
+
+1.6
+log
+@Sat Apr 29 11:43:05 2006
+@
+text
+@d12 6
+a17 1
+       $self->t({sample => "future/4", loops => 0.2, speed => 4});
+@
+
+
+1.5
+log
+@Sat Apr 29 11:42:51 2006
+@
+text
+@d11 4
+@
+
+
+1.4
+log
+@Sat Apr 29 11:42:38 2006
+@
+text
+@d8 1
+a8 1
+       $self->t({sample => "future/0", loops => 0.2, speed => 2});
+d10 1
+@
+
+
+1.3
+log
+@Sat Apr 29 11:41:05 2006
+@
+text
+@d6 4
+@
+
+
+1.2
+log
+@Sat Apr 29 11:35:17 2006
+@
+text
+@d3 3
+a5 2
+    $self->{bangs_per_tick} = 16;
+    $self->t({sample => "future/0"});
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+@

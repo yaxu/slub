@@ -1,0 +1,136 @@
+head	1.5;
+access;
+symbols;
+locks
+	alex:1.5; strict;
+comment	@# @;
+
+
+1.5
+date	2004.11.24.00.09.49;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2004.11.24.00.08.21;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2004.11.24.00.04.32;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2004.11.24.00.00.41;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.11.23.23.58.46;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Nov 23 23:58:46 2004
+@
+
+
+1.5
+log
+@Wed Nov 24 00:09:49 2004
+@
+text
+@my $start = 120;
+my $downs = [4, 3];
+my $max = 5;
+my $foo = 0;
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 16 == $foo) {
+        $self->{max} = $max;
+        $self->{num} = $start;
+        $self->trigger({sample => "tablex/0",
+                        ts => 240, rate => 50, gain => 300,
+                        filter => 1000, browndel => 300
+                       }
+                      );
+        if (rand > 0.5) {
+             $foo = $foo ? 0 : 4;
+        }
+    }
+    elsif ($self->{max} > 0 and $self->{bangs} % 2 == 0 and rand() > 0.3) {
+        $self->{num} -= $downs->[rand @@$downs];
+        $self->{max}--;
+        $self->trigger({sample => "gabba/$self->{num}",
+                        ts => 120, rate => 50, gain => 300,
+                        filter => 10 + ($self->{bangs} % 16 * 100),
+                        browndel => 100
+                       }
+                      );
+    }
+}@
+
+
+1.4
+log
+@Wed Nov 24 00:08:21 2004
+@
+text
+@d10 1
+a10 1
+        $self->trigger({sample => "invaders/2",
+d12 1
+a12 1
+                        filter => 500, browndel => 100
+@
+
+
+1.3
+log
+@Wed Nov 24 00:04:32 2004
+@
+text
+@d10 3
+a12 3
+        $self->trigger({sample => "tablex/$self->{num}",
+                        ts => 120, rate => 50, gain => 300,
+                        filter => 1000, browndel => 100
+@
+
+
+1.2
+log
+@Wed Nov 24 00:00:41 2004
+@
+text
+@d4 1
+d7 1
+a7 1
+    if ($self->{bangs} % 16 == 0) {
+d10 1
+a10 1
+        $self->trigger({sample => "gabba/$self->{num}",
+d12 1
+a12 1
+                        filter => 400, browndel => 100
+d15 3
+d23 2
+a24 1
+                        ts => 120, rate => 50, gain => 300, filter => 50,
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d11 1
+a11 1
+                        filter => 100,
+d19 2
+a20 1
+                        ts => 120, rate => 50, gain => 300, filter => 50
+@

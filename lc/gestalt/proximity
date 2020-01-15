@@ -1,0 +1,24 @@
+# ...X..x........x..x..X.....
+
+my $paused = 1;
+my $random = 0;
+
+sub bang {
+    my $self = shift;
+    return if $paused;
+    my $line = $self->line(0);
+    $line =~ s/(.)(.*)/$2$1/;
+    my $char = $1;
+    $self->line(0, $line);
+    $self->modified;
+
+    return unless $char =~ /[xX]/;
+
+    $self->t({speed => 10, sample => pick(),
+              volume => ($char eq 'X' ? 30 : 10)
+             }
+            );
+    
+}
+
+sub pick { "made/" . ($random ? int(rand(7)) : 2) }

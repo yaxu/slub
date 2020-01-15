@@ -1,0 +1,87 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2004.10.31.20.45.44;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.10.31.20.45.18;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Oct 31 20:45:18 2004
+@
+
+
+1.2
+log
+@Sun Oct 31 20:45:44 2004
+@
+text
+@# 60
+# 0100010001010100
+
+my @@line;
+
+sub bang {
+    my $self = shift;
+    #@@line = ();
+    $self->make(60, 8) if not @@line;
+    
+    $self->code->[1] =~ /(\d)(\d+)/;
+    $self->code->[1] = "# $2$1";
+    if ($1) {
+       my $note = shift @@line;
+       push(@@line, $note);
+       $self->play({num => $note, formfreq => 10, bwfreq => 50})
+    }
+
+    $self->bpm(130);
+    $self->code->[0] = "# " . join(', ', @@line);
+    $self->modified;
+}
+
+sub make {
+    my $self = shift;
+    my $val = shift;
+    my $level = shift;
+    push(@@line, $val);
+    return if --$level < 1;
+    my $rand = rand();
+    if ($rand > 0.9) {
+        $self->make($val, $level);
+        $self->make($val, $level);
+    }
+    elsif ($rand > 0.5) {
+        $val += 3;
+        $self->make($val, $level);
+    }
+    elsif ($rand > 0.1) {
+        $val -= 3;
+        $self->make($val, $level);
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 2
+a2 2
+# 57, 57, 54, 57, 54, 60, 57, 54, 57, 60
+# 0001000100010101
+d16 1
+a16 1
+       $self->play({num => $note})
+@

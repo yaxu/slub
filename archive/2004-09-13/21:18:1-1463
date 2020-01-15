@@ -1,0 +1,38 @@
+my $level = 3;
+
+sub bang {
+    my $self = shift;
+    $self->{foo} ||= 0;
+    if ($self->{bangs} % 2 == 0) {
+        my $num = 60;
+        my $bwfreq = 0;
+        my $ts = 20;
+        if ($level >= 1) {
+          if ($self->{bangs} % 6 == 0) {
+             $num += 12;
+          }
+          if ($self->{bangs} % 32 == 0) {
+             $num -= 6;
+          }
+        }
+
+        if ($level >= 2) {
+          $bwfreq = 20;
+          if ($level >= 3) {
+            $bwfreq += (10 * $self->sin(20));
+          }
+        }
+        if ($level >= 3) {
+            if ($self->{bangs} % 8 > 4) {
+                $ts += 10;
+            }
+        }
+
+        $self->play({num => $num,
+                     bwfreq => $bwfreq,
+                     ts     => $ts,
+                    }
+                   );
+        $self->{foo}++;
+    }
+}

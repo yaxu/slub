@@ -1,0 +1,1584 @@
+head	1.82;
+access;
+symbols;
+locks
+	alex:1.82; strict;
+comment	@# @;
+
+
+1.82
+date	2007.07.11.11.53.20;	author alex;	state Exp;
+branches;
+next	1.81;
+
+1.81
+date	2007.07.11.11.52.37;	author alex;	state Exp;
+branches;
+next	1.80;
+
+1.80
+date	2007.07.11.11.51.55;	author alex;	state Exp;
+branches;
+next	1.79;
+
+1.79
+date	2007.07.11.11.51.14;	author alex;	state Exp;
+branches;
+next	1.78;
+
+1.78
+date	2007.07.11.11.51.03;	author alex;	state Exp;
+branches;
+next	1.77;
+
+1.77
+date	2007.07.11.11.50.55;	author alex;	state Exp;
+branches;
+next	1.76;
+
+1.76
+date	2007.07.11.11.50.44;	author alex;	state Exp;
+branches;
+next	1.75;
+
+1.75
+date	2007.07.11.11.50.23;	author alex;	state Exp;
+branches;
+next	1.74;
+
+1.74
+date	2007.07.11.11.50.08;	author alex;	state Exp;
+branches;
+next	1.73;
+
+1.73
+date	2007.07.11.11.49.52;	author alex;	state Exp;
+branches;
+next	1.72;
+
+1.72
+date	2007.07.11.11.49.41;	author alex;	state Exp;
+branches;
+next	1.71;
+
+1.71
+date	2007.07.11.11.49.34;	author alex;	state Exp;
+branches;
+next	1.70;
+
+1.70
+date	2007.07.11.11.49.00;	author alex;	state Exp;
+branches;
+next	1.69;
+
+1.69
+date	2007.07.11.11.48.52;	author alex;	state Exp;
+branches;
+next	1.68;
+
+1.68
+date	2007.07.11.11.48.24;	author alex;	state Exp;
+branches;
+next	1.67;
+
+1.67
+date	2007.07.11.11.47.43;	author alex;	state Exp;
+branches;
+next	1.66;
+
+1.66
+date	2007.07.11.11.47.13;	author alex;	state Exp;
+branches;
+next	1.65;
+
+1.65
+date	2007.07.11.11.47.08;	author alex;	state Exp;
+branches;
+next	1.64;
+
+1.64
+date	2007.07.11.11.46.27;	author alex;	state Exp;
+branches;
+next	1.63;
+
+1.63
+date	2007.07.11.11.46.07;	author alex;	state Exp;
+branches;
+next	1.62;
+
+1.62
+date	2007.07.11.11.45.07;	author alex;	state Exp;
+branches;
+next	1.61;
+
+1.61
+date	2007.07.11.11.44.10;	author alex;	state Exp;
+branches;
+next	1.60;
+
+1.60
+date	2007.07.11.11.43.55;	author alex;	state Exp;
+branches;
+next	1.59;
+
+1.59
+date	2007.07.11.11.42.34;	author alex;	state Exp;
+branches;
+next	1.58;
+
+1.58
+date	2007.07.11.11.41.54;	author alex;	state Exp;
+branches;
+next	1.57;
+
+1.57
+date	2007.07.11.11.41.49;	author alex;	state Exp;
+branches;
+next	1.56;
+
+1.56
+date	2007.07.11.11.41.09;	author alex;	state Exp;
+branches;
+next	1.55;
+
+1.55
+date	2007.07.11.11.40.12;	author alex;	state Exp;
+branches;
+next	1.54;
+
+1.54
+date	2007.07.11.10.03.40;	author alex;	state Exp;
+branches;
+next	1.53;
+
+1.53
+date	2007.07.11.10.02.48;	author alex;	state Exp;
+branches;
+next	1.52;
+
+1.52
+date	2007.07.11.10.00.22;	author alex;	state Exp;
+branches;
+next	1.51;
+
+1.51
+date	2007.07.11.09.59.44;	author alex;	state Exp;
+branches;
+next	1.50;
+
+1.50
+date	2007.07.11.09.59.21;	author alex;	state Exp;
+branches;
+next	1.49;
+
+1.49
+date	2007.07.11.09.58.28;	author alex;	state Exp;
+branches;
+next	1.48;
+
+1.48
+date	2007.07.11.09.58.06;	author alex;	state Exp;
+branches;
+next	1.47;
+
+1.47
+date	2007.07.11.09.58.01;	author alex;	state Exp;
+branches;
+next	1.46;
+
+1.46
+date	2007.07.11.09.57.28;	author alex;	state Exp;
+branches;
+next	1.45;
+
+1.45
+date	2007.07.11.09.57.26;	author alex;	state Exp;
+branches;
+next	1.44;
+
+1.44
+date	2007.07.11.09.56.58;	author alex;	state Exp;
+branches;
+next	1.43;
+
+1.43
+date	2007.07.11.09.56.35;	author alex;	state Exp;
+branches;
+next	1.42;
+
+1.42
+date	2007.07.11.08.54.01;	author alex;	state Exp;
+branches;
+next	1.41;
+
+1.41
+date	2007.07.11.08.53.45;	author alex;	state Exp;
+branches;
+next	1.40;
+
+1.40
+date	2007.07.11.08.53.24;	author alex;	state Exp;
+branches;
+next	1.39;
+
+1.39
+date	2007.07.11.08.51.47;	author alex;	state Exp;
+branches;
+next	1.38;
+
+1.38
+date	2007.07.11.08.51.35;	author alex;	state Exp;
+branches;
+next	1.37;
+
+1.37
+date	2007.07.11.08.51.10;	author alex;	state Exp;
+branches;
+next	1.36;
+
+1.36
+date	2007.07.11.08.43.45;	author alex;	state Exp;
+branches;
+next	1.35;
+
+1.35
+date	2007.07.11.08.40.10;	author alex;	state Exp;
+branches;
+next	1.34;
+
+1.34
+date	2007.07.11.00.57.03;	author alex;	state Exp;
+branches;
+next	1.33;
+
+1.33
+date	2007.07.11.00.52.24;	author alex;	state Exp;
+branches;
+next	1.32;
+
+1.32
+date	2007.07.11.00.51.52;	author alex;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	2007.07.11.00.51.17;	author alex;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	2007.07.11.00.51.01;	author alex;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	2007.07.11.00.50.36;	author alex;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	2007.07.11.00.50.06;	author alex;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	2007.07.11.00.49.36;	author alex;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	2007.07.11.00.48.55;	author alex;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2007.07.11.00.48.39;	author alex;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2007.07.11.00.47.35;	author alex;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2007.07.11.00.46.40;	author alex;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2007.07.11.00.46.24;	author alex;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2007.07.11.00.46.15;	author alex;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2007.07.11.00.46.08;	author alex;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2007.07.11.00.45.55;	author alex;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2007.07.11.00.44.48;	author alex;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2007.07.11.00.43.12;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2007.07.11.00.42.08;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2007.07.11.00.41.37;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2007.07.11.00.40.50;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2007.07.11.00.40.41;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2007.07.11.00.39.10;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2007.07.11.00.37.06;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2007.07.11.00.35.59;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2007.07.11.00.35.20;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2007.07.11.00.32.22;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2007.07.11.00.16.25;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2007.07.11.00.15.53;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2007.07.10.23.30.36;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2007.07.10.23.28.25;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2007.07.10.23.27.58;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2007.07.10.23.25.34;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2007.07.10.23.24.13;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Wed Jul 11 00:24:13 2007
+@
+
+
+1.82
+log
+@Wed Jul 11 12:53:20 2007
+@
+text
+@
+
+my $pi = 3.141592653589793;
+
+sub bang {
+    my $self = shift;
+
+    $self->av({n => rand(12),
+               volume => 10,
+               duration => 2,
+               pan => 0,
+               sample => "newnotes",
+               speed => 2,
+               wobble => 0,
+               pan => 0
+              }
+             )
+      if $self->{bangs} % 8 == 0;
+    return;
+    $self->av({n => rand(12),
+               volume => 10,
+               duration => 2,
+               pan => 0,
+               sample => "newnotes",
+               speed => 2,
+               wobble => 0,
+               pan => 0
+              }
+             )
+      if $self->{bangs} % 8 == 0;
+
+}
+
+sub av {
+    my $self = shift;
+    my $p = shift;    
+
+   $p->{duration} ||= 5;
+
+    $self->{aosc} ||= 
+      Net::OpenSoundControl::Client->new(Host => 'localhost', Port => 7771);
+     my $speed = 2;
+
+    $self->{aosc}->send(
+       ['/site',
+        # x y
+        'f', ((($p->{pan} || 0) + 1) / 2) * 600,
+        'f', $p->{y} || 300,
+        # weight
+        'f', ($p->{volume} || 1) * 5,
+        # duration
+        'i', $p->{duration} * $speed * 2,
+        # speed
+        'f', ($p->{speed} || 3) * 5,
+        # direction
+        'f', $pi * 2 * ($p->{n} / 12),
+        # modulation
+        'f', $p->{wobble} ? (5 * $p->{wobble}) : 0,
+       ]
+      );
+
+      my $n = int $p->{n};
+      my $sample = $p->{sample} || 'drumtraks';
+      $self->t({sample => "$sample/$n", speed => 0.5,
+                scale_name => 'equal',
+                duration => 5000 * $p->{duration} * $speed,
+                volume => ($p->{volume} || 1), 
+                pan => ($p->{pan} || 0),
+                envelope_name => ($p->{wobble} ? 'chop' : ''),
+                delay => 1 - ($p->{wobble} / 100),
+                delay2 => 1 - ($p->{wobble} / 200),
+
+               }
+              );
+}@
+
+
+1.81
+log
+@Wed Jul 11 12:52:37 2007
+@
+text
+@d19 1
+a19 1
+
+@
+
+
+1.80
+log
+@Wed Jul 11 12:51:55 2007
+@
+text
+@d20 12
+@
+
+
+1.79
+log
+@Wed Jul 11 12:51:14 2007
+@
+text
+@d10 1
+a10 1
+               duration => 5,
+d57 1
+a57 1
+                envelope_name => $p->{wobble} ? 'chop' : '',
+@
+
+
+1.78
+log
+@Wed Jul 11 12:51:03 2007
+@
+text
+@d14 2
+a15 1
+               wobble => 0.5, pan => 0.75
+@
+
+
+1.77
+log
+@Wed Jul 11 12:50:55 2007
+@
+text
+@d12 1
+a12 1
+               sample => "gabba",
+a18 1
+
+@
+
+
+1.76
+log
+@Wed Jul 11 12:50:44 2007
+@
+text
+@d13 1
+a13 1
+               speed => 1,
+a17 6
+    $self->av({n => $self->{bangs} % 4,
+               volume => 10,
+               duration => 1,
+               pan => -0.75,
+               sample => "industrial",
+               speed => 2,
+a18 3
+              }
+             )
+      if $self->{bangs} % 2 == 0;
+@
+
+
+1.75
+log
+@Wed Jul 11 12:50:23 2007
+@
+text
+@d12 2
+a13 2
+               sample => "newnotes",
+               speed => 2,
+d27 1
+a27 1
+      if $self->{bangs} % 6 == 0;
+@
+
+
+1.74
+log
+@Wed Jul 11 12:50:08 2007
+@
+text
+@d18 1
+a18 1
+    $self->av({n => rand(12),
+@
+
+
+1.73
+log
+@Wed Jul 11 12:49:52 2007
+@
+text
+@d20 1
+a20 1
+               duration => 2,
+d27 1
+a27 1
+      if $self->{bangs} % 8 == 0;
+@
+
+
+1.72
+log
+@Wed Jul 11 12:49:41 2007
+@
+text
+@d14 1
+a14 1
+               wobble => 0.5
+d21 1
+a21 1
+               pan => -0.5,
+@
+
+
+1.71
+log
+@Wed Jul 11 12:49:34 2007
+@
+text
+@d21 1
+a21 1
+               pan => -0.25,
+@
+
+
+1.70
+log
+@Wed Jul 11 12:49:00 2007
+@
+text
+@d18 10
+@
+
+
+1.69
+log
+@Wed Jul 11 12:48:52 2007
+@
+text
+@d4 1
+a4 1
+my @@notes = (5,6);
+d8 1
+a8 1
+    $self->av({n => rand(12),#$notes[rand @@notes],
+@
+
+
+1.68
+log
+@Wed Jul 11 12:48:24 2007
+@
+text
+@d14 1
+a14 1
+               wobble => 10
+@
+
+
+1.67
+log
+@Wed Jul 11 12:47:43 2007
+@
+text
+@d57 2
+a58 1
+                delay => 0.1, delay2 => 0.1,
+@
+
+
+1.66
+log
+@Wed Jul 11 12:47:13 2007
+@
+text
+@d58 1
+a58 1
+                cutoff => 100
+@
+
+
+1.65
+log
+@Wed Jul 11 12:47:08 2007
+@
+text
+@d58 1
+a58 1
+                cutoff => 1000
+@
+
+
+1.64
+log
+@Wed Jul 11 12:46:27 2007
+@
+text
+@d14 1
+a14 1
+               #wobble => 10
+d57 2
+a58 1
+                delay => 0.1, delay2 => 0.1
+@
+
+
+1.63
+log
+@Wed Jul 11 12:46:07 2007
+@
+text
+@d17 1
+a17 1
+      if $self->{bangs} % 8 == 2;
+@
+
+
+1.62
+log
+@Wed Jul 11 12:45:07 2007
+@
+text
+@d39 1
+a39 1
+        'i', $p->{duration} * $speed,
+d51 1
+a51 1
+      $self->t({sample => "$sample/$n", speed => $speed,
+@
+
+
+1.61
+log
+@Wed Jul 11 12:44:10 2007
+@
+text
+@d57 1
+a57 1
+                
+@
+
+
+1.60
+log
+@Wed Jul 11 12:43:55 2007
+@
+text
+@d29 1
+a29 1
+      my $speed =1;
+@
+
+
+1.59
+log
+@Wed Jul 11 12:42:34 2007
+@
+text
+@d29 1
+d39 1
+a39 1
+        'i', $p->{duration} * $p->{speed},
+a48 1
+      my $speed = $p->{speed} || 1;
+d57 1
+@
+
+
+1.58
+log
+@Wed Jul 11 12:41:54 2007
+@
+text
+@d38 1
+a38 1
+        'i', $p->{duration} * 2,
+@
+
+
+1.57
+log
+@Wed Jul 11 12:41:49 2007
+@
+text
+@d51 1
+a51 1
+      $self->t({sample => "$sample/$n", speed => $speed / 2,
+@
+
+
+1.56
+log
+@Wed Jul 11 12:41:09 2007
+@
+text
+@d11 1
+a11 1
+               pan => rand(0.5),
+d13 2
+a14 2
+               speed => 0.5,
+               wobble => 10
+d51 1
+a51 1
+      $self->t({sample => "$sample/$n", speed => $speed,
+@
+
+
+1.55
+log
+@Wed Jul 11 12:40:12 2007
+@
+text
+@d12 2
+a13 2
+               sample => "metal",
+               speed => rand(8),
+@
+
+
+1.54
+log
+@Wed Jul 11 11:03:40 2007
+@
+text
+@d12 1
+a12 1
+               sample => "industrial",
+@
+
+
+1.53
+log
+@Wed Jul 11 11:02:48 2007
+@
+text
+@d14 1
+a14 1
+               wobble => 0
+@
+
+
+1.52
+log
+@Wed Jul 11 11:00:22 2007
+@
+text
+@d11 1
+a11 1
+               pan => -0.5,
+d13 2
+a14 2
+               speed => rand(4),
+               wobble => 1
+d17 1
+a17 1
+      if $self->{bangs} % 4 == 2;
+@
+
+
+1.51
+log
+@Wed Jul 11 10:59:44 2007
+@
+text
+@a17 10
+    $self->av({n => rand(12),#$notes[rand @@notes],
+               volume => 10,
+               duration => 10,
+               pan => 0.5,
+               sample => "industrial",
+               speed => rand(4),
+               wobble => 0
+              }
+             )
+      if $self->{bangs} % 4 == 2;
+@
+
+
+1.50
+log
+@Wed Jul 11 10:59:21 2007
+@
+text
+@d18 10
+@
+
+
+1.49
+log
+@Wed Jul 11 10:58:28 2007
+@
+text
+@d10 2
+a11 2
+               duration => 20,
+               pan => 0,
+d14 1
+a14 1
+               wobble => 0
+@
+
+
+1.48
+log
+@Wed Jul 11 10:58:06 2007
+@
+text
+@d13 1
+a13 1
+               speed => 1,
+@
+
+
+1.47
+log
+@Wed Jul 11 10:58:01 2007
+@
+text
+@d17 1
+a17 1
+      if $self->{bangs} % 8 == 2;
+@
+
+
+1.46
+log
+@Wed Jul 11 10:57:28 2007
+@
+text
+@d17 1
+a17 1
+      if $self->{bangs} % 32 == 2;
+@
+
+
+1.45
+log
+@Wed Jul 11 10:57:26 2007
+@
+text
+@d38 1
+a38 1
+        'i', $p->{duration},
+@
+
+
+1.44
+log
+@Wed Jul 11 10:56:58 2007
+@
+text
+@d40 1
+a40 1
+        'f', ($p->{speed} || 3) * 2.5,
+@
+
+
+1.43
+log
+@Wed Jul 11 10:56:35 2007
+@
+text
+@d40 1
+a40 1
+        'f', ($p->{speed} || 3) * 5,
+@
+
+
+1.42
+log
+@Wed Jul 11 09:54:01 2007
+@
+text
+@d13 1
+a13 1
+               speed => 3,
+d17 1
+a17 1
+      if $self->{bangs} % 4 == 2;
+@
+
+
+1.41
+log
+@Wed Jul 11 09:53:45 2007
+@
+text
+@a6 7
+#    $self->av({n => $self->{bangs} % 12,
+#               volume => 3,
+#               duration => 10,
+#               x => 100, y => 300,
+#              }
+#             )
+#      unless $self->{bangs} % 4;
+@
+
+
+1.40
+log
+@Wed Jul 11 09:53:24 2007
+@
+text
+@d19 2
+a20 1
+               sample => "industrial", speed => 1,
+@
+
+
+1.39
+log
+@Wed Jul 11 09:51:47 2007
+@
+text
+@d18 1
+a18 1
+               pan => 1,
+d39 1
+a39 1
+        'f', ((($p->{pan} || 0) * 600) + 300),
+@
+
+
+1.38
+log
+@Wed Jul 11 09:51:35 2007
+@
+text
+@d20 1
+a20 1
+               wobble => 5
+@
+
+
+1.37
+log
+@Wed Jul 11 09:51:10 2007
+@
+text
+@d61 1
+a61 1
+                pan => ($p->{x} / 600),
+@
+
+
+1.36
+log
+@Wed Jul 11 09:43:45 2007
+@
+text
+@d18 1
+a18 1
+               x => 300, y => 300,
+d39 2
+a40 1
+        'f', ($p->{x} || 300), 'f', $p->{y} || 300,
+@
+
+
+1.35
+log
+@Wed Jul 11 09:40:10 2007
+@
+text
+@d19 2
+a20 1
+               sample => "industrial", speed => 2
+d49 1
+a49 1
+        'f', 0,
+d60 2
+a61 1
+                pan => ($p->{x} / 600)
+@
+
+
+1.34
+log
+@Wed Jul 11 01:57:03 2007
+@
+text
+@d7 7
+a13 7
+    $self->av({n => $self->{bangs} % 12,
+               volume => 3,
+               duration => 10,
+               x => 100, y => 300,
+              }
+             )
+      unless $self->{bangs} % 4;
+d15 1
+a15 1
+    $self->av({n => $notes[rand @@notes],
+d18 2
+a19 2
+               x => 400, y => 300,
+               sample => "made", speed => 2
+@
+
+
+1.33
+log
+@Wed Jul 11 01:52:24 2007
+@
+text
+@d4 1
+a4 1
+my @@notes = (2, 3, 9);
+d7 1
+a7 1
+    $self->av({n => rand(10),
+d16 1
+a16 1
+               volume => 3,
+d19 1
+a19 1
+               sample => "lighter"
+d22 1
+a22 1
+      if $self->{bangs} % 12 == 2;
+d44 1
+a44 1
+        'f', ($p->{speed} || 3),
+@
+
+
+1.32
+log
+@Wed Jul 11 01:51:52 2007
+@
+text
+@d19 1
+a19 1
+               sample => "newnotes"
+@
+
+
+1.31
+log
+@Wed Jul 11 01:51:17 2007
+@
+text
+@d44 1
+a44 1
+        'f', 6,
+@
+
+
+1.30
+log
+@Wed Jul 11 01:51:01 2007
+@
+text
+@d52 1
+a52 1
+      my $speed = $p->{speed};
+@
+
+
+1.29
+log
+@Wed Jul 11 01:50:36 2007
+@
+text
+@d52 1
+a52 1
+      my $speed = 2;
+@
+
+
+1.28
+log
+@Wed Jul 11 01:50:06 2007
+@
+text
+@d46 1
+a46 1
+        'f', $pi * 2 * $p->{n},
+@
+
+
+1.27
+log
+@Wed Jul 11 01:49:36 2007
+@
+text
+@d4 1
+a4 1
+my @@notes = (3, 5, 9);
+@
+
+
+1.26
+log
+@Wed Jul 11 01:48:55 2007
+@
+text
+@d4 1
+a4 1
+
+d14 2
+a15 1
+    $self->av({n => rand(10),
+@
+
+
+1.25
+log
+@Wed Jul 11 01:48:39 2007
+@
+text
+@d16 1
+a16 1
+               duration => 10,
+d21 1
+a21 1
+      if $self->{bangs} % 6 == 2;
+@
+
+
+1.24
+log
+@Wed Jul 11 01:47:35 2007
+@
+text
+@d18 1
+d21 1
+a21 1
+      unless $self->{bangs} % 4;
+d54 1
+a54 1
+      $self->t({sample => "drumtraks/$n", speed => $speed,
+@
+
+
+1.23
+log
+@Wed Jul 11 01:46:40 2007
+@
+text
+@d52 1
+@
+
+
+1.22
+log
+@Wed Jul 11 01:46:24 2007
+@
+text
+@d17 1
+a17 1
+               x => 100, y => 300,
+@
+
+
+1.21
+log
+@Wed Jul 11 01:46:15 2007
+@
+text
+@d14 8
+@
+
+
+1.20
+log
+@Wed Jul 11 01:46:08 2007
+@
+text
+@d9 1
+a9 1
+               duration => 2,
+@
+
+
+1.19
+log
+@Wed Jul 11 01:45:55 2007
+@
+text
+@d10 1
+a10 1
+               x => 100, y => 100,
+@
+
+
+1.18
+log
+@Wed Jul 11 01:44:48 2007
+@
+text
+@d10 1
+a10 1
+               
+d38 1
+a38 1
+        'f', 0
+d47 2
+a48 1
+                volume => ($p->{volume} || 1)
+@
+
+
+1.17
+log
+@Wed Jul 11 01:43:12 2007
+@
+text
+@d8 3
+a10 2
+               volume => 10,
+               duration => 10
+d13 1
+a13 1
+      unless $self->{bangs} % 32;
+@
+
+
+1.16
+log
+@Wed Jul 11 01:42:08 2007
+@
+text
+@d42 2
+a43 2
+
+      $self->t({sample => "drumtraks/$p->{n}", speed => $speed,
+@
+
+
+1.15
+log
+@Wed Jul 11 01:41:37 2007
+@
+text
+@d43 1
+a43 1
+      $self->t({sample => "drumtraks/2", speed => $speed,
+@
+
+
+1.14
+log
+@Wed Jul 11 01:40:50 2007
+@
+text
+@d33 1
+a33 1
+        'f', 5,
+@
+
+
+1.13
+log
+@Wed Jul 11 01:40:41 2007
+@
+text
+@d40 3
+a42 1
+my $speed = 2;
+@
+
+
+1.12
+log
+@Wed Jul 11 01:39:10 2007
+@
+text
+@d7 5
+a11 1
+    $self->av({n => rand(10), volume => 10, duration => 10})
+d19 2
+d40 2
+a41 1
+      $self->t({sample => "drumtraks/1", speed => 1,
+d43 1
+a43 1
+                duration => 5000 * $p->{duration},
+@
+
+
+1.11
+log
+@Wed Jul 11 01:37:06 2007
+@
+text
+@d7 2
+a8 2
+    $self->av({n => rand(10), volume => 10})
+      unless $self->{bangs} % 16;
+d25 1
+a25 1
+        'i', 30,
+d34 3
+a36 2
+      $self->t({sample => "drumtraks/0", speed => 1,
+                scale_name => 'equal', loops => 10,
+@
+
+
+1.10
+log
+@Wed Jul 11 01:35:59 2007
+@
+text
+@d34 1
+a34 1
+      $self->t({sample => "newnotes/0", speed => 1,
+@
+
+
+1.9
+log
+@Wed Jul 11 01:35:20 2007
+@
+text
+@d7 1
+a7 1
+    $self->av({n => rand(10)})
+d21 1
+a21 1
+        'f', $p->{x) || 300, 'f', $p->{y} || 300,
+@
+
+
+1.8
+log
+@Wed Jul 11 01:32:22 2007
+@
+text
+@d7 1
+a7 1
+    $self->av({volume => 10})
+a8 2
+    $self->av({volume => 10})
+      unless ($self->{bangs} + 8) % 16;
+d21 1
+a21 1
+        'f', rand(600), 'f', rand(600),
+d25 1
+a25 1
+        'i', 70,
+d29 1
+a29 1
+        'f', rand(3.1 * 2),
+@
+
+
+1.7
+log
+@Wed Jul 11 01:16:25 2007
+@
+text
+@d23 1
+a23 1
+        'f', 300, 'f', 300,
+d31 1
+a31 1
+        'f', ($p->{num} || 0),
+@
+
+
+1.6
+log
+@Wed Jul 11 01:15:53 2007
+@
+text
+@d31 1
+a31 1
+        'f', $p->{num},
+@
+
+
+1.5
+log
+@Wed Jul 11 00:30:36 2007
+@
+text
+@d31 1
+a31 1
+        'f', $self->p{num},
+@
+
+
+1.4
+log
+@Wed Jul 11 00:28:25 2007
+@
+text
+@d7 4
+a10 1
+    $self->av();
+d25 1
+a25 1
+        'f', ($p->{volume} || 1) * 10,
+d31 1
+a31 1
+        'f', 0,
+@
+
+
+1.3
+log
+@Wed Jul 11 00:27:58 2007
+@
+text
+@a37 1
+    }
+@
+
+
+1.2
+log
+@Wed Jul 11 00:25:34 2007
+@
+text
+@d7 1
+d12 2
+a14 1
+
+d17 1
+a17 4
+    my $osc = $self->{aosc};
+   if ($self->{bangs} % 3 == 0 ) {
+    my $num = int rand(12);
+    $osc->send(
+d22 1
+a22 1
+        'f', 10 + rand(100),
+d28 1
+a28 1
+        'f', $pi * 2 * (($num % 12) / 12),
+d33 1
+a33 1
+      $self->t({sample => "newnotes/0", speed => 1 + $num,
+d35 1
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# hello
+d4 1
+a4 1
+test
+d7 6
+a12 1
+    $self->{aosc} = 
+d14 1
+a14 1
+$self->line(0, "hello");
+@

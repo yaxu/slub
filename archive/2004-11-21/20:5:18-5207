@@ -1,0 +1,17 @@
+my $foo;
+sub bang {
+    my $self = shift;
+    
+    if ($self->{bangs} % 8 == 0 and rand(3) > 2) {
+       $self->trigger({sample => "can/0", rate => 50});
+       $foo = int(rand(5));
+    }
+    if ($self->{bangs} % 4 == 0) {
+        if ($foo > 0) {
+            $foo--;
+        }
+        else {
+            $self->trigger({sample => "can/0", rate => 40});
+        }
+    }
+}

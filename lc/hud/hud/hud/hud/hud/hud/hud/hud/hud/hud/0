@@ -1,0 +1,21 @@
+# 5 <<+ sin
+# 337
+
+my $chunksize = 16;
+
+sub bang {
+    my $self = shift;
+    my $seq = $self->{seq} || '';
+    if (not $seq) {
+        my $script = $self->line(0);
+        $seq = $self->parse($script, $chunksize);
+    }
+    $self->line(1, $seq);
+    $self->modified;
+}
+
+
+sub parse {
+   my $self = shift;
+   $self->{bangs}
+}

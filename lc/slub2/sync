@@ -1,0 +1,43 @@
+# 80
+# 126
+my $metro = 1;
+
+my $bpm = 126;
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0) {
+        $self->line(0, $self->{bangs});
+        $self->modified;
+        $self->ade();
+    }
+    if ($bpm != $self->{bpm}) {
+        $self->bpm($bpm);
+    }
+
+    if ($metro) {
+        if ($self->{bangs} % 4 == 0) {
+            $self->t({sample => "drumtraks/2",
+                      speed => ($self->{bangs} % 16 == 0 ? 1.5 : 1)
+                     }
+                    );
+        }
+    }
+}
+
+##
+
+{
+    my $adeosc;
+    sub ade {
+        my ($self) = @_;
+        $self->line(1, $self->{tpm});
+        if (not $adeosc) {
+            $adeosc = Net::OSC->new;
+            $adeosc->server(hostname => '192.168.0.1', port => 7770);
+        }
+        $adeosc->command('/pureEvents/PEAOSCReleasePendingEvents');
+        $adeosc->data([['f', $self->{tpm}]]);
+        $adeosc->send_message;
+    }
+}

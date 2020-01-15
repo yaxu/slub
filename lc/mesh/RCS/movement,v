@@ -1,0 +1,686 @@
+head	1.32;
+access;
+symbols;
+locks
+	alex:1.32; strict;
+comment	@# @;
+
+
+1.32
+date	2008.06.17.18.06.30;	author alex;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	2008.06.17.12.01.54;	author alex;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	2008.06.17.12.01.29;	author alex;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	2008.06.17.11.58.19;	author alex;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	2008.06.17.11.45.28;	author alex;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	2008.06.17.11.45.03;	author alex;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	2008.06.17.11.44.49;	author alex;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2008.06.17.11.44.34;	author alex;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2008.06.17.11.44.30;	author alex;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2008.06.17.11.44.26;	author alex;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2008.06.17.11.44.22;	author alex;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2008.06.17.11.43.07;	author alex;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2008.06.17.11.43.01;	author alex;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2008.06.17.11.41.59;	author alex;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2008.06.17.11.40.51;	author alex;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2008.06.17.11.39.38;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2008.06.17.11.37.51;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2008.06.17.11.36.24;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2008.06.17.11.35.55;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2008.06.17.11.33.44;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2008.06.17.11.33.23;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2008.06.17.11.32.47;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2008.06.17.11.32.13;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2008.06.17.11.30.08;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2008.06.17.11.30.02;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2008.06.17.11.30.02;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.06.17.11.29.32;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.06.17.11.29.17;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.06.17.11.28.51;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.06.17.11.28.08;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.06.17.11.26.59;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.06.17.11.23.25;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Jun 17 12:23:25 2008
+@
+
+
+1.32
+log
+@Tue Jun 17 19:06:30 2008
+@
+text
+@
+# move out, average mallet, tense, resonant skin
+
+my $tension = 0.8;
+my $alpha = 1;
+my $mass = 1;
+my $velocity = 0.5;
+my $loss = 1;
+my $rand = 1;
+my @@move = (# x y speed angle
+           ['across', -8, 0,  0.00001, pi/2],
+           ['diagonal', -8, -3, 0.000011, pi /2.6],
+           ['in', -8, 0, 0.000005, pi/2],
+           ['out', 0, 0, 0.000005, pi/2],
+           ['static edge', 0, 3.99, 0, 0],
+           ['static middle', 0, 0, 0, 0]
+          );
+
+my @@mallets = (# mass alpha
+              ['average', 1, 1],
+              ['heavy stiff', 14, 0.2],
+              ['heavy soft', 3, 2],
+              ['light stiff', 0.5, 0.1],
+              ['light soft', 0.5, 3],
+             );
+
+my @@skins = (# tension loss
+             ['average', 1, 1],
+             ['tense, lossy', 1.1, 0.999],
+             ['loose, lossy', 0.9, 0.999],
+             ['tense, resonant', 1.1, 1.03],
+             ['loose, resonant', 0.9, 1.03],
+            );
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 1 == 0) {
+        my ($setting, $mallet, $skin);
+        if ($rand) {
+          $setting = $move[rand @@move];
+          $mallet = $mallets[rand @@mallets];
+          $skin = $skins[rand @@skins];
+        }
+        else {
+          $setting = shift(@@move);   push(@@move, $setting);
+          $mallet = shift(@@mallets); push(@@mallets, $mallet);
+          $skin = shift(@@skins);     push(@@skins, $skin);
+        }
+
+   
+        $self->line(1, 'move ' . $setting->[0] . ", " . $mallet->[0]
+                    . ' mallet, ' . $skin->[0] . ' skin');
+        $self->tension($skin->[1]);
+        $self->loss($skin->[2]);
+        $self->vector({x => $setting->[1], y => $setting->[2],
+                   speed => $setting->[3], angle => $setting->[4],
+                   mass => $mallet->[1], alpha => $mallet->[2],
+                   velocity => $velocity
+                  }
+                 );
+    }
+
+    $self->modified();
+}@
+
+
+1.31
+log
+@Tue Jun 17 13:01:54 2008
+@
+text
+@d2 1
+a2 1
+# move static middle, light soft mallet, loose, resonant skin
+d9 1
+a9 1
+my $rand = 0;
+d12 1
+a12 1
+#           ['diagonal', -8, -3, 0.000011, pi /2.6],
+@
+
+
+1.30
+log
+@Tue Jun 17 13:01:29 2008
+@
+text
+@d2 1
+a2 1
+# move in, heavy stiff mallet, tense, lossy skin
+@
+
+
+1.29
+log
+@Tue Jun 17 12:58:19 2008
+@
+text
+@d2 1
+a2 1
+# move static middle, light stiff mallet, loose, lossy skin
+d9 1
+a9 1
+my $rand = 1;
+d37 1
+a37 1
+    if ($self->{bangs} % 2 == 0) {
+@
+
+
+1.28
+log
+@Tue Jun 17 12:45:28 2008
+@
+text
+@d1 2
+a2 2
+# 0.25
+# move static middle, average mallet, average skin
+@
+
+
+1.27
+log
+@Tue Jun 17 12:45:03 2008
+@
+text
+@d2 1
+a2 1
+# move static middle, heavy soft mallet, tense, lossy skin
+@
+
+
+1.26
+log
+@Tue Jun 17 12:44:49 2008
+@
+text
+@d2 1
+a2 1
+# move static middle, heavy stiff mallet, loose, resonant skin
+d30 3
+a32 3
+             ['loose, lossy', 0.8, 0.999],
+             ['tense, resonant', 1.1, 1.04],
+             ['loose, resonant', 0.8, 1.04],
+@
+
+
+1.25
+log
+@Tue Jun 17 12:44:34 2008
+@
+text
+@d2 1
+a2 1
+# move out, average mallet, tense, resonant skin
+d31 2
+a32 2
+             ['tense, resonant', 1.1, 1.09],
+             ['loose, resonant', 0.8, 1.09],
+@
+
+
+1.24
+log
+@Tue Jun 17 12:44:30 2008
+@
+text
+@d2 1
+a2 1
+# move across, light soft mallet, tense, resonant skin
+d37 1
+a37 1
+    if ($self->{bangs} % 4 == 0) {
+@
+
+
+1.23
+log
+@Tue Jun 17 12:44:26 2008
+@
+text
+@d2 1
+a2 1
+# move in, heavy soft mallet, loose, lossy skin
+@
+
+
+1.22
+log
+@Tue Jun 17 12:44:22 2008
+@
+text
+@d2 1
+a2 1
+# move in, heavy stiff mallet, tense, lossy skin
+@
+
+
+1.21
+log
+@Tue Jun 17 12:43:07 2008
+@
+text
+@d2 1
+a2 1
+# move static edge, light stiff mallet, tense, resonant skin
+d9 1
+d38 12
+a49 3
+        my $setting = shift(@@move);   push(@@move, $setting);
+        my $mallet = shift(@@mallets); push(@@mallets, $mallet);
+        my $skin = shift(@@skins);     push(@@skins, $skin);
+@
+
+
+1.20
+log
+@Tue Jun 17 12:43:01 2008
+@
+text
+@d2 1
+a2 1
+# move across, average mallet, average skin
+@
+
+
+1.19
+log
+@Tue Jun 17 12:41:59 2008
+@
+text
+@d2 1
+a2 1
+# move static edge, light stiff mallet, average skin
+d30 2
+@
+
+
+1.18
+log
+@Tue Jun 17 12:40:51 2008
+@
+text
+@d2 1
+a2 1
+# move out, heavy soft mallet, average skin
+d27 3
+a29 1
+             ['average', 1, 1]
+@
+
+
+1.17
+log
+@Tue Jun 17 12:39:38 2008
+@
+text
+@d2 1
+a2 1
+# in, heavy stiff
+a4 1
+
+d33 3
+a35 6
+        my $setting = shift(@@move);
+        push(@@move, $setting);
+        my $mallet = shift(@@mallets);
+        push(@@mallets, $mallet);
+        my $skin = shift(@@skins);
+        push(@@skins, $skin);
+d37 2
+a38 1
+        $self->line(1, $setting->[0] . ", " . $mallet->[0]);
+@
+
+
+1.16
+log
+@Tue Jun 17 12:37:51 2008
+@
+text
+@d2 1
+a2 1
+# static edge, light stiff
+d38 2
+a39 2
+        my $mallet = shift(@@mallets);
+        push(@@mallets, $mallet);
+d42 2
+a43 1
+
+d51 1
+a51 2
+$self->loss($loss);
+$self->tension($tension);
+@
+
+
+1.15
+log
+@Tue Jun 17 12:36:24 2008
+@
+text
+@d2 1
+a2 1
+# in, heavy stiff
+d27 4
+d38 2
+@
+
+
+1.14
+log
+@Tue Jun 17 12:35:55 2008
+@
+text
+@d2 1
+a2 1
+# across, light stiff
+d20 3
+a22 3
+#              ['average', 1, 1],
+#              ['heavy stiff', 14, 0.2],
+#              ['heavy soft', 3, 2],
+d24 1
+a24 1
+              ['light soft', 0.5, 2],
+@
+
+
+1.13
+log
+@Tue Jun 17 12:33:44 2008
+@
+text
+@d2 1
+a2 1
+# across, average
+d12 1
+a12 1
+           ['diagonal', -8, -3, 0.000011, pi /2.6],
+d20 5
+a24 2
+              ['average', 1, 1],
+              ['heavy stiff', 4, 0.5],
+@
+
+
+1.12
+log
+@Tue Jun 17 12:33:23 2008
+@
+text
+@d36 1
+a36 1
+                   mass => $mass, alpha => $alpha,
+@
+
+
+1.11
+log
+@Tue Jun 17 12:32:47 2008
+@
+text
+@d2 1
+a2 1
+# static edge
+a22 1
+);
+d33 1
+@
+
+
+1.10
+log
+@Tue Jun 17 12:32:13 2008
+@
+text
+@d2 1
+a2 1
+# out
+d32 2
+a33 2
+
+        $self->line(1, $setting->[0]);
+@
+
+
+1.9
+log
+@Tue Jun 17 12:30:07 2008
+@
+text
+@d2 1
+a2 1
+# static edge
+d10 1
+a10 1
+my @@move = (
+d19 5
+d30 3
+@
+
+
+1.8
+log
+@Tue Jun 17 12:30:02 2008
+@
+text
+@d2 2
+a3 1
+# across
+@
+
+
+1.7
+log
+@Tue Jun 17 12:30:02 2008
+@
+text
+@d2 1
+a2 1
+# out
+@
+
+
+1.6
+log
+@Tue Jun 17 12:29:32 2008
+@
+text
+@d2 1
+a2 1
+
+d24 1
+a24 1
+        $self->line(1, ÂÂ$setting->[0]);
+@
+
+
+1.5
+log
+@Tue Jun 17 12:29:17 2008
+@
+text
+@d24 1
+@
+
+
+1.4
+log
+@Tue Jun 17 12:28:51 2008
+@
+text
+@d9 1
+a9 1
+my @@foo = (
+d22 2
+a23 2
+        my $setting = shift(@@foo);
+        push(@@foo, $setting);
+@
+
+
+1.3
+log
+@Tue Jun 17 12:28:08 2008
+@
+text
+@d11 1
+a11 1
+           ['diagonal'. -8, -3, 0.000011, pi /2.6],
+d24 2
+a25 2
+        $self->vector({x => $setting->[0], y => $setting->[1],
+                   speed => $setting->[2], angle => $setting->[3],
+@
+
+
+1.2
+log
+@Tue Jun 17 12:26:59 2008
+@
+text
+@d10 6
+a15 6
+           [-8, 0,  0.00001, pi/2], # across
+#           [-8, -3, 0.000011, pi /2.6], # diagonal
+           [-8, 0, 0.000005, pi/2], # in
+           [0, 0, 0.000005, pi/2], # out
+           [0, 3.99, 0, 0], # static edge
+           [0, 0, 0, 0] # static middle
+d18 1
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d8 1
+d30 1
+@

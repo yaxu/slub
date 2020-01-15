@@ -1,0 +1,38 @@
+my $ttl = 100;
+my $start;
+my $min = 40;
+my $max = 60;
+sub bang {
+    my $self = shift;
+    $start ||= $self->{bangs};
+#    exit(0) if (($ttl + $start) <= $self->{bangs});
+    if ($self->{bangs} % 4 == 0) {
+        $self->peep(50);
+    }
+    if ($self->{bangs} % 3 == 0 and $self->{bangs} % 4 != 0) {
+        $self->peep(55);
+    }
+
+    if ($self->{bangs} % 8 == 2) {
+        $self->peep(45 + (($self->{foo}++ % 3) * 3));
+    }
+}
+
+
+sub peep {
+    my ($self, $speed) = @_;
+
+    $self->t({speed => $speed, sample => "sine/5",
+              scale => "equal",
+              duration => 30000,
+              volume => 0.2, pan => 1- rand(2),
+              envelope_name => 'percussive',
+             }
+            );
+    $self->vsite($speed / 100);
+    warn((($speed - $min) / ($max - $min)) 
+          . ' ' 
+          . (($self->{bangs} - $start) / $ttl)
+          . "\n"
+         );
+}

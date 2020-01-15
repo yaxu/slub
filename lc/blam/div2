@@ -1,0 +1,33 @@
+my @notes = (0, 7, 14, 15, 12);
+#my @notes = (7, 14, 3, 0, 2);
+
+sub bang {
+    my $self = shift;
+
+    if ($self->{bangs} % 4 == 0) {
+        my $foo = $notes[($self->{bangs} % 5) % @notes];
+
+        $self->t({sample => "pluck/$foo",
+                  delay  => rand(0.01),
+                  delay2 => rand(0.01),
+                  volume => 3,
+                  shape  => ((($self->{bangs} % 64) / 64) * 1.1),
+                  speed  => 2, pan => -1
+                 }
+                );
+    }
+
+    if ($self->{bangs} % 4 == 0) {
+        my $foo = $notes[($self->{bangs} % 5) % @notes];
+
+        $self->t({sample => "pluck/$foo",
+                  delay  => rand(0.01),
+                  delay2 => rand(0.01),
+                  volume => 3, speed => -2,
+                  shape  => (((($self->{bangs} + 32) % 64) / 64) * 1.1),
+                  pan => 1
+                 }
+                );
+    }
+
+}

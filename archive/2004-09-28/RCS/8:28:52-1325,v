@@ -1,0 +1,63 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2004.09.28.07.31.21;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.09.28.07.28.52;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Sep 28 08:28:52 2004
+@
+
+
+1.2
+log
+@Tue Sep 28 08:31:21 2004
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->{seq} ||= [reverse(1, 3, 4, 6)];
+    $self->{rate} ||= 0;
+    if (($self->{bangs} % 32 < 20) and ($self->{bangs} % 1 == 0)) {
+        $self->play({num => 60 + 
+                       ($self->{bangs} % 2 ? $self->{rate} : $self->{rate2}),
+                     ts       => 30,
+                     gain     => 30,
+                     formfreq => 300,
+                     bwfreq   => ($self->sin(5) * 80) + 30,
+                     pan      => (0.2 * $self->sin(5)) + 0.4
+                    }
+                   );
+    }
+    
+    if ($self->{bangs} % 32 == 2) {
+       $self->{rate} = 20 + ($self->{seq}->[0]);
+       $self->{rate2} = 20 + ($self->{seq}->[1]);
+       push(@@{$self->{seq}}, shift(@@{$self->{seq}}));
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d10 2
+a11 2
+                     formfreq => 40,
+                     bwfreq   => 50,
+@

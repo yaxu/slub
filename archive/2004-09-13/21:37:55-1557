@@ -1,0 +1,32 @@
+sub bang {
+    my $self = shift;
+
+    if ($self->{bangs} % 16 == 4) {
+        $self->play({num      => 88, 
+                     bwfreq   => 1,
+                     formfreq => 40,
+                     ts       => 40,
+                     gain => 20
+                    }
+                   );
+    }
+    if ($self->{bangs} % 16 == 6) {
+        $self->play({num      => 88,
+                     bwfreq   => 1,
+                     formfreq => 40, 
+                     ts       => 70,
+                      gain => 20
+                    }
+                   );
+    }
+    if ($self->{bangs} % 16 == 14) {
+        $self->play({num      => 88,
+                     bwfreq   => 1,
+                     formfreq => 40,
+                     ts       => 40, 
+                     gain     => 40
+                    }
+                   );
+    }
+
+}

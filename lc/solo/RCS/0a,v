@@ -1,0 +1,36 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.09.30.15.18.06;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Sep 30 16:18:06 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 64 == 0) {
+        $self->t({sample => "sine/4",
+                  loops => 90,
+                  speed => 4.1,
+                  accellerate => -0.00006, delay => 0.1, delay2  => 0.2,
+                  shape => 0.9, volume => 0.02
+                 }
+                );
+    }
+}@

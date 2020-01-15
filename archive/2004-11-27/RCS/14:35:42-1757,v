@@ -1,0 +1,81 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2004.11.27.14.36.24;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.11.27.14.35.42;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Nov 27 14:35:42 2004
+@
+
+
+1.2
+log
+@Sat Nov 27 14:36:24 2004
+@
+text
+@my $foo = 'x  x     xx xx  ';
+my @@foo = split(//, $foo);
+my $size = 6;
+
+sub bang {
+    my $self = shift;
+    $self->{strength} ||= 0;
+    if ($foo[$self->{bangs} % @@foo] eq 'x') {
+        my $sample = $self->{bangs} % 8 == 4 ? 9 : 5;
+        $self->trigger({sample => "metal/$sample",
+                        ts => 8 * ($self->{strength} * 1),
+                        rate => 10,
+                        gain => 160,
+                       }
+                      );
+        $self->{strength} = 0;
+    }
+    else {
+        $self->{strength}++;
+    }
+    if ($self->{bangs} % (@@foo * 4) == 0) {
+        my @@points = grep{$foo[$_] eq 'x'} (0 .. $#foo);
+        my $no = scalar @@points;
+        $foo[$points[rand @@points]] = ' ';
+        $no--;
+        while ($no < $size) {
+          my @@unpoints = grep {$foo[$_] ne 'x'} (0 .. $#foo);
+          last unless @@unpoints;
+          $foo[$unpoints[rand @@unpoints]] = 'x';
+          ++$no;
+        }
+        while ($no > $size) {
+          @@points = grep {$foo[$_] eq 'x'} (0 .. $#foo);
+          last unless @@points;
+          $foo[$points[rand @@points]] = ' ';
+          --$no;
+        }
+        $self->code->[0] = 'my $foo = \'' . join('', @@foo) . '\';';
+        $self->modified;
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+my $foo = 'x x      xxx x  ';
+@

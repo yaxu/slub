@@ -1,0 +1,203 @@
+head	1.9;
+access;
+symbols;
+locks
+	alex:1.9; strict;
+comment	@# @;
+
+
+1.9
+date	2006.04.29.13.59.55;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2005.09.02.14.42.17;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2005.06.16.18.00.55;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2005.06.10.20.57.45;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2005.06.10.20.57.09;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.06.10.20.56.57;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.06.10.20.56.09;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.06.10.16.41.52;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.06.10.16.30.05;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Jun 10 17:30:05 2005
+@
+
+
+1.9
+log
+@Sat Apr 29 14:59:55 2006
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 32 == 0) {
+        $self->t({sample => "trump/1", speed => 0.25,
+                  accellerate => 0.000001,
+                  envelope_name => 'chop',
+                  vowel => 'e', loops => 2,
+                  pan => 1, pan_to => -1, volume => 10
+                 }
+                );
+        $self->{foo}++;
+    }
+    if ($self->{bangs} % 16 == 8) {
+        $self->t({sample => "trump/1", speed => 0.125,
+                  accellerate => -0.0000005,
+                  envelope_name => 'chop',
+                  vowel => ($self->{foo}++ % 2 ? 'a' : 'o'),
+                  pan => -1, pan_to => 1, volume => 10
+                 }
+                );
+    }
+}@
+
+
+1.8
+log
+@Fri Sep  2 15:42:17 2005
+@
+text
+@d8 1
+a8 1
+                  pan => 1, pan_to => -1
+d18 1
+a18 1
+                  pan => -1, pan_to => 1
+@
+
+
+1.7
+log
+@Thu Jun 16 19:00:55 2005
+@
+text
+@d14 7
+a20 7
+#        $self->t({sample => "trump/1", speed => 0.125,
+#                  accellerate => -0.0000005,
+#                  envelope_name => 'chop',
+#                  vowel => ($self->{foo}++ % 2 ? 'a' : 'o'),
+#                  pan => -1, pan_to => 1
+#p                 }
+#                );
+@
+
+
+1.6
+log
+@Fri Jun 10 21:57:45 2005
+@
+text
+@d5 1
+a5 1
+                  accellerate => 0.0000001,
+d7 1
+a7 1
+                  vowel => 'e', loops => 1,
+d14 7
+a20 7
+        $self->t({sample => "trump/1", speed => 0.125,
+                  accellerate => -0.0000005,
+                  envelope_name => 'chop',
+                  vowel => ($self->{foo}++ % 2 ? 'a' : 'o'),
+                  pan => -1, pan_to => 1
+                 }
+                );
+@
+
+
+1.5
+log
+@Fri Jun 10 21:57:09 2005
+@
+text
+@d11 1
+@
+
+
+1.4
+log
+@Fri Jun 10 21:56:57 2005
+@
+text
+@d7 1
+a7 1
+                  vowel => 'e', loops => 1.3,
+@
+
+
+1.3
+log
+@Fri Jun 10 21:56:08 2005
+@
+text
+@d7 1
+a7 1
+                  vowel => 'e',
+@
+
+
+1.2
+log
+@Fri Jun 10 17:41:52 2005
+@
+text
+@d3 1
+a3 1
+    if ($self->{bangs} % 16 == 0) {
+d14 1
+a14 1
+                  accellerate => -0.0000001,
+d16 1
+a16 1
+                  vowel => 'e',
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d4 9
+d14 1
+a14 1
+                  accellerate => 0.000001,
+d17 1
+a17 1
+                  pan => 1, pan_to => -1
+@

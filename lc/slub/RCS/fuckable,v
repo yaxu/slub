@@ -1,0 +1,34 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.06.03.18.25.01;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Jun  3 19:25:01 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0) {
+       $self->t({sample => "fuckable/0", pan => 1 - (2 *$self->sin(3)),
+                 speed => 0.5,
+                 volume => 0.002
+                }
+               );
+    }
+}@

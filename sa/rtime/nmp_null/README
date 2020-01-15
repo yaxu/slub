@@ -1,0 +1,5 @@
+
+This example doesn't use audio: it simply sends -cin ascii MIDI data
+onto the network. It should run everywhere the ascii driver runs 
+(i.e. UNIX-like OS's, including OS X).
+

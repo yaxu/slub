@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm caudio
+cc -g -O3 -Wall -pedantic -pipe -o caudio caudio.c -pthread -lsndfile
+

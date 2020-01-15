@@ -1,0 +1,10 @@
+sub bang {
+    my $self = shift;
+    $self->t({sample => "insect/$self->{bangs}", speed => 0.9,
+              pan => -1 + ($self->{bangs} % 8 > 3) * 2,
+              envelope_name => "valley", delay => rand(0.01),
+              delay2 => rand(0.01), loops => 1,
+              volume => 2
+             }
+             ) unless $self->{bangs} % 6;
+}

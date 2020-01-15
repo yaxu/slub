@@ -1,0 +1,51 @@
+# 16 /slub/samples/gabba/0.wav
+
+my @seq = (
+           '/slub/samples/gabba/0.wav',
+          );
+my @mods = (4, 16, 32, 64);
+my $mod = 16;
+
+sub bang {
+      my $self = shift;
+
+      my $width  = 6;
+      my $size   = $width * @seq;
+      my $point  = ($self->{bangs} % $size);
+      my $note   = $seq[int($point / $width)];
+      my $first  = (not ($point % $width));
+
+      $mod = $mods[rand @mods] if $first;
+      
+      $self->code->[0] = "# $mod $note";
+     
+      if (not $mod or not ($self->{bangs} % $mod)) {
+
+          $self->trigger({sample      => $note,
+                       ts       => 200,
+                       gain     => 100,
+                       browndel => 40,
+                      }
+                     ) unless $self->{bangs} % 2;
+     }
+    #$self->save("chip.drum");
+
+    $self->modified;
+}
+
+##
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./scala/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    $self->message("saved.");
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}

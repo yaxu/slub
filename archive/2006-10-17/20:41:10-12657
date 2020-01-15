@@ -1,0 +1,7 @@
+sub bang {
+    my $self = shift;
+    $self->sine({freq => 400, direction => -1, ts => 1})
+      if $self->{bangs} % 2 == 0;
+    $self->sine({freq => 2000, direction => -4, ts => 0.9})
+      if $self->{bangs} % 8 == 0;
+}

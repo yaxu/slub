@@ -1,0 +1,16 @@
+sub bang {
+    my $self = shift;
+    my $bar = $self->{bangs} % 32 > 20;
+    my $foo = $bar ? 2 : 3;
+    $self->t({loops => rand(2),
+              speed => $self->{bangs} % 12 ? 1 : 1.5,
+              pan => 1 - ($self->{bangs} % 3),
+              sample => "tim0/6",
+              #shape => ($self->{bangs} % 16 == 0 ? 1 : 0),
+              volume => 0.9,
+              shape => 0.75,
+#              delay => $self->{bangs} % 4 ? 0.009 : 0
+             }
+            )
+       if $self->{bangs} % $foo == 0;
+}

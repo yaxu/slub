@@ -1,0 +1,42 @@
+# 0.133672147713255
+
+my $tune = [0, 10, 2, -4, 10];
+
+sub bang {
+    my $self = shift;
+    my $erm = sin($self->{bangs} / 20);
+    $self->message($erm);
+    if (!($self->{foo} % 5) or !($self->{foo} % 1)) {
+      $self->play(48 + $tune->[$self->{note}++ % @$tune] 
+                  + ((! ($self->{foo} % 16)) ? -12 : 0), 
+                  20, 110 + ($erm * 50), 50 + rand(100)
+                 );
+    }
+    $self->{foo}++;
+    #$self->save('mess.face.drk');
+    $self->modified;
+}
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./saves/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    $self->message("saved.");
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}
+
+sub message {
+    my ($self, $message) = @_;
+    my $code = $self->code;
+    if (not $code->[0] =~ /^\#/) {
+      unshift(@$code, '#');
+    }
+    $code->[0] = '# ' . $message;
+}

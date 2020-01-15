@@ -1,0 +1,112 @@
+head	1.5;
+access;
+symbols;
+locks
+	alex:1.5; strict;
+comment	@# @;
+
+
+1.5
+date	2006.04.29.20.12.23;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2006.04.29.20.12.16;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2006.04.29.20.10.12;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2006.04.29.20.09.02;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2006.04.29.20.07.10;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Apr 29 21:07:10 2006
+@
+
+
+1.5
+log
+@Sat Apr 29 21:12:23 2006
+@
+text
+@sub bang {
+    my $self = shift;
+    my $foo = 3 + ($self->{bangs} % 8);
+    my $switch = $self->{bangs} % 32 == 0;
+    $self->t({sample => "mouth/$foo",
+              speed => 1,
+              delay => rand(0.01),
+              delay2 => rand(0.01),
+              shape => 0.9
+             }
+            ),
+        if $self->{bangs} % 2 == 0;
+}@
+
+
+1.4
+log
+@Sat Apr 29 21:12:16 2006
+@
+text
+@d3 1
+a3 1
+    my $foo = 4 + ($self->{bangs} % 8);
+@
+
+
+1.3
+log
+@Sat Apr 29 21:10:12 2006
+@
+text
+@d3 2
+a4 2
+    my $foo = ($self->{bangs} % 8);
+  
+d6 7
+a12 3
+              speed => 0.24,
+              delay => rand(0.01)})
+        if $self->{bangs} % 4 == 0;
+@
+
+
+1.2
+log
+@Sat Apr 29 21:09:02 2006
+@
+text
+@d3 1
+a3 1
+    my $foo = 15 - ($self->{bangs} % 4);
+d5 4
+a8 2
+    $self->t({sample => "mouth/$foo", speed => 0.24})
+        if $self->{bangs} % 3 == 0;
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 4
+a6 2
+    my $foo = $self->{bangs} % 16;
+    $self->t({sample => "mouth/$foo", speed => 0.5});
+@

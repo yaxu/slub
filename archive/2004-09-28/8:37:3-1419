@@ -1,0 +1,12 @@
+sub bang {
+    my $self = shift;
+    my $switch = $self->{bangs} % 32 < 16 ? 4 : 2;
+    if (($self->{bangs} % 32 < 24) and ($self->{bangs} % $switch == 0)) {
+        $self->trigger({sample => "gabba/0",
+                        rate   => 50,
+                        ts     => 100,
+                        gain   => 50
+                       }
+                      );
+    }
+}

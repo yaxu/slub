@@ -1,0 +1,37 @@
+      if (heads[i].active) {
+        tween_amount = (heads[i].position - (int) heads[i].position);
+
+        start = heads[i].sample->frames[(int) heads[i].position];
+
+        stop = heads[i].sample->frames[((int) heads[i].position) + 1];
+        difference = stop - start;
+        tween = difference * tween_amount;
+        
+        heads[i].position += heads[i].speed;
+        out_l[i] += start + tween;
+        
+        if (heads[i].sample->info->channels > 1) {
+          /* Assume it's a stereo sample */
+          if (heads[i].position >= heads[i].sample->info->frames) {
+            heads[i].position = 0;
+            heads[i].active = 0;
+            continue;
+          }
+          tween_amount = (heads[i].position - (int) heads[i].position);
+          
+          start = heads[i].sample->frames[(int) heads[i].position];
+          stop = heads[i].sample->frames[((int) heads[i].position) + 1];
+          difference = stop - start;
+          tween = difference * tween_amount;
+          
+          heads[i].position += heads[i].speed;
+        }
+        
+        out_r[i] += start + tween;
+        
+        if (heads[i].position >= heads[i].sample->info->frames) {
+          heads[i].position = 0;
+          heads[i].active = 0;
+          continue;
+        }
+      }

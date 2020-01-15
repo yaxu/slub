@@ -1,0 +1,5 @@
+sub bang {
+    my $self = shift;
+    $self->play({num => 80, formfreq => 10, bwfreq => 200, gain => 200})
+       unless $self->{bangs} % 4;
+}

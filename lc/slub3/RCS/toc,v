@@ -1,0 +1,50 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2005.06.03.18.18.50;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.06.03.17.55.36;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Jun  3 18:55:36 2005
+@
+
+
+1.2
+log
+@Fri Jun  3 19:18:50 2005
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0) {
+        $self->t({sample => "future/7",
+                  loops => 2,
+                  speed => 2.1,
+                  pan => 1,
+                  volume => 0.05
+                 }
+                );
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d8 1
+@

@@ -1,0 +1,10 @@
+sub bang {
+    my $self = shift;
+    unless ($self->{bangs} % 16) {
+        $self->t({sample => 'newnotes/0', volume => 1
+,
+                  speed => 0.4, accellerate => -0.000004,
+                 }
+                );
+    }
+}

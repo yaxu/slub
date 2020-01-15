@@ -1,0 +1,157 @@
+head	1.4;
+access;
+symbols;
+locks
+	alex:1.4; strict;
+comment	@# @;
+
+
+1.4
+date	2004.11.24.21.02.23;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2004.11.24.20.53.00;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2004.11.24.20.46.58;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.11.24.20.45.10;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Wed Nov 24 20:45:10 2004
+@
+
+
+1.4
+log
+@Wed Nov 24 21:02:23 2004
+@
+text
+@# 0 < 59:57:0:0:52:0:0:55:61:0:0:59:56:0:0:0
+# 32
+my $init = 0;
+my $start = 50;
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 32 == 0) {
+        $self->{tune} = [$self->tune(16)] unless $init++;
+    }
+    $self->code->[0] = "# " . join(':', @@{$self->{tune}});
+    my $point = shift(@@{$self->{tune}});
+    push (@@{$self->{tune}}, $point);
+ 
+
+    $self->code->[0] = "# $point < " . join(':', @@{$self->{tune}});
+    if ($point) {
+        $self->trigger({sample => "drum/$point", #filter => 10000,
+                        browndel => 10000, gain => 2});
+    }
+    if ($self->{bangs} % 4 == 0) {
+        $self->trigger({sample => 'breaks152loud/0', filter => 500,
+                        ts => 800,
+                        gain => 300,
+                        browndel => 600
+                       }
+                      );
+    }
+    $self->modified;
+}
+
+
+sub tune {
+    my $self = shift;
+    my $size = shift;
+    my @@result;
+    if ($size > 6) {
+        $size--;
+        my $split = int(($size / 2) + rand(2));
+        my @@part1 = $self->tune($split);
+        my @@part2 = $self->tune($size - $split);
+        my ($end1) = (grep {$_} reverse @@part1);
+        my ($end2) = (grep {$_} @@part2);
+        @@result = (@@part1, joinbits($end1, $end2), @@part2);
+    }
+    else {
+        @@result = $start + int(rand(12));
+        push(@@result, ((0) x ($size - 1)))
+    }
+    return(@@result);
+}
+
+sub joinbits {
+   my ($one, $two) = @@_;
+   my $result;
+   if ($two > $one) {
+       ($one, $two) = ($two, $one);
+   }
+
+   my $difference = $one - $two;
+   if ($difference % 2 or $difference < 2) {
+       $result = $two + 3;
+   }
+   else {
+       $result = $difference / 2;
+   }
+   return($result);
+}@
+
+
+1.3
+log
+@Wed Nov 24 20:53:00 2004
+@
+text
+@d1 1
+a1 1
+# 50 < 0:57:0:0:0:2:61:0:0:55:52:0:0:0:1:50
+d7 3
+a9 1
+    $self->{tune} = [$self->tune(16)] unless $init++;
+d14 1
+d17 10
+a26 1
+        $self->trigger({sample => "drum/$point", filter => 1000});
+@
+
+
+1.2
+log
+@Wed Nov 24 20:46:58 2004
+@
+text
+@d1 3
+a3 1
+#
+d7 10
+a16 2
+    my @@tune = $self->tune(32);
+    $self->code->[0] = "# " . join(':', @@tune);
+d36 1
+a36 1
+    )
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 2
+d5 2
+a6 1
+    my $tune = $self->tune(32);
+d23 1
+a23 1
+    else (
+@

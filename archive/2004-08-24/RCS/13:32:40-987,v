@@ -1,0 +1,30 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.08.24.12.32.40;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Aug 24 13:32:40 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@
+sub bang {
+    my $self = shift;
+    beep(20 + ($self->{bangs} % 100) + 100 * $self->sin(2));
+}
+@

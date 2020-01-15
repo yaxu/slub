@@ -1,0 +1,111 @@
+# saved.
+# tick 7051
+# tick 264
+# 59
+
+sub bang {
+    my $self = shift;
+
+    $self->test(0);
+
+    my $score = $self->{score};
+    my $note = 27 + $score->[$self->{tick} % @$score];
+    $note = $self->noter($note);
+    $self->{code}->[3] = "# $note";
+    #$self->play($note);
+
+    $self->save("structure");
+
+    $self->{tick} ||= 0;
+    $self->{tick}++;
+    $self->{code}->[2] = "# tick $self->{tick}";
+    $self->modified;
+}
+
+##
+
+sub noter {
+    my ($self, $note) = @_;
+    my $notes = [qw / 2 4 7 9 11 /];
+    return($notes->[$note % @$notes] + (12 * int($note / @$notes)));
+}
+
+##
+
+sub structure {
+    my $self = shift;
+    my $set = 1;
+    if ($set) {
+        $self->{structure} = [ ['+', '--', '--'],
+                               ['+',  '+', '--', '--'],
+                             ];
+    }
+
+}
+
+{
+    my $count;
+    sub test {
+        my ($self, $value, $level) = @_;
+        my $score = $self->{score} ||= [];
+        my $structure = $self->structure;
+        if (not $level) {
+            $level = $count = 0;
+            @$score = ();
+        }
+        return if @$structure <= $level;
+        
+        my $substruct = $structure->[$level];
+        foreach my $dir (@$substruct) {
+            ++$count;
+            if ($dir eq '+') {
+                $value += 1;
+            }
+            elsif($dir eq '++') {
+                $value += 2;
+            }
+            elsif ($dir eq '-') {
+                $value -= 1;
+            }
+            elsif ($dir eq '--') {
+                $value -= 2;
+            }
+            push @$score, $value;
+            $self->test($value, $level + 1, $count);
+        }
+    }
+}
+
+##
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./saves/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    $self->message("saved.");
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}
+
+##
+
+sub message {
+    my ($self, $message) = @_;
+    my $code = $self->code;
+    if (not $code->[0] =~ /^\#/) {
+      unshift(@$code, '#');
+    }
+    $code->[0] = '# ' . $message;
+}
+
+##
+
+sub sleeptime {
+    .15;
+}

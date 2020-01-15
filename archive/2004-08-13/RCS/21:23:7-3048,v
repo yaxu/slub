@@ -1,0 +1,33 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.08.13.20.23.07;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Aug 13 21:23:07 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->{buffer_time} = 0;
+    my $foo = $self->{bangs} % 16 > 10;
+    $self->play({num => $foo ? 10 : 50,
+                 
+                }
+               );
+}@

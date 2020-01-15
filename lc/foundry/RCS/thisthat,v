@@ -1,0 +1,176 @@
+head	1.6;
+access;
+symbols;
+locks
+	alex:1.6; strict;
+comment	@# @;
+
+
+1.6
+date	2008.02.20.20.02.05;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.02.20.20.01.59;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.02.20.20.01.53;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.02.20.20.01.44;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.02.20.20.01.29;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.20.19.57.46;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Wed Feb 20 19:57:46 2008
+@
+
+
+1.6
+log
+@Wed Feb 20 20:02:05 2008
+@
+text
+@# x----x----x--x--
+# x----x----x--x--
+# -!x-!--x---!x-!x
+
+sub bang {
+    my $self = shift;
+
+    return if ($self->{bangs} % 2);
+    my $b = $self->{burp}++;
+ 
+    if ($b % (length($self->line(0))) == 0) {
+      if ((not $self->{orig}) or $self->{orig} ne $self->line(0)) {
+          $self->{orig} = $self->line(0);
+          $self->line(1, $self->line(0));
+          $self->line(2, back($self->line(0)));
+      }
+    }
+
+    if ($b % 16 == 0 and rand() > 0.8) {
+        $self->line(2, back($self->line(0)));
+    }
+
+    my $seq = $self->line(2);
+    $seq =~ s/(.)(.+)/$2$1/;
+    my $chr = $1;
+    if ($chr eq '!') {
+       $self->t({sample => "gabba/0", loops => 0.2});
+    }
+    elsif ($chr eq 'x') {
+       my $curve = $self->sin(5);
+       $self->t({sample => "gabba/0", loops => rand(1), volume => 0.6 + $curve / 8,
+                }
+               );
+    }
+    elsif (rand() > 0.9) {
+        $self->t({sample => "gabba/0", volume => 0.8, loops => 0.1,
+                  speed => 1 + rand(0.4)
+                 }
+                );
+    }
+
+    $self->line(2, $seq);
+    $self->modified;
+}
+
+sub back {
+  my $front = shift;
+  $front =~ s/(?<=x)(\-+)/place($1)/eg;
+  
+  return($front);
+}
+
+sub place {
+    my $foo = shift;
+    substr($foo, rand(length($foo)), 1, '!');
+    return($foo);
+}@
+
+
+1.5
+log
+@Wed Feb 20 20:01:59 2008
+@
+text
+@d3 1
+a3 1
+# -x--!-x-!x!-x-!-
+d36 1
+a36 1
+        $self->t({sample => "gabba/5", volume => 0.8, loops => 0.1,
+@
+
+
+1.4
+log
+@Wed Feb 20 20:01:53 2008
+@
+text
+@d3 1
+a3 1
+# !-x-!--x--!-x-!x
+d36 1
+a36 1
+        $self->t({sample => "psr/5", volume => 0.8, loops => 0.1,
+@
+
+
+1.3
+log
+@Wed Feb 20 20:01:44 2008
+@
+text
+@d3 1
+a3 1
+# x--!-x-!x!-x-!--
+d27 1
+a27 1
+       $self->t({sample => "drum/0", loops => 0.2});
+@
+
+
+1.2
+log
+@Wed Feb 20 20:01:29 2008
+@
+text
+@d3 1
+a3 1
+# x!---x-!--x-!x!-
+d31 1
+a31 1
+       $self->t({sample => "gabba/0", loops => 0.1, volume => 0.6 + $curve / 8,
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+a3 1
+# x-!x!-x!---x!---
+d31 1
+a31 1
+       $self->t({sample => "gabba/1", loops => 0.1, volume => 0.6 + $curve / 8,
+@

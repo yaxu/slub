@@ -1,0 +1,51 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.10.18.20.08.47;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Oct 18 21:08:47 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# 9
+my $length = 32;
+my $space = 4;
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % $space == 0) {
+        my $foo = $self->{bangs} % 2 ? 1 : 0;
+        my $num = $foo ? 5 : 4;
+        $self->trigger({sample => "drumtraks/$num",
+                        rate   => 150,
+                        ts     => 30,
+                        gain   => 40,
+                        pan    => $foo ? 0.4 : 0.7
+                       }
+                      );
+         my $point = $length - ($self->{foo}++ % $length) - 1;
+         if ($point == 0) {
+             $space = 4;
+         }
+         elsif (rand($length / 2) > $point) { 
+             $space = rand(4) + 1;
+         }
+         $self->code->[0] = "# $point";
+
+    }
+    $self->modified;
+}@

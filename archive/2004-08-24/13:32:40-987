@@ -1,0 +1,5 @@
+
+sub bang {
+    my $self = shift;
+    beep(20 + ($self->{bangs} % 100) + 100 * $self->sin(2));
+}

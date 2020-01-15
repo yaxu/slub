@@ -1,0 +1,8 @@
+sub bang {
+    my $self = shift;
+    $self->t({pan => (1 - ($self->sin(1)* 2)),
+              shape => 0.3,
+              speed => 0.01
+             }
+            );
+}

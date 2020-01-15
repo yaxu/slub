@@ -1,0 +1,37 @@
+# saved.
+
+sub bang {
+      my $self = shift;
+      my $erm = sin($self->{bangs} / 20);
+      $self->play({num      => 50 + 12,
+                   formfreq => 20 + rand(4), 
+                   bwfreq   => 80 + rand(40), 
+                   ts       => 200,
+                   gain     => 30,
+                   pan      => 0.3 + rand(0.4),
+#                   crackle  => 190,
+#                   browndel => 300 * abs($erm),
+                  }
+                 ) unless $self->{bangs} % 2;
+
+    #$self->save("hah");
+
+    $self->modified;
+}
+
+##
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./scala/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    $self->message("saved.");
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}

@@ -1,0 +1,15 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0) {
+    $self->v({x => (1 + sin(($self->{bangs} / 100) * pi)) / 4 + 0.25,
+              y => abs(sin($self->{bangs} / 10)),
+              volume => 10,
+              image => "helenjess",
+              direction => 4 * sin($self->{bangs} / 100), speed => 10,
+              length => 8,
+              width => 10, 
+              reverb => 10
+             }
+            );
+    }
+}

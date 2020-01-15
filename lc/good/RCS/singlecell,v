@@ -1,0 +1,104 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2008.12.12.22.29.16;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.08.25.17.44.30;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Aug 25 18:44:30 2008
+@
+
+
+1.2
+log
+@Fri Dec 12 22:29:16 2008
+@
+text
+@# gabba/0vol 66.49 speed 0.00 cutoff 2089.10 res 0.02 
+# gabba/1vol 12.30 speed 0.00 cutoff 294.52 res 0.32 
+# gabba/2vol 58.21 speed 0.00 cutoff 2480.28 res 0.02 
+# gabba/3vol 66.93 speed 0.00 cutoff 1178.26 res 0.67 
+# off/0vol 63.28 speed 0.00 cutoff 723.77 res 0.72 
+
+use lib '/yaxu/slub/clients';
+
+use old::Old::Two;
+use old::Old::Off;
+
+sub bang {
+    my $self = shift;
+    my $next;
+
+    $self->{old} ||= $self->init_old();
+
+    foreach my $n (0 .. 3) {
+        my $aged = $self->{old}->[$n];
+        my $sample = $aged->sample;
+        #sample =~ s/gabba/gabbalouder/;
+        if ($next = $aged->next_beat) {
+            $self->t({sample => $sample,
+                      volume => $next->{vol} / 10000,
+                      speed  => 1,
+#                      delay  => rand(0.03),
+#                      delay2 => rand(0.03),
+                      loops => 1,
+                      shape  => 0.99,
+                      cutoff => $next->{cutoff},
+                      resonance => $next->{res},
+                     }
+                  );
+            my $m = $aged->sample;
+            foreach my $p (qw/vol speed cutoff res/) {
+              $m .= $p . " " . sprintf("%.2f", ($next->{$p} || 0)) . " ";
+            }
+            $self->line($n, $m);
+        }
+    }
+    $self->modified;
+}
+
+sub init_old {
+    my $self = shift;
+    my $old = [];
+    my $n = 0;
+    foreach my $sample ("gabba/0", "gabba/1", "gabba/2", "gabba/3") {
+       my $aged = old::Old::Two->new(sample   => $sample,
+                                      loopsize => 16,
+                                      pitch    => 60
+                                     );
+       push(@@$old, $aged);
+    }
+
+    push @@$old, old::Old::Off->new(sample   => "off/0",
+                                   loopsize => 32,
+                                   pitch    => 60
+                                  );
+    return $old;
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 4
+a4 4
+# gabba/0vol 47.58 speed 0.00 cutoff 138.03 res 0.21 
+# gabba/1vol 53.17 speed 0.00 cutoff 1159.75 res 0.77 
+# gabba/2vol 27.33 speed 0.00 cutoff 564.22 res 0.08 
+# gabba/3vol 114.40 speed 0.00 cutoff 489.96 res 0.07 
+@

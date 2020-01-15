@@ -1,0 +1,6 @@
+
+sub bang {
+    my $self = shift;
+    $self->code->[0] = "# ah";
+    $self->modified();
+}

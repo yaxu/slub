@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+
+    my $foo = $self->{bangs} % 32 > 20 ? 3 : 8;
+
+    $self->t({sample => "gabba/0", volume => 1,
+              pan => $self->{bangs} % 2 ? 0.5 : -0.5,
+             }
+            )
+      if $self->{bangs} % $foo == 0;
+}

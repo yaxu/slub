@@ -1,0 +1,50 @@
+# 1
+# 543
+# o
+
+my @mults = (0.1, 0.4, 0.2, 1);
+my @vowels = qw(a e i o u);
+my $fixedvowel = 'no';
+my $sampleno = 3;
+
+my $fun = 6;
+
+sub bang {
+    my $self = shift;
+    $self->{mult} ||= 0.5;
+    $self->{vowel} ||= 'a';
+
+    my $point = $self->{bangs} % 32;    
+    
+    my $mod = ($self->{bangs} % 64) % $fun;
+    if ($point % ($mod + 1) == 0) {
+        $self->t({sample => "bass/$sampleno",
+                  volume => 0.2,
+                  speed => ($self->{toggle} ? 0.7 : 1) + 
+                           ($self->{bangs} % 8 + 1) * $self->{mult},
+                  delay => 0.001, accellerate => -0.00001, 
+                  vowel => ($fixedvowel || $self->{vowel})
+                 }
+                );
+    }
+    if (rand() > 0.95) {
+       $self->{toggle} = ! $self->{toggle};
+    }
+    if ($self->{bangs} % 8 == 0) {
+#        $self->{multpoint} += (1- rand(2));
+        $self->{multpoint}++;
+        $self->{mult} = $mults[int($self->{multpoint}) % @mults];
+
+    }
+
+    if ($self->{bangs} % 16 == 0) {
+       $self->{vowel} = $vowels[rand @vowels];
+    }
+
+
+    $self->line(0, $self->{mult});
+    $self->line(1, $self->{multpoint});
+    $self->line(2, $self->{vowel});
+
+    $self->modified;
+  }

@@ -1,0 +1,39 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.02.13.15.38.42;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Feb 13 15:38:42 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->{foo} ||= 0;
+    if (($self->{bangs} % rand(4)) == 0) {
+        $self->t({sample => "moog/$self->{foo}",
+                  envelope_name => "valley",
+                  pan => (1 - rand(2)),
+                  speed => 0.5
+                 }
+                );
+        if (rand() > 0.9) {
+            $self->{foo}++;
+        }
+    }
+}@

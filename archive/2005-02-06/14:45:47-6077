@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+    unless ($self->{bangs} % 16) {
+        $self->t({sample => 'newnotes/0', volume => 0.3
+,
+                  speed => 0.2,
+                  envelope_name => 'valley', shape => 0.9, 
+                 }
+                );
+    }
+}

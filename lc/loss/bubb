@@ -1,0 +1,21 @@
+sub bang {
+    my $self = shift;
+
+    my $foo = ($self->{bangs} % 32 > 20 ? 3 : 2);
+    my $bar = ($self->{bangs} % 32 < 12 ? 0.3 : -0.4);
+    if ($self->{bangs} % 6 == $foo) {
+        $self->t({sample => "bubble/0", volume => 0.1, speed => $bar,
+                  envelope_name => 'valley', accellerate => 0.0000002
+                 })
+    }
+    if ($self->{bangs} % 7 == $foo + 1) {
+        $self->t({sample => "bubble/4", volume => 0.1, speed => $bar,
+                  envelope_name => 'valley', accellerate => 0.0000001
+                 })
+    }
+    if ($self->{bangs} % 4 == $foo + 3) {
+        $self->t({sample => "bubble/0", volume => 0.1, speed => $bar,
+                  envelope_name => 'tri', accellerate => 0.000002
+                 })
+    }
+}

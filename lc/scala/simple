@@ -1,0 +1,45 @@
+# -0.788525254426195
+
+sub bang {
+    my $self = shift;
+    my $erm = sin($self->{bangs} / 20);
+    $self->code->[0] = "# $erm";
+    my $foo = 0;
+   foreach (0 .. 15) {
+      $self->trigger({sample => '/slub/samples/click/click3.wav', 
+                      gain   => 100,
+                      ts     => 40,
+                      offset => $foo,
+                      browndel => 70,
+                     }
+                    ) unless $self->{bangs} % 8;
+      $foo += (sin($_));
+    }
+#    $self->play(45 + (20 * $erm), 80, 300, 80) unless $self->{bangs} % 4;
+    #$self->save('simple');
+    $self->modified;
+}
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./scala/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    $self->message("saved.");
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}
+
+sub message {
+    my ($self, $message) = @_;
+    my $code = $self->code;
+    if (not $code->[0] =~ /^\#/) {
+      unshift(@$code, '#');
+    }
+    $code->[0] = '# ' . $message;
+}

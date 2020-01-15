@@ -1,0 +1,16 @@
+my @vowels = qw/a e i o u/;
+
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 64 > 32;
+    if ($self->{bangs} % ($foo ? 2 : 4) == 0) {
+    $self->t({sample => "chin/0",
+              pan => 1 - rand(2),
+              loops => 10,
+              vowel => $vowels[rand @vowels],
+               shape => 0.99,
+              delay => rand(0.01)
+             }
+            );
+    }
+}

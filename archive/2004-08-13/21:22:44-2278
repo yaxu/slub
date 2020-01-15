@@ -1,0 +1,26 @@
+sub bang {
+    my $self = shift;
+    $self->{buffer_time} = 0;
+    if ($self->{bangs} %2 == 0) {
+      my $foo = $self->{foo}++ % 4;
+      $self->trigger({sample => "space/" 
+                      . ($foo + 
+                         ($self->{bah} += $self->{bangs} % 8 ? 0 : 1)
+                        ),
+                      rate => 20 + (100 * ($self->sin(50))),
+                      pan => $self->sin(50),
+                      browndel => 200,
+                      ts => 100
+                     }
+                    )
+    }
+    if ($self->{bangs} % 4 == 0) {
+      $self->trigger({sample => "future/6",
+                      ts     => 250,
+                      browndel => 10,
+                      rate => 100,
+                      gain => 300, browndel => 60
+                     }
+                    );
+    }
+}

@@ -1,0 +1,38 @@
+# 27
+my $length = 32;
+my $space = 4;
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % $space == 0) {
+        my $foo = $self->{bangs} % 2 ? 1 : 0;
+        my $num = $foo ? 5 : 4;
+        $self->t({sample => "drumtraks/$num",
+                  speed   => 0.5,
+                  ts     => 30,
+                  volume   => 0.4, delay => 0.03,
+                  pan    => $foo ? -0.4 : 0.4
+                 }
+                );
+         $self->v({$foo 
+                   ? (x=> 0.25, y => 0.25,
+                      length => 4, width => 5, speed => 5,
+                      direction => pi / 3 + pi, image => "daisy"
+                     )
+                   : (x => 0.75, y => 0.75, direction => pi / 3,
+                      speed => 5, image => "daisy"
+                     ),
+                   volume => 40, reverb => 8
+                  }
+                 );
+         my $point = $length - ($self->{foo}++ % $length) - 1;
+         if ($point == 0) {
+             $space = 4;
+         }
+         elsif (rand($length / 2) > $point) { 
+             $space = rand(4) + 1;
+         }
+         $self->code->[0] = "# $point";
+
+    }
+    $self->modified;
+}

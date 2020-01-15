@@ -1,0 +1,76 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2005.08.27.15.24.43;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.08.26.13.46.13;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Aug 26 14:46:13 2005
+@
+
+
+1.2
+log
+@Sat Aug 27 16:24:43 2005
+@
+text
+@# 0.268105595034177
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 2 == 0) {
+        $self->t({sample => "future/0", speed => 2,
+                  delay => rand(), pan => -0.8,
+                  volume => $self->sin(2), shape => 0
+                 }
+                );
+    }
+    if ($self->{bangs} % 2 == 1) {
+        $self->t({sample => "future/0", speed => 2.5, pan => 0.8,
+                  volume => 1 - $self->sin(2), delay => 0.009
+                 }
+                );
+    }
+
+    if ($self->{bangs} % 3 == 0) {
+        $self->t({sample => "future/1", speed => 1, pan => 0,
+                  volume => 1 - $self->sin(2), delay => 0.02
+                 }
+                );
+    }
+
+$self->line(0, 1 - $self->sin(10));
+$self->modified;
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# 0.00405202776309443
+d6 2
+a7 3
+                  delay => rand() > 0.7 ? 1 : 0, pan => -0.8,
+                  volume => $self->sin(2), shape => 0.9,
+                  vowel => 'o'
+d13 1
+a13 1
+                  volume => 1 - $self->sin(2), delay => 1, vowel => 'i'
+d17 8
+@

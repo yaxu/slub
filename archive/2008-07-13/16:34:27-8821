@@ -1,0 +1,6 @@
+sub bang {
+    my $self = shift;
+    $self->bpm(110);
+    $self->t({sample => "drumtraks/0", speed => $self->{bangs} % 16 ? 2 : 1.5, 
+             }) unless $self->{bangs} % 4;
+}

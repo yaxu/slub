@@ -1,0 +1,56 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.11.26.21.52.16;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Nov 26 21:52:16 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# 68
+use YAML;
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 2 == 0) {
+    $self->{perms} ||= perms(space => 16, things => 4);
+    unless($self->{combo} and @@{$self->{combo}}) {
+       $self->{combo} = $self->render([10, 5, 6, 8]);
+    }
+    my $num = 60 + shift(@@{$self->{combo}});
+    $self->play({formfreq => 1, bwfreq => 40, ts => 50,
+                 num => $num, filter => 300
+                }
+               );
+    $self->code->[0] = "# $num";
+    $self->modified;
+    }
+}
+
+sub render {
+    my $self = shift;
+    my $result;
+    my $line = shift;
+    my $perms = $self->{perms};
+    my $point = ($self->sin(10) * @@$perms);
+    my $runlengths = $perms->[$point];
+    foreach my $c (0 .. @@$runlengths -1) {
+        my $note = $line->[$c % @@$line];
+        push(@@$result, ($note) x $runlengths->[$c]);
+    }
+    return($result);
+}@

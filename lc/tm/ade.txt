@@ -1,0 +1,55 @@
+
+Reader's Notes
+-------- -----
+
+1] time() and sleep() are from Time::HiRes, and so deal in microseconds.
+
+
+# I use the system clock a lot
+my $start = time();
+
+# bpm, basically
+my $ticks_per_minute = 140;
+
+my $ticks = 0;
+
+# 'point' is the "logical" time we're processing events for
+my $point = $start;
+
+# this is where bpm changes go, scheduled for the future.  i guess if 
+# one arrives late, we're fucked.
+my @changes;
+
+while(1) {
+    # this seems to be the wrong place to increment the tick number,
+    # as there is never a tick number 0, but that's where i'm doing it
+    # at the moment.  i should experiment with moving it to the end...
+    $ticks++;
+
+    # loss of precision here, so recalculate from scratch every time
+    my $tick_seconds = ($ticks / $ticks_per_minute) * 60;
+    
+    
+    $point = $tick_seconds + $start;
+
+    # millisecond sleep
+    my $sleep = $point - time();
+    sleep($sleep)
+      if $sleep > 0;
+    
+    if (@changes and ($changes[0]->{ticks}) <= $ticks) {
+        
+        my $change = shift @changes;
+        
+        if ($ticks != $change->{ticks}) {
+            warn("processed a ticks_per_minute change " 
+                 . ($ticks - $change->{ticks}) 
+                 . " ticks too late.\n"
+                );
+        }
+        
+        $start = $point;
+        $ticks = 0;
+        $ticks_per_minute = $change->{ticks_per_minute};
+    }
+}

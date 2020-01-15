@@ -1,0 +1,269 @@
+head	1.11;
+access;
+symbols;
+locks
+	alex:1.11; strict;
+comment	@# @;
+
+
+1.11
+date	2005.05.20.19.08.21;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2005.05.20.19.07.31;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2005.04.16.15.17.16;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2005.04.16.15.16.36;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2005.04.16.15.16.24;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2005.04.16.15.12.48;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2005.04.16.15.09.30;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.04.16.15.04.08;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.04.16.14.58.00;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.04.16.13.44.20;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.04.16.13.39.32;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Apr 16 14:39:32 2005
+@
+
+
+1.11
+log
+@Fri May 20 20:08:21 2005
+@
+text
+@# 12341234
+# . o oo o
+# ==============-=
+# 16
+# 1
+
+sub bang {
+    my $self = shift;
+    return unless $self->line(0);
+
+    my $size = $self->line(3);
+
+    my $train = $self->line(1);
+    my $line = $self->line(2);
+
+    if ($self->line(4)) {
+      $line = ('=' x $size);
+      substr($line, $size - 1 - ($self->{bangs} % $size), 1, '-');
+    }
+    elsif (length($line) < $size) {
+      $line .= ('=' x ($size - length($line)));
+    }
+    elsif (length($line) > $size) {
+      $line = substr($line, 0, $size);
+    }
+
+    foreach my $point (0 .. (length($train) - 1)) {
+        if (substr($train, $point, 1) eq 'o'
+            and substr($line, $point, 1) eq '-'
+           ) {
+          my $pan = (1 - ($point / length($train)) * 2);
+
+          $self->t({sample => "can/$self->{bangs}", pan => $pan,
+                    speed => 1.5, shape => rand(1), envelope_name => 'valley',
+                    accellerate => -0.000005, loops => rand(5),
+#                    vowel => 'e',
+                    volume => 0.1
+                   }
+                  );
+        }
+    }
+
+    $line =~ s/(.)(.+)/$2$1/g;
+    $self->line(2, $line);
+
+    $self->modified;
+}@
+
+
+1.10
+log
+@Fri May 20 20:07:31 2005
+@
+text
+@d36 2
+a37 1
+#                    vowel => 'e'
+@
+
+
+1.9
+log
+@Sat Apr 16 16:17:16 2005
+@
+text
+@d3 1
+a3 1
+# ============-===
+d34 3
+a36 1
+                    speed => 2, shape => rand(2), envelope_name => 'valley'
+@
+
+
+1.8
+log
+@Sat Apr 16 16:16:36 2005
+@
+text
+@d3 1
+a3 1
+# =============-==
+@
+
+
+1.7
+log
+@Sat Apr 16 16:16:24 2005
+@
+text
+@d2 2
+a3 2
+#   o oo o
+# ============-===
+@
+
+
+1.6
+log
+@Sat Apr 16 16:12:48 2005
+@
+text
+@d1 3
+a3 3
+# 1
+# . o oo o
+# ===-============
+@
+
+
+1.5
+log
+@Sat Apr 16 16:09:30 2005
+@
+text
+@d2 2
+a3 2
+# o  o o  o
+# ====-===========
+d5 1
+a5 1
+# 0
+@
+
+
+1.4
+log
+@Sat Apr 16 16:04:08 2005
+@
+text
+@d3 3
+a5 3
+# ======================-=========
+# 32
+# 1
+d15 6
+a20 1
+    if (length($line) < $size) {
+a26 1
+
+d33 2
+a34 2
+          $self->t({sample => "can/3", pan => $pan,
+                    speed => -2, shape => rand(2), envelope_name => 'valley'
+@
+
+
+1.3
+log
+@Sat Apr 16 15:57:59 2005
+@
+text
+@d2 2
+a3 2
+# -      o  o o  o
+# =========-======================
+d5 1
+d28 2
+a29 1
+          $self->t({sample => "hardcore/3", pan => $pan,
+@
+
+
+1.2
+log
+@Sat Apr 16 14:44:20 2005
+@
+text
+@d2 2
+a3 2
+# o  oo  o
+# =========================-======
+d27 4
+a30 1
+          $self->t({sample => "hardcore/0", pan => $pan});
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 2
+a3 2
+# o   o o   o
+# ================-===============
+d21 1
+a21 1
+    my $point = 0;
+d24 1
+a24 1
+            and substr($train, $point, 1) eq '-'
+d27 1
+@

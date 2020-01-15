@@ -1,0 +1,131 @@
+/*
+CAUDIO software sampler and granular synthesizer
+(c) Copyright 2001 Adrian Ward/Slub
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+the complete license may be found here:
+http://www.gnu.org/copyleft/gpl.html
+*/
+
+#include <math.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stddef.h>
+#include <pthread.h>
+#include <sys/ioctl.h>
+#include <sys/types.h>
+#include <sys/soundcard.h>
+#include <sys/ioctl.h>
+
+#define BUFFERSIZE 4096        // 4kb buffer
+#define FORMAT     AFMT_S16_LE // Signed 16-bit little-endian (ie, a short)
+#define CHANNELS   1           // Stereo
+#define SAMPLERATE 44100       // 44.1kHz
+
+int       devHandle;
+pthread_t audioThreadHnd;
+
+float     playbackHead[16];
+float     playbackSpeed[16];
+float     playbackVolume[16];
+int       playbackPtr;
+
+void bomb(char *msg) {
+ printf("FATAL ERROR: %s\n", msg);
+ exit(-1);
+}
+
+short mixAllHeads() {
+ 
+ float tempSample = 0.0;
+ int   i;
+  
+ for (i = 0; i < 16; i++) {
+  if (playbackSpeed[i] > 0.01) {
+   playbackHead[i]   += playbackSpeed[i];
+   playbackVolume[i] *= 0.999;
+   tempSample        += (sin(playbackHead[i])*playbackVolume[i]);
+  }
+ }
+  
+ return tempSample * 32767;
+
+}
+
+void * audioThread(void *arg) {
+
+ short* outPtr;
+ short* outDataStartPtr;
+ float  tempSample = 0.0;
+ int    i;
+ 
+ outDataStartPtr = malloc(BUFFERSIZE*2*2L); // Why 2L??
+ while (1==1) {
+  outPtr = outDataStartPtr;
+  for (i=0; i<BUFFERSIZE; i++) {
+   tempSample = mixAllHeads();
+   *outPtr++ = (short) (tempSample * 32767); // L
+   *outPtr++ = (short) (tempSample * 32767); // R
+  }
+  write(devHandle,outDataStartPtr,BUFFERSIZE*2*2);
+ }
+
+}
+
+void init() {
+
+  int setting    = 0x0003000C; // 3 fragments (???), 4kb buffer (4096=2 ^ 0x0C)
+  int channels   = CHANNELS;
+  int format     = FORMAT;
+  int sampleRate = SAMPLERATE;
+
+  printf("CAUDIO software sampler and granular synthesizer\n");
+  printf("(c) Copyright 2001 Adrian Ward/Slub\n\n");
+
+  printf("Opening /dev/dsp\n");
+  if ((devHandle=open("/dev/dsp",O_WRONLY)) == -1) { bomb("Problem opening /dev/dsp"); }
+
+  printf("Configuring audio\n");
+  if (ioctl(devHandle,SNDCTL_DSP_SETFRAGMENT,&setting   ) == -1) { bomb("Failed SNDCTL_DSP_SETFRAGMENT"); }
+  if (ioctl(devHandle,SNDCTL_DSP_STEREO     ,&channels  ) == -1) { bomb("Failed SNDCTL_DSP_STEREO");      }
+  if (ioctl(devHandle,SNDCTL_DSP_SETFMT     ,&format    ) == -1) { bomb("Failed SNDCTL_DSP_SETFMT");      }
+  if (ioctl(devHandle,SNDCTL_DSP_SPEED      ,&sampleRate) == -1) { bomb("Failed SNDCTL_DSP_SPEED");       }
+  
+  printf("Creating audio thread\n");
+  if (pthread_create(&audioThreadHnd, NULL, audioThread, NULL) != 0) { bomb("Couldn't create thread"); }
+  if (pthread_detach(audioThreadHnd)                        != 0) { bomb("Couldn't detach thread"); }
+
+  printf("Ready\n\n");
+
+}
+
+
+int main() {
+
+  init();
+
+  while (1==1) {
+   sleep(1);
+  }
+  
+  return 0;
+
+}
+
+
+

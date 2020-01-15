@@ -1,0 +1,35 @@
+# 0.9375
+
+my $tension = 0.8;
+my $speed = 0.000001;
+my $alpha = 6;
+my $mass = 1;
+sub bang {
+    my $self = shift;
+    my $foo = (($self->{bangs} % 64) / 64);
+    $self->line(0, $foo);
+    my $bap = $self->{bangs} % 32;
+    my $bar = $bap > 24 ? 1 : 3;
+    $self->vector({x => 5, y => 0,
+                   speed => $speed, angle => 5,
+                   mass => $mass, alpha => $alpha,
+                   velocity => 0.5 + rand(0.4)
+                  }
+                 ) unless $self->{bangs} % $bar;
+    $self->strike({x => -5, y => 0,
+                   alpha => 10, mass => 1, x => 5, y => 3,
+                   speed => 0, angle => 0, velocity => 2.8
+                  }
+                 ) unless $self->{bangs} % 4;
+
+    if ($self->{bangs} % 32 == 0) {
+       $tension = 0.75 + rand(0.5);
+       $speed = rand(0.000002);
+       $alpha = 1 + rand(10);
+       $mass = 0.8 + rand();
+       $self->tension($tension);
+       $self->loss(0.9996);
+    }
+    $self->tension($tension + $bap * -0.01);
+    $self->modified();
+}

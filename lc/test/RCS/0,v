@@ -1,0 +1,53 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2005.09.30.10.35.39;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.09.30.10.12.48;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Sep 30 11:12:48 2005
+@
+
+
+1.2
+log
+@Fri Sep 30 11:35:39 2005
+@
+text
+@sub bang {
+    my $self = shift;
+
+
+    if ($self->{bangs} % 16 < 6) {
+       my $sample = $self->{bangs} % 4;
+       $self->t({sample => "chin/$sample", loops => 4,
+                 accellerate => -0.0001, speed => 0.09,
+                 delay => 0.1
+                }
+               );
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 10
+a12 1
+    $self->t({sample => "chin/0"});
+@

@@ -1,0 +1,22 @@
+# 0.452308079634911
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 2 == 0) {
+        $self->t({sample => "future/0", speed => 2,
+                  delay => rand() > 0.7 ? 1 : 0, pan => -0.8,
+                  volume => $self->sin(2), shape => 0.9,
+                  vowel => 'o'
+                 }
+                );
+    }
+    if ($self->{bangs} % 2 == 1) {
+        $self->t({sample => "future/0", speed => 2.5, pan => 0.8,
+                  volume => 1 - $self->sin(2), delay => 1, vowel => 'i'
+                 }
+                );
+    }
+    $self->t({sample => "can/$self->{bangs}"});
+
+    $self->line(0, 1 - $self->sin(10));
+    $self->modified;
+}

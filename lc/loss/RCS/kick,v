@@ -1,0 +1,79 @@
+head	1.3;
+access;
+symbols;
+locks
+	alex:1.3; strict;
+comment	@# @;
+
+
+1.3
+date	2007.07.22.00.13.25;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.02.19.21.46.04;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.02.19.17.58.47;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Feb 19 17:58:47 2005
+@
+
+
+1.3
+log
+@Sun Jul 22 01:13:25 2007
+@
+text
+@sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 128 > 110 ? 1 : 0;
+    if ($self->{bangs} % ($foo ? 4 : 3) == 0) {
+        $self->t({sample => "drumtraks/6", accellerate => -0.00006,
+                  speed => 1,
+                  volume => 4,
+                  shape => (($self->{bangs} % 16 == 0 
+                             or $self->{bangs} % 16 == 4
+                            )  ? 1 : 0)
+                 }
+                );
+    }
+}@
+
+
+1.2
+log
+@Sat Feb 19 21:46:04 2005
+@
+text
+@d4 1
+a4 1
+    if ($self->{bangs} % ($foo ? 4 : 8) == 0) {
+d7 4
+a10 2
+                  volume => 0.03,
+                  shape => 0
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d4 2
+a5 2
+    if ($self->{bangs} % ($foo ? 2 : 8) == 0) {
+        $self->t({sample => "drumtraks/6", accellerate => 0.0001,
+d7 2
+a8 2
+                  volume => 0.06,
+                  shape => 0.4
+@

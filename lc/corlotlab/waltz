@@ -1,0 +1,32 @@
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 3;
+    $self->sine({freq => rand() > 0.5 ? 200 : 300,
+                 direction => 0,
+                 ts => 3,
+                 volume => 50,
+                 noise => 0.01,
+                 tri => $foo > 0 ? 1 : 0,
+                 saw => $foo > 2 ? 1 : 0,
+                 sin => $foo != 1 ? 1 : 0,
+                 clip => 0.01, pan => -1
+                })
+      if $self->{bangs} % 4 == 1;
+
+    $self->sine({freq => rand() > 0.5 ? 400 : 100,
+                 direction => 0,
+                 ts => 3,
+                 volume => 50,
+                 noise => 0.01,
+                 tri => $foo > 0 ? 1 : 0,
+                 saw => $foo > 2 ? 1 : 0,
+                 sin => $foo != 1 ? 1 : 0,
+                 clip => 1, pan => 1
+                })
+      if $self->{bangs} % 4 == 0;
+#    $self->sine({freq => 40, sin => 1, volume => 8,
+#                 direction => -0.3, ts => 2, clip => 0.05
+#                }
+#               )
+#      if $self->{bangs} % 64 == 0;
+}

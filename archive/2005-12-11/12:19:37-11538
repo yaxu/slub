@@ -1,0 +1,15 @@
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 6 == 0;
+    if ($self->{bangs} % 8 == 0 or $foo) {
+        $self->v({volume => 40 + rand(20),
+                  curve => rand(0.1),
+                  speed => 5 + rand(5),
+                  reverb => 5,
+                  length => 10, width => 30, image => "daisy",
+                  direction => ($foo ? 0 : pi)
+                 }
+                );
+        $self->t({sample => "drum/2"});
+    }
+}

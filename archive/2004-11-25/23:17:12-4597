@@ -1,0 +1,31 @@
+# >>+<-<<^>
+my $start = 50 + 12;
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0 or $self->{bangs} % 7 == 0) {
+    $self->{foo} ||= "<-<<^>>>+";
+    $self->{num} ||= $start;
+    my ($foo, $bar) = ($self->{foo}  =~ /(.)(.+)/);
+    $self->{foo} = "$2$1";
+    $self->code->[0] = "# $self->{foo}";
+    if ($foo eq '+') {
+        $self->{num}++;
+    }
+    elsif ($foo eq '-') {
+        $self->{num}--;
+    }
+    elsif ($foo eq '>') {
+        $self->{num} += 3;
+    }
+    elsif ($foo eq '<') {
+        $self->{num} -= 3;
+    }
+    elsif ($foo eq '^') {
+        $self->{num} = $start;
+    }
+    $self->play({num => $self->{num}, formfreq => 3, bwfreq => 50,
+                 filter => 100, ts => 80}
+               );
+    $self->modified();
+    }
+}

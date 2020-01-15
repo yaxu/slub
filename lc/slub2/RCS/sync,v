@@ -1,0 +1,385 @@
+head	1.17;
+access;
+symbols;
+locks
+	alex:1.17; strict;
+comment	@# @;
+
+
+1.17
+date	2006.04.01.20.31.01;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2005.11.26.19.54.36;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2005.11.26.19.46.14;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2005.11.26.19.26.13;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2005.11.26.12.10.16;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2005.09.09.13.39.48;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2005.06.17.18.23.43;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2005.06.17.14.23.08;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2005.06.17.13.37.51;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2005.06.16.17.53.19;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2005.06.16.17.48.21;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2005.06.16.17.42.30;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2005.06.16.17.42.26;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.06.16.17.41.21;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.04.19.18.52.10;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.04.19.18.49.39;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.04.19.18.48.22;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Apr 19 19:48:20 2005
+@
+
+
+1.17
+log
+@Sat Apr  1 21:31:00 2006
+@
+text
+@# 80
+# 126
+my $metro = 1;
+
+my $bpm = 126;
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0) {
+        $self->line(0, $self->{bangs});
+        $self->modified;
+        $self->ade();
+    }
+    if ($bpm != $self->{bpm}) {
+        $self->bpm($bpm);
+    }
+
+    if ($metro) {
+        if ($self->{bangs} % 4 == 0) {
+            $self->t({sample => "drumtraks/2",
+                      speed => ($self->{bangs} % 16 == 0 ? 1.5 : 1)
+                     }
+                    );
+        }
+    }
+}
+
+##
+
+{
+    my $adeosc;
+    sub ade {
+        my ($self) = @@_;
+        $self->line(1, $self->{tpm});
+        if (not $adeosc) {
+            $adeosc = Net::OSC->new;
+            $adeosc->server(hostname => '192.168.0.1', port => 7770);
+        }
+        $adeosc->command('/pureEvents/PEAOSCReleasePendingEvents');
+        $adeosc->data([['f', $self->{tpm}]]);
+        $adeosc->send_message;
+    }
+}@
+
+
+1.16
+log
+@Sat Nov 26 19:54:36 2005
+@
+text
+@d1 2
+a2 2
+# 18304
+# 130
+a15 1
+        $self->{bpm} = $bpm;
+d37 1
+a37 1
+            $adeosc->server(hostname => '192.168.0.2', port => 7770);
+@
+
+
+1.15
+log
+@Sat Nov 26 19:46:14 2005
+@
+text
+@d1 2
+a2 2
+# 13344
+# 300
+d4 3
+a6 1
+my $bpm = 200;
+d15 1
+a15 1
+        $self->bpm($Âpm);
+@
+
+
+1.14
+log
+@Sat Nov 26 19:26:13 2005
+@
+text
+@d1 4
+a4 2
+# 288
+# 150
+d12 13
+a24 1
+    $self->bpm(150) unless $self->{bingdd}++;
+@
+
+
+1.13
+log
+@Sat Nov 26 12:10:16 2005
+@
+text
+@d1 1
+a1 1
+# 1968
+d10 1
+a10 1
+    $self->bpm(150) unless $self->{bingfd}++;
+@
+
+
+1.12
+log
+@Fri Sep  9 14:39:48 2005
+@
+text
+@d1 1
+a1 1
+# 6640
+d22 1
+a22 1
+            $adeosc->server(hostname => '193.82.57.180', port => 7770);
+@
+
+
+1.11
+log
+@Fri Jun 17 19:23:42 2005
+@
+text
+@d1 1
+a1 1
+# 656
+d22 1
+a22 1
+            $adeosc->server(hostname => '192.168.1.34', port => 7770);
+@
+
+
+1.10
+log
+@Fri Jun 17 15:23:08 2005
+@
+text
+@d1 2
+a2 2
+# 208
+# 190
+d10 1
+a10 1
+    $self->bpm(190) unless $self->{bingf}++;
+d22 1
+a22 1
+            $adeosc->server(hostname => '192.168.0.1', port => 7770);
+@
+
+
+1.9
+log
+@Fri Jun 17 14:37:51 2005
+@
+text
+@d1 1
+a1 1
+# 672
+d22 1
+a22 1
+            $adeosc->server(hostname => '192.168.1.34', port => 7770);
+@
+
+
+1.8
+log
+@Thu Jun 16 18:53:19 2005
+@
+text
+@d1 2
+a2 2
+# 5840
+# 1000
+d22 1
+a22 1
+            $adeosc->server(hostname => '192.168.0.2', port => 7770);
+@
+
+
+1.7
+log
+@Thu Jun 16 18:48:21 2005
+@
+text
+@d1 2
+a2 2
+# 896
+# 180
+d10 1
+a10 1
+    $self->bpm(180) unless $self->{bing}++;
+@
+
+
+1.6
+log
+@Thu Jun 16 18:42:30 2005
+@
+text
+@d1 2
+a2 1
+# 640
+d10 1
+d18 2
+a19 1
+        my ($self, $bpm) = @@_;
+d25 1
+a25 1
+        $adeosc->data([]);
+d28 1
+a28 1
+}
+@
+
+
+1.5
+log
+@Thu Jun 16 18:42:26 2005
+@
+text
+@d1 1
+a1 1
+# 608
+@
+
+
+1.4
+log
+@Thu Jun 16 18:41:21 2005
+@
+text
+@d1 1
+a1 1
+# 32
+d9 17
+a25 1
+}@
+
+
+1.3
+log
+@Tue Apr 19 19:52:10 2005
+@
+text
+@d1 1
+a1 1
+# 1568
+d7 1
+a7 1
+#        $self->ade();
+@
+
+
+1.2
+log
+@Tue Apr 19 19:49:39 2005
+@
+text
+@d1 1
+a1 1
+# 1344
+d7 1
+a7 1
+        $self->ade();
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# 416
+@

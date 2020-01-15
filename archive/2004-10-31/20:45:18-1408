@@ -1,0 +1,43 @@
+# 60
+# 0100010001010100
+
+my @line;
+
+sub bang {
+    my $self = shift;
+    #@line = ();
+    $self->make(60, 8) if not @line;
+    
+    $self->code->[1] =~ /(\d)(\d+)/;
+    $self->code->[1] = "# $2$1";
+    if ($1) {
+       my $note = shift @line;
+       push(@line, $note);
+       $self->play({num => $note, formfreq => 10, bwfreq => 50})
+    }
+
+    $self->bpm(130);
+    $self->code->[0] = "# " . join(', ', @line);
+    $self->modified;
+}
+
+sub make {
+    my $self = shift;
+    my $val = shift;
+    my $level = shift;
+    push(@line, $val);
+    return if --$level < 1;
+    my $rand = rand();
+    if ($rand > 0.9) {
+        $self->make($val, $level);
+        $self->make($val, $level);
+    }
+    elsif ($rand > 0.5) {
+        $val += 3;
+        $self->make($val, $level);
+    }
+    elsif ($rand > 0.1) {
+        $val -= 3;
+        $self->make($val, $level);
+    }
+}

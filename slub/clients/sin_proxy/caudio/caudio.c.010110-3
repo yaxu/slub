@@ -1,0 +1,192 @@
+/*
+CAUDIO software sampler and granular synthesizer
+(c) Copyright 2001 Adrian Ward/Slub
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+the complete license may be found here:
+http://www.gnu.org/copyleft/gpl.html
+*/
+
+#include <math.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stddef.h>
+#include <pthread.h>
+#include <sys/ioctl.h>
+#include <sys/types.h>
+#include <sys/soundcard.h>
+#include <sys/ioctl.h>
+
+#define MAXVOICES  20
+#define BUFFERSIZE 100        // 4kb buffer
+#define FORMAT     AFMT_S16_LE // Signed 16-bit little-endian (ie, a short)
+#define CHANNELS   1           // Stereo
+#define SAMPLERATE 44100       // 44.1kHz
+
+typedef struct {
+ float l;
+ float r; 
+} stereo;
+
+int       devHandle;
+pthread_t audioThreadHnd;
+
+float     playbackHead  [MAXVOICES];
+float     playbackSpeed [MAXVOICES];
+float     playbackVolume[MAXVOICES];
+float     playbackPan   [MAXVOICES];
+int       playbackPtr = 0;
+int       maxChannels = 0;
+
+stereo    compressor;
+
+void bomb(char *msg) {
+ printf("FATAL ERROR: %s\n", msg);
+ exit(-1);
+}
+
+stereo mixAllHeads() {
+ 
+ stereo tempSample;
+ float  monoSample;
+ int      i;
+ int      c=0;
+
+ tempSample.l = 0.0;
+ tempSample.r = 0.0;
+ monoSample   = 0.0;
+  
+ for (i = 0; i < MAXVOICES; i++) {
+
+  if (playbackSpeed[i] > 0.000001) {
+   playbackHead[i]   += playbackSpeed[i];
+   playbackVolume[i] *= 0.99998;
+   monoSample         = (sin(playbackHead[i])*playbackVolume[i]);
+   tempSample.l      += monoSample * (  playbackPan[i]);
+   tempSample.r      += monoSample * (1-playbackPan[i]);
+
+   c++;
+  }
+
+  if (playbackVolume[i] < 0.001) {
+   playbackSpeed[i] = 0;
+  }
+
+ }
+
+ if (fabs(tempSample.l * compressor.l) > 1.0){ compressor.l = compressor.l / fabs(tempSample.l * compressor.l); }
+ if (fabs(tempSample.r * compressor.r) > 1.0){ compressor.r = compressor.r / fabs(tempSample.r * compressor.r); }
+
+ if (compressor.l < 1) { compressor.l *= 1.0002; } else { compressor.l  = 1; }
+ if (compressor.r < 1) { compressor.r *= 1.0002; } else { compressor.r  = 1; }
+
+ tempSample.l *= compressor.l;
+ tempSample.r *= compressor.r;
+
+ if (tempSample.l >  1.0) { tempSample.l =  1.0; }
+ if (tempSample.l < -1.0) { tempSample.l = -1.0; }
+ if (tempSample.r >  1.0) { tempSample.r =  1.0; }
+ if (tempSample.r < -1.0) { tempSample.r = -1.0; }
+
+ maxChannels = c;
+
+ return tempSample;
+
+}
+
+void * audioThread(void *arg) {
+
+ short* outPtr;
+ short* outDataStartPtr;
+ stereo tempSample;
+ int    i;
+ 
+ outDataStartPtr = malloc(BUFFERSIZE*2*2L); // Why 2L??
+ while (1==1) {
+  outPtr = outDataStartPtr;
+  for (i=0; i<BUFFERSIZE; i++) {
+
+   tempSample = mixAllHeads();
+
+   *outPtr++ = (short) (tempSample.l * 32000); // L
+   *outPtr++ = (short) (tempSample.r * 32000); // R
+
+  }
+  write(devHandle,outDataStartPtr,BUFFERSIZE*2*2);
+ }
+
+}
+
+void init() {
+
+  int setting    = 0x0003000C; // 3 fragments (???), 4kb buffer (4096=2 ^ 0x0C)
+  int channels   = CHANNELS;
+  int format     = FORMAT;
+  int sampleRate = SAMPLERATE;
+
+  compressor.l = 1.0;
+  compressor.r = 1.0;
+
+  printf("CAUDIO software sampler and granular synthesizer\n");
+  printf("(c) Copyright 2001 Adrian Ward/Slub\n\n");
+
+  printf("Opening /dev/dsp\n");
+  if ((devHandle=open("/dev/dsp",O_WRONLY)) == -1) { bomb("Problem opening /dev/dsp"); }
+
+  printf("Configuring audio\n");
+  if (ioctl(devHandle,SNDCTL_DSP_SETFRAGMENT,&setting   ) == -1) { bomb("Failed SNDCTL_DSP_SETFRAGMENT"); }
+  if (ioctl(devHandle,SNDCTL_DSP_STEREO     ,&channels  ) == -1) { bomb("Failed SNDCTL_DSP_STEREO");      }
+  if (ioctl(devHandle,SNDCTL_DSP_SETFMT     ,&format    ) == -1) { bomb("Failed SNDCTL_DSP_SETFMT");      }
+  if (ioctl(devHandle,SNDCTL_DSP_SPEED      ,&sampleRate) == -1) { bomb("Failed SNDCTL_DSP_SPEED");       }
+  
+  printf("Creating audio thread\n");
+  if (pthread_create(&audioThreadHnd, NULL, audioThread, NULL) != 0) { bomb("Couldn't create thread"); }
+  if (pthread_detach(audioThreadHnd)                        != 0) { bomb("Couldn't detach thread"); }
+
+  printf("Ready\n\nType numbers between 0 and 10...\n");
+
+}
+
+
+int main() {
+
+  char tempString[255];
+
+  init();
+
+  while (1==1) {
+
+   printf("%i channels>",maxChannels);
+   gets(tempString);
+
+   playbackHead  [playbackPtr]=0.0;
+   playbackSpeed [playbackPtr]=0.01 + (atof(tempString) / 100.0);
+   playbackVolume[playbackPtr]=0.9;
+   playbackPan   [playbackPtr]=((float) playbackPtr / (float) (MAXVOICES-1));
+
+   playbackPtr++;
+   if (playbackPtr==MAXVOICES) { playbackPtr=0; }
+
+  }
+  
+  return 0;
+
+}
+
+
+

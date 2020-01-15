@@ -1,0 +1,16 @@
+sub bang {
+    my $self = shift;
+
+    $self->t({loops => rand(2),
+              speed => $self->{bangs} % 12 ? 1 : 1.5,
+              pan => 1 - rand(2), 
+              duration => 15000 + 10000 * sin($self->{bangs} * 0.05),
+              sample => "timmono/5",
+              #shape => ($self->{bangs} % 16 == 0 ? 1 : 0),
+              volume => 0.2,
+              shape => 0.75,
+              delay => $self->{bangs} % 4 ? 0.009 : 0
+             }
+            )
+       if $self->{bangs} % 2 == 0;
+}

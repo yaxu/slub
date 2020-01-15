@@ -1,0 +1,5 @@
+sub bang {
+    my $self = shift;
+    $self->t({sample => "808/SD/2", offset => 1})
+      unless $self->{bangs} % 4;
+}

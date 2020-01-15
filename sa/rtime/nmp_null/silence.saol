@@ -1,0 +1,69 @@
+
+//
+//    SAOL program to test networking without using a soundcard.
+//    Copyright (C) 2000  Regents of the University of California
+//
+//    License also covers the SASL file in this directory.
+//
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License (Version 2) as
+//    published by the Free Software Foundation.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+//    Original Author: John Wawrzynek
+//    Maintainer: John Lazzaro, lazzaro@cs.berkeley.edu
+//
+
+
+//
+// Global block, krate sets sleep time.
+//
+
+global {
+  srate 44100;
+
+  krate 50; // may be set to a higher value (say, 200)
+            // for better latency, if nmp_audio is not
+            // also running on the same machine. 
+}
+
+//
+// Dummy instrument for MIDI preset 0
+//
+
+instr dummy0_kbd(pitch, velocity) preset 0   
+
+{ 
+  output(0);
+  turnoff;
+}
+
+//
+// Dummy instrument for MIDI preset 1
+//
+
+instr dummy1_kbd(pitch, velocity) preset 1   
+
+{ 
+  output(0);
+  turnoff;
+}
+
+//
+// Dummy instrument for MIDI preset 2
+//
+
+instr dummy2_kbd(pitch, velocity) preset 2   
+
+{ 
+  output(0);
+  turnoff;
+}

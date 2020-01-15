@@ -1,0 +1,37 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2006.09.02.21.38.09;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Sep  2 22:38:08 2006
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@my $foo = 0.05;
+
+sub bang {
+    my $self = shift;
+    $self->t({sample => "gabba/0", loops => $foo, shape => 1, speed => 0.5})
+        if $self->{bangs} % 8 == 0;
+    $self->t({sample => "drum/0", loops => $foo, shape => 1, speed => 0.5})
+        if $self->{bangs} % 8 == 4;
+
+    $self->t({sample => "drumtraks/0", loops => 0})
+        if $self->{bangs} % 8 == 4;
+
+}@

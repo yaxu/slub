@@ -1,0 +1,33 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.02.13.15.26.22;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Feb 13 15:26:22 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % ($self->{bangs} % 8) == 0) {
+       $self->t({pan => 0.5 * rand(), speed => 0.05 - (0.1 * $self->sin(5)),
+                 volume => 2
+                }
+               );
+    }
+}@

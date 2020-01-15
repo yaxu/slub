@@ -1,0 +1,30 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.08.19.18.39.57;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Thu Aug 19 19:39:57 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->trig(0, 80 + 20 * $self->sin(10),
+                400, 200
+               ) if $self->{bangs} % 8 > 4;
+}@

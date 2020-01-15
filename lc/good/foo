@@ -1,0 +1,23 @@
+sub bang {
+    my $self = shift;
+    $self->{note} ||= 0;   
+    my $toggle = $self->{bangs} % 32 < 20;
+    if ($self->{bangs} % ($toggle ? 8 : 6) == 0) {
+        $self->t({pan_to => ($toggle ? 1 : -1),
+                  pan => 0,
+ #                 speed => 3,
+                  envelope_name => 'tri',
+                  sample => "hh/5",
+                  volume => 0.01
+                 }
+                );
+    }
+
+    if ($self->{bangs} % 4 == 0) {
+        if ($self->{try}++ > 4 or rand() > 0.9) {
+            $self->{try} = 0;
+            $self->{note}++;
+        }
+       
+    }
+}

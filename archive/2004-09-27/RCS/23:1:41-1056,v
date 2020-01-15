@@ -1,0 +1,34 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.09.27.22.01.41;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Sep 27 23:01:41 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0) {
+        $self->trigger({sample => "chin/0",
+                        browndel => 10,
+                        ts => 40
+                       }
+                      );
+    }
+}@

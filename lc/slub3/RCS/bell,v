@@ -1,0 +1,70 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2005.06.03.14.47.50;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.06.03.13.33.49;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Jun  3 14:33:49 2005
+@
+
+
+1.2
+log
+@Fri Jun  3 15:47:50 2005
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 32 == 0) {
+        my $rand = 1 - rand(2);
+ 
+        $self->t({sample => "sine/4", volume => 0.005,
+                  loops => 400,
+                  speed => 6,
+                  pan => $rand,
+                  pan_to => 0 - $rand,
+                  accellerate => -0.00001,
+                  shape => 0.9,
+                 }
+                );
+        $self->t({sample => "sine/4", volume => 0.005,
+                  loops => 300,
+                  speed => 5,
+                  pan => $rand,
+                  pan_to => 0 - $rand,
+                  accellerate => -0.00001,
+                  shape => 0.9
+                 }
+                );
+    }
+    if ($self->{bangs} % 32 >= 16) {
+        $self->t({sample => "chin/0", loops => 3});
+    }
+
+    if ($self->{bangs} % 16 == 0) {
+        $self->t({sample => "future/0"});
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d25 7
+@

@@ -1,0 +1,9 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 2 == 0) {
+        $self->trigger({sample => 'dr55/5',
+                        ts     => 30,
+                       }
+                      );
+    }
+}

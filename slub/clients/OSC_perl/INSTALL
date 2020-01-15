@@ -1,0 +1,13 @@
+
+just leave everything where it is and put a 
+use lib "/path/to/OSC_perl";
+
+in your skript.
+
+if you need to rebuild the sendOSC perl wrapper do a
+
+$ source MakeOSCclient
+
+
+aeh, looks like to me that the manually added subroutines will be lost
+from sendOSC.pm when you re-run swig.

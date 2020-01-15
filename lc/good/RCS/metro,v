@@ -1,0 +1,598 @@
+head	1.33;
+access;
+symbols;
+locks
+	alex:1.33; strict;
+comment	@# @;
+
+
+1.33
+date	2008.08.05.13.27.48;	author alex;	state Exp;
+branches;
+next	1.32;
+
+1.32
+date	2008.08.05.13.27.45;	author alex;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	2008.08.05.13.26.25;	author alex;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	2008.08.05.13.25.13;	author alex;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	2008.08.05.13.24.11;	author alex;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	2008.08.05.13.23.18;	author alex;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	2008.08.05.13.21.11;	author alex;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	2008.08.05.13.16.39;	author alex;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2008.08.05.13.16.05;	author alex;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2008.08.05.13.16.02;	author alex;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2008.08.05.13.15.47;	author alex;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2008.08.05.13.15.19;	author alex;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2008.08.05.13.15.05;	author alex;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2008.08.05.13.14.26;	author alex;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2008.08.05.13.14.16;	author alex;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2008.08.05.13.13.41;	author alex;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2008.08.05.13.10.38;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2008.08.05.13.10.28;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2008.07.18.14.15.45;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2008.07.18.14.15.29;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2008.07.18.14.13.47;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2008.07.18.14.13.39;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2008.07.18.14.13.14;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2008.07.18.13.20.04;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2008.07.17.16.12.47;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2008.07.17.16.07.00;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2008.07.16.16.01.07;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.07.16.15.59.27;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.07.16.15.57.44;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.07.16.15.56.50;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.07.16.15.43.44;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.07.16.11.48.29;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.07.16.11.47.45;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Wed Jul 16 12:47:45 2008
+@
+
+
+1.33
+log
+@Tue Aug  5 14:27:48 2008
+@
+text
+@# 361 1.5
+my $bps = 1.5;
+$ENV{LATENCY} = -0.71;
+sub bang {
+    my $self = shift;
+    $self->line(0, $self->{bangs} . " " . $self->{bps});
+    $self->scbps($bps)
+     unless $self->{bps} == $bps;
+    $self->{bps} = $bps;
+#    $self->latency(0.22);
+if ($self->{bangs} % 4 == 0) {
+    $self->t({sample => "drumtraks/1",
+              speed => $self->{foo}++ % 4 ? 1 : 4,
+              loops => 0.3
+             });
+}
+    $self->modified;
+}@
+
+
+1.32
+log
+@Tue Aug  5 14:27:45 2008
+@
+text
+@d1 2
+a2 2
+# 344 1
+my $bps = 1;
+@
+
+
+1.31
+log
+@Tue Aug  5 14:26:25 2008
+@
+text
+@d1 1
+a1 1
+# 7 1.5
+d3 1
+a3 1
+$ENV{LATENCY} = 0.35;
+@
+
+
+1.30
+log
+@Tue Aug  5 14:25:13 2008
+@
+text
+@d1 3
+a3 3
+# 9567 1.5
+my $bps = 1.5;
+$ENV{LATENCY} = -1;
+@
+
+
+1.29
+log
+@Tue Aug  5 14:24:11 2008
+@
+text
+@d1 3
+a3 3
+# 9248 1.2
+my $bps = 1.2;
+$ENV{LATENCY} = 0;
+@
+
+
+1.28
+log
+@Tue Aug  5 14:23:18 2008
+@
+text
+@d1 3
+a3 3
+# 2210 0.9
+my $bps = 0.9;
+$ENV{LATENCY} = 0.26;
+@
+
+
+1.27
+log
+@Tue Aug  5 14:21:11 2008
+@
+text
+@d1 1
+a1 1
+# 1752 0.9
+@
+
+
+1.26
+log
+@Tue Aug  5 14:16:39 2008
+@
+text
+@d1 2
+a2 2
+# 369 1.1
+my $bps = 1;
+@
+
+
+1.25
+log
+@Tue Aug  5 14:16:05 2008
+@
+text
+@d1 3
+a3 3
+# 225 1
+my $bps = 1.1;
+$ENV{LATENCY} = 0.23;
+@
+
+
+1.24
+log
+@Tue Aug  5 14:16:02 2008
+@
+text
+@d1 3
+a3 3
+# 212 1
+my $bps = 1;
+$ENV{LATENCY} = 0.22;
+@
+
+
+1.23
+log
+@Tue Aug  5 14:15:47 2008
+@
+text
+@d1 3
+a3 3
+# 149 1
+my $bps = 1.1;
+$ENV{LATENCY} = 0.21;
+@
+
+
+1.22
+log
+@Tue Aug  5 14:15:19 2008
+@
+text
+@d1 3
+a3 3
+# 35 1
+my $bps = 1;
+$ENV{LATENCY} = 0.2;
+@
+
+
+1.21
+log
+@Tue Aug  5 14:15:05 2008
+@
+text
+@d1 1
+a1 1
+# 313 1
+d3 1
+@
+
+
+1.20
+log
+@Tue Aug  5 14:14:26 2008
+@
+text
+@d1 1
+a1 1
+# 158 1
+@
+
+
+1.19
+log
+@Tue Aug  5 14:14:16 2008
+@
+text
+@d1 1
+a1 1
+# 107 1
+@
+
+
+1.18
+log
+@Tue Aug  5 14:13:41 2008
+@
+text
+@d1 1
+a1 1
+# 44
+d5 1
+a5 1
+    $self->line(0, $self->{bangs});
+@
+
+
+1.17
+log
+@Tue Aug  5 14:10:38 2008
+@
+text
+@d1 2
+a2 2
+# 21
+my $bps = 1.5;
+@
+
+
+1.16
+log
+@Tue Aug  5 14:10:28 2008
+@
+text
+@d1 1
+a1 1
+# 186
+d10 1
+a10 1
+#if (0) {
+d15 1
+a15 1
+#}
+@
+
+
+1.15
+log
+@Fri Jul 18 15:15:45 2008
+@
+text
+@d1 1
+a1 1
+# 237
+d10 1
+a10 1
+if (0) {
+d12 1
+a12 1
+              speed => $self->{bangs} % 4 ? 1 : 4,
+d15 1
+a15 1
+}
+@
+
+
+1.14
+log
+@Fri Jul 18 15:15:29 2008
+@
+text
+@d1 2
+a2 2
+# 207
+my $bps = 2;
+@
+
+
+1.13
+log
+@Fri Jul 18 15:13:47 2008
+@
+text
+@d1 1
+a1 1
+# 35
+@
+
+
+1.12
+log
+@Fri Jul 18 15:13:39 2008
+@
+text
+@d10 1
+d15 1
+@
+
+
+1.11
+log
+@Fri Jul 18 15:13:14 2008
+@
+text
+@d1 1
+a1 1
+# 17
+@
+
+
+1.10
+log
+@Fri Jul 18 14:20:04 2008
+@
+text
+@d1 1
+a1 1
+
+d9 1
+a9 1
+    $self->latency(0.22);
+@
+
+
+1.9
+log
+@Thu Jul 17 17:12:47 2008
+@
+text
+@d1 1
+d5 1
+d14 1
+@
+
+
+1.8
+log
+@Thu Jul 17 17:07:00 2008
+@
+text
+@d7 1
+a7 1
+    latency(0.22);
+@
+
+
+1.7
+log
+@Wed Jul 16 17:01:07 2008
+@
+text
+@d4 1
+a4 1
+    $self->scbps('158.223.51.77', 57120, $bps)
+d8 2
+a9 2
+    $self->t({sample => "drumtraks/0",
+              speed => $self->{bangs} % 4 ? 2 : 3,
+@
+
+
+1.6
+log
+@Wed Jul 16 16:59:27 2008
+@
+text
+@d1 1
+a1 1
+my $bps = 4;
+d7 1
+a7 1
+    latency(0);
+@
+
+
+1.5
+log
+@Wed Jul 16 16:57:44 2008
+@
+text
+@d7 1
+@
+
+
+1.4
+log
+@Wed Jul 16 16:56:50 2008
+@
+text
+@d1 1
+a1 1
+my $bps = 2;
+@
+
+
+1.3
+log
+@Wed Jul 16 16:43:44 2008
+@
+text
+@d1 1
+d4 3
+a6 1
+#    $self->scbps('158.223.51.77', 57120, 4);
+@
+
+
+1.2
+log
+@Wed Jul 16 12:48:29 2008
+@
+text
+@d3 1
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d4 2
+@

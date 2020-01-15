@@ -1,0 +1,363 @@
+head	1.17;
+access;
+symbols;
+locks
+	alex:1.17; strict;
+comment	@# @;
+
+
+1.17
+date	2006.06.08.12.45.37;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2006.02.08.00.21.40;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2006.02.08.00.21.19;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2006.02.08.00.16.15;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2006.02.08.00.13.30;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2006.02.08.00.12.44;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2006.02.08.00.12.00;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2006.02.08.00.11.03;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2006.02.08.00.10.51;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2006.02.08.00.09.47;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2006.02.08.00.07.02;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2006.02.08.00.06.49;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2006.02.08.00.06.14;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2006.02.08.00.05.47;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2006.02.08.00.04.58;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2006.02.08.00.04.48;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2006.02.08.00.04.10;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Wed Feb  8 00:04:10 2006
+@
+
+
+1.17
+log
+@Thu Jun  8 13:45:37 2006
+@
+text
+@my $ttl = 100;
+my $start;
+my $min = 40;
+my $max = 60;
+sub bang {
+    my $self = shift;
+    $start ||= $self->{bangs};
+#    exit(0) if (($ttl + $start) <= $self->{bangs});
+    if ($self->{bangs} % 4 == 0) {
+        $self->peep(50);
+    }
+    if ($self->{bangs} % 3 == 0 and $self->{bangs} % 4 != 0) {
+        $self->peep(55);
+    }
+
+    if ($self->{bangs} % 8 == 2) {
+        $self->peep(45 + (($self->{foo}++ % 3) * 3));
+    }
+}
+
+
+sub peep {
+    my ($self, $speed) = @@_;
+
+    $self->t({speed => $speed, sample => "sine/5",
+              scale => "equal",
+              duration => 30000,
+              volume => 0.2, pan => 1- rand(2),
+              envelope_name => 'percussive',
+             }
+            );
+    $self->vsite($speed / 100);
+    warn((($speed - $min) / ($max - $min)) 
+          . ' ' 
+          . (($self->{bangs} - $start) / $ttl)
+          . "\n"
+         );
+}@
+
+
+1.16
+log
+@Wed Feb  8 00:21:40 2006
+@
+text
+@d8 1
+a8 1
+    exit(0) if (($ttl + $start) <= $self->{bangs});
+d32 1
+@
+
+
+1.15
+log
+@Wed Feb  8 00:21:19 2006
+@
+text
+@d1 1
+a1 1
+my $ttl = 200;
+@
+
+
+1.14
+log
+@Wed Feb  8 00:16:15 2006
+@
+text
+@d1 1
+a1 1
+my $ttl = 100;
+d8 1
+a18 1
+    #exit unless $ttl--;
+@
+
+
+1.13
+log
+@Wed Feb  8 00:13:30 2006
+@
+text
+@d3 2
+d32 5
+@
+
+
+1.12
+log
+@Wed Feb  8 00:12:44 2006
+@
+text
+@d2 1
+d5 1
+a5 1
+
+d16 1
+@
+
+
+1.11
+log
+@Wed Feb  8 00:12:00 2006
+@
+text
+@d1 1
+a1 1
+
+a3 1
+    my $time = $self->{bangs};
+@
+
+
+1.10
+log
+@Wed Feb  8 00:11:03 2006
+@
+text
+@d4 1
+a4 1
+#    my $time = $self->{bangs};
+d8 1
+a8 1
+
+d10 1
+a10 1
+        $self->peep(65);
+d29 1
+a29 1
+}
+@
+
+
+1.9
+log
+@Wed Feb  8 00:10:51 2006
+@
+text
+@d4 1
+a4 1
+    my $time = $self->{bangs};
+@
+
+
+1.8
+log
+@Wed Feb  8 00:09:47 2006
+@
+text
+@d20 2
+a21 2
+    my $self = shift;
+    my $speed = shift;
+d29 1
+a29 1
+}@
+
+
+1.7
+log
+@Wed Feb  8 00:07:02 2006
+@
+text
+@d7 1
+a7 8
+        $self->t({speed => 50, sample => "sine/5",
+                  scale => "equal",
+                  duration => 30000,
+                  volume => 0.2, pan => 1- rand(2),
+                  envelope_name => 'percussive',
+                 }
+                );
+    }
+d10 1
+a10 7
+        $self->t({speed => 55, sample => "sine/5",
+                  scale => "equal",
+                  duration => 30000,
+                  volume => 0.2, pan => 1- rand(2),
+                  envelope_name => 'percussive',
+                 }
+                );
+d14 1
+a14 8
+        $self->t({speed => 45 + (($self->{foo}++ % 3) * 3),
+                  sample => "sine/5",
+                  scale => "equal",
+                  duration => 30000,
+                  volume => 0.2, pan => 1- rand(2),
+                  envelope_name => 'percussive',
+                 }
+                );
+d16 2
+d19 10
+@
+
+
+1.6
+log
+@Wed Feb  8 00:06:49 2006
+@
+text
+@d5 1
+@
+
+
+1.5
+log
+@Wed Feb  8 00:06:14 2006
+@
+text
+@a0 4
+# s>^<<
+# <^i>
+# ^>p<
+# 144
+@
+
+
+1.4
+log
+@Wed Feb  8 00:05:47 2006
+@
+text
+@d8 1
+a8 1
+
+@
+
+
+1.3
+log
+@Wed Feb  8 00:04:58 2006
+@
+text
+@d30 2
+a31 1
+        $self->t({speed => 45, sample => "sine/5",
+@
+
+
+1.2
+log
+@Wed Feb  8 00:04:48 2006
+@
+text
+@d30 1
+a30 1
+        $self->t({speed => 55, sample => "sine/5",
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d29 10
+@

@@ -1,0 +1,182 @@
+head	1.5;
+access;
+symbols;
+locks
+	alex:1.5; strict;
+comment	@# @;
+
+
+1.5
+date	2005.05.20.18.57.45;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.05.20.18.49.45;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.05.20.18.45.27;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.05.20.18.42.43;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.05.20.18.41.27;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri May 20 19:41:27 2005
+@
+
+
+1.5
+log
+@Fri May 20 19:57:45 2005
+@
+text
+@# ..x...x...x...x...x...x...x...x...x...x...
+# .
+# .x...x...x...x.x.....o...x..x.x..x...x...x
+sub bang {
+    my $self = shift;
+    my $foo = $self->line(0);
+    $foo =~ s/(.)//;
+    my $char = $1;
+    $foo .= $self->{bangs} % 4 ? '.' : 'x';
+
+    if (rand() > 0.8 and $self->{bangs} % 4 == 0) {
+        my @@foo = split(//, $foo);
+        my $point = int(scalar(@@foo) / 2);
+        my $strength = 4;
+        my $max = scalar(@@foo) - 1;
+        my @@bar = (('.') x scalar(@@foo));
+        $bar[$point] = 'o';
+        foreach my $bar (0 .. $point) {
+            if ($point + $bar < $max and $foo[$point + $bar] ne '.') {
+                my $to = $point + $bar + $strength;
+                $to = $max if $to > $max;
+                $bar[$to] = $foo[$point + $bar];
+                $foo[$point + $bar] = '.';
+                $strength--;
+                last unless $strength;
+            }
+            if ($point - $bar > 0 and $foo[$point - $bar] ne '.') {
+                my $to = $point - $bar - $strength;
+                $to = 0 if $to < 0;
+                $bar[$to] = $foo[$point - $bar];
+                $foo[$point - $bar] = '.';
+                $strength--;
+                last unless $strength;
+            }
+        }
+        foreach my $bar (0 .. $max) {
+            if ($bar[$bar] eq 'o' or $bar[$bar] eq 'x') {
+                $foo[$bar] = $bar[$bar];
+            }
+        }
+        my $bing = join('', @@foo);
+        $self->line(2, $bing);
+        $foo = $bing;
+    }
+
+    $self->line(0, $foo);
+
+    $self->line(1, $char);
+    $self->modified;
+
+    if ($char eq 'x') {
+        $self->t();
+    }
+    elsif ($char eq 'o') {
+        $self->t({sample => "drum/0"});
+    }
+}@
+
+
+1.4
+log
+@Fri May 20 19:49:45 2005
+@
+text
+@d3 1
+a3 1
+# ...x......o.....x....o.....xx....x..x.....
+d11 1
+a11 1
+    if (rand() > 0.98) {
+d14 1
+a14 1
+        my $strength = 6;
+d37 1
+a37 1
+            if ($bar[$bar]) {
+@
+
+
+1.3
+log
+@Fri May 20 19:44:32 2005
+@
+text
+@d1 1
+a1 1
+# ...x
+d3 1
+d11 1
+a11 1
+    if (rand() > 0.95) {
+d17 1
+d22 1
+a22 1
+                $bar[$to] = $max;
+d25 1
+d30 1
+a30 1
+                $bar[$to] = $max;
+d33 1
+d41 3
+a43 1
+        $foo = join('', @@foo);
+d55 1
+a55 1
+        $self->t();
+@
+
+
+1.2
+log
+@Fri May 20 19:42:43 2005
+@
+text
+@d1 2
+a2 2
+# ...x...x...x...x...x...x...x...x
+# x
+a8 1
+    $self->line(0, $foo);
+d37 1
+d40 2
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 2
+a2 2
+# .x...x...x...x...x...x...x...x..
+# .
+d34 3
+a36 1
+            if ($max
+@

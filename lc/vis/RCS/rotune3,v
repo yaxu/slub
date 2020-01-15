@@ -1,0 +1,227 @@
+head	1.7;
+access;
+symbols;
+locks
+	alex:1.7; strict;
+comment	@# @;
+
+
+1.7
+date	2006.02.08.00.02.38;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2006.02.08.00.00.37;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2006.01.28.18.19.59;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2006.01.28.18.18.45;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.12.11.12.50.07;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.11.24.23.28.09;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.11.24.23.28.06;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Thu Nov 24 23:28:06 2005
+@
+
+
+1.7
+log
+@Wed Feb  8 00:02:38 2006
+@
+text
+@# s>^<<
+# <^i>
+# ^>p<
+# 144
+
+sub bang {
+    my $self = shift;
+
+    if ($self->{bangs} % 4 == 0) {
+        $self->t({speed => 50, sample => "sine/5",
+                  scale => "equal",
+                  duration => 30000,
+                  volume => 0.2, pan => 1- rand(2),
+                  envelope_name => 'percussive',
+                  delay => 0.2
+                 }
+                );
+    }
+}@
+
+
+1.6
+log
+@Wed Feb  8 00:00:37 2006
+@
+text
+@d5 1
+d9 10
+a18 8
+   $self->t({speed => 30, sample => "sine/5",
+             scale => "equal",
+             duration => 300000,
+             volume => 0.2, pan => 1- rand(2),
+             envelope_name => $self->{foo}++ % 2 ? 'chop' : 'percussive',
+             delay => 0.2
+            }
+           );
+@
+
+
+1.5
+log
+@Sat Jan 28 18:19:59 2006
+@
+text
+@d2 2
+a3 2
+# ><^i
+# <^>p
+d8 6
+a13 36
+    my $foo = $self->{bangs} % 32 > 28 ? 3: 2;
+
+    if ($self->{bangs} % $foo == 0) {
+       $self->foo(1);
+       $self->foo(0);
+       $self->foo(2);    
+    }
+
+    unless ($self->{bangs} % 16) {
+        $self->t({sample => 'newnotes/0', volume => 0.1,
+                  speed => 0.4, accellerate => 0.00001, loops => 8,
+                 }
+                );
+    }
+}
+
+sub foo {
+   my $self = shift;
+   my $point = shift;
+        my $code = $self->code->[$point];
+        $code =~ s/(\S)(\S+)/$2$1/;
+        $self->code->[$point] = $code;
+        $self->modified;
+        my $num = $self->{"num$point"};
+        if ($1 eq '>') {
+            $num += 12;
+        }
+        elsif ($1 eq '<') {
+            $num -= 12;
+        }
+        elsif ($1 eq '^') {
+            if ($self->{bangs} % 128 > 90) {
+                $num = 30;
+            }
+            else {
+                $num = 20;
+d15 2
+a16 27
+        }
+        elsif ($1 eq '+') {
+            $num += 3;
+        }
+        elsif ($1 eq '-') {
+            $num -= 3;
+        }
+        else {
+            $num += ord($1);
+        }
+ 
+        $self->t({speed => ($num % 36) + 30, sample => "sine/5",
+                  scale => "equal",
+                  duration => 300000,
+                  volume => 0.2, pan => 1- rand(2),
+                  envelope_name => $self->{foo}++ % 2 ? 'chop' : 'percussive',
+                  delay => 0.2
+                 }
+                );
+        $self->vsite(0.2 + ( $point/ 4) + ($num % 36 / 36 / 8)
+                     
+                    );
+        $self->v({x => ($num + 20) / 200, y => ($num + 20) / 200, volume => 8, reverb => 3,
+                  direction => rand(pi * 2)
+                 });
+        $self->{"num$point"} = $num;
+    }@
+
+
+1.4
+log
+@Sat Jan 28 18:18:45 2006
+@
+text
+@d1 3
+a3 3
+# <<s>^
+# <^i>
+# p<^>
+d64 3
+a66 1
+        $self->vsite();
+@
+
+
+1.3
+log
+@Sun Dec 11 12:50:07 2005
+@
+text
+@d1 3
+a3 3
+# <s>^<
+# ^i><
+# <^>p
+d64 1
+@
+
+
+1.2
+log
+@Thu Nov 24 23:28:09 2005
+@
+text
+@d1 1
+a1 1
+# ^<<s>
+d61 1
+a61 1
+#                  delay => 0.2
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 3
+a3 3
+# s>^<<
+# <^i>
+# p<^>
+@

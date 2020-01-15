@@ -1,0 +1,36 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.08.14.12.37.34;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Aug 14 13:37:34 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    my $bar = $self->{bangs} % 16 > 10 ? 0 : 1;
+    if ($self->{bangs} % ($bar ? 4 : 3) == 0) {
+       my $foo = $self->{foo}++ % 16 > 12 ? 1 : 0;
+       $self->play({num => $foo ? 50 : 60, browndel => 40,
+                    pan => $self->sin(40),
+                    formfreq => 20, bwfreq => 30
+                   }
+                  );
+    }
+}@

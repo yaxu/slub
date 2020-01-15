@@ -1,0 +1,74 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2006.01.28.23.42.34;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2006.01.28.23.31.16;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Jan 28 23:31:16 2006
+@
+
+
+1.2
+log
+@Sat Jan 28 23:42:34 2006
+@
+text
+@sub bang {
+    my $self = shift;
+    my $mode = $self->{mode}++;
+    if ($self->{bangs} % 16 == 6) {
+        $self->t({sample => "sine/4",
+                  loops => 60,
+                  scale => "equal",
+                  speed => ($mode % 32 == 0 ? 45 : 50),
+                  vowel => 'i',
+                  envelope => 'chop', delay => 0.01, pan => 1
+                 }
+                );
+        $self->vsite(0.5);
+    }
+    if ($self->{bangs} % 24 == 0) {
+        $self->t({sample => "sine/4",
+                  loops => 400,
+                  scale => "equal",
+                  speed => ($mode % 32 == 0 ? 30 : 25),
+                  vowel => 'o', delay => 0.1, pan => -1
+                 }
+                );
+        $self->vsite(0.75);
+    }
+
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 2
+a4 1
+    if ($self->{bangs} % 16 == 0) {
+d6 1
+a6 1
+                  loops => 4,
+d8 3
+a10 1
+                  speed => 20
+d13 1
+d15 11
+@

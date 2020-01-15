@@ -1,0 +1,65 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2004.11.23.23.56.08;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.11.23.23.49.51;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Nov 23 23:49:51 2004
+@
+
+
+1.2
+log
+@Tue Nov 23 23:56:08 2004
+@
+text
+@my $start = 120;
+my $downs = [4, 3];
+my $max = 5;
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 64 == 0) {
+        $self->{max} = $max;
+        $self->{num} = $start;
+        $self->trigger({sample => "chin/$self->{num}",
+                        ts => 120, rate => 50, gain => 300
+                       }
+                      );
+    }
+    elsif ($self->{max} > 0 and $self->{bangs} % 2 == 0 and rand() > 0.3) {
+        $self->{num} -= $downs->[rand @@$downs];
+        $self->{max}--;
+        $self->trigger({sample => "chin/$self->{num}",
+                        ts => 120, rate => 50, gain => 300
+                       }     
+                      );    
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d10 1
+a10 1
+                        ts => 120, rate => 50
+d18 1
+a18 1
+                        ts => 120, rate => 50
+@

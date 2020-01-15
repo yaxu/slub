@@ -1,0 +1,37 @@
+# 8
+# 8
+my @foo = (0,4,7,8,12, 16);
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 128 == 0) {
+        if (not defined $self->{left} or rand()> 0.7) {
+            $self->{left} = $foo[rand @foo];
+        }
+        if (not defined $self->{right} or rand()> 0.7) {
+            $self->{right} = $foo[rand @foo];
+        }
+        $self->line(0, $self->{left});
+        $self->line(1, $self->{right});
+        $self->modified;
+        $self->t({sample => "sax/$self->{left}", speed => 2, volume => 0.8,
+                  accellerate => -0.000001, loops => 0.5, pan => 0.5,
+                  delay => 0.01, shape => 0.9
+                 }
+                );
+        $self->t({sample => "sax/$self->{right}", speed => 2, volume => 0.8,
+                  accellerate => -0.000001, loops => 0.6, pan => -0.5,
+                  delay => 0.01, shape => 0.9
+                 }
+                );
+        $self->t({speed => 42, sample => "sine/5",
+                  scale => "equal",
+                  duration => 600000,
+                  volume => 3, pan => 1 - rand(2),
+                  envelope_name => 'valley',
+                  delay => 0.3, shape => 0.9, accellerate => -0.00001
+                 }
+                );
+        
+    }
+}

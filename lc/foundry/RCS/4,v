@@ -1,0 +1,246 @@
+head	1.11;
+access;
+symbols;
+locks
+	alex:1.11; strict;
+comment	@# @;
+
+
+1.11
+date	2008.02.19.22.34.06;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2008.02.19.22.33.26;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2008.02.19.22.29.20;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2008.02.19.22.28.05;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2008.02.19.22.27.59;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.02.19.22.27.30;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.02.19.22.26.10;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.02.19.22.22.28;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.02.19.22.21.36;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.02.19.22.20.34;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.19.22.17.50;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Feb 19 22:17:50 2008
+@
+
+
+1.11
+log
+@Tue Feb 19 22:34:06 2008
+@
+text
+@# 0
+
+my $v = 1;
+
+sub bang {
+    my $self = shift;
+
+    my $b = $self->{bangs};
+    my $state = $self->line(0);
+    if ($state == 0) {
+        if (($self->{bangs} % 4 == 0 and rand() > 0.9)
+            or $self->{bangs} % 16 == 10
+           ) {
+           $state = 1;
+        }
+    }
+    elsif ($state == 1) {
+        if ($b % 2) {
+            $self->t({sample => "drum/0", volume => $v, speed => 1,
+                      loops => 0.1
+                     }
+                    );
+        }
+        else {
+            $self->t({sample => "uxay/3", volume => $v, speed => 1,
+                      loops => 0.1
+                     }
+                    );
+        }
+        if (($b % 4 == 0 and rand() > 0.6) or $b % 32 == 26) {
+          $state = 2;
+        }
+    }
+    elsif ($state == 2) {
+       $state = 3;
+    }
+    elsif ($state == 3) {
+       $self->t({sample => "drum/0", volume => $v,
+                }
+               );
+       $state = 0;
+    }
+
+    $self->line(0, $state);
+    $self->modified;
+}@
+
+
+1.10
+log
+@Tue Feb 19 22:33:26 2008
+@
+text
+@d1 1
+a1 1
+# 1
+d34 4
+a37 1
+    elsif ($state == 2 and $b % 32 == 28) {
+@
+
+
+1.9
+log
+@Tue Feb 19 22:29:20 2008
+@
+text
+@d7 1
+d11 1
+a11 1
+        if (($self->{bangs} % 2 == 0 and rand() > 0.9)
+d19 1
+a19 1
+            $self->t({sample => "drum/0", volume => $v, speed => 3,
+d25 1
+a25 1
+            $self->t({sample => "drum/0", volume => $v, speed => -2,
+d30 9
+@
+
+
+1.8
+log
+@Tue Feb 19 22:28:05 2008
+@
+text
+@d3 1
+a3 1
+my $v = 0;
+d18 4
+a21 1
+            $self->t({sample => "drum/0", volume => $v});
+d24 4
+@
+
+
+1.7
+log
+@Tue Feb 19 22:27:59 2008
+@
+text
+@d3 2
+@
+
+
+1.6
+log
+@Tue Feb 19 22:27:30 2008
+@
+text
+@d16 1
+a16 1
+            $self->t({sample => ""});
+@
+
+
+1.5
+log
+@Tue Feb 19 22:26:10 2008
+@
+text
+@d16 1
+@
+
+
+1.4
+log
+@Tue Feb 19 22:22:28 2008
+@
+text
+@d14 6
+@
+
+
+1.3
+log
+@Tue Feb 19 22:21:36 2008
+@
+text
+@d17 1
+a17 5
+}
+
+
+
+                      [1;5B[1;5A@
+
+
+1.2
+log
+@Tue Feb 19 22:20:34 2008
+@
+text
+@a13 6
+    elsif ($state == 1) {
+        if ($b % 2) {
+        }
+        else {
+        }
+    }
+d17 5
+a21 1
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d14 6
+@

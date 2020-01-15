@@ -1,0 +1,52 @@
+# ><-><->^+
+
+sub bang {
+    my $self = shift;
+    $self->{foo} ||= 0;
+    $self->{next} ||= 0;
+    $self->{hits} ||= 3;
+    $self->{dist} ||= 3;
+    $self->{rate} ||= 100;
+    $self->{note} ||= 0;
+
+    if ($self->{next} == 0 and $self->{hits} > 0) {
+        $self->trigger({sample => "latibro/" . $self->{note},
+                        ts => 100,
+                        rate   => $self->{rate}
+                       }
+                      );
+        $self->{next} = $self->{dist};
+        $self->{hits}--;
+    }
+    else {
+        $self->{next}--;
+    }
+    
+    if ($self->{bangs} % 16 == 0) {
+        $self->{hits} = 1 + rand(3);
+        $self->{dist} = int(rand(3)) + 1; 
+        $self->{next} = $self->{dist};
+        my ($seq) = $self->code->[0] =~ /\s+(.+)/;
+        $seq =~ s/(.)(.*)/$2$1/;
+        my $i = $1;
+        if ($i eq '>') {
+            $self->{rate} += 10;
+        }
+        elsif ($i eq '<') {
+            $self->{rate} -= 10;
+        }
+        elsif ($i eq '^') {
+            $self->{rate} = 50;
+        }
+        elsif ($i eq '+') {
+            $self->{rate} += 4;
+        }
+        elsif ($i eq '-') {
+            $self->{rate} -= 4;
+        }
+
+        $self->code->[0] = "# $seq";
+        $self->modified;
+        $self->{note} = $self->{note} ? 0 : 5;
+    }
+}

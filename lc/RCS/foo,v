@@ -1,0 +1,30 @@
+head	1.1;
+access;
+symbols;
+locks
+	root:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2008.07.18.14.08.01;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Jul 18 15:08:01 2008
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->t({sample => "drumtraks/0"}) 
+     unless $self->{bangs} % 4;
+}
+@

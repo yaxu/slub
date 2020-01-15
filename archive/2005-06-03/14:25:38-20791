@@ -1,0 +1,25 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 32 == 0) {
+        my $rand = 1 - rand(2);
+ 
+        $self->t({sample => "sine/4", volume => 0.0000000005,
+                  loops => 400,
+                  speed => 5,
+                  pan => $rand,
+                  pan_to => 0 - $rand,
+#                  accellerate => -0.00001,
+                  shape => 1,
+                 }
+                );
+        $self->t({sample => "sine/4", volume => 0.005,
+                  loops => 300,
+                  speed => 5,
+                  pan => $rand,
+                  pan_to => 0 - $rand,
+                  accellerate => -0.00001,
+                  shape => 0.9
+                 }
+                );
+    }
+}

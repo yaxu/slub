@@ -1,0 +1,69 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2004.08.13.20.30.12;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.08.13.20.22.44;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Aug 13 21:22:44 2004
+@
+
+
+1.2
+log
+@Fri Aug 13 21:30:12 2004
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->{buffer_time} = 0;
+    if ($self->{bangs} %2 == 0) {
+      my $foo = $self->{foo}++ % 4;
+      $self->trigger({sample => "space/" 
+                      . ($foo + 
+                         ($self->{bah} += $self->{bangs} % 8 ? 0 : 1)
+                        ),
+                      rate => 20 + (100 * ($self->sin(50))),
+                      pan => $self->sin(50),
+                      browndel => 200,
+                      ts => 100
+                     }
+                    )
+    }
+    if ($self->{bangs} % 4 == 0) {
+      $self->trigger({sample => "future/6",
+                      ts     => 250,
+                      browndel => 10,
+                      rate => 100,
+                      gain => 300, browndel => 60
+                     }
+                    );
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d6 1
+a6 1
+      $self->trigger({sample => "drum/" 
+d10 3
+a12 1
+                      rate => 60,
+@

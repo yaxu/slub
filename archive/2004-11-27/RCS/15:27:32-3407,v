@@ -1,0 +1,61 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.11.27.15.27.32;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Nov 27 15:27:32 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@my $start = 120;
+my $downs = [4, 3];
+my $max = 5;
+my $foo = 0;
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 16 == $foo) {
+        $self->{max} = $max;
+        $self->{num} = $start;
+        $self->trigger({sample => "invaders/2",
+                        ts => 240, rate => 50, gain => 50,
+                        filter => 10000, browndel => 200
+                       }
+                      );
+        if (rand > 0.5) {
+             $foo = $foo ? 0 : 4;
+        }
+    }
+    elsif ($self->{max} > 0 and $self->{bangs} % 2 == 0 and rand() > 0.3) {
+        $self->{num} -= $downs->[rand @@$downs];
+        $self->{max}--;
+        $self->trigger({sample => "gabba/$self->{num}",
+                        ts => 10, rate => 50, gain => 300,
+                        filter => 10 + ($self->{bangs} % 16 * 100),
+                        browndel => 100
+                       }
+                      );
+    }
+    if ($self->{bangs} % 8 == 0 and rand() > 0.2) {
+#        $self->trigger({sample => 'breaks152/0',
+#                        ts => 800, gain => 20,
+#                        filter => 8000,
+#                        pan => rand
+#                       }
+#                      );
+    }
+}@

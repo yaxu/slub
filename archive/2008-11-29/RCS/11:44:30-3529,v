@@ -1,0 +1,55 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2008.11.29.11.44.55;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.11.29.11.44.31;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Nov 29 11:44:31 2008
+@
+
+
+1.2
+log
+@Sat Nov 29 11:44:55 2008
+@
+text
+@my $foo = 4;
+sub bang {
+    my $self = shift;
+    if($foo-- > 0) {
+      t(sample => "off/0");
+    }
+    else {
+      if ($self->{bangs} % 8 == 0 and rand() > 0.5) {
+        $foo = 3 + int(rand(4));
+      }
+    } 
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d5 1
+a5 1
+      t(sample => "industrial/0");
+d8 1
+a8 1
+      if ($self->{bangs} % 4 == 0 and rand() > 0.5) {
+@

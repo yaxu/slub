@@ -1,0 +1,9 @@
+
+sub bang {
+    my $self = shift;
+    $self->t({sample => "can/$self->{bangs}",
+              delay => rand()
+             }
+            ) 
+      unless $self->{bangs} % 3;
+}

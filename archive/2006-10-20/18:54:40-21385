@@ -1,0 +1,16 @@
+sub bang {
+    my $self = shift;
+    my $foo = ($self->{bangs} % 32 == 0 or ($self->{bangs} % 32 == 12));
+    my $bar = ($self->{bangs} % 32 == 20);
+    $self->sine({freq => 200,
+                 ts => 4,
+                 direction => -1,
+                }
+               ) if $foo;
+
+    $self->sine({freq => 400,
+                 ts => 0.5,
+                 direction => 0.2,
+                }
+               ) if $bar;
+}

@@ -1,0 +1,31 @@
+# 0.995830463033976
+sub bang {
+    my $self = shift;
+    $self->{mult} ||= 1;
+    if ($self->{bangs} % 4 == 0) {
+        $self->t({sample => "timmono/7", speed => 2 * $self->{mult},
+                  delay => rand(), pan => -0.8,
+                  volume => $self->sin(2), shape => 0
+                 }
+                );
+    }
+    if ($self->{bangs} % 2 == 1) {
+        $self->t({sample => "timmono/7", speed => 2.5 * $self->{mult}, pan => 0.8,
+                  volume => 1 - $self->sin(2), delay => 0.009
+                 }
+                );
+    }
+
+    if ($self->{bangs} % 3 == 0) {
+        $self->t({sample => "timmono/6", speed => -6 * $self->{mult}, pan => 0,
+                  volume => 1 - $self->sin(2), delay => 0.02
+                 }
+                );
+    }
+if ($self->{bangs} % 16 == 0) {
+   my @p = (1, 2, 3);
+   $self->{mult} = $p[rand @p];
+}
+$self->line(0, 1 - $self->sin(10));
+$self->modified;
+}

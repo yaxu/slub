@@ -1,0 +1,612 @@
+head	1.24;
+access;
+symbols;
+locks
+	alex:1.24; strict;
+comment	@# @;
+
+
+1.24
+date	2006.06.08.12.45.36;	author alex;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2006.02.01.17.11.29;	author alex;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2006.02.01.00.35.50;	author alex;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2006.02.01.00.34.50;	author alex;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2006.02.01.00.32.41;	author alex;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2006.02.01.00.31.31;	author alex;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2006.02.01.00.30.30;	author alex;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2006.02.01.00.29.59;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2006.02.01.00.26.38;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2006.02.01.00.25.35;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2006.01.31.23.59.04;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2006.01.31.23.58.40;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2006.01.31.09.16.42;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2006.01.31.09.16.35;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2006.01.31.00.06.26;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2006.01.30.23.21.11;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2006.01.30.22.31.24;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2006.01.30.22.31.02;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2006.01.30.22.20.05;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2006.01.30.22.13.01;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2006.01.30.22.09.38;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2006.01.30.22.00.29;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2006.01.30.21.48.03;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2006.01.29.02.12.04;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Jan 29 02:12:04 2006
+@
+
+
+1.24
+log
+@Thu Jun  8 13:45:36 2006
+@
+text
+@
+my $bpm = 140;
+
+my $speed = 1;
+
+
+sub bang {
+    my $self = shift;
+    return if not $speed;;
+    if ($self->{bangs} % (256 / $speed)== 0) {
+       $self->vbar();
+    }
+
+    #$self->sinewave();
+    $self->break();
+    $self->tune();
+    $self->taptap();
+    #$self->zigzag;
+    #$self->vbang();
+    for (1 .. $speed) {
+        $self->vbang();
+    }
+    $self->checkbpm();
+}
+
+sub zigzag {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0) {
+       $self->vsite(0.25);
+    }
+    elsif ($self->{bangs} % 16 == 8) {
+       $self->vsite(0.75);
+    }
+}
+
+sub taptap {
+    my $self = shift;
+    if ($self->{bangs} % int(6 + rand(2)) == 0) {
+       $self->t({sample => "can/4", loops => 1});
+       $self->vsite(0.65);
+    }
+}
+
+sub tune {
+    my $self = shift;
+    if ($self->{bangs} % (4 + ($self->{bing}++ % 10)) == 0) {
+       my $foo = (($self->{bop} += 3) % 5);
+       $self->vsite(0.4 - 0.05 * $foo);
+       $self->t({sample => "sine/5", duration => 70000 + rand(60000),
+                 speed => 1 + $foo + 30,
+                 scale => 'equal',  
+                 delay => 0.15,
+                 accellerate => -0.00001, vowel => 'a',
+                 delay2 => 0.2,
+                 pan => rand() > 0.5 ? -0.25 : 0.25, volume => 2
+                }
+               );
+    }
+}
+
+sub break {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0 or $self->{bangs} % 16 == 10
+        or $self->{bangs} % 16 == 6
+       ) {
+        $self->t({sample => "drumtraks/6", volume => 0.35});
+        $self->vsite(0.9);
+    }
+
+    if ($self->{bangs} % 16 == 8) {
+        $self->t({sample => "drumtraks/4", volume => 0.3, loops => 0.4});
+        $self->vsite(0.75);
+    }
+    if ($self->{bangs} % 16 == 12) {
+        $self->t({sample => "drumtraks/5", volume => 0.2, loops => 0.4});
+        $self->vsite(0.75);
+    }
+}
+
+sub sinewave {
+    my $self = shift;
+    return if ($self->{bangs} % 4 != 0);
+
+    my $foo = ($self->{bangs} / 20) * (3.12 / 2);
+    $self->vsite((CORE::sin($foo) + 1) / 4 + 0.25);
+    $self->vsite((CORE::sin($foo + 3.14159) + 1) / 4 + 0.25);
+}
+
+sub checkbpm {
+    my $self = shift;
+    if ($bpm != $self->{set}) {
+       $self->{set} = $bpm;
+       $self->bpm($bpm);
+    }
+}@
+
+
+1.23
+log
+@Wed Feb  1 17:11:29 2006
+@
+text
+@d15 3
+a17 3
+    #$self->break();
+    #$self->tune();
+    #$self->taptap();
+d40 1
+a40 1
+       $self->vsite(0.6);
+d66 1
+a66 1
+        $self->t({sample => "drumtraks/6"});
+@
+
+
+1.22
+log
+@Wed Feb  1 00:35:50 2006
+@
+text
+@d15 2
+a16 2
+    $self->break();
+    $self->tune();
+d55 1
+a55 1
+                 pan => rand() > 0.5 ? -0.25 : 0.25
+@
+
+
+1.21
+log
+@Wed Feb  1 00:34:50 2006
+@
+text
+@d53 1
+a53 1
+                 accellerate => -0.00001, vowel => 'a'
+d55 1
+a55 1
+                 pan => rand() > 0.5 ? 0.25 : 0.75
+@
+
+
+1.20
+log
+@Wed Feb  1 00:32:41 2006
+@
+text
+@d55 1
+a55 1
+                 
+@
+
+
+1.19
+log
+@Wed Feb  1 00:31:31 2006
+@
+text
+@d17 1
+a17 1
+    $self->taptap();
+d49 1
+a49 1
+       $self->t({sample => "sine/5", duration => 70000,
+d54 1
+a54 1
+#                 delay2 => 0.2,
+@
+
+
+1.18
+log
+@Wed Feb  1 00:30:29 2006
+@
+text
+@d53 1
+a53 1
+                 accellerate => -0.000001
+@
+
+
+1.17
+log
+@Wed Feb  1 00:29:59 2006
+@
+text
+@d49 1
+a49 1
+       $self->t({sample => "sine/5", duration => 30000,
+d53 1
+@
+
+
+1.16
+log
+@Wed Feb  1 00:26:38 2006
+@
+text
+@d62 3
+a64 1
+    if ($self->{bangs} % 16 == 0 or $self->{bangs} % 16 == 10) {
+d68 1
+@
+
+
+1.15
+log
+@Wed Feb  1 00:25:35 2006
+@
+text
+@d66 2
+a67 2
+    if ($self->{bangs} % 16 == 2) {
+        $self->t({sample => "drumtraks/4", volume => 0.3});
+d71 1
+a71 1
+        $self->t({sample => "drumtraks/5", volume => 0.2});
+@
+
+
+1.14
+log
+@Tue Jan 31 23:59:04 2006
+@
+text
+@d2 1
+a2 1
+my $bpm = 150
+a3 1
+my $paused = 0;
+d16 2
+a17 1
+    #$self->tune();
+d36 8
+d46 1
+a46 1
+    if ($self->{bangs} % (2 + ($self->{bing}++ % 5)) == 0) {
+d49 5
+a53 4
+       $self->t({sample => "made/11", duration => 8000,
+                 speed => 1 + $foo,
+                 scale => 'equal', delay => rand(0.1),
+                 delay2 => 0.1,
+d66 2
+a67 2
+    if ($self->{bangs} % 16 == 4) {
+        $self->t({sample => "drumtraks/4"});
+d71 1
+a71 1
+        $self->t({sample => "drumtraks/5"});
+@
+
+
+1.13
+log
+@Tue Jan 31 23:58:40 2006
+@
+text
+@d78 3
+a80 4
+    my $set = $self->line(0);
+    if ($set != $self->{set}) {
+       $self->{set} = $set;
+       $self->bpm($set);
+@
+
+
+1.12
+log
+@Tue Jan 31 09:16:42 2006
+@
+text
+@d1 2
+a2 1
+# 739.752
+d5 2
+d10 2
+a11 2
+    return if $paused;;
+    if ($self->{bangs} % 128 == 0) {
+d16 1
+a16 1
+    #$self->break();
+d20 4
+a23 1
+    $self->vbang();
+d74 9
+@
+
+
+1.11
+log
+@Tue Jan 31 09:16:34 2006
+@
+text
+@d14 3
+a16 3
+    $self->tune();
+    $self->zigzag;
+    $self->vbang();
+@
+
+
+1.10
+log
+@Tue Jan 31 00:06:26 2006
+@
+text
+@d14 2
+a15 1
+    #$self->tune();
+d20 10
+@
+
+
+1.9
+log
+@Mon Jan 30 23:21:11 2006
+@
+text
+@d12 1
+a12 1
+    $self->sinewave();
+d42 1
+a42 1
+        $self->vsite(0.72);
+d46 1
+a46 1
+        $self->vsite(0.70);
+@
+
+
+1.8
+log
+@Mon Jan 30 22:31:24 2006
+@
+text
+@d12 1
+a12 1
+    #$self->sinewave();
+d52 1
+a52 1
+    return if ($self->{bangs} % 2 != 0);
+@
+
+
+1.7
+log
+@Mon Jan 30 22:31:02 2006
+@
+text
+@d13 2
+a14 2
+    $self->break();
+    $self->tune();
+@
+
+
+1.6
+log
+@Mon Jan 30 22:20:05 2006
+@
+text
+@d22 9
+a30 1
+       $self->t({sample => "newnotes/2", loops => 0.4});
+@
+
+
+1.5
+log
+@Mon Jan 30 22:13:01 2006
+@
+text
+@d14 1
+a14 1
+    
+d19 7
+d34 5
+a38 1
+        $self->vsite(0.75);
+@
+
+
+1.4
+log
+@Mon Jan 30 22:09:38 2006
+@
+text
+@d3 2
+d7 1
+d21 1
+a21 1
+    if ($self->{bangs} % 8 == 0) {
+d23 5
+a27 1
+        $self->vsite(0.1);
+@
+
+
+1.3
+log
+@Mon Jan 30 22:00:29 2006
+@
+text
+@d1 1
+a1 1
+# 573.144
+d5 1
+a5 1
+    if ($self->{bangs} % 256 == 0) {
+d9 6
+a14 5
+#    if ($self->{bangs} % 4 == 0) {
+#        $self->vsite(($self->{bangs} % 16) / 16
+#                     + (($self->{bangs} % 12) / 30)
+#                    );
+#    }
+d16 5
+a20 6
+    if ($self->{bangs} % 4 == 0) {
+       my $foo = ($self->{bangs} / 20) * (3.12 / 2);
+       $self->line(0, $foo);
+       $self->modified;
+#       $self->t({sample => "drum/0", speed => 1 + CORE::sin($foo)});
+#       $self->vsite((CORE::sin($foo) + 1) / 4 + 0.25);
+d22 9
+a30 9
+    if ($self->{bangs} % 4 == 0) {
+       my $foo = ($self->{bangs} / 20) * (3.12 / 2);
+       $self->line(0, $foo);
+       $self->modified;
+#       $self->t({sample => "drum/0", speed => 1 + CORE::sin($foo)});
+#       $self->vsite((CORE::sin($foo + 3.12) + 1) / 4 + 0.25);
+    }
+    
+    $self->vbang();
+@
+
+
+1.2
+log
+@Mon Jan 30 21:48:03 2006
+@
+text
+@d1 2
+d5 5
+a9 1
+    if ($self->{bangs} % 4 == 0) {
+d13 8
+d22 1
+a22 1
+    if ($self->{bangs} % 8 == 0) {
+d24 4
+a27 4
+       $self->vsite((CORE::sin($foo) + 1) / 4 + 0.25);
+    }
+    if ($self->{bangs} % 8 == 0) {
+       $self->vreset();
+d29 2
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d12 3
+@

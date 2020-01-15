@@ -1,0 +1,19 @@
+my $dir = 0;
+my $foo = 0;
+my $init = 0;
+my $sample = 0;
+sub bang {
+    my $self = shift;
+    if (not $init) {
+       return unless $self->{bangs} % 16 == 0;
+       $init = 1;
+    }
+    if ($foo <= 0) {
+        $foo = (rand > 0.5 ? 8 : 2);
+        $self->trigger({sample => "latibro/$sample", ts => 100, rate => 50});
+    }
+    if ($self->{bangs} % 64 == 32) {
+        $sample += (rand > 0.5 ? -1 : 2);
+    }
+    $foo--;
+}

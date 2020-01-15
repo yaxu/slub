@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+    $self->t({sample => "drumtraks/1", 
+              speed => 0 - 0.1 + rand(0.05)
+             }
+            ) unless $self->{bangs} % 16;
+    $self->t({sample => "drumtraks/1", 
+              speed => 0.1 + rand(0.05)
+             }
+            ) unless $self->{bangs} % 16;
+}

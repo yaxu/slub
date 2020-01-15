@@ -1,0 +1,11 @@
+use OpenGL;
+
+sub bang {
+    my $self = shift;
+    unless($self->{init}++) {
+        glpOpenWindow() unless $self->{fooz}++;
+        glMatrixMode( GL_PROJECTION );
+        glFrustum(-1.0, 1.0, -1.0, 1.0, 1.0, 20.0);
+        glMatrixMode( GL_MODELVIEW ); 
+    }
+}

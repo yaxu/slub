@@ -1,0 +1,48 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.05.21.21.46.23;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat May 21 22:46:23 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# vkbl
+# 650
+my @@l = ('a' .. 'z');
+sub bang {
+    my $self = shift;
+
+    my $line = $self->line(0);
+    if ($self->{bangs} % 62 == 0) {
+       my $max = 4;
+       while (length($line) >= $max) {
+           $line =~ s/.//;
+       }
+       $line .= $l[rand @@l];
+    }
+    if ($self->{bangs} % 16 == 0) {
+       my $char = substr($line, ($self->{bing} % length($line)), 1);
+       $self->t({sample => "kurt/" . ord($char), volume => 0.01,
+                 speed => 0.5});
+       $self->{bing}++;
+       $self->line(1, $self->{bing});
+    }
+    $self->line(0, $line);
+    $self->modified;
+}@

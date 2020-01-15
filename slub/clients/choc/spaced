@@ -1,0 +1,67 @@
+$VAR1 = [
+          undef,
+          {
+            'strength' => '5',
+            'spread' => '5',
+            'chr' => 'x',
+            'sample' => 'future1',
+            'racism' => '5',
+            'number' => '1'
+          },
+          {
+            'strength' => '10',
+            'spread' => '16',
+            'chr' => '~',
+            'sample' => 'future2',
+            'racism' => '1',
+            'number' => '2'
+          },
+          {
+            'strength' => '20',
+            'spread' => '20',
+            'chr' => '=',
+            'sample' => 'future3',
+            'racism' => '3',
+            'number' => '3'
+          },
+          {
+            'strength' => '15',
+            'spread' => '32',
+            'sample' => 'future4',
+            'chr' => '-',
+            'racism' => '3',
+            'number' => '4'
+          },
+          {
+            'strength' => '25',
+            'spread' => '24',
+            'sample' => 'future5',
+            'chr' => '+',
+            'racism' => '3',
+            'number' => '5'
+          },
+          {
+            'strength' => '10',
+            'spread' => '128',
+            'sample' => 'future6',
+            'chr' => '*',
+            'racism' => '5',
+            'number' => '6'
+          },
+          {
+            'strength' => '15',
+            'spread' => '30',
+            'sample' => 'future7',
+            'chr' => '%',
+            'racism' => '3',
+            'number' => '7'
+          },
+          {
+            'strength' => '16',
+            'spread' => '28',
+            'sample' => 'future8',
+            'chr' => '@',
+            'racism' => '4',
+            'number' => '8'
+          }
+        ];

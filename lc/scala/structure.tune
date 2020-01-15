@@ -1,0 +1,158 @@
+# saved.
+
+# tick 1088
+# note 83
+# offset 0
+
+my $mask = "1";
+
+sub structure {
+    my $self = shift;
+    my $set = 1;
+    if ($set) {
+        $self->{structure} = [ ['+', '++'],
+                               ['++', '+'],
+                             ];
+    }
+}
+
+sub bang {
+    my $self = shift;
+
+    my $erm = sin($self->{bangs} / 20);
+
+    return if $self->{bangs} % ((($self->{bangs} % 32) > 24) ? 2 : 4);
+
+    $self->test(0);
+
+    my $score = $self->{score};
+    my $note = 27 + $score->[$self->{tick} % @$score];
+    $note = $self->noter($note + $self->{offset});
+    $self->{code}->[3] = "# note $note";
+
+    if (substr($mask, $self->{tick} % length($mask), 1) eq 1) {
+      $self->play({num      => $note + 3 - 12,
+                   formfreq => 4 + rand(4), 
+                   bwfreq   => 40 + rand(40), 
+                   ts       => 50,
+                   gain     => 60,
+                   browndel => 0,
+                  }
+                 );
+      $self->play({num      => $note - 12 + ((rand > 0.5) * - 12),
+                   formfreq => 8 + rand(4),
+                   bwfreq   => 80,
+                   ts       => 50,# + (abs(1 - $erm) * 50),
+                   gain     => 30,
+                   offset   => 0.01,
+                   browndel => 0,
+                  }
+                 );
+
+    }
+
+    $self->play($note, 60, 7000, 700, 0.4 + ($self->{tick} % 2) / 0.25)
+      if substr($mask, $self->{tick} % length($mask), 1) eq 1;
+
+    #$self->save("structure.tune");
+
+    $self->{tick} ||= 0;
+    $self->{tick}++;
+    $self->{code}->[2] = "# tick $self->{tick}";
+    $self->{offset} = 3;
+     if (not $self->{tick} % ($self->{offset_mod} ||= 64)) {
+        if ($self->{offset}) {
+            $self->{offset} = 0;
+            $self->{offset_mod} = 48;
+        }
+        else {
+          $self->{offset} = int(rand(@{$self->{samples}}));
+          $self->{offset_mod} = 16;
+        }
+        $self->{code}->[4] = "# offset $self->{offset}";
+    }
+    $self->modified;
+}
+
+##
+
+sub noter {
+    my ($self, $note) = @_;
+    my $notes = [qw / 2 4 7 9 11 /];
+    return($notes->[$note % @$notes] + (12 * int($note / @$notes)));
+}
+
+##
+
+{
+    my $count;
+    sub test {
+        my ($self, $value, $level) = @_;
+        my $score = $self->{score} ||= [];
+        my $structure = $self->structure;
+        if (not $level) {
+            $level = $count = 0;
+            @$score = ();
+        }
+        return if @$structure <= $level;
+        
+        my $substruct = $structure->[$level];
+        foreach my $dir (@$substruct) {
+            ++$count;
+            if ($dir eq '+') {
+                $value += 1;
+            }
+            elsif($dir eq '++') {
+                $value += 2;
+            }
+            elsif ($dir eq '-') {
+                $value -= 1;
+            }
+            elsif ($dir eq '--') {
+                $value -= 2;
+            }
+            push @$score, $value;
+            $self->test($value, $level + 1, $count);
+        }
+    }
+}
+
+##
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./scala/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    $self->message("saved.");
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}
+
+##
+
+sub message {
+    my ($self, $message) = @_;
+    my $code = $self->code;
+    if (not $code->[0] =~ /^\#/) {
+      unshift(@$code, '#');
+    }
+    $code->[0] = '# ' . $message;
+}
+
+##
+
+sub bangs_per_minute {
+    120
+}
+
+##
+
+sub sleeptime {
+    .15;
+}

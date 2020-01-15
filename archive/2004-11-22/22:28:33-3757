@@ -1,0 +1,21 @@
+# 1...4...1.......
+# 
+# -1
+
+sub bang {
+    my $self = shift;
+    my ($seq)  = $self->code->[0] =~ /\s+(\S+)/;
+    my (@ctls) = split(//, $self->code->[1] =~ /\s+(\S+)/);
+    my ($pnt)  = $self->code->[2] =~ /\s+(\S+)/;
+    my ($ctl) = shift(@ctls);
+    if ($ctl eq '>') {
+        $pnt++;
+    } 
+    elsif ($ctl eq '<') {
+        $pnt--;
+    }
+    $self->code->[0] = "# $seq";
+    $self->code->[1] = "# " . join('', @ctls);
+    $self->code->[2] = "# $pnt";
+    $self->modified;
+}

@@ -1,0 +1,32 @@
+# elo...piksel...H
+
+sub bang {
+    my $self = shift;
+
+    if ($self->{bangs} % 8 == 0) {
+        t(sample => "made/0", speed => 0.8);
+    }
+
+    if (($self->{bangs} % 32) =~ /[08]/) {
+        t(sample => "made/0", loops => 0.5, speed => 2,
+          accellerate => -0.000002, pan => 1 - $self->sin(4) * 2,
+          
+         );
+    }
+     my $foo = $self->{bangs} % 32 > 20;
+    if (($self->{bangs} % 16) =~ /[248]/) {
+       t({sample => "insect/0"});
+       t({sample => "diphone/$self->{bangs}", 
+         speed => $foo ? -1 : 1,
+         loops => 0.5,
+         }
+        );
+    }
+
+    
+
+    my $l = $self->line(0);
+    $l =~ s/(.)(.*)/$2$1/;
+    $self->line(0, $l);
+    $self->modified();
+}

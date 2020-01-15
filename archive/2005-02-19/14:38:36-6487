@@ -1,0 +1,10 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 2 == 0) {
+        $self->t({sample => "can/$self->{bangs}",
+                  speed => 6,
+                  volume => 3,
+                 }
+                );
+    }
+}

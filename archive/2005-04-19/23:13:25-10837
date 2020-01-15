@@ -1,0 +1,13 @@
+my @vowels = ('a', 'e', 'i', 'o', 'u');
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 64 > 40;
+    $self->t({loops => rand(64), vowel => $vowels[rand @vowels],
+              scale => "equal",
+              speed => ($self->{bangs} % 128 > 64 ? 2 : 1),
+              volume => 0.05,
+              accellerate => -0.00005
+             }
+            )
+        if $self->{bangs} % ($foo ? 8 : 4) == 0
+}

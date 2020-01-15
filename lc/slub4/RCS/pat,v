@@ -1,0 +1,478 @@
+head	1.18;
+access;
+symbols;
+locks
+	alex:1.18; strict;
+comment	@# @;
+
+
+1.18
+date	2006.01.28.09.28.46;	author alex;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2006.01.28.09.23.02;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2006.01.28.09.21.06;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2006.01.28.09.20.16;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2006.01.28.09.19.48;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2006.01.28.09.19.22;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2005.06.17.13.36.39;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2005.06.12.19.24.21;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2005.06.12.19.14.58;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2005.06.12.19.12.49;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2005.06.12.19.12.30;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2005.06.12.19.08.58;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2005.06.12.18.49.03;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2005.06.12.18.47.00;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.06.12.18.46.23;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.06.12.18.44.35;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.06.12.18.36.04;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.06.12.18.04.19;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Jun 12 19:04:19 2005
+@
+
+
+1.18
+log
+@Sat Jan 28 09:28:46 2006
+@
+text
+@# 10001000
+# 1000
+my $foo = 0;
+
+my @@studied = map { [$_ => info($_)] } comb(8);
+
+my @@sifted = 
+  map  { $_->[0] }
+  sort { $b->[1] <=> $a->[1]
+	   || $a->[2] <=> $b->[2]
+       }
+  map  { [$_->[0], $_->[1]->{regularity}, $_->[1]->{count}] }
+  grep { $_->[1]->{distinct} }
+  grep { $_->[0] =~ /1/ }
+  @@studied;
+
+my @@on = 
+  grep {substr($_, 0, 1) eq '1'}
+  @@sifted;
+my @@off = 
+  grep {substr($_, 0, 1) eq '0'}
+  @@sifted;
+
+sub bang {
+    my $self = shift;
+    if (not length($self->{pat})) {
+       if ($self->{foo}++ % 4 != 3) {
+           $self->{pat} = $on[rand(2)];
+       }
+       else {
+           $self->{pat} = $off[@@off - 1 - rand(10)];
+       }
+       $self->line(0, $self->{pat});
+    }
+    $self->{pat} =~ s/(.)//;
+    if ($1 eq '1') {
+       $self->t({sample => "future/" . $self->{bangs} % 8,
+                 pan    => 0.5 - ($self->{bangs} % 16 / 16),
+#                 vowel  => 'i',
+                 speed => 1,
+                 loops => 1.2,
+                 accellerate => -0.00001,
+                 delay => 0.01, delay2 => 0.001,
+                 shape => 0.5
+                }
+               );
+    }
+    $self->line(1, $self->{pat});
+    $self->modified;
+}
+
+sub info {
+  my ($line) = @@_;
+  
+  my %stats;
+  
+  $stats{on} = (substr($line, 0, 1) eq '1' ? 1 : 0);
+  
+  $stats{count} = $line =~ tr/1/1/;
+  
+  $stats{distinct} = (($line =~ /11/) ? 0 : 1);
+  
+  my $regularity;
+  my $half = length($line) / 2;
+  my $first = substr($line, 0, $half);
+  my $second = substr($line, $half, $half);
+  if ($first eq $second) {
+    $regularity += 2;
+  }
+  if (($first =~ tr/1/1/) == ($second =~ tr/1/1/)) {
+    $regularity += 2;
+  }
+  foreach my $point (0 .. ($half - 1)) {
+    if (substr($first, $point, 1) eq substr($second, $point, 1)) {
+      $regularity++;
+    }
+  }
+  $stats{regularity} = $regularity || 0;
+  return(\%stats);
+}
+
+sub comb {
+  my ($length) = @@_;
+  my @@result;
+  if ($length > 1) {
+    @@result = map {'1' . $_, '0' . $_} comb($length - 1);
+  }
+  else {
+    @@result = (1, 0);
+  }
+  return(@@result);
+}@
+
+
+1.17
+log
+@Sat Jan 28 09:23:02 2006
+@
+text
+@d1 2
+a2 2
+# 00001001
+# 
+d44 1
+a44 1
+                 shape => 0.9
+@
+
+
+1.16
+log
+@Sat Jan 28 09:21:06 2006
+@
+text
+@d2 1
+a2 1
+# 01001
+@
+
+
+1.15
+log
+@Sat Jan 28 09:20:16 2006
+@
+text
+@d1 2
+a2 2
+# 10001000
+# 1000
+@
+
+
+1.14
+log
+@Sat Jan 28 09:19:48 2006
+@
+text
+@d2 1
+a2 1
+# 001000
+d43 2
+a44 1
+                 delay => 0.01, delay2 => 0.001, shape => 0.9
+@
+
+
+1.13
+log
+@Sat Jan 28 09:19:22 2006
+@
+text
+@d2 1
+a2 1
+# 000
+d43 1
+a43 1
+                 delay => 0.01
+@
+
+
+1.12
+log
+@Fri Jun 17 14:36:39 2005
+@
+text
+@d1 2
+a2 2
+# 01001010
+# 001010
+d39 3
+a41 3
+                 vowel  => 'i', 
+                 speed => 2,
+                 loops => 1,
+d43 1
+a43 1
+                   
+@
+
+
+1.11
+log
+@Sun Jun 12 20:24:21 2005
+@
+text
+@d1 2
+a2 2
+# 10001000
+# 000
+d37 1
+a37 1
+       $self->t({sample => "stab/" . $self->{bangs} % 8,
+d39 1
+a39 1
+                 vowel  => 'l', 
+d43 1
+a43 1
+                 
+@
+
+
+1.10
+log
+@Sun Jun 12 20:14:58 2005
+@
+text
+@d1 2
+a2 2
+# 10101010
+# 0
+d39 2
+a40 2
+                 vowel  => 'e', 
+                 speed => 3,
+d42 2
+a43 1
+                 accellerate => -0.00001
+@
+
+
+1.9
+log
+@Sun Jun 12 20:12:49 2005
+@
+text
+@d1 2
+a2 2
+# 10010100
+# 
+d31 1
+a31 1
+           $self->{pat} = $on[@@on - 1 - rand(10)];
+@
+
+
+1.8
+log
+@Sun Jun 12 20:12:30 2005
+@
+text
+@d1 2
+a2 2
+# 10001000
+# 0
+@
+
+
+1.7
+log
+@Sun Jun 12 20:08:58 2005
+@
+text
+@d2 1
+a2 1
+# 0001000
+d28 1
+a28 1
+           $self->{pat} = $on[0];
+d38 5
+a42 2
+                 pan => 1 - ($self->{bangs} % 16 / 8),
+                 
+@
+
+
+1.6
+log
+@Sun Jun 12 19:49:03 2005
+@
+text
+@d1 2
+a2 2
+
+
+d14 1
+d26 19
+a44 1
+    $self->t({sample => "can/0"});
+@
+
+
+1.5
+log
+@Sun Jun 12 19:47:00 2005
+@
+text
+@d5 1
+a5 1
+my @@studied = map { [$_ => study($_)] } comb(8);
+d28 1
+a28 1
+sub study {
+@
+
+
+1.4
+log
+@Sun Jun 12 19:46:23 2005
+@
+text
+@d62 1
+a62 2
+    @@result = map {'1' . $_, '0' . $_} $self->comb($length - 1);
+    
+@
+
+
+1.3
+log
+@Sun Jun 12 19:44:35 2005
+@
+text
+@a2 2
+my $self = bless {}, __PACKAGE__;
+
+d5 1
+a5 1
+my @@studied = map { [$_ => $self->study($_)] } $self->comb(8);
+d29 1
+a29 1
+  my ($self, $line) = @@_;
+d59 1
+a59 1
+  my ($self, $length) = @@_;
+@
+
+
+1.2
+log
+@Sun Jun 12 19:36:04 2005
+@
+text
+@a0 1
+#!/usr/bin/perl -w
+a1 1
+use strict;
+d18 1
+a18 1
+my @@on_by_regularity = 
+d20 2
+a21 2
+  @@by_regularity;
+my @@off_by_regularity = 
+d23 1
+a23 1
+  @@by_regularity;
+d25 3
+a27 3
+foreach my $line (@@on_by_regularity) {
+  print "$foo $line\n";
+  $foo++;
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@a3 4
+!
+
+package foo;
+
+d11 1
+a11 1
+my @@by_regularity = 
+d17 1
+@

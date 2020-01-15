@@ -1,0 +1,33 @@
+
+# What happens when agents occasionally mimic one another?
+
+sub bits {
+    return({
+            shy => {krate => 2,
+                    own_min_space => 16,
+                    own_max_space => 8,
+                    other_min_space => 3,
+                   },
+            repetitive => {krate => 4,
+                           own_min_space => 3,
+                           own_max_space => 8
+                          }
+           }
+          );
+}
+
+my $bits = bits();
+my %history;
+my $foo = 0;
+while (1) {
+    while(my ($name, $hash) = each %$bits) {
+        if ($foo % $hash->{krate} == 0) {
+            if (my $own_last = $history{$name}) {
+                if (exists $hash->{own_min_space}) {
+                    next if $own_last < $hash->{own_min_space};
+                }
+            }
+        }
+    }
+    ++$foo;
+}

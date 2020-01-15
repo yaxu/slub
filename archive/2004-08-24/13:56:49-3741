@@ -1,0 +1,12 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % ($self->{bangs} % 64 > 48 ? 3 : 4) == 0) {
+      $self->trig({sample => "latibro/$self->{num}",
+                   pitch => -80,
+                   pan => 0.2 + rand(0.6)
+                  }
+                 );
+      $self->{foo}++;
+      $self->{num} = $self->{foo} % 2 ? 0 : 5 + int(rand(3));
+    }
+}

@@ -1,0 +1,36 @@
+my $vol = 6;
+
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs};
+    my $c = 0;
+    my $switch = $self->{bangs} % 32 > 12 ? 1 : 0;
+
+    #my $bip = int(rand(4));
+    #my $bip = ($self->{bip}++ % 6);
+    my $bip = 10;
+
+    if($foo % ($foo % ($switch ? 8 : 2)) == 0) {
+       $self->t({sample => "future/0", loops => 0.2, volume => $vol});
+    }
+    return if $c++ > $bip;
+    $foo += 2;
+    if( $foo % ($foo % 4) == 0) {
+       $self->t({sample => "future/0", loops => 0.2, speed => 1,
+                 pan => 0.4, volume => $vol
+                }
+               );
+    }
+    return if $c++ > $bip;
+    $foo += 0;
+    if( $foo % ($foo % 3) == 0) {
+       $self->t({sample => "future/4", loops => 0.2, speed => -9,
+                 pan => 1- rand(2), volume => $vol
+                }
+               );
+    }
+    return if $c++ > $bip;
+    
+
+
+}

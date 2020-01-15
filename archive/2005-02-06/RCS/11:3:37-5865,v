@@ -1,0 +1,93 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2005.02.06.11.03.38;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.02.06.11.03.37;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Feb  6 11:03:37 2005
+@
+
+
+1.2
+log
+@Sun Feb  6 11:03:38 2005
+@
+text
+@# ^<><s>
+# 4<+<j<^
+# >^<$>>
+
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 32 > 28 ? 3: 2;
+
+    if ($self->{bangs} % $foo == 0) {
+       $self->foo(1);
+       $self->foo(0);
+       $self->foo(2);    
+    }
+}
+
+sub foo {
+   my $self = shift;
+   my $point = shift;
+        my $code = $self->code->[$point];
+        $code =~ s/(\S)(\S+)/$2$1/;
+        $self->code->[$point] = $code;
+        $self->modified;
+        my $num = $self->{"num$point"};
+        if ($1 eq '>') {
+            $num += 12;
+        }
+        elsif ($1 eq '<') {
+            $num -= 12;
+        }
+        elsif ($1 eq '^') {
+            if ($self->{bangs} % 128 > 90) {
+                $num = 70;
+            }
+            else {
+                $num = 60;
+            }
+        }
+        elsif ($1 eq '+') {
+            $num += 3;
+        }
+        elsif ($1 eq '-') {
+            $num -= 3;
+        }
+        else {
+            $num += ord($1);
+        }
+        $self->t({sample => "newnotes/$num",
+                 }
+                );
+        $self->{"num$point"} = $num;
+    }@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 3
+a3 3
+# ><s>^<
+# j<^4<+<
+# <$>>>^
+@

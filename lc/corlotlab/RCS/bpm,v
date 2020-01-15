@@ -1,0 +1,64 @@
+head	1.3;
+access;
+symbols;
+locks
+	alex:1.3; strict;
+comment	@# @;
+
+
+1.3
+date	2008.06.03.13.33.44;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2006.11.04.16.34.51;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2006.10.20.18.59.29;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Oct 20 19:59:29 2006
+@
+
+
+1.3
+log
+@Tue Jun  3 14:33:44 2008
+@
+text
+@my $bpm = 200;
+sub bang {
+    my $self = shift;
+    unless ($self->{foo} == $bpm) {
+      $self->bpm($bpm);
+      $self->{foo} = $bpm;
+    }
+}@
+
+
+1.2
+log
+@Sat Nov  4 16:34:51 2006
+@
+text
+@d1 1
+a1 1
+my $bpm = 150;
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+my $bpm = 126;
+@

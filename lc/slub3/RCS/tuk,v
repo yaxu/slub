@@ -1,0 +1,47 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.06.03.17.58.26;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Jun  3 18:58:26 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@my $vowels = ['a', 'e', 'i', 'o', 'u'];
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 6 == 0) {
+        $self->t({pan => $self->sin(),
+                  sample => "sine/5",
+                  speed => 32,
+                  loops => 8,
+                  vowel => 'e',
+                  scale => 'equal'
+                 }
+                );
+        $self->t({pan => $self->sin(),
+                  sample => "sine/5",
+                  accellerate => -0.00001,
+                  speed => 24,
+                  loops => 32, 
+                  scale => 'equal'
+                 }
+                );
+    }
+}@

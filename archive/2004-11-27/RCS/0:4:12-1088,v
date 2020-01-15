@@ -1,0 +1,60 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2004.11.27.00.23.33;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.11.27.00.04.12;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Nov 27 00:04:12 2004
+@
+
+
+1.2
+log
+@Sat Nov 27 00:23:33 2004
+@
+text
+@# 3!
+my $quiet = 0;
+sub bang {
+    my $self = shift;
+    if ($quiet > 0) {
+      $quiet--;
+    }
+    elsif ($self->{bangs} % 6 == 0) {
+        my $foo = ($self->{bangs} % 8 == 0);
+        $self->trigger({sample => "chin/0",
+                        rate => 10 + ($foo ? 10 : 0)
+                       }
+                      );
+        if ($foo) {
+           $self->modified;
+           $quiet = int(rand(18));
+           $self->code->[0] = "# $quiet!";
+        }
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# 0!
+@

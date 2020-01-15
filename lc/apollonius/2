@@ -1,0 +1,26 @@
+
+my $halfpi = 3.141592653589793 / 2;
+
+sub bang {
+    my $self = shift;
+    my $note = 0;
+
+    $self->{aosc} = 
+      Net::OpenSoundControl::Client->new(Host => 'localhost', Port => 7770);
+    my $osc = $self->{aosc};
+
+    $osc->send(
+       ['/site',
+        # x y
+        'f', 300, 'f', 300,
+        # weight
+        'f', 10,
+        # duration
+        'i', 40,
+        # speed
+        'f', 5,
+        # direction
+        'f', ($self->{bangs} / 12) * $halfpi
+       ]
+      ) if ($self->{bangs} % 4 == 0);
+}

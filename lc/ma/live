@@ -1,0 +1,26 @@
+sub bang {
+    my $self = shift;
+    my $mode = $self->{mode}++;
+    if ($self->{bangs} % 16 == 6) {
+        $self->t({sample => "sine/4",
+                  loops => 60,
+                  scale => "equal",
+                  speed => ($mode % 32 == 0 ? 45 : 50),
+                  vowel => 'i',
+                  envelope => 'chop', delay => 0.01, pan => 1
+                 }
+                );
+        $self->vsite(0.5);
+    }
+    if ($self->{bangs} % 24 == 0) {
+        $self->t({sample => "sine/4",
+                  loops => 400,
+                  scale => "equal",
+                  speed => ($mode % 32 == 0 ? 30 : 25),
+                  vowel => 'o', delay => 0.1, pan => -1
+                 }
+                );
+        $self->vsite(0.75);
+    }
+
+}

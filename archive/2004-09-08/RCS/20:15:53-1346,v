@@ -1,0 +1,134 @@
+head	1.4;
+access;
+symbols;
+locks
+	alex:1.4; strict;
+comment	@# @;
+
+
+1.4
+date	2004.09.08.19.21.52;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2004.09.08.19.21.49;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2004.09.08.19.16.44;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.09.08.19.15.53;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Wed Sep  8 20:15:53 2004
+@
+
+
+1.4
+log
+@Wed Sep  8 20:21:52 2004
+@
+text
+@# <<><s^>>
+# t4<<j<^<
+# >><<<>^>>><<<><><<><<<<>
+
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 32 > 28 ? 3: 2;
+
+    if ($self->{bangs} % $foo == 0) {
+       $self->foo(1);
+       $self->foo(0);
+       $self->foo(2);    
+    }
+}
+
+sub foo {
+   my $self = shift;
+   my $point = shift;
+        my $code = $self->code->[$point];
+        $code =~ s/(\S)(\S+)/$2$1/;
+        $self->code->[$point] = $code;
+        $self->modified;
+        my $num = $self->{"num$point"};
+        if ($1 eq '>') {
+            $num += 12;
+        }
+        elsif ($1 eq '<') {
+            $num -= 12;
+        }
+        elsif ($1 eq '^') {
+            $num = 60;
+        }
+        else {
+            $num += ord($1);
+        }
+        $self->play({num => $num, formfreq => 10, 
+                     bwfreq => 60 * $self->sin(10), ts => 60,
+                     pan => $self->sin(10),
+                     browndel => $self->{foop}--,
+#                     offset => rand(10)
+                    }
+                   );
+        $self->{"num$point"} = $num;
+    }
+@
+
+
+1.3
+log
+@Wed Sep  8 20:21:49 2004
+@
+text
+@d1 3
+a3 3
+# s^>><<><
+# j<^<t4<<
+# <<<>>><<<>^>>><<<><><<><
+d40 1
+a40 1
+                     offset => rand(10)
+@
+
+
+1.2
+log
+@Wed Sep  8 20:16:44 2004
+@
+text
+@d1 3
+a3 2
+# !<<d>c<!
+# >^><><f<
+d12 1
+d36 2
+a37 1
+        $self->play({num => $num, formfreq => 40, bwfreq => 60, ts => 100,
+d39 2
+a40 1
+                     browndel => $self->{foop}++
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 2
+a2 2
+# <<d>c<!!
+# ^><><f<>
+d34 3
+a36 1
+        $self->play({num => $num, formfreq => 40, bwfreq => 60, ts => 100
+@

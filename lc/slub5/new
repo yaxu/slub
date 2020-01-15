@@ -1,0 +1,24 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0) {
+        my $foo = $self->{bangs} % 32;
+        $self->t({sample => "newnotes/$foo",
+                  speed => 0.25, shape => 0.1, delay => 0.1,
+                  delay2 => 0.1,
+                  pan => 0.5 - rand(1)
+                 }
+                );
+    }
+    if ($self->{bangs} % 8 == ($self->{bangs} % 128 > 64 ? 0 : 4)) {
+       $self->t({sample => "chin/0", delay => 0.1,
+                 speed => ((($self->{foo}++ % 2) + 1) * 0.2)
+                }
+               );
+    }
+    if ($self->{bangs} % 64 == 4 or $self->{bangs} % 32 == 14) {
+#        $self->t({sample => "monsterb/4",
+#                  speed => 0.6, loops => 1 
+#                 }
+#                );
+    }
+}

@@ -1,0 +1,24 @@
+# vkbl
+# 650
+my @l = ('a' .. 'z');
+sub bang {
+    my $self = shift;
+
+    my $line = $self->line(0);
+    if ($self->{bangs} % 62 == 0) {
+       my $max = 4;
+       while (length($line) >= $max) {
+           $line =~ s/.//;
+       }
+       $line .= $l[rand @l];
+    }
+    if ($self->{bangs} % 16 == 0) {
+       my $char = substr($line, ($self->{bing} % length($line)), 1);
+       $self->t({sample => "kurt/" . ord($char), volume => 0.01,
+                 speed => 0.5});
+       $self->{bing}++;
+       $self->line(1, $self->{bing});
+    }
+    $self->line(0, $line);
+    $self->modified;
+}

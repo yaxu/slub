@@ -1,0 +1,33 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2006.03.23.21.28.09;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Thu Mar 23 21:28:09 2006
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@
+sub bang {
+    my $self = shift;
+    $self->t({sample => "can/$self->{bangs}",
+              delay => rand()
+             }
+            ) 
+      unless $self->{bangs} % 3;
+}@

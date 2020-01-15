@@ -1,0 +1,691 @@
+head	1.32;
+access;
+symbols;
+locks
+	alex:1.32; strict;
+comment	@# @;
+
+
+1.32
+date	2008.06.10.10.54.11;	author alex;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	2008.06.10.10.46.42;	author alex;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	2008.06.10.10.42.17;	author alex;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	2008.06.10.10.41.24;	author alex;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	2008.06.10.10.41.17;	author alex;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	2008.06.10.10.40.33;	author alex;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	2008.06.10.10.40.03;	author alex;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2008.06.10.10.39.18;	author alex;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2008.06.10.10.39.12;	author alex;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2008.06.10.10.38.22;	author alex;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2008.06.10.10.38.09;	author alex;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2008.06.10.10.37.54;	author alex;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2008.06.10.10.37.36;	author alex;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2008.06.10.10.37.19;	author alex;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2008.06.10.10.34.55;	author alex;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2008.06.10.10.34.02;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2008.06.10.10.29.38;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2008.06.10.10.29.02;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2008.06.10.10.27.45;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2008.06.10.10.26.34;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2008.06.10.10.25.34;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2008.06.10.10.24.56;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2008.06.10.10.24.37;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2008.06.10.10.24.02;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2008.06.10.10.23.56;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2008.06.10.10.23.54;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.06.10.10.23.17;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.06.10.10.22.14;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.06.10.10.21.56;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.06.10.10.19.53;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.06.10.10.18.21;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.06.09.22.43.41;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Jun  9 23:43:41 2008
+@
+
+
+1.32
+log
+@Tue Jun 10 11:54:11 2008
+@
+text
+@# 0.9375
+
+my $tension = 0.8;
+my $speed = 0.000001;
+my $alpha = 6;
+my $mass = 1;
+sub bang {
+    my $self = shift;
+    my $foo = (($self->{bangs} % 64) / 64);
+    $self->line(0, $foo);
+    my $bap = $self->{bangs} % 32;
+    my $bar = $bap > 24 ? 1 : 3;
+    $self->vector({x => 5, y => 0,
+                   speed => $speed, angle => 5,
+                   mass => $mass, alpha => $alpha,
+                   velocity => 0.5 + rand(0.4)
+                  }
+                 ) unless $self->{bangs} % $bar;
+    $self->strike({x => -5, y => 0,
+                   alpha => 10, mass => 1, x => 5, y => 3,
+                   speed => 0, angle => 0, velocity => 2.8
+                  }
+                 ) unless $self->{bangs} % 4;
+
+    if ($self->{bangs} % 32 == 0) {
+       $tension = 0.75 + rand(0.5);
+       $speed = rand(0.000002);
+       $alpha = 1 + rand(10);
+       $mass = 0.8 + rand();
+       $self->tension($tension);
+       $self->loss(0.9996);
+    }
+    $self->tension($tension + $bap * -0.01);
+    $self->modified();
+}@
+
+
+1.31
+log
+@Tue Jun 10 11:46:42 2008
+@
+text
+@d1 1
+a1 1
+# 0.8125
+d31 1
+a31 1
+       $self->loss(0.9965);
+d33 1
+a33 1
+    $self->tension($tension + $bap * 0.01);
+@
+
+
+1.30
+log
+@Tue Jun 10 11:42:17 2008
+@
+text
+@d1 1
+a1 1
+# 0.65625
+d19 5
+a23 5
+#    $self->strike({x => -5, y => 0,
+#                   alpha => 0.5, mass => 1.3, x => 0, y => 0,
+#                   speed => 0, angle => 0
+#                  }
+#                 ) unless $self->{bangs} % 32;
+d31 1
+a31 1
+       $self->loss(0.99 + rand(0.02));
+d33 1
+a33 1
+#    $self->tension($tension + $bap * 0.01);
+@
+
+
+1.29
+log
+@Tue Jun 10 11:41:24 2008
+@
+text
+@d1 1
+a1 1
+# 0.109375
+d33 1
+a33 1
+    $self->tension($tension + $bap * 0.01);
+@
+
+
+1.28
+log
+@Tue Jun 10 11:41:17 2008
+@
+text
+@d1 1
+a1 1
+# 0.171875
+@
+
+
+1.27
+log
+@Tue Jun 10 11:40:33 2008
+@
+text
+@d1 1
+a1 1
+# 0.671875
+d33 1
+a33 1
+    $self->tension($tension + $bap * 0.1);
+@
+
+
+1.26
+log
+@Tue Jun 10 11:40:03 2008
+@
+text
+@d1 1
+a1 1
+# 0.015625
+d33 1
+a33 1
+
+@
+
+
+1.25
+log
+@Tue Jun 10 11:39:18 2008
+@
+text
+@d1 1
+a1 1
+# 0.390625
+d11 2
+a12 1
+    my $bar = $self->{bangs} % 32 > 24 ? 1 : 3;
+@
+
+
+1.24
+log
+@Tue Jun 10 11:39:12 2008
+@
+text
+@d1 1
+a1 1
+# 0.546875
+d15 1
+a15 1
+                   velocity => 0.5 + rand(0.3)
+@
+
+
+1.23
+log
+@Tue Jun 10 11:38:22 2008
+@
+text
+@d1 1
+a1 1
+# 0.265625
+d15 1
+a15 1
+                   velocity => 0.5 + rand(0.5)
+d30 1
+a30 1
+       $self->loss(0.99 + rand(0.01));
+@
+
+
+1.22
+log
+@Tue Jun 10 11:38:09 2008
+@
+text
+@d1 1
+a1 1
+# 0.671875
+d30 1
+a30 1
+#       $self->loss(0.99 + rand(0.1));
+@
+
+
+1.21
+log
+@Tue Jun 10 11:37:54 2008
+@
+text
+@d1 1
+a1 1
+# 0.796875
+d25 1
+a25 1
+       $tension = 1;# + rand(0.5);
+@
+
+
+1.20
+log
+@Tue Jun 10 11:37:36 2008
+@
+text
+@d1 1
+a1 1
+# 0.625
+d15 1
+a15 1
+                   velocity => 0.5 + rand(0.25)
+@
+
+
+1.19
+log
+@Tue Jun 10 11:37:19 2008
+@
+text
+@d1 1
+a1 1
+# 0.5
+d11 1
+a11 1
+    my $bar = $self->{bangs} % 32 > 20 ? 1 : 2;
+@
+
+
+1.18
+log
+@Tue Jun 10 11:34:55 2008
+@
+text
+@d11 1
+d17 6
+a22 6
+                 ) unless $self->{bangs} % 3;
+    $self->strike({x => -5, y => 0,
+                   alpha => 0.5, mass => 1.3, x => 0, y => 0,
+                   speed => 0, angle => 0
+                  }
+                 ) unless $self->{bangs} % 8;
+d25 1
+a25 1
+       $tension = 0.6;# + rand(0.5);
+d30 1
+a30 1
+       $self->loss(0.99 + rand(0.1));
+@
+
+
+1.17
+log
+@Tue Jun 10 11:34:02 2008
+@
+text
+@d1 1
+a1 1
+# 0.859375
+d24 1
+a24 1
+       $tension = 0.6 + rand(0.5);
+@
+
+
+1.16
+log
+@Tue Jun 10 11:29:38 2008
+@
+text
+@d1 1
+a1 1
+# 0.8125
+d16 7
+a22 2
+                 ) unless $self->{bangs} % 4;
+#    $self->strike({x => 3, y => 3}) unless $self->{bangs} % 8;
+d29 1
+a29 1
+       $self->loss(0.99 + rand(0.2));
+d31 1
+@
+
+
+1.15
+log
+@Tue Jun 10 11:29:02 2008
+@
+text
+@d1 1
+a1 1
+# 0.375
+d13 2
+a14 1
+                   mass => $mass, alpha => $alpha, velocity => 0.5
+@
+
+
+1.14
+log
+@Tue Jun 10 11:27:45 2008
+@
+text
+@d1 1
+a1 1
+# 0.75
+d23 1
+a23 1
+       $self->loss(0.9 + rand());
+@
+
+
+1.13
+log
+@Tue Jun 10 11:26:34 2008
+@
+text
+@d1 1
+a1 1
+# 0.859375
+d23 1
+@
+
+
+1.12
+log
+@Tue Jun 10 11:25:34 2008
+@
+text
+@d1 1
+a1 1
+# 0.296875
+d15 1
+a15 1
+                 ) unless $self->{bangs} % 3;
+@
+
+
+1.11
+log
+@Tue Jun 10 11:24:56 2008
+@
+text
+@d1 1
+a1 1
+# 0.53125
+d6 1
+d13 1
+a13 1
+                   mass => 1.7, alpha => $alpha, velocity => 0.5
+d21 1
+@
+
+
+1.10
+log
+@Tue Jun 10 11:24:37 2008
+@
+text
+@d1 1
+a1 1
+# 0.265625
+d18 1
+a18 1
+       $speed = 0.000001 + rand(0.000001);
+@
+
+
+1.9
+log
+@Tue Jun 10 11:24:02 2008
+@
+text
+@d1 1
+a1 1
+# 0.78125
+d12 1
+a12 1
+                   mass => 1.7, alpha => $alpha
+@
+
+
+1.8
+log
+@Tue Jun 10 11:23:56 2008
+@
+text
+@d1 1
+a1 1
+# 0.109375
+@
+
+
+1.7
+log
+@Tue Jun 10 11:23:54 2008
+@
+text
+@d1 1
+a1 1
+# 0.796875
+d19 1
+a19 1
+       $alpha = 1 + rand(4);
+@
+
+
+1.6
+log
+@Tue Jun 10 11:23:17 2008
+@
+text
+@d1 1
+a1 1
+# 0.265625
+d5 1
+d12 1
+a12 1
+                   mass => 1.7, alpha => 8
+d19 1
+@
+
+
+1.5
+log
+@Tue Jun 10 11:22:14 2008
+@
+text
+@d1 1
+a1 1
+# 0.3125
+d4 1
+a4 1
+
+d10 1
+a10 1
+                   speed => 0.000001, angle => 5,
+d17 1
+@
+
+
+1.4
+log
+@Tue Jun 10 11:21:56 2008
+@
+text
+@d1 1
+a1 1
+# 0.140625
+d15 1
+a15 1
+    if ($self->{bangs % 4 == 0) {
+@
+
+
+1.3
+log
+@Tue Jun 10 11:19:53 2008
+@
+text
+@d1 3
+a3 1
+# 0.75
+d10 2
+a11 2
+                   speed => 0.000015, angle => 5,
+                   mass => 1.7, alpha => 1
+d15 4
+a18 1
+#    $self->tension(0.8 + rand(0.01));
+@
+
+
+1.2
+log
+@Tue Jun 10 11:18:21 2008
+@
+text
+@d1 1
+a1 1
+# 0.234375
+d7 1
+a7 1
+    $self->vector({x => 7.9, y => 0,
+d9 1
+a9 1
+                   mass => 1.7, alpha => 0.5
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# 0.1875
+d7 3
+a9 3
+    $self->vector({x => 0, y => 0,
+                   speed => 0.000007, angle => pi() * $foo,
+                   mass => 1.5, alpha => 0.5
+d12 2
+a13 2
+    $self->strike({x => 3, y => 3}) unless $self->{bangs} % 8;
+#$self->tension(0.6);
+@

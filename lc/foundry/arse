@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+    my $s = $self->{bangs} % 32 > 20;
+    $self->t({sample => "uxay/1", volume => 2, speed => $s ? 1 : 0.9,
+              pan => -0.5 + rand(), loops => 0.25 + rand(0.75),
+              shape => 0.99
+             }
+            )
+      if $self->{bangs} % 4 == 0;
+
+}

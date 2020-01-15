@@ -1,0 +1,61 @@
+# gabba/0vol 122.49 speed 0.00 cutoff 3062.24 res 0.77 
+# gabba/1vol 11.12 speed 0.00 cutoff 150.66 res 0.30 
+# gabba/2vol 106.40 speed 0.00 cutoff 80.26 res 0.47 
+# gabba/3vol 92.95 speed 0.00 cutoff 2954.95 res 0.26 
+# off/0vol 63.28 speed 0.00 cutoff 723.77 res 0.72 
+
+use lib '/yaxu/slub/clients';
+
+use old::Old::Two;
+use old::Old::Off;
+
+sub bang {
+    my $self = shift;
+    my $next;
+
+    $self->{old} ||= $self->init_old();
+
+    foreach my $n (0 .. 3) {
+        my $aged = $self->{old}->[$n];
+        my $sample = $aged->sample;
+        #sample =~ s/gabba/gabbalouder/;
+        if ($next = $aged->next_beat) {
+            $self->t({sample => $sample,
+                      volume => $next->{vol} / 1000,
+                      speed  => 1,
+#                      delay  => rand(0.03),
+#                      delay2 => rand(0.03),
+                      loops => 1,
+                      shape  => 0.99,
+                      cutoff => $next->{cutoff},
+                      resonance => $next->{res},
+                     }
+                  );
+            my $m = $aged->sample;
+            foreach my $p (qw/vol speed cutoff res/) {
+              $m .= $p . " " . sprintf("%.2f", ($next->{$p} || 0)) . " ";
+            }
+            $self->line($n, $m);
+        }
+    }
+    $self->modified;
+}
+
+sub init_old {
+    my $self = shift;
+    my $old = [];
+    my $n = 0;
+    foreach my $sample ("gabba/0", "gabba/1", "gabba/2", "gabba/3") {
+       my $aged = old::Old::Two->new(sample   => $sample,
+                                      loopsize => 16,
+                                      pitch    => 60
+                                     );
+       push(@$old, $aged);
+    }
+
+    push @$old, old::Old::Off->new(sample   => "off/0",
+                                   loopsize => 32,
+                                   pitch    => 60
+                                  );
+    return $old;
+}

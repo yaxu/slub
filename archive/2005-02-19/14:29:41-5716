@@ -1,0 +1,10 @@
+sub bang {
+    my $self = shift;
+    my $mod = ($self->{bangs} % 256 < 32 ? 4 : 6);
+    if ($self->{bangs} % $mod == 0) {
+        $self->t({sample => "drumtraks/6", volume => 2, speed => 0.8,
+                  shape => 0.4
+                 }
+                );
+    }
+}

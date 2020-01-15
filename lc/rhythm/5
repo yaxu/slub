@@ -1,0 +1,63 @@
+# 32.3.4!6+3
+# O...O.O.O...O...O.O.O...O..OO...
+
+my $init = 0;
+my $rules = [];
+
+sub bang {
+    my $self = shift;
+    init() unless $init;
+
+    my $line = $self->line(1);
+    return unless length $line;
+    my $point = $self->{bangs} % length($line);
+    my $chr = substr($line, $point, 1);
+    if ($chr eq 'O') {
+        $self->t({sample => "made/2",
+                  loops => rand(0.05) + 0.01, speed => 0.25
+                 }
+                );
+    }
+    my $sound;
+    foreach my $rule (@$rules) {
+        if (($self->{bangs} + $rule->[2]) % $rule->[1] == 0) {
+            if ($rule->[0] eq 'pulse') {
+                $chr = 'o';
+            }
+            else if ( $rule->[0] eq 'wipe') {
+                $chr = '';
+            }
+            else if ($rule->[0] eq 'accent') {
+                $chr =~ s/([a-z])/upper($1)/e;
+            }
+        }
+    }
+}
+
+
+sub init {
+  my $string = $self->line(0);
+
+  $string =~ s/^(\d+)//;
+  my $length = $1;
+  my $rhythm = ('.' x $length);
+
+  while($string =~ /(\D+)(\d+)(?=\+(\d+))?/g) {
+    my ($verb, $param, $offset) = ($1, $2, $3);
+    $offset ||= 0;
+    print("$verb / $param / $offset\n");
+    if ($verb eq '.') {
+      $param--;
+      push(@$rules, ['pulse', $param, $offset]);
+      $rhythm =~ s/(?<=.{$offset})(.)(.{$param})/O$2/g;
+    }
+    elsif ($verb eq '!') {
+      $param--;
+      push(@$rules, ['wipe', $param, $offset]);
+      $rhythm =~ s/(?<=.{$offset})(.)(.{$param})/.$2/g;
+   }
+  }
+  $self->line(1, $rhythm);
+  $self->modified;
+  ++$init;
+}

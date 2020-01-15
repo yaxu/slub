@@ -1,0 +1,69 @@
+
+This example is an interactive demo that uses MIDI data from the MIDI
+In jack to drive a simple musical instrument. Unlike linmidi, several
+controllers (Mod wheel, pitch bend wheel, channel volume) are used by
+the linbuzz patch, via the sfront/lib/Slib library.
+
+The test this program under Linux, type "make" in this directory to
+run the example. 
+
+To test this program under Macintosh OS X, copy the Makefile.osx file
+to Makefile, and then type "make". Note that sfront supports external
+MIDI sources via CoreMIDI at present, but not virtual MIDI sources.
+
+
+Testing under Windows MultiMedia Extension library
+--------------------------------------------------
+
+Note that this example has not been tested yet under Windows;
+please send back bugs and performance reports. Thanks!
+
+
+The simplest test under Microsoft Windows uses the Windows MultiMedia
+Extension library, via the PortAudio library. First, run sfront:
+
+sfront -cin win32 -aout pa_win_wmme -orc linbuzz.saol -sco linbuzz.sasl
+
+And then compile the sa.c file using either gcc:
+
+             gcc -O3 sa.c -lm -lwinmm -o sa.exe
+
+or Microsoft Visual C++:
+
+             cl sa.c winmm.lib -o sa.exe
+
+Execute the sa.exe file to start the instrument. Rerun sfront using 
+the -latency t flag, where t is a floating-point constant with units of
+seconds, to test the latency behavior of the program.
+
+
+Testing under Windows DirectSound
+---------------------------------
+
+Sfront also supports the Windows DirectSound system, via the Portaudio
+library. To use DirectSound, you'll need a recent version of Developer
+Microsoft Directsound installed on your machine, available from
+
+            http://www.microsoft.com/directx/download.asp
+
+To use sfront with Directsound, first run sfront:
+
+sfront -cin win32 -aout pa_win_ds -orc linbuzz.saol -sco linbuzz.sasl
+
+And then compile the sa.c file using Microsoft Visual C++:
+
+         cl sa.c dsound.lib dxguid.lib winmm.lib -o sa.exe
+
+Execute the sa.exe file to start the instrument. Rerun sfront using 
+the -latency t flag, where t is a floating-point constant with units of
+seconds, to test the latency behavior of the program.
+
+If you have trouble with compilation, see this FAQ for DirectSound
+installation issues:
+
+http://msdn.microsoft.com/library/default.asp?URL=/library/techart/DirectX8faq.htm
+
+Note gcc probably won't compile DirectSound, but you can try it using:
+
+     gcc -O3 sa.c -lm -lwinmm -ldsound -ldxguid -lwinmm -o sa.exe
+

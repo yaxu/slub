@@ -1,0 +1,25 @@
+sub bang {
+    my $self = shift;
+    $self->sine({freq => 70,
+                 direction => 0.1,
+                 ts => 2,
+                 volume => 4,
+                 noise => 0.01
+                })
+      if $self->{bangs} % 6 == 0;
+    $self->sine({freq => 70,
+                 direction => -0.1,
+                 ts => 2,
+                 volume => 4,
+                 noise => 0.001
+                })
+      if $self->{bangs} % 8 == 0;
+    $self->sine({freq => 71,
+                 direction => -0.1,
+                 ts => 3,
+                 volume => 4,
+                 noise => 0.001, pan => 0.5 * (1 - rand(2))
+                })
+      if $self->{bangs} % 8 == 0;
+
+}

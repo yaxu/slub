@@ -1,0 +1,22 @@
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0)  {
+    $self->strike({alpha => 7, velocity => 3, mass => 0.1,
+                   x=> -3.999, y => -3.999
+                  });
+    }
+    my $foo = $self->{bangs} % 32 > 20 ? 3 : 4;
+    if ($self->{bangs} % $foo == 0) {
+      $self->strike({alpha => 1, velocity => 1, mass => 0.4,
+                     x=> 3.999,# y => 3.999
+                    });   
+    }
+    if ($self->{bangs} % ($foo * 2) == 0) {
+      $self->strike({alpha => 2, velocity => 1.4,
+                     x => 3.999, y => 3.999    
+                    });       
+    }
+    $self->tension($self->{bangs} % 32 > 16 ? 0.8 : 0.75);
+    $self->loss(1.2);
+}

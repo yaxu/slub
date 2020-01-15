@@ -1,0 +1,59 @@
+# x----x----x--x--
+# x----x----x--x--
+# -!x--!-x---!x!-x
+
+sub bang {
+    my $self = shift;
+
+    return if ($self->{bangs} % 2);
+    my $b = $self->{burp}++;
+ 
+    if ($b % (length($self->line(0))) == 0) {
+      if ((not $self->{orig}) or $self->{orig} ne $self->line(0)) {
+          $self->{orig} = $self->line(0);
+          $self->line(1, $self->line(0));
+          $self->line(2, back($self->line(0)));
+      }
+    }
+
+    if ($b % 16 == 0 and rand() > 0.8) {
+        $self->line(2, back($self->line(0)));
+    }
+
+    my $seq = $self->line(2);
+    $seq =~ s/(.)(.+)/$2$1/;
+    my $chr = $1;
+    if ($chr eq '!') {
+       $self->t({sample => "timmono/32", loops => 0.5 + rand(0.5), 
+                 speed => 1, pan => 0.5});
+    }
+    elsif ($chr eq 'x') {
+       my $curve = $self->sin(5);
+       $self->t({sample => "timmono/33", pan => 1 - rand(2),
+                 loops => rand(1), volume => 0.6 + $curve / 8,
+                }
+               );
+    }
+    elsif (rand() > 0.9) {
+        $self->t({sample => "timmono/32", volume => 0.8, loops => 0.1,
+                  speed => 1 + rand(0.4), pan => -0.5
+                 }
+                );
+    }
+
+    $self->line(2, $seq);
+    $self->modified;
+}
+
+sub back {
+  my $front = shift;
+  $front =~ s/(?<=x)(\-+)/place($1)/eg;
+  
+  return($front);
+}
+
+sub place {
+    my $foo = shift;
+    substr($foo, rand(length($foo)), 1, '!');
+    return($foo);
+}

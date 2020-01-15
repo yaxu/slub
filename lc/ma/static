@@ -1,0 +1,37 @@
+# 0.818357381567566
+sub bang {
+    my $self = shift;
+    $self->{mode} ||= 0;
+    $self->{straight} = ($self->{mode} % 8 == 0 ? 0 : 1);
+    my $mode = $self->{mode};
+    if ($self->{bangs} % ($mode % 4 == 0 ? 2 : 4) == 0) {
+        $self->t({sample => "future/0", speed => 2,
+                  ($self->{straight} ? () : (delay => rand())), 
+                  pan => -0.8,
+                  volume => $self->sin(2), shape => 0
+                 }
+                );
+    }
+    if ($self->{bangs} % ($mode % 3 == 0 ? 2 : 8) == 1) {
+        $self->t({sample => "future/0", speed => 2.5, pan => 0.8,
+                  volume => 1 - $self->sin(2),
+                  ($self->{straight} ? () : (delay => 0.09))
+                 }
+                );
+    }
+
+    if ($self->{bangs} % ($mode % 4 == 0 ? 1 : 6) == 0) {
+        $self->t({sample => "future/6", speed => 2, pan => 0,
+                  volume => 1 - $self->sin(2),
+                  ($self->{straight} ? () : (delay => 0.02))
+                 }
+                );
+    }
+
+    if ($self->{bangs} % 16 == 0) {
+       $self->{mode}++;
+    }
+
+    $self->line(0, 1 - $self->sin(10));
+    $self->modified;
+}

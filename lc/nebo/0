@@ -1,0 +1,27 @@
+# 0.937511289494723
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 2 == 0) {
+        $self->t({sample => "future/0", speed => 2,
+                  delay => rand(), pan => -0.8,
+                  volume => $self->sin(2), shape => 0
+                 }
+                );
+    }
+    if ($self->{bangs} % 2 == 1) {
+        $self->t({sample => "future/0", speed => 2.5, pan => 0.8,
+                  volume => 1 - $self->sin(2), delay => 0.009
+                 }
+                );
+    }
+
+    if ($self->{bangs} % 3 == 0) {
+        $self->t({sample => "future/6", speed => 2, pan => 0,
+                  volume => 1 - $self->sin(2), delay => 0.02
+                 }
+                );
+    }
+
+$self->line(0, 1 - $self->sin(10));
+$self->modified;
+}

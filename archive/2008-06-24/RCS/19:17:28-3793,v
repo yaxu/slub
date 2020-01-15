@@ -1,0 +1,37 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2008.06.24.18.17.28;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Jun 24 19:17:28 2008
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->{speed} ||= 0.1;
+    if ($self->{bangs} % 2 == 0) {
+      $self->t({sample => "industrial/$self->{bangs}", speed =>  1,
+                delay => 0.01 + rand(0.01),
+                delay2 => 0.01 + rand(0.01),
+                pan => rand(2) - 1, loops => 1.5,
+               }
+              );
+#      $self->{speed} += 0.1;
+    }
+}@

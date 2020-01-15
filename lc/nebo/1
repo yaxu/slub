@@ -1,0 +1,22 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0) {
+        $self->t({sample => "drum/0", volume => 4, delay => rand(0.1),
+                  pan => 0, speed => 1.2
+                 }
+                );
+    }
+    if ($self->{bangs} % 8 == 5) {
+        $self->t({sample => "drum/0", volume => 4, delay => rand(0.1),
+                  pan => -1, speed => 1.4
+                 }
+                );
+    }
+    if ($self->{bangs} % 8 == 2) {
+        $self->t({sample => "drum/0", volume => 4, delay => rand(0.1),
+                  pan => 1, speed => 1.4
+                 }
+                );
+    }
+
+}

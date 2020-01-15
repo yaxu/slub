@@ -1,0 +1,35 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.02.06.14.45.47;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Feb  6 14:45:47 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    unless ($self->{bangs} % 16) {
+        $self->t({sample => 'newnotes/0', volume => 0.3
+,
+                  speed => 0.2,
+                  envelope_name => 'valley', shape => 0.9, 
+                 }
+                );
+    }
+}@

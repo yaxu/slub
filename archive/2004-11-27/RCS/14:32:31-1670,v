@@ -1,0 +1,50 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2004.11.27.14.32.47;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.11.27.14.32.31;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Nov 27 14:32:31 2004
+@
+
+
+1.2
+log
+@Sat Nov 27 14:32:47 2004
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % ($self->{bangs} % 64 > 48 ? 3 : 4) == 0) {
+      $self->trigger({sample => "latibro/$self->{num}",
+                      pan => 0.2 + rand(0.6)
+                     }
+                    );
+      $self->{foo}++;
+      $self->{num} = $self->{foo} % 2 ? 0 : 5 + int(rand(3));
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@a4 1
+                      rate => 70,
+@

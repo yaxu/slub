@@ -1,0 +1,52 @@
+# 16.3+2.8+2!3+1
+# ..O..O..O..O....
+
+my $init = 0;
+
+sub bang {
+    my $self = shift;
+    init() unless $init;
+
+    my $line = $self->line(1);
+    return unless length $line;
+    my $point = $self->{bangs} % length($line);
+    my $chr = substr($line, $point, 1);
+    if ($chr eq 'O') {
+        $self->t({sample => "f/5",
+                  loops => 0.02,
+                  pan => -1, pan_to => 1,
+#                  loops => ($self->{bangs} % 8 == 0 ? 0.3 + rand(0.3) : 0.1),
+                  delay => 0.02 + rand(0.005),
+                  volume => 0.15,
+                  speed => 0.9 + ((($self->{bangs} / 24) % 4) * 0.09)
+                           + rand(0.01),
+                 }
+                );
+    }
+}
+
+
+sub init {
+  my $string = $self->line(0);
+
+  $string =~ s/^(\d+)//;
+  my $length = $1;
+  my $rhythm = ('.' x $length);
+
+  while($string =~ /(\D+)(\d+)(?=\+(\d+))?/g) {
+    my ($verb, $param, $offset) = ($1, $2, $3);
+    $offset ||= 0;
+    print("$verb / $param / $offset\n");
+    if ($verb eq '.') {
+      $param--;
+      $rhythm =~ s/(?<=.{$offset})(.)(.{$param})/O$2/g;
+    }
+    elsif ($verb eq '!') {
+      $param--;
+      $rhythm =~ s/(?<=.{$offset})(.)(.{$param})/.$2/g;
+   }
+  }
+  $self->line(1, $rhythm);
+  $self->modified;
+  ++$init;
+}

@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+    my $point = $self->{bangs} % 16;
+    beep(800, 70) if (($self->{bangs} + 4) % 8 == 0);
+    beep(80, 50)  if $point == 0;
+    beep(81, 100) if $point == 10;
+}
+
+sub bpm {
+    140 * 4;
+}

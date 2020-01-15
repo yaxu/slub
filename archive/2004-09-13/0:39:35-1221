@@ -1,0 +1,10 @@
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 16 > 11;
+    if ($self->{bangs} % ($foo ? 1 : 2) == 0) {
+        $self->trigger({sample => "incoming/4",
+                        pan    => $self->sin(4),
+                       }
+                      );
+    }
+}

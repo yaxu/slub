@@ -1,0 +1,373 @@
+head	1.16;
+access;
+symbols;
+locks
+	alex:1.16; strict;
+comment	@# @;
+
+
+1.16
+date	2005.12.11.12.48.01;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2005.12.11.12.47.21;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2005.12.11.12.40.36;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2005.12.11.12.40.18;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2005.12.11.12.40.02;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2005.11.26.22.13.25;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2005.11.26.13.39.44;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2005.11.26.13.38.13;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2005.11.26.13.09.03;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2005.11.26.13.06.26;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2005.11.26.13.05.27;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2005.11.26.13.04.21;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.11.26.13.03.26;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.11.26.13.02.38;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.11.26.13.01.08;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.11.26.12.50.39;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Nov 26 12:50:39 2005
+@
+
+
+1.16
+log
+@Sun Dec 11 12:48:01 2005
+@
+text
+@my @@rise = (0, 4, 2, 7);
+# 0.28
+# 0.0133333333333335
+sub bang {
+    my $self = shift;
+    my $foo = ($self->{bangs} % 64 > 48 ? 2 : 4);
+    if ($self->{bangs} % $foo == 0) {
+        my $speed = 10 - 1 + $rise[$self->{foo} % @@rise] - 30;
+        $self->line(1, ($speed + 21.1) / 7.5);
+        $self->modified;
+        $self->t({sample => "f/0", 
+                  speed => 10 - 1 + $rise[$self->{foo} % @@rise] - 30,
+                  loops => 0.01 + rand(0.2), delay2 => 0.2,
+                  scale => "equal", delay => 0.01, volume => 0.25, pan => 0.25
+                 }
+                );
+        $self->v({x => ($speed + 21.1) / 7.5, y => 1,
+                  volume => 40, speed => 30,
+                  reverb => 5, direction => pi
+                 }
+                );
+        if (rand() > 0.5) {
+           $self->{foo}++;
+        }
+        if ($self->{bangs} % 16 == 0) {
+           $self->{foo} = 0;
+        }
+    }
+    if ($self->{bangs} % ($foo * 2) == $foo) {
+        my $speed = (1 + $rise[$self->{foo2} % @@rise]) - 30;
+        my $foo = ($speed + 29.1) / 7.5;
+        $self->line(2, $foo);
+        $self->modified;
+        $self->t({sample => "f/0",
+                  speed => $speed, loops => 1,
+                  scale => "equal",
+                  delay => 0.02, delay2 => 0.2, volume => 0.25, pan => -0.25
+                 }
+                );
+        $self->v({volume => 30, x => 0.001, direction => pi / 2, 
+                  speed => 10 + $foo * 20, reverb => 10,
+                  width => 10, curve => -0.025 + 0.05 * $foo,
+                  image => "cat"
+                 }
+                );
+        if (rand() > 0.5) {
+           $self->{foo2}++;
+        }
+        if ($self->{bangs} % 16 == 0) {
+           $self->{foo2} = 0;
+        }
+    }
+
+}@
+
+
+1.15
+log
+@Sun Dec 11 12:47:21 2005
+@
+text
+@a1 1
+# 0.546666666666667
+d3 1
+d42 2
+a43 2
+                  width => 20, curve => -0.025 + 0.05 * $foo,
+                  
+@
+
+
+1.14
+log
+@Sun Dec 11 12:40:36 2005
+@
+text
+@d2 2
+a3 1
+# 0.0133333333333335
+d30 4
+d35 1
+a35 1
+                  speed => (1 + $rise[$self->{foo2} % @@rise]) - 30, loops => 1,
+d40 6
+a45 1
+        $self->v({});
+@
+
+
+1.13
+log
+@Sun Dec 11 12:40:18 2005
+@
+text
+@d2 1
+a2 1
+# 0.28
+d35 1
+@
+
+
+1.12
+log
+@Sun Dec 11 12:40:02 2005
+@
+text
+@d2 1
+a2 1
+# 0.0133333333333335
+@
+
+
+1.11
+log
+@Sat Nov 26 22:13:25 2005
+@
+text
+@d2 1
+a2 1
+
+d7 3
+d16 5
+@
+
+
+1.10
+log
+@Sat Nov 26 13:39:44 2005
+@
+text
+@d8 2
+a9 2
+                  speed => 1 + $rise[$self->{foo} % @@rise] - 30,
+                  loops => 0.3 + rand(0.2), delay2 => 0.2,
+@
+
+
+1.9
+log
+@Sat Nov 26 13:38:13 2005
+@
+text
+@d24 1
+a24 1
+                  delay => 0.02, volume => 0.25, pan => -0.25
+@
+
+
+1.8
+log
+@Sat Nov 26 13:09:03 2005
+@
+text
+@d5 1
+a5 1
+    my $foo = ($self->{bangs} % 64 > 48 ? 4 : 2);
+d8 1
+a8 1
+                  speed => 1 + $rise[$self->{foo} % @@rise],
+d22 1
+a22 1
+                  speed => 1 + $rise[$self->{foo2} % @@rise], loops => 1,
+@
+
+
+1.7
+log
+@Sat Nov 26 13:06:26 2005
+@
+text
+@d5 2
+a6 1
+    if ($self->{bangs} % 4 == 0) {
+d20 1
+a20 1
+    if ($self->{bangs} % 8 == 4) {
+d22 1
+a22 1
+                  speed => 1 + $rise[$self->{foo2} % @@rise], loops => 0.3,
+@
+
+
+1.6
+log
+@Sat Nov 26 13:05:27 2005
+@
+text
+@d7 2
+a8 1
+                  speed => 1 + $rise[$self->{foo} % @@rise], loops => 0.1,
+d21 1
+a21 1
+                  speed => 1 + $rise[$self->{foo2} % @@rise], loops => 0.11,
+@
+
+
+1.5
+log
+@Sat Nov 26 13:04:21 2005
+@
+text
+@d5 1
+a5 1
+    if ($self->{bangs} % 2 == 0) {
+d8 1
+a8 1
+                  scale => "equal", delay => 0.01, volume => 0.25
+d18 1
+a18 1
+    if ($self->{bangs} % 4 == 2) {
+d21 2
+a22 1
+                  scale => "equal", delay => 0.02, volume => 0.25
+@
+
+
+1.4
+log
+@Sat Nov 26 13:03:26 2005
+@
+text
+@d18 1
+a18 1
+    if ($self->{bangs} % 2 == 1) {
+d20 2
+a21 2
+                  speed => 1 + $rise[$self->{foo2} % @@rise], loops => 0.1,
+                  scale => "equal", delay => 0.01, volume => 0.25
+@
+
+
+1.3
+log
+@Sat Nov 26 13:02:38 2005
+@
+text
+@d18 14
+@
+
+
+1.2
+log
+@Sat Nov 26 13:01:08 2005
+@
+text
+@d1 1
+a1 1
+my @@rise = (0, 2, 4, 7);
+d5 1
+a5 1
+    if ($self->{bangs} % 8 == 0) {
+d7 2
+a8 2
+                  speed => 1 + $rise[$self->{foo} % @@rise],
+                  scale => "equal", delay => 0.01, volume => 0.5
+d14 1
+a14 1
+        if ($self->{bangs} % 64 == 0) {
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 2
+d5 4
+a8 3
+    if ($self->{bangs} % 64 == 4 or $self->{bangs} % 128 == 14) {
+        $self->t({sample => "monsterb/4",
+                  speed => 0.6, loops => 1
+d11 6
+@

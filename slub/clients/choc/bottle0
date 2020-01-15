@@ -1,0 +1,35 @@
+$VAR1 = [
+          undef,
+          {
+            'strength' => '64',
+            'spread' => '64',
+            'sample' => 'bottle1',
+            'chr' => 'x',
+            'racism' => '4',
+            'number' => '1'
+          },
+          {
+            'strength' => '32',
+            'spread' => '72',
+            'sample' => 'bottle2',
+            'chr' => '~',
+            'racism' => '8',
+            'number' => '2'
+          },
+          {
+            'strength' => '16',
+            'spread' => '40',
+            'sample' => 'bottle3',
+            'chr' => '=',
+            'racism' => '8',
+            'number' => '3'
+          },
+          {
+            'strength' => '10',
+            'spread' => '4',
+            'sample' => 'bottle4',
+            'chr' => '-',
+            'racism' => '4',
+            'number' => '4'
+          }
+        ];

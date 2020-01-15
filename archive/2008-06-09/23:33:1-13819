@@ -1,0 +1,15 @@
+# 0.171875
+
+sub bang {
+    my $self = shift;
+    my $foo = (($self->{bangs} % 64) / 64);
+    $self->line(0, $foo);
+    $self->vector({x => 0, y => 0,
+                   speed => 0.000007, angle => pi() * $foo,
+                   mass => 1.5, alpha => 0.5
+                  }
+                 ) unless $self->{bangs} % 3;
+    $self->strike({x => 3, y => 3}) unless $self->{bangs} % 8;
+#$self->tension(0.6);
+    $self->modified();
+}

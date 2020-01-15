@@ -1,0 +1,5 @@
+sub bang {
+    my $self = shift;
+#    $self->t({sample => "latibro/Sound2.wav", speed => 0.5})
+#       unless $self->{bangs} % 4;
+}

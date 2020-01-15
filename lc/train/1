@@ -1,0 +1,6 @@
+sub bang {
+    my $self = shift;
+    $self->t({sample => "808/LT/0", loops => 0.15, speed => 1,
+       volume => 2, shape => 1})
+      if $self->{bangs} % 4 == 0;
+}

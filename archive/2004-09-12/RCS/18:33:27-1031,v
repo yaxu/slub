@@ -1,0 +1,34 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.09.12.17.33.27;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Sep 12 18:33:27 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 2 == 0) {
+        $self->trigger({sample => 'dr55/5',
+                        ts     => 30,
+                       }
+                      );
+    }
+}
+@

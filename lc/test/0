@@ -1,0 +1,13 @@
+sub bang {
+    my $self = shift;
+
+
+    if ($self->{bangs} % 16 < 6) {
+       my $sample = $self->{bangs} % 4;
+       $self->t({sample => "chin/$sample", loops => 4,
+                 accellerate => -0.0001, speed => 0.09,
+                 delay => 0.1
+                }
+               );
+    }
+}

@@ -1,0 +1,32 @@
+my @vowels = qw(a e i o u);
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0) {
+        my $point = ($self->{bangs} % (4*4)) / 4;
+        $self->v({volume => 30,
+                  direction => ((pi / 2) * $point),
+                  length => 2,
+                  width => 4,
+                  speed => 10,
+                  reverb => 4,
+                  #curve => 0.15, image => "daisy"
+                 }
+                );
+#        $self->v({volume => 30,
+#                  direction => ((pi / 1) * $point),
+        #          length => 2,
+        #          width => 4,
+        #          speed => 10,
+        #          reverb => 4,
+        #          #curve => 0.15, image => "cat"
+        #         }
+        #        );
+
+
+        $self->t({sample => "kurt/4", 
+                  vowel => $vowels[$point], loops => 3, delay => 0.3
+                 }
+                );
+    }
+
+}

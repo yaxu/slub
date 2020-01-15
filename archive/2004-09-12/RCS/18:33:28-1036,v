@@ -1,0 +1,38 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.09.12.17.33.28;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Sep 12 18:33:28 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    my $point = $self->{bangs} % 16;
+    if (grep {$_ eq $point} (0, 7)) {
+        my $switch = (($self->{bangs} % 32 > 20) ? 1 : 0);
+        my $num = ($switch ? 62 : 50);
+        $self->play({num => $num,
+                     ts => 50,
+                     formfreq => ($switch ? 30 : 50),
+                     bwfreq => ($switch ? 20 : 100),
+                    }
+                   );
+    }
+}@

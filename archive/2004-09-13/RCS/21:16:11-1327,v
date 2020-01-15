@@ -1,0 +1,97 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2004.09.13.20.16.24;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.09.13.20.16.12;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Sep 13 21:16:11 2004
+@
+
+
+1.2
+log
+@Mon Sep 13 21:16:24 2004
+@
+text
+@# ^>+<>-
+
+sub bang {
+    my $self = shift;
+    $self->{foo} ||= 0;
+    $self->{next} ||= 0;
+    $self->{hits} ||= 3;
+    $self->{dist} ||= 3;
+    $self->{rate} ||= 160;
+    $self->{note} ||= 0;
+
+    if ($self->{next} == 0 and $self->{hits} > 0) {
+        $self->trigger({sample => "latibro/" . $self->{note},
+                        ts => 80,
+                        #rate   => $self->{rate}
+                       }
+                      );
+        $self->{next} = $self->{dist};
+        $self->{hits}--;
+    }
+    else {
+        $self->{next}--;
+    }
+    
+    if ($self->{bangs} % 8 == 0) {
+        $self->{hits} = 2 + (2 * rand(2));
+        $self->{dist} = (int(rand(2)) * 2) + 2; 
+        $self->{next} = $self->{dist};
+        my ($seq) = $self->code->[0] =~ /\s+(.+)/;
+        $seq =~ s/(.)(.*)/$2$1/;
+        my $i = $1;
+        if ($i eq '>') {
+            $self->{rate} += 20;
+            $self->{note} += 2;
+        }
+        elsif ($i eq '<') {
+            $self->{rate} -= 20;
+            $self->{note} -= 2;
+        }
+        elsif ($i eq '^') {
+            $self->{rate} = 50;
+            $self->{note} = 20;
+        }
+        elsif ($i eq '+') {
+            $self->{rate} += 4;
+            $self->{note}++;
+        }
+        elsif ($i eq '-') {
+            $self->{rate} -= 4;
+            $self->{note}--;
+        }
+
+        $self->code->[0] = "# $seq";
+        $self->modified;
+        #$self->{note} = $self->{note} ? 0 : 5;
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# +<>-^>
+@

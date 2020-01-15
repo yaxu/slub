@@ -1,0 +1,8 @@
+# 1025
+
+sub bang {
+    my $self = shift;
+    my $foo = $self->line(0);
+    $foo =~ s/(.)(.*)/$2$1/;
+    $self->line(0, $self->{bangs});
+}

@@ -1,0 +1,40 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.09.13.20.41.13;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Sep 13 21:41:13 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->{urp} ||= 2;
+    if ($self->{bangs} % $self->{urp} == 0) {
+        my $foo = 5 + ($self->{foo}++ % 2);
+        $self->trigger({sample => "sequential/$foo",
+                        gain   => 50,
+                        ts     => 150
+                       }
+                      );
+        if ($self->{foo} >= ($self->{urp} * 4)) {
+            $self->{urp} = rand() > 0.5 ? 8 : 16;
+            $self->{foo} = 0;
+        }
+    }
+}@

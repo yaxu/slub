@@ -1,0 +1,48 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.10.11.22.37.59;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Oct 11 23:37:59 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# 8
+my $length = 16;
+my $space = 4;
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % $space == 0) {
+        $self->trigger({sample => "chin/12",
+                        rate   => 3,
+                        ts     => 100,
+                        gain   => 50
+                       }
+                      );
+         my $point = $length - ($self->{foo}++ % $length) - 1;
+         if ($point == 0) {
+             $space = 4;
+         }
+         elsif (rand($length / 2) > $point) {
+             $space = rand(4) + 1;
+         }
+         $self->code->[0] = "# $point";
+
+    }
+    $self->modified;
+}@

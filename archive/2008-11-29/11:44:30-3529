@@ -1,0 +1,12 @@
+my $foo = 4;
+sub bang {
+    my $self = shift;
+    if($foo-- > 0) {
+      t(sample => "off/0");
+    }
+    else {
+      if ($self->{bangs} % 8 == 0 and rand() > 0.5) {
+        $foo = 3 + int(rand(4));
+      }
+    } 
+}

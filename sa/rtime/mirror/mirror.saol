@@ -1,0 +1,256 @@
+
+//
+//    SAOL Resonator-Based Physical Model Library
+//    This file: Marimba bars
+//    Copyright (C) 2000 Regents of the University of California
+//
+//    This license also covers the SASL file in this directory.
+//
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License (Version 2) as
+//    published by the Free Software Foundation.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+//    Original Author: John Wawrzynek
+//    Maintainer: John Lazzaro, lazzaro@cs.berkeley.edu
+//
+
+//
+// If you're interested in extending this model, don't modify this
+// file directly; see the README in sfront/lib/reson/ instead.
+//
+
+//
+// Global block includes tables for scaling prototype marimba bar
+//
+
+global {
+  
+  srate 44100;
+  krate 1050;
+  
+  // vel table holds status for each note
+  //
+  //  -1  -- no instr active for this note
+  //   0  -- instr active, no new strikes
+  // > 0  -- new note strike, value of MIDIvel
+
+  table marimba_vel(step, 128 , 0, -1, 128 );
+
+  ksig marimba_poly;  // number of active notes at once
+
+  sequence(marimba_kbd, marimba_audio);
+
+  // hand-tuned version of qscale = 0.0551223*exp(0.0579087*x) for q scaling
+
+  table marimba_qscale(expseg, -1, 0, 0.5*0.0551223, 
+                       128, 0.5*0.0551223*exp(0.0579087*128));
+
+  // implements gscale = 0.004*(1/223.066)*exp(0.0813501*x) for g scaling
+  
+  table marimba_gscale(expseg, -1, 0,  0.004*(1/223.066), 128,
+		       0.004*(1/223.066)*exp(0.0813501*128));
+			 
+}
+
+
+//
+// Instr for handling MIDI or SASL control input. Updates marimba_vel table.
+//
+
+instr marimba_kbd(pitch, velocity) preset 0   
+
+{ 
+  imports exports table marimba_vel;
+  imports exports ksig marimba_poly;
+  ksig vval, kpitch;
+
+
+  // happens at k-rate
+
+  vval = velocity;
+  kpitch = pitch;
+  if (tableread(marimba_vel, int(kpitch)) == -1)
+    {
+      if (marimba_poly   < 24)
+	{
+	  tablewrite(marimba_vel, int(pitch), vval);
+	  instr marimba_audio(0, -1, pitch);
+	  marimba_poly   = marimba_poly   + 1;
+	}
+    }
+  else
+    {
+      tablewrite(marimba_vel, int(pitch), vval);
+    }
+
+  turnoff;
+
+}
+
+
+//
+// Instr for creating audio output. Each active note has its own
+// instance of marimba_audio.
+//
+
+instr marimba_audio(notenum) {
+
+  ivar a[3], b[3], g[3];
+  ivar aa, ab, sg, vw, vwn;
+  ksig nm, ky[1], silent;
+  asig out;
+
+  asig y[3], y1[3], y2[3]; 
+  asig sy[3];
+  asig ay, ay1, ay2, dummy, x;
+
+
+  // happens at i-rate
+
+  marimba_resinit(a, b, g, notenum);
+  marimba_strikeinit(aa, ab, sg, vw, vwn, notenum);
+
+  // happens at k-rate
+
+  silent = (rms(out) < 5e-4);
+  marimba_strikeupdate(ky, nm, silent, notenum, vw, vwn);
+
+  // happens at a-rate
+
+  dummy = 0;                          // until optimizer improves
+
+  ay = aa*ay1 + ab*ay2 + ky[dummy];   // attack resonator
+  x = (arand(nm) + sg)*ay;
+
+  y = a*y1 + b*y2 + x;                // resonator bank
+
+  ay2 = ay1;                          // update filter state
+  ay1 = (abs(ay)>1e-30) ? ay : 0.0; 
+
+  ky[dummy] = 0;
+  y2 = y1; 
+  y1 = y;
+
+  sy = g*y;                          // gain adjust
+  out = (sy[0]+sy[1]+sy[2]);         // sum over sy[]
+
+  output(out);
+
+}
+
+
+//
+// Initializes the resonance model for the marimba.
+//
+
+iopcode marimba_resinit(ivar a[3], ivar b[3], ivar g[3], ivar notenum)
+
+{
+  ivar r[3], freq[3], q[3];
+  ivar j, scale, norm;
+  imports exports table marimba_qscale;
+  imports exports table marimba_gscale;
+
+
+  // set f/q/g for prototype bar
+
+  norm = tableread(marimba_qscale, int(notenum + 12));	
+  scale = cpsmidi(notenum + 12)/ 261.6256 ;
+
+  freq[0] =  261.63*scale; q[0] = 240*norm;  
+  freq[1] = 1041.29*scale; q[1] = 200*norm;  
+  freq[2] = 2616.30*scale; q[2] = 150*norm;  
+
+  norm = tableread(marimba_gscale, int(notenum+12));
+
+  g[0] = (freq[0] < s_rate/2) ? norm : 0.0;
+  g[1] = (freq[1] < s_rate/2) ? norm : 0.0;
+  g[2] = (freq[2] < s_rate/2) ? norm : 0.0;
+
+  // Compute actual resonator coefficients
+
+  j = 0;
+  while ( j < 3 )
+    {
+      r[j] = exp(-freq[j]/(s_rate*q[j]));
+      a[j] = 2*r[j]*cos(2* 3.14159265358979323846 *(freq[j]/s_rate));
+      b[j] = - r[j]*r[j];
+      j = j + 1;
+    }
+
+}
+
+
+//
+// Initializes the striker model.
+//
+
+iopcode marimba_strikeinit(ivar aa, ivar ab, ivar sg, ivar vw, 
+			   ivar vwn, ivar notenum)
+
+{
+  ivar ar, afreq;
+
+  afreq = 261.63;  // attack resonator frequency 
+
+  // Compute resonator bank coefficients
+
+  ar = exp(-2* 3.14159265358979323846 *(afreq/s_rate));
+  aa = 2*ar;
+  ab = -ar*ar;
+
+  vw = (1/127); // keyboard normalization curve
+  sg = 0.0025;  // "signal gain" empirical constant (should not scale).
+  vwn = 0.01;   //  velocity scaling for nm
+}
+
+
+//
+// k-pass semantics for the striker model
+//
+
+kopcode marimba_strikeupdate(ksig ky[1], ksig nm, ksig silent, 
+	                     ksig notenum, ivar vw, ivar vwn)
+
+{
+  imports exports table marimba_vel;
+  imports exports ksig marimba_poly;
+  ksig exit, count;
+
+  count = silent ? (count + 1) : max(count - 1, 0);
+  if (((count > 5) && (itime > 0.25)) || exit)
+    {
+      if (!exit)
+	{
+	  turnoff;
+	  exit = 1;
+	  tablewrite(marimba_vel, int(notenum), -1);
+	  marimba_poly   = marimba_poly   - 1;
+	}
+      ky[0] = 0;
+    }
+  else
+    {
+      if (tableread(marimba_vel, int(notenum)) > 0)
+	{
+	  ky[0] = vw*tableread(marimba_vel, int(notenum));
+	  nm = ky[0]*vwn;
+	  tablewrite(marimba_vel, int(notenum), 0);
+	}
+      else
+	{
+	  ky[0] = 0;
+	}
+    }
+}
+
+

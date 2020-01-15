@@ -1,0 +1,29 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2006.08.20.18.16.13;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Aug 20 19:16:13 2006
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->t({sample => "808/SD/2", offset => 1})
+      unless $self->{bangs} % 4;
+}@

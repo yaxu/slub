@@ -1,0 +1,34 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.02.19.14.38.36;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Feb 19 14:38:36 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 2 == 0) {
+        $self->t({sample => "can/$self->{bangs}",
+                  speed => 6,
+                  volume => 3,
+                 }
+                );
+    }
+}@

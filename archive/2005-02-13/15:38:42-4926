@@ -1,0 +1,15 @@
+sub bang {
+    my $self = shift;
+    $self->{foo} ||= 0;
+    if (($self->{bangs} % rand(4)) == 0) {
+        $self->t({sample => "moog/$self->{foo}",
+                  envelope_name => "valley",
+                  pan => (1 - rand(2)),
+                  speed => 0.5
+                 }
+                );
+        if (rand() > 0.9) {
+            $self->{foo}++;
+        }
+    }
+}

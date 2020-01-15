@@ -1,0 +1,5 @@
+
+sub bang {
+    my $self = shift;
+    # does this work?    
+}

@@ -1,0 +1,21 @@
+# hi there
+
+sub bang {
+    my $self = shift;
+
+    my $osc = 
+      $self->{meshosc} ||=
+        Net::OpenSoundControl::Client->new(Host => 'localhost', Port => 6011);
+
+    $osc->send(['/strike',
+                'f',  5 - ($self->{bangs} % 10 + rand()), 
+                'f', $self->{bangs} % 4,
+                'f', 1 + ($self->{bangs} % 3) * 0.6,
+                'f', 0.01 + rand(0.2),
+                'f', 0.5 + $self->sin(4) * 2
+               ]);
+    my $foo = $self->{bangs} % 24 > 20 ? 0.3 : 0.1;
+    $osc->send(['/tension', 'f', $foo + ($self->{bangs} % 6 ? 1.1 : 1.2)]);
+    $osc->send(['/loss', 'f', 1.0]);
+
+}

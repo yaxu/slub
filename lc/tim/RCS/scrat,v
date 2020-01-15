@@ -1,0 +1,40 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2008.07.12.20.11.14;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Jul 12 21:11:14 2008
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    my $bar = $self->{bangs} % 32 > 20;
+    my $foo = $bar ? 2 : 3;
+    $self->t({loops => rand(2),
+              speed => $self->{bangs} % 12 ? 1 : 1.5,
+              pan => 1 - ($self->{bangs} % 3),
+              sample => "tim0/6",
+              #shape => ($self->{bangs} % 16 == 0 ? 1 : 0),
+              volume => 0.9,
+              shape => 0.75,
+#              delay => $self->{bangs} % 4 ? 0.009 : 0
+             }
+            )
+       if $self->{bangs} % $foo == 0;
+}@

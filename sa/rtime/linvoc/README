@@ -1,0 +1,15 @@
+
+This example is an interactive demo that is a simple envelope
+follower.  It uses MIDI data from the MIDI In Jack to select notes for
+a simple musical instrument, and audio input to modulate the amplitude
+of the notes.
+
+The test this program under Linux, type "make" in this directory to
+run the example.
+
+To test this program under Macintosh OS X, copy the Makefile.osx file
+to Makefile, and then type "make". Note that sfront supports external
+MIDI sources via CoreMIDI at present, but not virtual MIDI sources.
+
+
+

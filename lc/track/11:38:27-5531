@@ -1,0 +1,6 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 24 == 0) {
+        $self->t({sample => "notes/5", volume => 2});
+    }
+}

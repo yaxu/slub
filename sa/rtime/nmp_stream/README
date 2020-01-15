@@ -1,0 +1,15 @@
+
+This example lets you test sfront networking, by streaming MIDI file
+data to the other members of a session. Use nmp_audio as the client
+for the other session members. A real streaming server would work much
+differently ... this example treats the stream as it would interactive
+MIDI input.
+
+Under Linux, just type "make" in this directory to run the example.
+
+To test this program under Macintosh OS X, copy the Makefile.osx file
+to Makefile, and then type "make".
+
+To test this program under IRIX, HPUX, or FreeBSD, see the Makefile
+for modification details.
+

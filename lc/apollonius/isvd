@@ -1,0 +1,75 @@
+
+
+my $pi = 3.141592653589793;
+
+sub bang {
+    my $self = shift;
+
+    $self->av({n => rand(12),
+               volume => 10,
+               duration => 2,
+               pan => 0,
+               sample => "newnotes",
+               speed => 2,
+               wobble => 0,
+               pan => 0
+              }
+             )
+      if $self->{bangs} % 8 == 0;
+    return;
+    $self->av({n => rand(12),
+               volume => 10,
+               duration => 2,
+               pan => 0,
+               sample => "newnotes",
+               speed => 2,
+               wobble => 0,
+               pan => 0
+              }
+             )
+      if $self->{bangs} % 8 == 0;
+
+}
+
+sub av {
+    my $self = shift;
+    my $p = shift;    
+
+   $p->{duration} ||= 5;
+
+    $self->{aosc} ||= 
+      Net::OpenSoundControl::Client->new(Host => 'localhost', Port => 7771);
+     my $speed = 2;
+
+    $self->{aosc}->send(
+       ['/site',
+        # x y
+        'f', ((($p->{pan} || 0) + 1) / 2) * 600,
+        'f', $p->{y} || 300,
+        # weight
+        'f', ($p->{volume} || 1) * 5,
+        # duration
+        'i', $p->{duration} * $speed * 2,
+        # speed
+        'f', ($p->{speed} || 3) * 5,
+        # direction
+        'f', $pi * 2 * ($p->{n} / 12),
+        # modulation
+        'f', $p->{wobble} ? (5 * $p->{wobble}) : 0,
+       ]
+      );
+
+      my $n = int $p->{n};
+      my $sample = $p->{sample} || 'drumtraks';
+      $self->t({sample => "$sample/$n", speed => 0.5,
+                scale_name => 'equal',
+                duration => 5000 * $p->{duration} * $speed,
+                volume => ($p->{volume} || 1), 
+                pan => ($p->{pan} || 0),
+                envelope_name => ($p->{wobble} ? 'chop' : ''),
+                delay => 1 - ($p->{wobble} / 100),
+                delay2 => 1 - ($p->{wobble} / 200),
+
+               }
+              );
+}

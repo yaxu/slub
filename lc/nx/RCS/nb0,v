@@ -1,0 +1,46 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2007.01.05.00.19.24;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Jan  5 00:19:24 2007
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0) {
+        $self->t({sample => "drum/0", volume => 0.9, delay => rand(0.1),
+                  pan => 0, speed => 1.2
+                 }
+                );
+    }
+    if ($self->{bangs} % 8 == 5) {
+        $self->t({sample => "drum/0", volume => 0.9, delay => rand(0.1),
+                  pan => -1, speed => 1.4
+                 }
+                );
+    }
+    if ($self->{bangs} % 8 == 2) {
+        $self->t({sample => "drum/0", volume => 0.9, delay => rand(0.1),
+                  pan => 1, speed => 1.4
+                 }
+                );
+    }
+
+}@

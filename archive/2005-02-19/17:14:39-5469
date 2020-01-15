@@ -1,0 +1,10 @@
+sub bang {
+    my $self = shift;
+return;
+    if ($self->{bangs} % 32 == 0) {
+        $self->t({sample => "notes/5", volume => 0.07, accellerate => 0.0001,
+                  speed => 0.001
+                 }
+                );
+    }
+}

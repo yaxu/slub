@@ -1,0 +1,20 @@
+# ku rere bo be bo
+# x! _ x _ x _ x _ x _ _ _ _ _ _ _ x _ _ _ x _ _ _ x _ _ _ _ _ _ _
+# ku  rere  bo  be  bo        ku    rere    bo       
+
+sub bang {
+    my $self = shift;
+    my @words = split(/\s+/, $self->line(0));
+    my @pat = split(/\s+/, $self->line(1));
+    my $foo =0;
+    my $sym = $pat[b() % @pat];
+    @pat = map {$_ =~ /^x/ ? $words[$foo++ % @words] : '' } @pat;
+    $self->line(2, join ' ', @pat);
+    my $word = $pat[b() % @pat];
+    my $strong = ($sym =~ /\!/) ? 1 : 0;
+    say_hi($word, {velocity => $strong ? 1 : 0.5,
+                   tension => 0.4
+                  }
+          );
+    $self->modified;
+}

@@ -1,0 +1,30 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.11.21.19.19.24;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Nov 21 19:19:24 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0 and not int rand(3)) {
+        $self->play({num => 40, ts => 200});
+    }
+}@

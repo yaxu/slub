@@ -1,0 +1,55 @@
+# saved.
+
+my $tune = [17, 33, 11];
+
+sub bang {
+    my $self = shift;
+
+    if (not ($self->{bangs} % 4) or not (($self->{bangs} + 1) % 4)) {
+      $self->play(40 + $tune->[$self->{foo}++ % @$tune], 
+                  8, 10, 140);
+    }
+
+    $self->play(50 + $self->{tune}->[$self->{bangs} % @$tune], 
+                900, 60, 10);
+
+    if (not $self->{bangs} % 32) {
+        $tune->[rand @$tune] += int(rand(8)) - 4;
+        $self->code->[2] = ('my $tune = ['
+                            . join(', ', @$tune)
+                            . '];'
+                           );
+    }
+
+#    $self->save('metal0.0');
+
+    $self->modified;
+}
+
+##
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./scala/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    $self->message("saved.");
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}
+
+##
+
+sub message {
+    my ($self, $message) = @_;
+    my $code = $self->code;
+    if (not $code->[0] =~ /^\#/) {
+      unshift(@$code, '#');
+    }
+    $code->[0] = '# ' . $message;
+}

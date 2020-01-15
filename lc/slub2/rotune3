@@ -1,0 +1,65 @@
+# <<s>^
+# ><^i
+# >p<^
+# 20
+sub bang {
+    my $self = shift;
+
+    my $foo = $self->{bangs} % 32 > 28 ? 3: 2;
+
+    if ($self->{bangs} % $foo == 0) {
+       $self->foo(1);
+       $self->foo(0);
+       $self->foo(2);    
+    }
+
+    unless ($self->{bangs} % 16) {
+        $self->t({sample => 'newnotes/0', volume => 0.1,
+                  speed => 0.4, accellerate => 0.00001, loops => 8,
+                 }
+                );
+    }
+}
+
+sub foo {
+   my $self = shift;
+   my $point = shift;
+        my $code = $self->code->[$point];
+        $code =~ s/(\S)(\S+)/$2$1/;
+        $self->code->[$point] = $code;
+        $self->modified;
+        my $num = $self->{"num$point"};
+        if ($1 eq '>') {
+            $num += 12;
+        }
+        elsif ($1 eq '<') {
+            $num -= 12;
+        }
+        elsif ($1 eq '^') {
+            if ($self->{bangs} % 128 > 90) {
+                $num = 30;
+            }
+            else {
+                $num = 20;
+            }
+        }
+        elsif ($1 eq '+') {
+            $num += 3;
+        }
+        elsif ($1 eq '-') {
+            $num -= 3;
+        }
+        else {
+            $num += ord($1);
+        }
+
+        $self->t({speed => ($num % 36) + 30, sample => "sine/5",
+                  scale => "equal",
+                  duration => 300000,
+                  volume => 0.2, pan => 1- rand(2),
+                  envelope_name => $self->{foo}++ % 2 ? 'chop' : 'percussive',
+#                  delay => 0.2
+                 }
+                );
+        $self->{"num$point"} = $num;
+    }

@@ -1,0 +1,6 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0 and not int rand(3)) {
+        $self->play({num => 40, ts => 200});
+    }
+}

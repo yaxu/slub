@@ -1,0 +1,45 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.11.22.22.28.33;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Nov 22 22:28:33 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# 1...4...1.......
+# 
+# -1
+
+sub bang {
+    my $self = shift;
+    my ($seq)  = $self->code->[0] =~ /\s+(\S+)/;
+    my (@@ctls) = split(//, $self->code->[1] =~ /\s+(\S+)/);
+    my ($pnt)  = $self->code->[2] =~ /\s+(\S+)/;
+    my ($ctl) = shift(@@ctls);
+    if ($ctl eq '>') {
+        $pnt++;
+    } 
+    elsif ($ctl eq '<') {
+        $pnt--;
+    }
+    $self->code->[0] = "# $seq";
+    $self->code->[1] = "# " . join('', @@ctls);
+    $self->code->[2] = "# $pnt";
+    $self->modified;
+}@

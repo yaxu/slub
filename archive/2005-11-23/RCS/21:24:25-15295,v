@@ -1,0 +1,178 @@
+head	1.8;
+access;
+symbols;
+locks
+	alex:1.8; strict;
+comment	@# @;
+
+
+1.8
+date	2005.11.24.00.30.26;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2005.11.24.00.29.05;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2005.11.24.00.15.28;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2005.11.24.00.12.40;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.11.23.23.42.08;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.11.23.23.36.43;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.11.23.23.29.40;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.11.23.21.24.25;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Wed Nov 23 21:24:25 2005
+@
+
+
+1.8
+log
+@Thu Nov 24 00:30:26 2005
+@
+text
+@use Net::OpenSoundControl::Client;
+use Math::Trig;
+
+my $osc;
+
+sub bang {
+    my $self = shift;
+    $self->code(1, "hello");
+    $self->modified();
+
+    if ($self->{bangs} % 1 == 0) {
+      $osc ||=
+        Net::OpenSoundControl::Client->new(Host => '192.168.0.2',
+                                           Port => 12000
+                                          );
+      $osc->send(
+                 ['/trigger',
+                  # x y
+                  'f', rand(300), 'f', rand(300),
+                  # speed
+                  'f', rand(5), 
+                  # direction
+                  'f', rand(pi * 2),
+                  # width length
+                  'f', 1, 'f', 1
+                 ]
+                );
+    }
+}@
+
+
+1.7
+log
+@Thu Nov 24 00:29:04 2005
+@
+text
+@d23 1
+a23 1
+                  'f', rand(pi * 2)
+@
+
+
+1.6
+log
+@Thu Nov 24 00:15:28 2005
+@
+text
+@d11 1
+a11 1
+    if ($self->{bangs} % 16 == 0) {
+d18 8
+a25 1
+                  'f', rand(300), 'f', rand(300), 'f', rand(10), 'f', rand(pi * 2)
+@
+
+
+1.5
+log
+@Thu Nov 24 00:12:40 2005
+@
+text
+@d2 1
+d18 1
+a18 1
+                  'f', rand(100), 'f', rand(100), 'f', 2, 'f', 3
+@
+
+
+1.4
+log
+@Wed Nov 23 23:42:08 2005
+@
+text
+@d17 1
+a17 1
+                  'f', 100, 'f', rand(100), 'f', 2, 'f', 0.6
+@
+
+
+1.3
+log
+@Wed Nov 23 23:36:43 2005
+@
+text
+@d17 1
+a17 1
+                  'f', 100, 'f', rand(100), 'f', 2, 'f', 0.3
+@
+
+
+1.2
+log
+@Wed Nov 23 23:29:40 2005
+@
+text
+@d2 1
+a2 1
+use Math::PI;
+d17 1
+a17 1
+                  'f', 100, 'f', 100, 'f', 1
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 2
+d10 10
+a19 6
+    if ($self->{bangs} % 8 == 0) {
+      $self->{osc} =
+        Net::OpenSoundControl::Client->new(Host => 'localhost', Port => 6060);
+        $self->{osc}->send('/trigger',
+                           ['i', 0, 'f', 0.1, 's', "hello"]
+                          );
+@

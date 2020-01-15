@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0) {
+        $self->trigger({sample => 'moog/6',
+                        ts => 60,
+                        rate => ($self->{bangs} % 32 ? 33 : 50),
+                        gain => ($self->{bangs} % 32 ? 100 : 80),
+                       }
+                      );
+    }
+}

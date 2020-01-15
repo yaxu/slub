@@ -1,0 +1,54 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.06.04.12.30.03;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Jun  4 13:30:03 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# sample gap hits vowel
+# 0 8 3 3
+# 0 8 3 3
+# 0 8 3 3
+
+
+my $lookup;
+
+sub bang {
+    my $self = shift;
+    my $foo = 0;
+    $lookup ||= {map {$_ => $foo++} split(' ', $self->line(0))};
+
+    $foo = 1;
+    while (my $line = $self->line($foo++)) {
+        my @@stuff = split(' ', $line);
+        my $sample = $stuff[$lookup->{sample}];
+        my $gap    = $self->morph($stuff[$lookup->{gap}]);
+        my $hits   = $self->morph($stuff[$lookup->{hits}]);
+        my $vowel  = $self->morph($stuff[$lookup->{vowel}]);
+        
+    }
+
+    $self->modified;
+}
+
+sub morph {
+    my $self = shift;
+    
+}@

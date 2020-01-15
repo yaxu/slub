@@ -1,0 +1,70 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2004.10.31.20.25.15;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.10.31.20.23.23;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Oct 31 20:23:23 2004
+@
+
+
+1.2
+log
+@Sun Oct 31 20:25:15 2004
+@
+text
+@# 2, 3, 4, 5, 10, 12, 14
+my @@foo = (2 .. 5, 10, 12, 14);
+
+sub bang {
+    my $self = shift;
+    $self->{foo} ||= [@@foo];
+    foreach my $foo (@@{$self->{foo}}) {
+       if ($self->{bangs} % $foo == 0) {
+           $self->trigger({sample => "drum/$foo"});
+       }
+    }
+
+    if ($self->{bangs} % 4 == 0) {
+       foreach my $p (0 .. (scalar({$self->{foo}}) - 1)) {
+           if (rand(@@foo) < 1) {
+              $self->{foo}->[$p] += int((rand(2) - 1));
+              $self->{foo}->[$p] = 1 if $self->{foo}->[$p] < 1;
+           }
+       }
+       $self->code->[0] = '# ' . join(', ', @@{$self->{foo}});
+       $self->modified;
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# 4, 5, 10, 12, 14
+d13 2
+a14 2
+    if ($self->{bangs} % 16 == 0) {
+       foreach my $p (0 .. (@@{$self->{foo}} - 1)) {
+d16 2
+a17 1
+              $foo[$p] += int((rand(2) - 1));
+@

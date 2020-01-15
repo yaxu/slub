@@ -1,0 +1,9 @@
+sub bang {
+    my $self = shift;
+    $self->{buffer_time} = 0;
+    my $foo = $self->{bangs} % 16 > 10;
+    $self->play({num => $foo ? 10 : 50,
+                 
+                }
+               );
+}

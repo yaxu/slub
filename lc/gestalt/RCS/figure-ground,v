@@ -1,0 +1,39 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.10.29.17.40.52;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Oct 29 18:40:52 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 6 == 0) {
+       $self->t({sample => "kurt/2", volume => 40, speed => 0.8});
+    }
+    if ($self->{bangs} % 8 == 0) {
+       $self->t({sample => "kurt/0", volume => 15, speed => 0.95});
+    }
+    if ($self->{bangs} % 14 == 0) {
+       $self->t({sample => "kurt/4", volume => 30, speed => 1.1});
+    }
+    if ($self->{bangs} % 10 == 0) {
+       $self->t({sample => "kurt/3", volume => 30, speed => 1.1});
+    }
+}@

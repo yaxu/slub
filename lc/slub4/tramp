@@ -1,0 +1,16 @@
+sub bang {
+    my $self = shift;
+
+    if ($self->{bangs} % 16 == 0) {
+        $self->t({sample => "jungle/2",
+                  speed => 0.8
+                 }
+                );
+    }
+    if ($self->{bangs} % 16 == 8) {
+        $self->t({sample => "jungle/11",
+                 }
+                );
+    }
+
+}

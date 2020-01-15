@@ -1,0 +1,37 @@
+my $bar = 64;
+sub bang {
+    my $self = shift;
+    my $p = $self->{bangs} % $bar;
+    $self->{gab} = {
+       sample => "drum/0",
+       mod => 8,
+       max => 3
+    };
+    $self->{beep} = {
+       sample => "off/0",
+       mod => 6,
+       max => 1,
+       loops => 0.25
+    };
+    $self->{break} = {
+       sample => "breaks165/0",
+       mod => 32,
+       max => 1,
+       loops => 1
+    };
+
+    foreach my $foo (qw/gab beep break/) {
+       my $o = $self->{$foo};
+       if ($p == 0) {
+          $o->{cur} = 0;
+       }
+       my $s = $self->{$foo};
+       if ($o->{cur} < $o->{max} and $p % $o->{mod} == 0) {
+         $o->{cur}++;
+         $self->t({sample => $o->{sample},
+                   loops => ($o->{loops} || 1),
+                   pan => 1 - rand(2)
+                  });
+       }
+    }
+}

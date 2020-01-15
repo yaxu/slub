@@ -1,0 +1,6 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0) {
+        $self->strike();
+    }
+}

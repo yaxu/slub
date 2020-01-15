@@ -1,0 +1,16 @@
+# 1
+
+sub bang {
+    my $self = shift;
+    my $foo = (($self->{bangs} % 64) > 32) ? 1 : 0;
+    $self->line(0, $foo);
+    if (($self->{bangs} % ($foo ? 12 : 16)) == 0) {
+        $self->t({sample => "moog/$foo", volume => 0.2,
+                  speed => ($foo ? -1 : 1),
+                  envelope_name => 'tri',
+                  pan => ($foo ? -1 : 1),
+                 }
+                );
+    }
+    $self->modified;
+}

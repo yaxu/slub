@@ -1,0 +1,53 @@
+# 0.421778283385994
+
+my $tune = [29, -2, -10];
+
+sub bang {
+    my $self = shift;
+
+    my $erm = sin($self->{bangs} / 20);
+    $self->message($erm);
+
+    $self->play(110 + $self->{tune}->[$self->{bangs} % @$tune] + (10 * $erm), 
+                6 + (5 * $erm), 7, 10 + rand(30));
+
+    if (not $self->{bangs} % 32) {
+        $tune->[rand @$tune] += int(rand(8)) - 4;
+        $self->code->[2] = ('my $tune = ['
+                            . join(', ', @$tune)
+                            . '];'
+                           );
+    }
+
+#    $self->save('acid.tapper.cheese');
+
+    $self->modified;
+}
+
+##
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./scala/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    $self->message("saved.");
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}
+
+##
+
+sub message {
+    my ($self, $message) = @_;
+    my $code = $self->code;
+    if (not $code->[0] =~ /^\#/) {
+      unshift(@$code, '#');
+    }
+    $code->[0] = '# ' . $message;
+}

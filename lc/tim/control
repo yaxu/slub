@@ -1,0 +1,65 @@
+use Time::HiRes;
+use Net::OpenSoundControl::Client;
+
+my $osc;
+
+sub tim {
+    my ($x, $y, $z, $deg, $colour) = @_;
+    $osc->send(['/tim', 'i', $x, 'i', $y, 'i', $z, 'f', $deg, 'i', $colour]);
+}
+
+sub message {
+    my $message = shift;
+    $osc->send(['/message', 's', $message]);
+}
+
+sub bang {
+    my $self = shift;
+    $osc =
+        Net::OpenSoundControl::Client->new(Host => 'localhost',
+                                           Port => 12345
+                                          );
+
+    if (0) {
+        if ($self->{bangs} % 4 == 0) {
+#            $self->bpm(120);
+            $self->t({sample => "drumtraks/4",
+                      speed => ($self->{bangs} % 16 ==0) ? 1.5 : 1
+                     });
+        }
+    }
+    my $foo = 64;
+    if ($self->{bangs} % $foo == 0) {
+        my @opening = (0.01, 0.082, 0.23);
+        my @dancing = (0.259, 0.74, 0.76);
+        my @dragon = (0.27);
+        my @water = (0.47, 0.4815);
+        my @playing = (0.695);
+        my @all = (@opening, @dancing, @dragon, @water, @playing);
+        my $point;
+        if (rand() > 0.9) {
+          $point = rand();
+        }
+        else {
+          $point = $opening[rand(@opening)];
+        }
+        $osc->send(['/skip',
+                    'f', $point
+                   ]
+                  );
+        $osc->send(['/speed', 'f', 1]);
+    }
+
+    if (1 && $self->{bangs} % $foo == ($foo / 2)) {
+        $osc->send(['/speed', 'f', -1]);
+    }
+
+    if (0) {    
+      my $message = "happy birthday tim";
+      my $foo = int(rand(length($message)));
+      substr($message, $foo, 1, '*');
+      $message =~ s/ /\n/g;
+      message($message);
+    }
+#   tim(300, 300, 0, rand() > 0.5 ? 0 : 180, 0xFFFFFF);
+}

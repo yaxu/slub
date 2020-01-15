@@ -1,0 +1,32 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.02.02.23.38.09;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Wed Feb  2 23:38:09 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->t({pan => (1 - ($self->sin(1)* 2)),
+              shape => 0.3,
+              speed => 0.01
+             }
+            );
+}@

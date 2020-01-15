@@ -1,0 +1,26 @@
+# awsou
+# 115
+sub bang {
+    my $self = shift;
+    $self->{foo} ||= '0';
+    my @foo = split(//, $self->{foo});
+    my $foo = $self->{bangs} % 16 > 10 ? 0 : 1;
+
+    if ($self->{bangs} % ($foo ? 2 : 3) == 0) {
+        my $fooz = ord($foo[$self->{bing}++ % @foo]);
+        $self->code->[1] = "# $fooz";
+        $self->trigger({sample => "procshort/$fooz", gain => 60, 
+                        rate   => ($foo ? 95 : 90),
+                        pan    => 0.4 + ($self->sin(20) * 0.2)
+                       }
+                      );
+    }
+    if ($self->{bangs} % 32 == 0) {
+       $self->{foo} .= chr(ord('a') + int(rand(26)));
+       if (length($self->{foo}) > 5) {
+          $self->{foo} =~ s/.//;
+       }
+    }
+    $self->code->[0] = "# $self->{foo}";
+    $self->modified;
+}

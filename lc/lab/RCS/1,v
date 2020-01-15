@@ -1,0 +1,62 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2005.09.16.15.07.02;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.09.09.14.06.05;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Sep  9 15:06:05 2005
+@
+
+
+1.2
+log
+@Fri Sep 16 16:07:02 2005
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->{foo} ||= 1;
+    if ($self->{bangs} % 64 == 0) {
+       $self->{foo} -= 0.1;
+       $self->{foo} = 1 if $self->{foo} < 0.5;
+    }
+    $self->t({sample => "made/4", volume => 0.001, delay => 0.9,
+              delay2 => 0.4, loops => 1, speed => $self->{foo},
+             }
+            )
+        if $self->{bangs} % 16 == 12;
+    $self->t({sample => "made/2", volume => 0.001})
+        if $self->{bangs} % 16 == 6;
+    $self->t({sample => "made/0", volume => 0.001})
+        if $self->{bangs} % 16 == 0;
+
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d8 2
+a9 2
+    $self->t({sample => "made/3", volume => 0.001, delay => 0.9,
+              delay2 => 0.4, loops => 6, speed => $self->{foo},
+d13 1
+a13 1
+    $self->t({sample => "made/4", volume => 0.001})
+@

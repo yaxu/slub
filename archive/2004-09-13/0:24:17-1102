@@ -1,0 +1,16 @@
+sub bang {
+    my $self = shift;
+    $self->{urp} ||= 2;
+    if ($self->{bangs} % $self->{urp} == 0) {
+        my $foo = 5 + ($self->{foo}++ % 2);
+        $self->trigger({sample => "sequential/$foo",
+                        gain   => 50,
+                        ts     => 150
+                       }
+                      );
+        if ($self->{foo} >= ($self->{urp} * 4)) {
+            $self->{urp} = rand() > 0.5 ? 8 : 16;
+            $self->{foo} = 0;
+        }
+    }
+}

@@ -1,0 +1,40 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.11.26.22.13.18;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Nov 26 22:13:18 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@my @@vowels = qw/a e i o u/;
+
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 64 > 32;
+    if ($self->{bangs} % ($foo ? 2 : 4) == 0) {
+    $self->t({sample => "chin/0",
+              pan => 1 - rand(2),
+              loops => 10,
+              vowel => $vowels[rand @@vowels],
+               shape => 0.99,
+              delay => rand(0.01)
+             }
+            );
+    }
+}@

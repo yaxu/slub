@@ -1,0 +1,8 @@
+#!/bin/sh
+INCLUDE="-I../libOSC -I/usr/lib/perl/5.8.0/CORE"
+swig -perl5 sendOSC.i
+# swig -perl5 dumpOSC.i
+gcc -c sendOSC.c htmsocket.c sendOSC_wrap.c ${INCLUDE}
+# gcc -c dumpOSC.c htmsocket.c dumpOSC_wrap.c -I../libOSC -I/usr/lib/perl/5.6.1/CORE
+ld -shared -G sendOSC.o htmsocket.o sendOSC_wrap.o ../libOSC/libOSC.a -o sendOSC.so
+# ld -shared -G dumpOSC.o dumpOSC_wrap.o ../libOSC/libOSC.a -o dumpOSC.so

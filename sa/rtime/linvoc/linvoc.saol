@@ -1,0 +1,124 @@
+
+//    Sfront, a SAOL to C translator
+//    Copyright (C) 2001 John Lazzaro
+//    This file: simple test instrument written in SAOL.
+//    Maintainers's address: lazzaro@cs.berkeley.edu;
+// 
+// This license covers also covers SASL file in this directory.
+// 
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation (Version 1, 1989).
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program; see the file COPYING.  If not, write to
+// the Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+
+// simple envelope follower, uses the notes held down on the
+// MIDI controller connected to the MIDI In jack to set the
+// note values, uses the signal energy of the microphone input
+// signal on the sound card to shape the envelope of the sound.
+
+global { 
+  inchannels 1; 
+  outchannels 1; 
+  srate 44100; 
+  krate 1050; 
+  send(ampl; ; input_bus);
+  ksig voice;
+  } 
+ 
+
+instr ampl () { 
+ exports ksig voice;
+
+ voice = 50*rms(input,0.050);
+} 
+
+instr sine (pitch, vel) preset 0 { 
+
+  // declarations
+ 
+  ivar a;       // sets osc f
+  ivar attack,release, attlim, ktime, stime;
+  ksig incr, rel, tot;
+  asig x, y;    // osc state
+  asig init;
+  asig env;
+  ksig tmp;
+  imports ksig voice;
+
+  // **********************
+  // computed during i-passl
+  // **********************
+
+  ktime = 1/k_rate;
+  stime = 1/s_rate;
+
+  // change these for envelope
+  // should be of k-rate granularity
+
+  
+
+  attack = int(0.005/ktime)*ktime;
+  release = int(0.060/ktime)*ktime;
+
+  attlim = attack - 0.5*ktime;
+
+  // turns MIDI number into 
+  // oscillator constant 
+
+  a = 2.0*sin(3.14159*cpsmidi(pitch - 12)*stime);
+
+  // **********************
+  // computed during k-pass
+  // **********************
+
+  incr = 0;
+  if (released && !rel)
+    {
+      rel = 1;
+      extend(release);
+    }
+  if ((!rel) && (itime < attlim))
+    {
+      incr = stime/attack;
+      tot = tot + ktime/attack;
+    }
+  if (rel)
+    {
+      incr = -tot*stime/(release+2*ktime);
+    }
+    
+
+  // **********************
+  // computed during a-pass
+  // **********************
+
+  if (init == 0)
+    {
+      x = 0.25;
+      init = 1;
+    }
+
+  x = x - a*y;
+  y = y + a*x;
+  env = env + incr;
+  
+  output(voice*env*y);
+  } 
+
+
+
+
+
+
+
+
+

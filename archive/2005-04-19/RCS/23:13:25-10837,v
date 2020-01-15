@@ -1,0 +1,53 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2005.04.19.22.15.33;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.04.19.22.13.25;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Apr 19 23:13:25 2005
+@
+
+
+1.2
+log
+@Tue Apr 19 23:15:33 2005
+@
+text
+@my @@vowels = ('a', 'e', 'i', 'o', 'u');
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 64 > 40;
+    $self->t({loops => rand(64), vowel => $vowels[rand @@vowels],
+              scale => "equal",
+              speed => ($self->{bangs} % 128 > 64 ? 2 : 1),
+              volume => 0.05,
+              accellerate => -0.00005
+             }
+            )
+        if $self->{bangs} % ($foo ? 8 : 4) == 0
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d5 7
+a11 1
+    $self->t({loops => rand(64), vowel => $vowels[rand @@vowels]})
+@

@@ -1,0 +1,10 @@
+sub bang {
+    my $self = shift; 
+
+    my $foo = $self->{burp2}++ % 8 > 5;
+
+    if ($self->{bangs} % ($foo ? 1 : 3) == 0) {
+        my $foo = $self->{burp}++ % 8 > 5;
+        beep($foo ? 100 : 50, 130);
+    }
+}

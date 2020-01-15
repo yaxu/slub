@@ -1,0 +1,40 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2006.10.19.15.01.59;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Thu Oct 19 16:01:59 2006
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 3;
+    $self->sine({freq => 800,
+                 direction => 0,
+                 ts => 0.1,
+                 volume => 4,
+                 noise => 0.01,
+                 tri => $foo > 0 ? 1 : 0,
+                 saw => $foo > 2 ? 1 : 0,
+                 sin => $foo != 1 ? 1 : 0
+                })
+      if $self->{bangs} % 4 == 0;
+
+}
+@

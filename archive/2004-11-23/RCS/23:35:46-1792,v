@@ -1,0 +1,82 @@
+head	1.3;
+access;
+symbols;
+locks
+	alex:1.3; strict;
+comment	@# @;
+
+
+1.3
+date	2004.11.23.23.49.50;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2004.11.23.23.37.39;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.11.23.23.35.47;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Nov 23 23:35:46 2004
+@
+
+
+1.3
+log
+@Tue Nov 23 23:49:50 2004
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0 or $self->{bangs} % 12 == 0) {
+        $self->noise({ts => 60, filter => 200 + 1000 * $self->sin,
+                     }
+                    );
+    }
+    if ($self->{bangs} % 64 == 0) {
+        my $num = 50;
+        $num += (($self->{bangs} % 256) / 64);
+        $self->play({num => $num, formfreq => 2,
+                     bwfreq => 50,
+                     ts => 600
+                    }
+                   );
+    }
+    elsif ($self->{bangs} % 4 == 0 and rand() > 0.4) {
+        $self->play({num => (rand() > 0.6 ? 50 : 62), 
+                     formfreq => 2, 
+                     bwfreq => 120, 
+                     ts => 120
+                    }
+                   );
+    }
+}@
+
+
+1.2
+log
+@Tue Nov 23 23:37:39 2004
+@
+text
+@d20 1
+a20 1
+                     bwfreq => 50, 
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d17 3
+a19 2
+    elsif ($self->{bangs} % 16 == 0 and rand() > 0.4) {
+        $self->play({num => 62, formfreq => 2, 
+@

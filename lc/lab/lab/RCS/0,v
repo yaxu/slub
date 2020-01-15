@@ -1,0 +1,41 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.09.09.13.51.29;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Sep  9 14:51:29 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0 and rand() > 0.5) {
+        $self->t({sample => "breaks152louder/0", delay => rand(0.1), pan => 2,
+                  pan_to => -2,
+                  shape => 0.9,
+                  envelope_name => 'valley'
+                 }
+                );
+    }
+    if ($self->{bangs} % 2 == 0) {
+      $self->t({sample => "gabba/" . $self->{bang}++, volume => 0.2,
+                #shape => 1, delay => 0.01, speed => -1
+               }
+              );
+    }
+}@

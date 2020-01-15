@@ -1,0 +1,56 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2005.04.18.21.03.08;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.04.18.13.08.27;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Apr 18 14:08:27 2005
+@
+
+
+1.2
+log
+@Mon Apr 18 22:03:07 2005
+@
+text
+@sub bang {
+    my $self = shift;
+    my $switch = $self->{bangs} % 128 > 32 ? -0.9 : -0.8;
+
+    $self->t({loops => rand(1.5), speed => rand() > 0.5 ? 1 : $switch,
+              pan => 1 - rand(2),
+              sample => "drumtraks/0",
+              shape => ($self->{bangs} % 16 == 0 ? 0.9 : 0),
+              volume => 0.01
+             }
+            )
+       if $self->{bangs} % 4 == 2;
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d7 1
+a7 1
+              sample => "drumtraks/2",
+d9 1
+a9 1
+              volume => 1
+@

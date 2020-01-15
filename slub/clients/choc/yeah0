@@ -1,0 +1,25 @@
+$VAR1 = [
+          undef,
+          {
+            'strength' => '40',
+            'spread' => '8',
+            'sample' => 'yeah1',
+            'chr' => 'x',
+            'racism' => '3',
+            'number' => '1'
+          },
+          ${\$VAR1->[0]},
+          ${\$VAR1->[0]},
+          ${\$VAR1->[0]},
+          ${\$VAR1->[0]},
+          ${\$VAR1->[0]},
+          ${\$VAR1->[0]},
+          {
+            'strength' => '50',
+            'spread' => '40',
+            'sample' => 'yeah8',
+            'chr' => '@',
+            'racism' => '30',
+            'number' => '8'
+          }
+        ];

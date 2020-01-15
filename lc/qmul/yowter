@@ -1,0 +1,16 @@
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 64 < 16 ? 6 : 16;
+    if ($self->{bangs} % 16 > 12) {
+       $foo += rand(2);
+    }
+    if ($self->{bangs} % $foo == 0) {
+       $self->t({sample => "diphone/$self->{bangs}", speed => 0.5,
+                 volume => 5,
+                 #accellerate => -0.000003 - rand(0.000002),
+                 #shape => rand(0.8),
+                 #pan => 0.8 - rand(0.8 * 2)
+                }
+               );
+    }
+}

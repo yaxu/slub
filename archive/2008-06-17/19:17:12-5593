@@ -1,0 +1,14 @@
+my $foo = 40;
+
+sub bang {
+    my $self = shift;
+   if ($self->{bangs} % 60 > $foo) {
+      $self->vector({x => -6.5, y => 3.9,
+                     alpha => 0.001
+                    }
+                   ) unless $self->{bangs} % 5;
+      $foo = rand(40);
+   }
+   $self->tension(0.9 + rand(0.5));
+   $self->loss(0);
+}

@@ -1,0 +1,44 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2006.07.13.11.56.55;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Thu Jul 13 12:56:55 2006
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# 5 <<+ sin
+# hello
+
+my $chunksize = 16;
+
+sub bang {
+    my $self = shift;
+    my $seq = $self->{seq} || '';
+    if (not $seq) {
+        my $script = $self->line(0);
+        $seq = parse($script, $chunksize);
+    }
+    $self->line(1, $seq);
+    $self->modified;
+}
+
+
+sub parse {
+   "hello"
+}@

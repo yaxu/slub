@@ -1,0 +1,20 @@
+# 5 <<+ sin
+# hello
+
+my $chunksize = 16;
+
+sub bang {
+    my $self = shift;
+    my $seq = $self->{seq} || '';
+    if (not $seq) {
+        my $script = $self->line(0);
+        $seq = parse($script, $chunksize);
+    }
+    $self->line(1, $seq);
+    $self->modified;
+}
+
+
+sub parse {
+   "hello"
+}

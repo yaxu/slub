@@ -1,0 +1,82 @@
+--- #YAML:1.0
+1:
+  - category: 'Artistic tool '
+    padding: 5
+    start: 1093165200
+    stop: 1093166400
+    title: Casey Reas
+  - category: 'Artistic tool '
+    padding: 5
+    start: 1093166400
+    stop: 1093166820
+    title: Fredrik Olofsson
+  - category: 'Artistic tool '
+    padding: 5
+    start: 1093166820
+    stop: 1093168020
+    title: Salsaman
+  - category: 'Artistic tool '
+    padding: 5
+    start: 1093168020
+    stop: 1093168620
+    title: Rene Beekman
+  - category: 'Artistic tool '
+    padding: 5
+    start: 1093168620
+    stop: 1093169520
+    title: Victor Laskin and Alexei Shulgin
+  - category: 'Data transformation '
+    padding: 5
+    start: 1093169520
+    stop: 1093170720
+    title: Ivan Bachev
+  - category: 'Data transformation '
+    padding: 5
+    start: 1093170720
+    stop: 1093171320
+    title: Douwe Osinga
+  - category: 'Data transformation '
+    padding: 5
+    start: 1093171320
+    stop: 1093172220
+    title: Georg Tremmel, Shiho Fukuhara
+  - category: 'Food '
+    padding: 5
+    start: 1093176000
+    stop: 1093179600
+    title: '*lunch break*'
+  - category: 'Appropriation and plagiarism '
+    padding: 5
+    start: 1093179600
+    stop: 1093180500
+    title: Jean-Baptiste Bayle, Beatrice Rettig
+  - category: 'Text manipulation '
+    padding: 5
+    start: 1093180500
+    stop: 1093181700
+    title: Christophe Bruno
+  - category: 'Text manipulation '
+    padding: 5
+    start: 1093181700
+    stop: 1093182300
+    title: Eugenio Tisselli
+  - category: 'Conceptual software '
+    padding: 5
+    start: 1093182300
+    stop: 1093183500
+    title: Peter Luining
+  - category: 'Conceptual software '
+    padding: 5
+    start: 1093183500
+    stop: 1093184520
+    title: Rachel Beth Egenhoefer
+  - category: 'Conceptual software '
+    padding: 5
+    start: 1093184520
+    stop: 1093185420
+    title: Brad Borevitz
+  - category: 'Conceptual software '
+    padding: 5
+    start: 1093185420
+    stop: 1093186920
+    title: Anne Laforet

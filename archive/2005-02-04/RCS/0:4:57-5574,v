@@ -1,0 +1,72 @@
+head	1.3;
+access;
+symbols;
+locks
+	alex:1.3; strict;
+comment	@# @;
+
+
+1.3
+date	2005.02.04.00.10.21;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.02.04.00.05.52;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.02.04.00.04.57;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Feb  4 00:04:57 2005
+@
+
+
+1.3
+log
+@Fri Feb  4 00:10:21 2005
+@
+text
+@sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 4 ? 1 : 0.4;
+    my $bar = $self->{bangs} % 64 > 50 ? 2 : 4;
+    $self->t({speed => $bar / 2,
+              sample => "drumtraks/DT Tom2.wav",
+              pan  => 1 - (2 * $self->sin(4))
+             }
+            ) 
+      if $self->{bangs} % $bar == 0;
+    $self->t({speed => $foo, shape => 0, sample => "drumtraks/DT Tom1.wav"})
+      if $self->{bangs} % 3 == 0;
+    
+}@
+
+
+1.2
+log
+@Fri Feb  4 00:05:52 2005
+@
+text
+@a5 1
+              shape => 0,
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d7 2
+a8 1
+              sample => "drumtraks/DT Tom2.wav"
+d14 1
+a14 1
+
+@

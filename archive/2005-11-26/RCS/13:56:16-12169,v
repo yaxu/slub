@@ -1,0 +1,55 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2005.11.26.19.24.24;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.11.26.13.56.16;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Nov 26 13:56:16 2005
+@
+
+
+1.2
+log
+@Sat Nov 26 19:24:24 2005
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0) {
+        $self->t({sample => "drumtraks/2",
+                  speed => ($self->{bangs} % 16 == 0 ? 1.5 : 1)
+                 }
+                );
+        }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+a3 1
+    if ($self->{bangs} % 4 == 1) {
+d5 1
+a5 1
+                  speed => ($self->{bangs} % 16 == 1 ? 1.5 : 1)
+d8 1
+a8 1
+    }
+@

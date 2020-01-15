@@ -1,0 +1,43 @@
+$VAR1 = [
+          undef,
+          {
+            'strength' => '40',
+            'spread' => '16',
+            'sample' => 'stab1',
+            'chr' => 'x',
+            'racism' => '4',
+            'number' => '1'
+          },
+          {
+            'strength' => '40',
+            'spread' => '16',
+            'sample' => 'stab2',
+            'chr' => '~',
+            'racism' => '4',
+            'number' => '2'
+          },
+          {
+            'strength' => '40',
+            'spread' => '16',
+            'sample' => 'stab3',
+            'chr' => '=',
+            'racism' => '4',
+            'number' => '3'
+          },
+          {
+            'strength' => '40',
+            'spread' => '16',
+            'sample' => 'stab4',
+            'chr' => '-',
+            'racism' => '4',
+            'number' => '4'
+          },
+          {
+            'strength' => '50',
+            'spread' => '20',
+            'sample' => 'stab5',
+            'chr' => '+',
+            'racism' => '4',
+            'number' => '5'
+          }
+        ];

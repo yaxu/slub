@@ -1,0 +1,33 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.08.23.08.07.00;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Aug 23 09:07:00 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@
+sub bang {
+    my $self = shift;
+    $self->code->[3] = '$self->code->[0] = \'#\';';
+    $self->modified;
+}
+
+
+@

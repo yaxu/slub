@@ -1,0 +1,25 @@
+# a.e.d...
+# a.e.d.....aed...
+#             ^
+
+sub bang {
+    my $self = shift;
+    my $string = $self->line(0);
+    $string .= shrink($string);
+    $self->line(1, $string);
+    $self->modified;
+    my $point = $self->{bangs} % length($string);
+    my $chr = substr($string, $point, 1);
+    return if $chr eq '.';
+    $self->trigger({sample => "drumtraks/"  . ord($chr),
+                   volume => 0.01, browndel => 100
+             }
+            );
+    $self->line(2, ' ' x $point  . '^');
+    $self->modified;
+    #if ($self->{bangs} % 1 == 0) {
+    #   my $foo = $self->line(0);
+    #   $foo =~ s/(.)(.+)/$2$1/;
+    #   $self->line(0, $foo);
+    #}
+}

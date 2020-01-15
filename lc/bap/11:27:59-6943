@@ -1,0 +1,24 @@
+sub bang {
+    my $self = shift;
+    my $switch = $self->{bangs} % 128 > 64;
+    if ($self->{bangs} % 32 == 16) {
+        $self->t({sample => 'metal/0',
+                  speed => 0.1,
+                  pan => -1,
+                  pan_to => 1,
+                  shape => rand(0.5) + 0.25,
+                  volume => 0.03
+                 }
+                );
+    }
+    if ($self->{bangs} % 16 == 0) {
+        $self->t({sample => 'metal/0',
+                  speed => ($switch ? 0.2 : 0.15),
+                  pan => 1,
+                  pan_to => -1,
+                  shape => rand(0.5) + 0.25,
+                  volume => 0.03
+                 }
+                );
+    }
+}

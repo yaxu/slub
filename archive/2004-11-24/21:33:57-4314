@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+    my $point = $self->sin(10);
+    my $play;
+    if (rand() > $point) {
+        $play = $self->{bangs} % 4;
+    }
+    else {
+        $play = rand() > 0.75;
+    }
+}

@@ -1,0 +1,28 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0) {
+        $self->trigger({sample => "drum/$self->{bangs}",
+                        gain => 100,
+                        rate => 10,
+                        ts   => 40,
+                       }
+                      );
+        $self->foo(0);
+    }
+}
+
+sub foo {
+   my $self = shift;
+   my $offset = shift;
+   $offset += rand(0.1);
+        $self->trigger({sample => "latibro/$self->{bangs}",
+                        gain => 100,
+                        rate => 10 + ($offset * 10),
+                        ts   => 40,
+                        offset => $offset
+                       }
+                      );
+   if (rand > 0.2) {
+      $self->foo($offset);
+   }
+}

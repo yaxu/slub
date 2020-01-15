@@ -1,0 +1,17 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0 and rand() > 0.5) {
+        $self->t({sample => "breaks152louder/0", delay => rand(0.1), pan => 2,
+                  pan_to => -2,
+#                  shape => 0.9,
+                  envelope_name => 'valley', volume => 0.05
+                 }
+                );
+    }
+#    if ($self->{bangs} % 1 == 0) {
+      $self->t({sample => "gabba/" . $self->{bang}++, volume => 0.2,
+                pan => 1, pan_to => -2, delay => 0.001
+               }
+              );
+#    }
+}

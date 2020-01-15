@@ -1,0 +1,49 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.11.22.20.07.00;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Nov 22 20:07:00 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@my $flip;
+sub bang {
+    my $self = shift;
+
+    if ($flip) {
+        if ($self->{bangs} % 8 == 0) {
+            $self->trigger({sample => "can/1", rate => 50});
+        }
+        if ($self->{bangs} % 4 == 0) {
+            $self->trigger({sample => "diphone2/" . int(rand(16)),
+                            rate => 50, ts => 100
+                           }
+                          );
+        }
+    }
+    else {
+        if ($self->{bangs} % 3 == 0) {
+            $self->trigger({sample => "can/" . $self->{foo}++});
+        }
+    }
+    
+    if (rand > 0.95) {
+       $flip = not $flip;
+    }
+}@

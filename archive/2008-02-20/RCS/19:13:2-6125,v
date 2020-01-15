@@ -1,0 +1,66 @@
+head	1.3;
+access;
+symbols;
+locks
+	alex:1.3; strict;
+comment	@# @;
+
+
+1.3
+date	2008.02.20.19.13.47;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.02.20.19.13.35;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.20.19.13.02;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Wed Feb 20 19:13:02 2008
+@
+
+
+1.3
+log
+@Wed Feb 20 19:13:47 2008
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->t({sample => "drumtraks/1", 
+              speed => 0 - 0.1 + rand(0.05)
+             }
+            ) unless $self->{bangs} % 16;
+    $self->t({sample => "drumtraks/1", 
+              speed => 0.1 + rand(0.05)
+             }
+            ) unless $self->{bangs} % 16;
+}@
+
+
+1.2
+log
+@Wed Feb 20 19:13:35 2008
+@
+text
+@d4 4
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d4 1
+a4 2
+              loops => rand(10), 
+              speed => 2
+@

@@ -1,0 +1,328 @@
+head	1.11;
+access;
+symbols;
+locks
+	alex:1.11; strict;
+comment	@# @;
+
+
+1.11
+date	2004.10.27.23.29.01;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2004.10.27.23.28.06;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2004.10.27.23.27.29;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2004.10.27.23.26.11;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2004.10.27.23.25.35;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2004.10.27.23.21.41;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2004.10.27.23.20.03;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2004.10.27.23.19.39;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2004.10.27.22.59.53;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2004.10.27.22.59.43;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.10.27.22.10.55;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Wed Oct 27 23:10:55 2004
+@
+
+
+1.11
+log
+@Thu Oct 28 00:29:01 2004
+@
+text
+@# done.
+# 2_2
+# 15 / 15 
+# 12
+my $seq = [qw/ 1 12 1 12/];
+
+my $scope = 16;
+my $path_length = 4;
+my $wind_power = 0;
+my $map = mapit();
+my @@keys = keys %$map;
+my $rendered = render();
+my $period = 2;
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % $period == 0) {
+       my $point = ($self->{bangs} / $period) % @@$rendered;
+       $self->code->[3] = "# $rendered->[$point]";
+       $self->play({num => 70 + $rendered->[$point],
+                    formfreq => 3,
+                    bwfreq   => 200,
+                    ts => 50 + rand(10)
+                   }
+                  );
+    }
+    $self->modified;
+}
+
+sub render {
+    my $result = [];
+    foreach my $point (0 .. (@@$seq - 1)) {
+        my $from = $seq->[$point];
+        my $to   = $seq->[($point + 1) % @@$seq];
+        my $path = $from . '_' . $to;
+        push(@@$result, @@{$map->{$path}});
+    }
+    return $result;
+}
+
+sub mapit {
+    my $result;
+    my $points = [ 0 .. ( $scope - 1 ) ];
+    foreach my $from (@@$points) {
+        foreach my $to (@@$points) {
+            $self->code->[2] = "# $from / $to ";
+            $result->{$from . '_' . $to} = path($from, $to);
+        }
+    }
+    $self->code->[0] = "# done.";
+    return($result);
+}
+
+sub path {
+    my ($from, $to) = @@_;
+    
+    my $result = [];
+    my $foo = 0;
+    for my $step ( 0 .. ( $path_length - 2 ) ) {
+        my $difference = abs($from - $to);
+        my $power = ($foo++ % (($difference / 2) + 1));
+        $power += int(rand($wind_power)) - int($wind_power / 2);
+        if ($from < $to) {
+            $from += $power;
+        }
+        else {
+            $from -= $power;
+        }
+        push(@@$result, $from);
+    }
+    push(@@$result, $to);
+    return $result;
+}@
+
+
+1.10
+log
+@Thu Oct 28 00:28:06 2004
+@
+text
+@d4 1
+a4 1
+# 1
+d9 1
+a9 1
+my $wind_power = 1.5;
+a25 1
+       push(@@$rendered, shift(@@$rendered));
+@
+
+
+1.9
+log
+@Thu Oct 28 00:27:29 2004
+@
+text
+@d5 1
+a5 1
+my $seq = [qw/ 1 5 7 9/];
+@
+
+
+1.8
+log
+@Thu Oct 28 00:26:11 2004
+@
+text
+@d4 1
+a4 1
+# 8
+d13 1
+d17 4
+a20 3
+    if ($self->{bangs} % 2 == 0) {
+       $self->code->[3] = "# $rendered->[0]";
+       $self->play({num => 70 + $rendered->[0],
+@
+
+
+1.7
+log
+@Thu Oct 28 00:25:35 2004
+@
+text
+@d4 2
+a5 2
+# 5
+my $seq = [qw/ 1 12 3 15/];
+@
+
+
+1.6
+log
+@Thu Oct 28 00:21:41 2004
+@
+text
+@d3 3
+a5 3
+# 7 / 7 
+# 3
+my $seq = [qw/ 3 7 2 4 /];
+d7 1
+a7 1
+my $scope = 8;
+d18 4
+a21 3
+       $self->play({num => 90 + $rendered->[0],
+                    formfreq => 5,
+                    bwfreq   => 100,
+@
+
+
+1.5
+log
+@Thu Oct 28 00:20:03 2004
+@
+text
+@d18 5
+a22 1
+       $self->play({num => 90 + $rendered->[0]});
+@
+
+
+1.4
+log
+@Thu Oct 28 00:19:39 2004
+@
+text
+@d4 1
+a4 1
+# 7
+d18 1
+a18 1
+       $self->play({num => 40 + $rendered->[0]});
+@
+
+
+1.3
+log
+@Wed Oct 27 23:59:53 2004
+@
+text
+@d2 1
+a2 1
+# 5_3
+d4 2
+a5 2
+
+my $seq = [qw/ 3 8 2 4 /];
+d8 2
+a9 2
+my $path_length = 5;
+
+d12 2
+d16 4
+a19 4
+    if ($self->{bangs} % 8 == 0) {
+      my $choice = $keys[rand @@keys];
+      $self->code->[1] = "# " . $choice;
+      $self->code->[2] = "# " . join(':', @@{$map->{$choice}});
+d24 11
+d53 1
+a53 1
+    for my $step ( 0 .. ( $path_length - 1 ) ) {
+d56 1
+d61 1
+a61 1
+            $from += $power;
+d65 1
+@
+
+
+1.2
+log
+@Wed Oct 27 23:59:43 2004
+@
+text
+@d2 1
+a2 1
+# 6_7
+d16 2
+a17 2
+      $self->code->[1] = "# " . $keys[rand @@keys];
+      $self->code->[2] = "# " . join(':', @@{$map->{$keys[rand @@keys]}});
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 6
+d10 2
+a11 2
+my $map = map();
+
+d14 6
+a19 1
+
+d22 1
+a22 1
+sub map {
+d27 2
+a28 1
+            $result->[$from . '_' . $to] = path($from, $to);
+d31 2
+d39 1
+d41 9
+a49 2
+
+
+d51 1
+@

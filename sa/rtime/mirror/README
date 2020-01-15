@@ -1,0 +1,16 @@
+
+This example lets you test sfront networking, by bouncing notes off of
+a server at Berkeley (or, by the time you read this, some other host
+on the network). Like the ascii example, you use the ASCII keyboard to
+play pentatonic scales. The reflected notes will be transposed by a fifth.
+
+Under Linux, just type "make" in this directory to run the example.
+
+To test this program under Macintosh OS X, copy the Makefile.osx file
+to Makefile, and then type "make".
+
+To test this program under IRIX, HPUX, or FreeBSD, see the Makefile
+for modification details. 
+
+Sfront networking and the ascii driver isn't compatible with Windows,
+so this example doesn't work.

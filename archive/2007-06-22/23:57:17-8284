@@ -1,0 +1,9 @@
+sub bang {
+    my $self = shift;
+    my $foo= $self->{bangs} % 64 > 40 ? 0 : 1;
+    $self->t({sample => "wobble/0", 
+              speed => ($foo ? 2 : 3), pan => 1, pan_to => -1
+             }
+            )
+      unless $self->{bangs} % ($foo ? 8 : 6);
+}

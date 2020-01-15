@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0 and rand() > 0.2) {
+        my $speed = 1;
+        if (rand() > 0.9)  {
+          $speed -= 2;
+        }
+        $self->t({sample => "breaks157/0", volume => 0.5, speed => $speed, 
+                  envelope_name => "valley"});
+    }
+}

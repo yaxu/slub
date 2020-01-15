@@ -1,0 +1,37 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0) {
+        $self->v({volume => 20, reverb => 6, x => 0.25,
+                  image => "daisy",
+                  width => 2, length => 5, speed => 4,
+                  direction => 0-pi/2
+                 }
+                );
+        $self->t({sample => "drumtraks/0", loops => 2});
+    }
+
+    if ($self->{bangs} % 16 == 0) {
+        $self->v({volume => 20, reverb => 6, x => 0.75,
+                  image => "daisy",
+                  width => 2, length => 5, speed => 4,
+                  direction => pi/2
+                 }
+                );
+    }
+
+
+
+    if ($self->{bangs} % 4 == 0) { 
+        my $foo = $self->{bangs} % 16;
+        $self->v({volume => 20, reverb => 5, 
+                  y => ($foo ? 0.25 : 0.75),
+                  direction => ($foo ? 0 : pi ),
+                  speed => 10, curve => ($foo ? -0.05 : -0.05),
+                  image => "cat"
+                 });
+        $self->t({sample => "drumtraks/9",
+                  speed => $foo ? 1 : -1
+                 }
+                );
+    }
+}

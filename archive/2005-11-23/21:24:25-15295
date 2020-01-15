@@ -1,0 +1,29 @@
+use Net::OpenSoundControl::Client;
+use Math::Trig;
+
+my $osc;
+
+sub bang {
+    my $self = shift;
+    $self->code(1, "hello");
+    $self->modified();
+
+    if ($self->{bangs} % 1 == 0) {
+      $osc ||=
+        Net::OpenSoundControl::Client->new(Host => '192.168.0.2',
+                                           Port => 12000
+                                          );
+      $osc->send(
+                 ['/trigger',
+                  # x y
+                  'f', rand(300), 'f', rand(300),
+                  # speed
+                  'f', rand(5), 
+                  # direction
+                  'f', rand(pi * 2),
+                  # width length
+                  'f', 1, 'f', 1
+                 ]
+                );
+    }
+}

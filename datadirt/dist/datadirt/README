@@ -1,0 +1,81 @@
+
+            .-------------------------------------.
+            |     _      _           _ _     _    |
+            |  __| |__ _| |_ __ _ __| |_|_ _| |_  |
+            | / _` / _` |  _/ _` / _` | | '_|  _| |
+            | \__,_\__,_|\__\__,_\__,_|_|_|  \__| |
+            |                                     |
+            `-------------------------------------'
+
+
+Datadirt - a live sample playback thing written in C and controlled by
+OSC.
+
+Released under the GNU Public License.  See COPYING for details.
+
+(c) Alex McLean 2005
+
+Some portions (c) Adrian Ward, this largely being a rehash of his MSG
+software.  He released his code under the GPL as well though so that's
+no problem for you.
+
+
+INSTALLATION
+------------
+
+Currently tested under Linux (ubuntu).  Let me know if you get it to
+work - alex@slab.org
+
+The latest version should be available
+at http://yaxu.org/datadirt/
+
+You'll need the following two libraries installed before compiling
+datadirt:
+
+  liblo - lightweight OSC implementation
+  http://plugin.org.uk/liblo/
+
+  libsndfile1 - sound file library
+  http://www.mega-nerd.com/libsndfile/
+
+By default it'll output to /dev/dsp.  Edit config.h to change that, or
+to switch on jack support.
+
+
+USAGE
+-----
+
+To get it to make a sound, you'll need to send it the OSC message
+'/trigger' with the following parameters.
+
+All parameters must be supplied, with the OSC signature "sfffffsfffssffff".
+
+string - sample name
+float  - playback speed (1 is normal, -1 is reverse)
+float  - waveshape (between 0 .. 0.99 is good, higher for overdrive)
+float  - pan (-1 is full left, 0 is centre, 1 is full right)
+float  - pan to (-1 is full left, 0 is centre, 1 is full right)
+float  - volume (0 is silent, 1 is normal)
+string - envelope name (one of 'percussive', 'tri', 'valley' or 'slope')
+float  - analog feel strength (experimental, doesn't seem to work)
+float  - analog feel frequency (experimental, doesn't seem to work)
+float  - accellerate (best with very small values, try 0.00000001)
+string - vowel (try 'a', 'e', 'i', 'o' or 'u')
+string - scale name ('equal' for equal temperament tuning, default is decimal)
+float  - loops (number of times the sample is played, default is 1)
+float  - duration (number of samples to play - incompatible with the 'loops' 
+                   parameter)
+float  - delay1 (two delay loops, send values between 0 and 1)
+float  - delay2 
+
+BUGS
+----
+
+Doesn't yet support OSC bundle timestamps.  This is the next thing to
+do, and would need a patch to liblo.
+
+
+CONTACT
+-------
+
+Mail alex@slab.org with success/failure reports, fixes and so on.

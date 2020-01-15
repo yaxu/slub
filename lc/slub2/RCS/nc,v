@@ -1,0 +1,73 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2005.04.18.13.02.17;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.04.18.13.01.34;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Apr 18 14:01:34 2005
+@
+
+
+1.2
+log
+@Mon Apr 18 14:02:17 2005
+@
+text
+@# 1
+sub bang {
+    my $self = shift;
+#    $self->line(0, $pos);
+    if ($self->{bangs} % 8 == 0) {
+        $self->t({sample => "future/0",
+                  speed => ($self->{trip} ? 0.7 : 1),
+                  loops => 0.2,
+                  volume => 4
+                 }
+                );
+        $self->{trip} = 0;
+    }
+    elsif ($self->{bangs} % 64 == 52) {
+        $self->t({sample => "future/0", loops => rand() > 0.5 ? 0.2 : 2,
+                  volume => 4
+                 }
+                );
+
+        $self->{trip} = 1;
+    }
+
+    if ($self->{bangs} % 8 == 4 or $self->{bangs} % 8 == 2) {
+        $self->t({duration => rand(1800),
+                  sample => "glitch/6",
+                  accellerate => 0 - rand(0.0045),
+                  volume => 0.005,
+                  vowel => 'e'
+                 }
+                );
+    }
+    $self->modified;
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d15 1
+a15 1
+        $self->t({sample => "future/0", loops => 0.2,
+@

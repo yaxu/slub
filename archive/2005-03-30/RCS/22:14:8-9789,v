@@ -1,0 +1,89 @@
+head	1.4;
+access;
+symbols;
+locks
+	alex:1.4; strict;
+comment	@# @;
+
+
+1.4
+date	2005.03.30.21.45.45;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.03.30.21.16.12;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.03.30.21.15.40;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.03.30.21.14.08;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Wed Mar 30 22:14:08 2005
+@
+
+
+1.4
+log
+@Wed Mar 30 22:45:45 2005
+@
+text
+@
+my @@vowels = ('a', 'e', 'i', 'o', 'u');
+
+sub bang {
+    my $self = shift;
+    my $point = $self->{bangs} % 16;
+    if ($point eq 0 or $point eq 6 or $point eq 10) {
+       $self->t({speed => 1, volume => 0.1
+                 vowel => $vowels[$self->{bangs} % scalar(@@vowels)],
+                 sample => "can/0"
+                }
+               );
+    }
+}@
+
+
+1.3
+log
+@Wed Mar 30 22:16:12 2005
+@
+text
+@d8 3
+a10 2
+       $self->t({speed => 0.01, volume => 0.02,
+                 vowel => $vowels[$self->{bangs} % scalar(@@vowels)]
+@
+
+
+1.2
+log
+@Wed Mar 30 22:15:40 2005
+@
+text
+@d8 2
+a9 2
+       $self->t({speed => 0.003, volume => 0.01,
+                 vowel => $vowels[$self->{bangs} % scalar(@@vowels)];
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 3
+d8 4
+a11 1
+       $self->t({speed => 0.003, vowel => 'e', volume => 0.01});
+@

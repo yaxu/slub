@@ -1,0 +1,19 @@
+# s>dfa
+# s
+
+sub bang {
+    my $self = shift;
+    return unless $self->{bangs} % 3 == 0;
+    my $foo = $self->line(0);
+    $foo =~ s/(.)(.*)/$2$1/;
+    my $n = ord($1);
+    $self->{bing} ||= 0;
+    if ($foo eq '>') {
+      $self->{bing}++;
+    }
+    $n += $self->{bing};
+    $self->line(1, $1);
+    $self->t({sample => "newnotes/$n"});
+    $self->line(0, $foo);
+    $self->modified;
+}

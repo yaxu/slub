@@ -1,0 +1,167 @@
+head	1.5;
+access;
+symbols;
+locks
+	alex:1.5; strict;
+comment	@# @;
+
+
+1.5
+date	2004.09.12.23.35.40;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2004.09.12.23.15.36;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2004.09.12.23.09.58;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2004.09.12.23.04.16;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.09.12.22.58.38;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Sep 12 23:58:38 2004
+@
+
+
+1.5
+log
+@Mon Sep 13 00:35:40 2004
+@
+text
+@# ><-><->^+
+
+sub bang {
+    my $self = shift;
+    $self->{foo} ||= 0;
+    $self->{next} ||= 0;
+    $self->{hits} ||= 3;
+    $self->{dist} ||= 3;
+    $self->{rate} ||= 100;
+    $self->{note} ||= 0;
+
+    if ($self->{next} == 0 and $self->{hits} > 0) {
+        $self->trigger({sample => "latibro/" . $self->{note},
+                        ts => 100,
+                        rate   => $self->{rate}
+                       }
+                      );
+        $self->{next} = $self->{dist};
+        $self->{hits}--;
+    }
+    else {
+        $self->{next}--;
+    }
+    
+    if ($self->{bangs} % 16 == 0) {
+        $self->{hits} = 1 + rand(3);
+        $self->{dist} = int(rand(3)) + 1; 
+        $self->{next} = $self->{dist};
+        my ($seq) = $self->code->[0] =~ /\s+(.+)/;
+        $seq =~ s/(.)(.*)/$2$1/;
+        my $i = $1;
+        if ($i eq '>') {
+            $self->{rate} += 10;
+        }
+        elsif ($i eq '<') {
+            $self->{rate} -= 10;
+        }
+        elsif ($i eq '^') {
+            $self->{rate} = 50;
+        }
+        elsif ($i eq '+') {
+            $self->{rate} += 4;
+        }
+        elsif ($i eq '-') {
+            $self->{rate} -= 4;
+        }
+
+        $self->code->[0] = "# $seq";
+        $self->modified;
+        $self->{note} = $self->{note} ? 0 : 5;
+    }
+}@
+
+
+1.4
+log
+@Mon Sep 13 00:15:36 2004
+@
+text
+@d1 1
+a1 1
+# >+>+><^>-
+d13 2
+a14 2
+        $self->trigger({sample => "moog/" . $self->{note},
+                        ts => 200,
+d39 1
+a39 1
+            $self->{rate} = 100;
+d50 1
+a50 1
+        $self->{note} = $self->{note} ? 0 : 4;
+@
+
+
+1.3
+log
+@Mon Sep 13 00:09:58 2004
+@
+text
+@d1 1
+a1 1
+# <^>>
+d10 1
+d13 1
+a13 1
+        $self->trigger({sample => "moog/0",
+d25 1
+a25 1
+    if ($self->{bangs} % 32 == 0) {
+d41 6
+d50 1
+@
+
+
+1.2
+log
+@Mon Sep 13 00:04:16 2004
+@
+text
+@d1 1
+a1 1
+
+d9 1
+d12 3
+a14 1
+        $self->trigger({sample => "moog/0", ts => 200
+d23 1
+d28 15
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 2
+d5 6
+a10 1
+    if ($self->{bangs} % 8 == 0) {
+d14 10
+@

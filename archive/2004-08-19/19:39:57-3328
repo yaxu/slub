@@ -1,0 +1,6 @@
+sub bang {
+    my $self = shift;
+    $self->trig(0, 80 + 20 * $self->sin(10),
+                400, 200
+               ) if $self->{bangs} % 8 > 4;
+}

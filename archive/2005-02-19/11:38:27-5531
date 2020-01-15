@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 24 == 0) {
+        $self->t({sample => "notes/8",
+                  volume => 2,
+                  envelope_name => 'valley',
+                  speed  => 0.175
+                 }
+                );
+    }
+}

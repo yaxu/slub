@@ -1,0 +1,26 @@
+sub bang {
+    my $self = shift;
+    $self->{seq} ||= [reverse(1, 3, 4, 6)];
+    $self->{rate} ||= 0;
+    $self->{cp} ||= 20;
+    $self->{foo} ||= 2;
+    my $mod = 2;
+    if (($self->{bangs} % 32 < $self->{cp}) and ($self->{bangs} % $mod == 0)) {
+        $self->trigger({
+                     sample   => "drum/$self->{rate}",
+                     rate     => 90,
+                     ts       => 30,
+                     gain     => 80,
+                     pan      => (0.2 * $self->sin(5)) + 0.4
+                    }
+                   );
+    }
+    
+    if ($self->{bangs} % 32 == $self->{foo}) {
+       $self->{foo} = 2 + int(rand(8));
+       $self->{cp} = 30;#20 + rand(12);
+       $self->{rate} = 20 + ($self->{seq}->[0]);
+       $self->{rate2} = 20 + ($self->{seq}->[1]);
+       push(@{$self->{seq}}, shift(@{$self->{seq}}));
+    }
+}

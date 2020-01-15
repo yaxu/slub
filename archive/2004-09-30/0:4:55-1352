@@ -1,0 +1,28 @@
+sub bang {
+    my $self = shift;
+    $self->{seq} ||= [1, 3, 4, 6, 10, 18, 6];
+    $self->{rate} ||= 0;
+    $self->{cp} ||= 20;
+    $self->{foo} ||= 2;
+    my $mod = 2;
+    if (($self->{bangs} % 32 < $self->{cp}) and ($self->{bangs} % $mod == 0)) {
+        $self->play({num => 44 + 
+                       ($self->{bangs} % ($mod * 2)
+                        ? $self->{rate} : $self->{rate2}),
+                     ts       => 50,
+                     gain     => 70,
+                     formfreq => 10,
+                     bwfreq   => ($self->sin(5) * 40) + 30,
+                     pan      => (0.2 * $self->sin(5)) + 0.4
+                    }
+                   );
+    }
+    
+    if ($self->{bangs} % 32 == $self->{foo}) {
+       $self->{foo} = 6 + int(rand(4));
+       $self->{cp} = rand > 0.9 ? 30 : 31;
+       $self->{rate} = 20 + ($self->{seq}->[0]);
+       $self->{rate2} = 20 + ($self->{seq}->[1]);
+       push(@{$self->{seq}}, shift(@{$self->{seq}}));
+    }
+}

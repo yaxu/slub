@@ -1,0 +1,13 @@
+sub bang {
+    my $self = shift;
+    $self->{speed} ||= 0.1;
+    if ($self->{bangs} % 2 == 0) {
+      $self->t({sample => "industrial/$self->{bangs}", speed =>  1,
+                delay => 0.01 + rand(0.01),
+                delay2 => 0.01 + rand(0.01),
+                pan => rand(2) - 1, loops => 1.5,
+               }
+              );
+#      $self->{speed} += 0.1;
+    }
+}

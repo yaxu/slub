@@ -1,0 +1,12 @@
+# hola piksel
+sub bang {
+    my $self = shift;
+#    t({sample => "gabba/0",offset => 0.1, pan => 1
+#     }) if $self->{bangs} % 8 == 0;
+#    my $foo = $self->{bangs} % 6;
+#    t({sample => "drum/2",offset => 0.1})
+#        if ($self->{bangs} % 8) =~ /[2-$foo]/;
+}
+
+
+here

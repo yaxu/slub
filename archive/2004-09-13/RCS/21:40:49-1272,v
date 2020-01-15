@@ -1,0 +1,47 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.09.13.20.40.49;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Sep 13 21:40:49 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->{foo} ||= 4;
+    $self->{longevity} ||= 0.7;
+    if ($self->{bangs} % $self->{foo} == 0 and $self->{on}) {
+        $self->trigger({sample   => "yeah/11",
+                        ts       => 80,
+                        rate     => 90,
+                        gain     => 90,
+                        browndel => $self->{browndel}
+                       }
+                      );
+        if (rand() > $self->{longevity}) {
+            $self->{on} = 0;
+        }
+    }
+    if ($self->{bangs} % 16 == 0 and rand() > 0.7) {
+        $self->{on} = 1;
+        $self->{foo} = 4 * (1 + rand(3));
+        $self->{browndel} = rand(30);
+        $self->{longevity} = 0.5 + rand(0.7);
+    }
+}@

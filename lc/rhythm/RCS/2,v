@@ -1,0 +1,352 @@
+head	1.16;
+access;
+symbols;
+locks
+	alex:1.16; strict;
+comment	@# @;
+
+
+1.16
+date	2006.07.19.22.31.54;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2006.07.19.22.26.04;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2006.07.19.22.24.54;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2006.07.19.22.22.17;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2006.07.19.22.21.41;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2006.04.29.22.55.20;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2006.04.29.19.55.51;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2006.04.01.21.04.22;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2006.03.27.23.17.42;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2006.03.27.21.42.52;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2006.03.27.21.36.36;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2006.03.27.21.36.04;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2006.03.27.21.34.38;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2006.03.26.23.08.28;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2006.03.26.23.08.09;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2006.03.26.22.57.04;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Mar 26 23:57:04 2006
+@
+
+
+1.16
+log
+@Wed Jul 19 23:31:54 2006
+@
+text
+@# 20.4.3!5+3
+# O...O.O..O..O..OO...
+
+use IO::File;
+my $init = 0;
+
+sub bang {
+    my $self = shift;
+    $self->openlog() unless $self->{logfh};
+    init() unless $init;
+
+    my $line = $self->line(1);
+    return unless length $line;
+    my $point = $self->{bangs} % length($line);
+    my $chr = substr($line, $point, 1);
+    if ($chr eq 'O') {
+        $self->t({sample => "drumtraks/6"});
+    }
+}
+
+sub openlog {
+    my $self = shift;
+    $self->{logfh} = IO::File->new('>>/tmp/rhythm.log');
+    $self->{logfh}->autoflush(1);
+    print {$self->{logfh}} $self->{now} . ':' . $self->{bangs} . ": *start*\n";
+}
+
+sub init {
+  my $string = $self->line(0);
+  print {$self->{logfh}} $self->{now} . ':' . $self->{bangs} . ": $string";
+  $string =~ s/^(\d+)//;
+  my $length = $1;
+  my $rhythm = ('.' x $length);
+
+  while($string =~ /(\D+)(\d+)(?=\+(\d+))?/g) {
+    my ($verb, $param, $offset) = ($1, $2, $3);
+    $offset ||= 0;
+    print("$verb / $param / $offset\n");
+    if ($verb eq '.') {
+      $param--;
+      $rhythm =~ s/(?<=.{$offset})(.)(.{$param})/O$2/g;
+    }
+    elsif ($verb eq '!') {
+      $param--;
+      $rhythm =~ s/(?<=.{$offset})(.)(.{$param})/.$2/g;
+    }
+  }
+  print {$self->{logfh}} " = $rhythm\n";
+  $self->line(1, $rhythm);
+  $self->modified;
+  $init++;
+}@
+
+
+1.15
+log
+@Wed Jul 19 23:26:04 2006
+@
+text
+@d1 2
+a2 2
+# 16
+# ................
+@
+
+
+1.14
+log
+@Wed Jul 19 23:24:54 2006
+@
+text
+@d1 2
+a2 2
+# 128.5.9.13
+# O....O...OO..O.O..O.O....OOO..O....OO..OO....O....O.O.OO....O..O.O....O.O..O..O.OO...O....OO...O...OO...OO..O.O....O.O..O.......
+a18 1
+    print {$self->{logfh}} "oh\n";
+d24 1
+@
+
+
+1.13
+log
+@Wed Jul 19 23:22:17 2006
+@
+text
+@d1 2
+a2 2
+# 16.3.2
+# O.OOO.O.OOO.O.O.
+@
+
+
+1.12
+log
+@Wed Jul 19 23:21:41 2006
+@
+text
+@d19 1
+a19 1
+    print {$self->{logfh}} "oh\n"
+d21 1
+@
+
+
+1.11
+log
+@Sat Apr 29 23:55:20 2006
+@
+text
+@d1 2
+a2 2
+# 32.4.1+24
+# O...O...O...O...O...O...OOOOOOOO
+d4 1
+d9 1
+d17 1
+a17 2
+        $self->t({sample => "drumtraks/6", loops => 0.5, 
+volume => 8, pan => 1 - rand(2)});
+d19 6
+d29 1
+a29 1
+
+d47 1
+@
+
+
+1.10
+log
+@Sat Apr 29 20:55:51 2006
+@
+text
+@d15 2
+a16 1
+        $self->t({sample => "drumtraks/6", loops => 0.5, pan => 1 - rand(2)});
+@
+
+
+1.9
+log
+@Sat Apr  1 22:04:22 2006
+@
+text
+@d1 2
+a2 2
+# 32.4+2.1+24
+# ..O...O...O...O...O...O.OOOOOOOO
+@
+
+
+1.8
+log
+@Tue Mar 28 00:17:42 2006
+@
+text
+@d1 2
+a2 2
+# 32.4.1+24
+# O...O...O...O...O...O...OOOOOOOO
+d15 1
+a15 1
+        $self->t({sample => "drumtraks/6", loops => 0.5});
+@
+
+
+1.7
+log
+@Mon Mar 27 22:42:52 2006
+@
+text
+@d1 2
+a2 2
+# 20.6+2.4!3+1
+# O.O.....O...O.O.....
+@
+
+
+1.6
+log
+@Mon Mar 27 22:36:36 2006
+@
+text
+@d1 2
+a2 2
+# 32.6+2.4!3+1
+# O.O.....O...O.O.....O...O.O.....
+d15 1
+a15 1
+        $self->t({sample => "drumtraks/4", loops => 0.5});
+@
+
+
+1.5
+log
+@Mon Mar 27 22:36:04 2006
+@
+text
+@d1 2
+a2 2
+# 32.6
+# O.....O.....O.....O.....O.......
+@
+
+
+1.4
+log
+@Mon Mar 27 22:34:38 2006
+@
+text
+@d1 2
+a2 2
+# 24.2+0!6+2
+# O...O.O...O.O...O.O.O.O.
+d32 1
+a32 1
+      $rhythm =~ s/(?<=,{$offset})(.)(.{$param})/O$2/g;
+@
+
+
+1.3
+log
+@Mon Mar 27 00:08:28 2006
+@
+text
+@d15 1
+a15 1
+        $self->t({sample => "industrial/0", loops => 0.1});
+@
+
+
+1.2
+log
+@Mon Mar 27 00:08:09 2006
+@
+text
+@d1 2
+a2 2
+# 32.2+0!6+2
+# O...O.O...O.O...O.O...O.O...O.O.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 2
+a2 2
+# 32.4+0!3+2
+# O...O.......O...O.......O...O...
+@

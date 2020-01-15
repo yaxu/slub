@@ -1,0 +1,54 @@
+my @rise = (0, 4, 2, 7);
+# 0.28
+# 0.0133333333333335
+sub bang {
+    my $self = shift;
+    my $foo = ($self->{bangs} % 64 > 48 ? 2 : 4);
+    if ($self->{bangs} % $foo == 0) {
+        my $speed = 10 - 1 + $rise[$self->{foo} % @rise] - 30;
+        $self->line(1, ($speed + 21.1) / 7.5);
+        $self->modified;
+        $self->t({sample => "f/0", 
+                  speed => 10 - 1 + $rise[$self->{foo} % @rise] - 30,
+                  loops => 0.01 + rand(0.2), delay2 => 0.2,
+                  scale => "equal", delay => 0.01, volume => 0.25, pan => 0.25
+                 }
+                );
+        $self->v({x => ($speed + 21.1) / 7.5, y => 1,
+                  volume => 40, speed => 30,
+                  reverb => 5, direction => pi
+                 }
+                );
+        if (rand() > 0.5) {
+           $self->{foo}++;
+        }
+        if ($self->{bangs} % 16 == 0) {
+           $self->{foo} = 0;
+        }
+    }
+    if ($self->{bangs} % ($foo * 2) == $foo) {
+        my $speed = (1 + $rise[$self->{foo2} % @rise]) - 30;
+        my $foo = ($speed + 29.1) / 7.5;
+        $self->line(2, $foo);
+        $self->modified;
+        $self->t({sample => "f/0",
+                  speed => $speed, loops => 1,
+                  scale => "equal",
+                  delay => 0.02, delay2 => 0.2, volume => 0.25, pan => -0.25
+                 }
+                );
+        $self->v({volume => 30, x => 0.001, direction => pi / 2, 
+                  speed => 10 + $foo * 20, reverb => 10,
+                  width => 10, curve => -0.025 + 0.05 * $foo,
+                  image => "cat"
+                 }
+                );
+        if (rand() > 0.5) {
+           $self->{foo2}++;
+        }
+        if ($self->{bangs} % 16 == 0) {
+           $self->{foo2} = 0;
+        }
+    }
+
+}

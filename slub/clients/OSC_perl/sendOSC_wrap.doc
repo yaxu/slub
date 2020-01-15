@@ -1,0 +1,14 @@
+sendOSC_wrap.c
+
+[ Module : sendOSC, Package : sendOSC ]
+
+
+print_args(argv);
+        [ returns int  ]
+
+get_args();
+        [ returns char ** ]
+
+HartCoreMode(argc,argv);
+        [ returns void  ]
+

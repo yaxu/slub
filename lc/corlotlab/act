@@ -1,0 +1,25 @@
+sub bang {
+    my $self = shift;
+    my $dir = ($self->{dir} ||= 1);
+    my $mod = ($self->{mod} ||= 4);
+    $self->{freq} ||= 300;
+
+    my $active = $self->{active};
+    if ($active && ($self->{bangs} % 8 == 0)) {
+        $self->sine({freq => ($self->{freq} += (10 * $dir)) / 4,
+                     ts => 16, tri => 1, volume => 5,
+                     clip => 0.05
+                    }
+                   );
+                     
+        if(rand() > 0.95) {
+            $self->{active} = 0;
+        }
+    }
+    else {
+      if(rand() > 0.95) {
+         $self->{active} = 1;
+         $self->{dir} = $self->{dir} > 0 ? -1 : 1;
+      }
+    }
+}

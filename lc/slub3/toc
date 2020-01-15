@@ -1,0 +1,12 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0) {
+        $self->t({sample => "future/7",
+                  loops => 2,
+                  speed => 2.1,
+                  pan => 1,
+                  volume => 0.05
+                 }
+                );
+    }
+}

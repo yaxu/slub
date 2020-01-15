@@ -1,0 +1,85 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2008.06.24.17.55.31;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Jun 24 18:55:31 2008
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# gabba/0vol 33.88 speed 0.00 cutoff 1403.30 res 0.21 
+# gabba/1vol 60.49 speed 0.00 cutoff 2112.76 res 0.00 
+# gabba/2vol 121.47 speed 0.00 cutoff 192.73 res 0.02 
+# gabba/3vol 65.44 speed 0.00 cutoff 2352.09 res 0.55 
+# off/0vol 63.28 speed 0.00 cutoff 723.77 res 0.72 
+
+use lib '/yaxu/slub/clients';
+
+use old::Old::Two;
+use old::Old::Off;
+
+sub bang {
+    my $self = shift;
+    my $next;
+
+    $self->{old} ||= $self->init_old();
+
+    foreach my $n (0 .. 3) {
+        my $aged = $self->{old}->[$n];
+        my $sample = $aged->sample;
+        #sample =~ s/gabba/gabbalouder/;
+        if ($next = $aged->next_beat) {
+            $self->t({sample => $sample,
+                      volume => $next->{vol} / 1000,
+                      speed  => 1,
+                      delay  => rand(0.03),
+                      delay2 => rand(0.03),
+                      loops => 1,
+                      shape  => rand() > 0.99 ? 1 : 0.99,
+                      cutoff => $next->{cutoff},
+                      resonance => $next->{res},
+                     }
+                  );
+            my $m = $aged->sample;
+            foreach my $p (qw/vol speed cutoff res/) {
+              $m .= $p . " " . sprintf("%.2f", ($next->{$p} || 0)) . " ";
+            }
+            $self->line($n, $m);
+        }
+    }
+    $self->modified;
+}
+
+sub init_old {
+    my $self = shift;
+    my $old = [];
+    my $n = 0;
+    foreach my $sample ("gabba/0", "gabba/1", "gabba/2", "gabba/3") {
+       my $aged = old::Old::Two->new(sample   => $sample,
+                                      loopsize => 16,
+                                      pitch    => 60
+                                     );
+       push(@@$old, $aged);
+    }
+
+    push @@$old, old::Old::Off->new(sample   => "off/0",
+                                   loopsize => 32,
+                                   pitch    => 60
+                                  );
+    return $old;
+}@

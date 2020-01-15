@@ -1,0 +1,89 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2004.10.11.22.38.38;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.10.11.22.38.00;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Oct 11 23:38:00 2004
+@
+
+
+1.2
+log
+@Mon Oct 11 23:38:38 2004
+@
+text
+@my $foo = ' x  xx   x x  x ';
+my @@foo = split(//, $foo);
+my $size = 6;
+
+sub bang {
+    my $self = shift;
+    $self->{strength} ||= 0;
+    if ($foo[$self->{bangs} % @@foo] eq 'x') {
+        my $sample = $self->{bangs} % 8 == 4 ? 9 : 5;
+        $self->trigger({sample => "metal/$sample",
+                        ts => 4 * ($self->{strength} * 1),
+                        rate => 11 + $self->{strength},
+                        gain => 50,
+                        offset => 0.02
+                       }
+                      );
+        $self->trigger({sample => "metal/$sample",
+                        ts => 4 * ($self->{strength} * 1),
+                        rate => 10 + $self->{strength},
+                        gain => 50,
+                       }
+                      );
+
+        $self->{strength} = 0;
+    }
+    else {
+        $self->{strength}++;
+    }
+    if ($self->{bangs} % (@@foo * 1) == 0 and rand > 0.5) {
+        my @@points = grep{$foo[$_] eq 'x'} (0 .. $#foo);
+        my $no = scalar @@points;
+        $foo[$points[rand @@points]] = ' ';
+        $no--;
+        while ($no < $size) {
+          my @@unpoints = grep {$foo[$_] ne 'x'} (0 .. $#foo);
+          last unless @@unpoints;
+          $foo[$unpoints[rand @@unpoints]] = 'x';
+          ++$no;
+        }
+        while ($no > $size) {
+          @@points = grep {$foo[$_] eq 'x'} (0 .. $#foo);
+          last unless @@points;
+          $foo[$points[rand @@points]] = ' ';
+          --$no;
+        }
+        $self->code->[0] = 'my $foo = \'' . join('', @@foo) . '\';';
+        $self->modified;
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+my $foo = 'x    x  xxx  x  ';
+@

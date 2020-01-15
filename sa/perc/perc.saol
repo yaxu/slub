@@ -1,0 +1,686 @@
+// perc.saol
+//
+// Simple drum set.
+// Includes prototypes for spatialize()
+
+global { 
+  srate 44100 ; 
+  krate 420 ; 
+  outchannels 2 ; 
+
+  sequence(perc,rv);
+  send(rv; ; rvbus[1]);
+
+  table yaxurand( random, 1024 * 16, 1, -0.1, 0.1);
+
+  // kit drums
+  // Samples originally by Michael Fischer, taken from TR-808
+  
+  table kick( sample , - 1,     "bd.wav");    // sample 0
+  table snare( sample , - 1,    "sd.wav");    // sample 1
+  table lotom( sample , - 1,    "lt.wav");    // sample 2
+  table midtom( sample , - 1,   "mt.wav");    // sample 3
+  table hitom( sample , - 1,    "ht.wav");    // sample 4
+  table loconga( sample , - 1,  "lc.wav");    // sample 5
+  table midconga( sample , - 1, "mc.wav");    // sample 6
+  table hiconga( sample , - 1,  "hc.wav");    // sample 7
+  table rimshot( sample , - 1,  "rs.wav");    // sample 8
+  table claves( sample , - 1,   "cl.wav");    // sample 9
+  table clap( sample , - 1,     "cp.wav");    // sample 10
+  table maracas( sample , -1,  "ma.wav");    // sample 11
+  table cowbell( sample , - 1,  "cb.wav");    // sample 12
+  table ride( sample , - 1,     "cr.wav");    // sample 13
+  table crash( sample , -1,    "cy.wav");    // sample 14
+  table hhopen( sample , - 1,   "oh.wav");    // sample 15
+  table hhclosed( sample , - 1, "ch.wav");    // sample 16
+
+  table times(empty,17);   // end times for each table
+  ksig inittimes;          // flag to set it
+
+  table midimap(data,128,
+                -1,  -1,  -1,  -1 , -1 , -1,  -1, -1, -1,  -1,
+                -1,  -1,  -1,  -1 , -1 , -1,  -1, -1, -1,  -1,
+                -1,  -1,  -1,  -1 , -1 , -1,  -1, -1, -1,  -1,
+                -1,  -1,  -1,  -1 , -1 , 
+                0,  // 35    Acoustic Bass Drum
+                0,  // 36      Bass Drum 1  
+                8, // 37      Side Stick  
+                1,  // 38     Acoustic Snare 
+                10, // 39      Hand Clap  
+                1,  // 40      Electric Snare    
+                2,  // 41      Low Floor Tom 
+                16,  // 42     Closed Hi Hat    
+                4,  // 43      High Floor Tom   
+                16,  // 44      Pedal Hi-Hat     
+                2,  // 45     Low Tom       
+                15, // 46     Open Hi-Hat    
+                3,  // 47      Low-Mid Tom 
+                3,  // 48     Hi Mid Tom  
+                14, // 49     Crash Cymbal 1 
+                4,  // 50      High Tom    
+                13, // 51      Ride Cymbal 1   
+                14, // 52      Chinese Cymbal   
+                13, // 53      Ride Bell    
+                11, // 54      Tambourine     
+                14, // 55      Splash Cymbal    
+                12, // 56      Cowbell     
+                14, // 57      Crash Cymbal 2   
+                -1, // 58      Vibraslap    
+                13, // 59      Ride Cymbal 2
+                -1, // 60      Hi Bongo
+                -1, // 61      Low Bongo
+                6, // 62      Mute Hi Conga
+                6, // 63      Open Hi Conga
+                5, // 64      Low Conga
+                -1,  // 65      High Timbale
+                -1,  // 66      Low Timbale
+                -1, // 67      High Agogo
+                -1, // 68      Low Agogo
+                -1, // 69      Cabasa
+                11, // 70x     Maracas
+                -1, // 71      Short Whistle
+                -1, // 72      Long Whistle
+                -1, // 73      Short Guiro
+                -1, // 74      Long Guiro
+                9, // 75      Claves
+                -1, // 76      Hi Wood Block
+                -1, // 77      Low Wood Block
+                -1, // 78      Mute Cuica
+                -1, // 79      Open Cuica
+                -1, // 80      Mute Triangle
+                -1, // 81      Open Triangle
+                
+                -1,  -1,  -1,  -1 , -1 , -1,  -1, -1, -1,  
+                -1,  -1,  -1,  -1 , -1 , -1,  -1, -1, -1,  -1,
+                -1,  -1,  -1,  -1 , -1 , -1,  -1, -1, -1,  -1,
+                -1,  -1,  -1,  -1 , -1 , -1,  -1, -1, -1,  -1,
+                -1,  -1,  -1,  -1 , -1 , -1,  -1, -1); 
+
+  table azimuth(data, -1, 
+                  0,    //kick
+                  -0.4, //snare
+                  1.7,  //lotom
+                  0.3,  //midtom
+                  0.3, //hitom
+                  -1.7, //loconga
+	          -1.7, //midconga
+                  -1.7, //hiconga
+                  -0.7, //rimshot
+                  1.7,  //claves
+                  -1.7,    //clap,
+	          1.7,  //maracas
+                  1.7,  //cowbell
+                  0,  //ride
+                  0,  //crash
+                  -1.7, //hhopen
+                  -1.7  // hhclosed
+                  );
+
+  table elevation(data, -1, 
+                  -1.0,    //kick
+                   0, //snare
+                   -0.4,  //lotom
+                   0.4, //midtom
+                   0.8, //hitom
+                   0.8, //loconga
+	           0.8, //midconga
+                   0.8, //hiconga
+                   0, //rimshot
+                  0.8,  //claves
+                  0,    //clap,
+	          0.8,  //maracas
+                  0,  //cowbell
+                  1.0,  //ride
+                  1.0,  //crash
+                  0.5, //hhopen
+                  0.3  // hhclosed
+                  );
+  table levels(data, -1, 
+                   1.0, //kick
+                   1.0, //snare
+                   0.5, //lotom
+                   0.5, //midtom
+                   0.5, //hitom
+                   1.0, //loconga
+	           1.0, //midconga
+                   1.0, //hiconga
+                   1.0, //rimshot
+                   1.0, //claves
+                   0.6, //clap,
+	           0.4, //maracas
+                   0.6, //cowbell
+                   0.7, //ride
+                   0.7, //crash
+                   0.3, //hhopen
+                   1  // hhclosed
+                  );
+
+  // hand-tuned version of qscale = 0.0393432*exp(0.0615256*x) for q scaling
+
+  table string_qscale(expseg, -1, 
+			 0,  0.5*0.0393432, 
+                        128, 0.5*0.0393432*exp(0.0615256*128));
+
+
+  // implements gscale = 0.04*(1/70.0337)*exp(0.0735272*rms_x) for g scaling
+  
+  table string_gscale(expseg, -1, 0, 0.04*(1/70.0337), 128,
+			 0.04*(1/70.0337)*exp(0.0735272*128));
+			 
+
+  // vel table holds status for each note
+  //
+  //  -1  -- no instr active for this note
+  //   0  -- instr active, no new strikes
+  // > 0  -- new note strike, value of MIDIvel
+
+  table string_vel(step, 128 , 0, -1, 128);
+
+  ksig string_poly;               // number of active notes at once
+
+  sequence(string_kbd, string_audio);
+
+  ksig yaxuinit;
+  ksig yaxuenv;
+}
+
+// kopcode startup
+//
+// sets table lengths
+//
+
+kopcode timeset() {
+
+imports exports table kick,snare,lotom,midtom,hitom,loconga;
+imports exports table midconga,hiconga,rimshot,claves,clap;
+imports exports table maracas,cowbell,ride,crash,hhopen, hhclosed;
+imports exports table times;
+
+tablewrite(times, 0, (1/s_rate)*ftlen(kick));
+tablewrite(times, 1, (1/s_rate)*ftlen(snare));
+tablewrite(times, 2, (1/s_rate)*ftlen(lotom));
+tablewrite(times, 3, (1/s_rate)*ftlen(midtom));
+tablewrite(times, 4, (1/s_rate)*ftlen(hitom));
+tablewrite(times, 5, (1/s_rate)*ftlen(loconga));
+tablewrite(times, 6, (1/s_rate)*ftlen(midconga));
+tablewrite(times, 7, (1/s_rate)*ftlen(hiconga));
+tablewrite(times, 8, (1/s_rate)*ftlen(rimshot));
+tablewrite(times, 9, (1/s_rate)*ftlen(claves));
+tablewrite(times, 10, (1/s_rate)*ftlen(clap));
+tablewrite(times, 11, (1/s_rate)*ftlen(maracas));
+tablewrite(times, 12, (1/s_rate)*ftlen(cowbell));
+tablewrite(times, 13, (1/s_rate)*ftlen(ride));
+tablewrite(times, 14, (1/s_rate)*ftlen(crash));
+tablewrite(times, 15, (1/s_rate)*ftlen(hhopen));
+tablewrite(times, 16, (1/s_rate)*ftlen(hhclosed));
+
+}
+
+// instr perc
+//
+// plays drum samples
+//
+
+instr perc(pitch, vel) preset 0 { 
+
+  ivar pmap, scale, az, el;
+  ksig eflag, etime, kpmap;
+  asig samp;
+  imports exports table kick,snare,lotom,midtom,hitom,loconga;
+  imports exports table midconga,hiconga,rimshot,claves,clap;
+  imports exports table maracas,cowbell,ride,crash,hhopen, hhclosed;
+  imports exports table midimap, times;
+  tablemap drumset(kick,snare,lotom,midtom,hitom,loconga,
+	           midconga,hiconga,rimshot,claves,clap,
+	           maracas,cowbell,ride,crash,hhopen, hhclosed);
+  imports exports table azimuth, elevation,levels;
+  imports exports ksig inittimes;
+
+
+  if (!inittimes)
+   {
+     inittimes = 1;
+     timeset();
+   }
+
+  pmap = tableread(midimap,pitch);
+  scale = (vel/127)*tableread(levels,pmap);
+  az = tableread(azimuth,pmap);
+  el = tableread(elevation,pmap);
+
+  kpmap = pmap;
+  etime = tableread(times,kpmap);
+  if ((itime>etime)&&(!eflag))
+    {
+      eflag = 1;
+      turnoff;
+    }
+  if ((released)&&(!eflag))
+   {
+     eflag = 1;
+     if (etime>itime)
+      { 
+        extend(etime - itime);
+      }
+   }
+  if (pmap >= 0)
+   {
+     samp = scale*doscil(drumset[pmap]);
+     spatialize(samp,az,el,0);
+     outbus(rvbus,samp);
+   }
+} 
+
+
+//
+// instr fl
+//
+// flanges snare drum -- not used
+
+instr fl() {
+asig out;
+
+out = flange(input[0],0.33, 100);
+outbus(rvbus, out);
+
+spatialize (out,-0.4,0,0);
+
+}
+
+
+//
+// instr rv
+//
+// reverberates kit
+
+instr rv() {
+
+output (0.1*reverb(input[0],6000,2.25));
+
+}
+
+//
+// instr spa
+//
+// prototype for spatialize implementation
+// Taken from:
+// Brown, C.P.; Duda, R.O.
+//     A structural model for binaural sound synthesis.
+//   IEEE Transactions on Speech and Audio Processing, Sept. 1998, vol.6,
+//   (no.5):476-88.
+// Thanks to Richard Duda for his help in getting this working.
+//
+// probably has rate-semantic bugs
+//
+
+instr spa() {
+
+// should be imported from score
+
+ksig azimuth, elevation, distance;
+
+// ivars holding model constants
+ivar a,c,b,d,g,h,maxaz,pi,ke,troom,first;
+ivar azl, azr, etaps;
+ivar A[5], B[5], D[5], P[5];
+
+// control-rate working variables 
+
+ksig T[5];
+
+ksig x,y,z, theta, phi;
+ksig pL,pR, tL, tR, k, fd, td;
+ksig b0L, b1L, b0R, b1R, a1;
+
+// audio-rate working variables
+asig left, right, room, idx, in, ein;
+oparray fracdelay[7];
+
+// indexes 
+
+etaps = 5;
+azl = etaps; azr = etaps+1; 
+
+
+// part 1, distance model
+
+fd = 70000*pow(max(0.3,distance),-0.666667);
+in  = lopass(input[0],fd);
+
+// part 2, elevation model
+
+// first do variable transformations
+
+azimuth = max(min(azimuth,pi),-pi);
+elevation = max(min(elevation,pi/2),-pi/2);
+
+
+x = cos(elevation)*sin(azimuth); 
+y = cos(elevation)*cos(azimuth); 
+z = sin(elevation); 
+
+theta = asin(x);  // use atan2(z,y) in phi C code
+phi = (y != 0) ? atan(z/y) : (pi/2)*(z > 0) - (pi/2)*(z < 0);
+
+// set spatialization constants, allocate space
+
+pi = 3.14159;
+a = 0.2; // radius of head
+c = 1087.49;  // speed of sound
+
+// these need to be in c code
+g = a/c;
+b = 2/g;
+d = 2*s_rate;
+h = 1/(b+d);
+
+maxaz = g*(1+pi/2); // maximum azimuthal delay
+
+A[0] = 1*(1/44100); B[0] = 2*(1/44100);
+A[1] = 5*(1/44100); B[1] = 4*(1/44100);
+A[2] = 5*(1/44100); B[2] = 7*(1/44100);
+A[3] = 5*(1/44100); B[3] = 11*(1/44100);
+A[4] = 5*(1/44100); B[4] = 13*(1/44100);
+
+D[0] = 1.1;        P[0] = 0.5;
+D[1] = D[0] - 0.5; P[1] = -1;
+D[2] = D[1];       P[2] = 0.5;
+D[3] = D[1];       P[3] = -0.25;
+D[4] = D[1];       P[4] = 0.25;
+
+if (!first)
+{
+  fracdelay[azl](1,maxaz);   //azimuth delays
+  fracdelay[azr](1,maxaz);
+  idx = 0;
+  while (idx < etaps)        // elevation delats
+   {
+    fracdelay[idx](1, A[idx] + B[idx]);
+    idx = idx + 1;
+   }
+
+  first = 1;
+}
+
+// update T[k] every k-cycle
+
+k = 0;
+while (k < etaps)
+{
+  T[k] = A[k] * cos(theta/2)*sin(D[k]*(pi/2 - phi)) + B[k];
+  k = k + 1;
+}
+
+// compute elevated output ein
+
+idx = 0;
+ein = in;
+while (idx < etaps) 
+{
+  ein = ein + P[idx]*fracdelay[idx](2,T[idx]);  
+  fracdelay[idx](5);  
+  fracdelay[idx](3,0,in); 
+  idx = idx + 1;
+}
+
+// part 3, azimuth
+
+// compute p's and t's every kcycle
+
+pL = 1 - sin(theta);
+pR = 1 + sin(theta);
+if (theta > 0)
+{
+  tL = g*(1 + theta);
+  tR = g*(1 - sin(theta));
+}
+else
+{
+  tR = g*(1 - theta);
+  tL = g*(1 + sin(theta));
+}
+
+b0L = h*(pL*d + b);
+b0R = h*(pR*d + b);
+b1L = h*(b - pL*d);
+b1R = h*(b - pR*d);
+a1 = h*(b-d);
+
+left  = fracdelay[azl](2,tL);
+right = fracdelay[azr](2,tR);
+
+fracdelay[azl](5);
+fracdelay[azr](5);
+
+fracdelay[azl](3,0,iir(ein, b0L, a1, b1L));
+fracdelay[azr](3,0,iir(ein, b0R, a1, b1R));
+
+// part 4, final room model
+
+ke = 0.177828;    //-15dB echo gain -- room model
+troom = 0.020;
+
+room = ke*delay(in,troom);
+
+output(left+room,right+room);
+
+}
+
+//
+// The resinit iopcode initializes the resonance model for the thing being
+// struck or plucked.
+//
+
+iopcode string_resinit(ivar a[10], ivar b[10], 
+		ivar g[10], ivar notenum)
+
+{
+  ivar r[10], freq[10], q[10];
+  ivar j, scale, norm;
+  imports exports table string_qscale;
+  imports exports table string_gscale;
+
+  // set f/q/g for prototype bar
+
+  norm = tableread(string_qscale, int(notenum));
+  scale = cpsmidi(notenum)/220;
+
+  freq[0] = 440*scale;  q[0] = 300*norm;  
+  freq[1] = 880*scale;  q[1] = 300*norm;  
+  freq[2] = 1320*scale; q[2] = 300*norm;  
+  freq[3] = 1760*scale; q[3] = 300*norm;  
+  freq[4] = 2200*scale; q[4] = 300*norm;  
+  freq[5] = 2640*scale; q[5] = 300*norm;  
+  freq[6] = 3080*scale; q[6] = 320*norm;  
+  freq[7] = 3520*scale; q[7] = 300*norm;  
+  freq[8] = 3960*scale; q[8] = 190*norm;  
+  freq[9] = 4400*scale; q[9] = 300*norm;  
+
+  norm = tableread(string_gscale, int(notenum));
+
+  g[0] = (freq[0] < s_rate/2) ? norm*0.7  : 0.0;
+  g[1] = (freq[1] < s_rate/2) ? norm*0.8  : 0.0;
+  g[2] = (freq[2] < s_rate/2) ? norm*0.6  : 0.0;
+  g[3] = (freq[3] < s_rate/2) ? norm*0.7  : 0.0;
+  g[4] = (freq[4] < s_rate/2) ? norm*0.7  : 0.0;
+  g[5] = (freq[5] < s_rate/2) ? norm*0.8  : 0.0;
+  g[6] = (freq[6] < s_rate/2) ? norm*0.95 : 0.0;
+  g[7] = (freq[7] < s_rate/2) ? norm*0.76 : 0.0;
+  g[8] = (freq[8] < s_rate/2) ? norm*0.87 : 0.0;
+  g[9] = (freq[9] < s_rate/2) ? norm*0.76 : 0.0;
+
+  // compute actual resonator coefficients
+
+  j = 0;
+  while ( j < 10)
+    {
+      r[j] = exp(-freq[j]/(s_rate*q[j]));
+      a[j] = 2*r[j]*cos(2* 3.14159265358979323846 *(freq[j]/s_rate));
+      b[j] = - r[j]*r[j];
+      j = j + 1;
+    }
+
+}
+
+//
+// The strikeinit iopcode initializes the pluck model.
+//
+
+iopcode string_strikeinit(ivar aa, ivar ab, ivar sg, ivar vw, 
+			     ivar vwn, ivar notenum)
+
+{
+  ivar ar, afreq;
+
+  afreq = 2000;  // attack resonator frequency 
+
+  // Compute resonator bank coefficients
+
+  ar = exp(-2* 3.14159265358979323846 *(afreq/s_rate));
+  aa = 2*ar;
+  ab = -ar*ar;
+
+  vw = (1/127) ; // keyboard normalization curve
+  sg = 0.004;      // "signal gain" empirical constant (should not scale).
+  vwn = 0.02;      // velocity scaling for nm
+  
+}
+
+//
+//
+// k-pass semantics for the pluck model
+//
+
+kopcode string_strikeupdate(ksig ky[1], ksig nm, ksig silent, 
+	                 ksig notenum, ivar vw, ivar vwn)
+
+{
+  imports exports table string_vel;
+  imports exports ksig string_poly;
+  ksig exit, count;
+
+  count = silent ? (count + 1) : max(count - 1, 0);
+  if (((count > 5) && (itime > 0.25)) || exit)
+    {
+      if (!exit)
+	{
+	  turnoff;
+	  exit = 1;
+	  tablewrite(string_vel, int(notenum), -1);
+	  string_poly   = string_poly   - 1;
+	}
+      ky[0] = 0;
+    }
+  else
+    {
+      if (tableread(string_vel, int(notenum)) > 0)
+	{
+	  ky[0] = vw*tableread(string_vel, int(notenum));
+	  nm = ky[0]*vwn;
+	  tablewrite(string_vel, int(notenum), 0);
+	}
+      else
+	{
+	  ky[0] = 0;
+	}
+    }
+}
+
+//
+// Instr for creating audio output.
+//
+
+instr string_audio(notenum) {
+
+  ivar a[10], b[10], g[10];
+  ivar aa, ab, sg, vw, vwn;
+  ksig nm, ky[1], silent;
+  asig out;
+
+  asig y[10], y1[10], y2[10]; 
+  asig sy[10];
+  asig ay, ay1, ay2, dummy, x;
+
+  // happens at i-rate
+
+  string_resinit(a, b, g, notenum);
+  string_strikeinit(aa, ab, sg, vw, vwn, notenum);
+
+  // happens at k-rate
+
+  silent = (rms(out) < 8e-4);
+  string_strikeupdate(ky, nm, silent, notenum, vw, vwn);
+
+  // happens at a-rate
+
+  dummy = 0;                          // until optimizer improves
+
+  ay = aa*ay1 + ab*ay2 + ky[dummy];   // attack resonator
+  x = (arand(nm) + sg)*ay;
+
+  y = a*y1 + b*y2 + x;                // resonator bank
+
+  ay2 = ay1;                          // update filter state
+  ay1 = (abs(ay)>1e-30) ? ay : 0.0; 
+
+  ky[dummy] = 0;
+  y2 = y1; 
+  y1 = y;
+
+  sy = g*y;                           // gain adjust
+  out = (sy[0]+sy[1]+sy[2]+sy[3]+sy[4]+sy[5]+sy[6]+sy[7]+sy[8]+sy[9]) ;                 // sum over sy[]
+
+  output(out);
+
+}
+
+
+//
+// Instr for handling MIDI control input. Updates string_vel table.
+//
+
+instr string_kbd(pitch, velocity) preset 1   
+
+{ 
+  imports exports table string_vel;
+  imports exports ksig string_poly;
+  ksig vval, kpitch;
+
+  // happens at k-rate
+
+  vval = velocity;
+  kpitch = pitch;
+  if (tableread(string_vel, int(kpitch)) == -1) {
+    if (string_poly   < 24) {
+      tablewrite(string_vel, int(pitch), vval);
+      instr string_audio(0, -1, pitch);
+      string_poly   = string_poly   + 1;
+    }
+  }
+  else {
+    tablewrite(string_vel, int(pitch), vval);
+  }
+
+  turnoff;
+}
+
+
+instr yaxupaxo (pitch, vel) preset 2 {
+  ivar ktime, stime, atime, rtime;
+  imports exports table yaxurand;
+  asig y;
+  ivar attack;  
+  ivar release;
+  ivar sustain;
+  imports exports ksig yaxuinit;
+  imports exports ksig yaxuenv;
+
+  if (!yaxuinit) {
+    yaxuenv = kline(0, 0.05, 1, ((1 * vel) / 127), 1, release, 0.5);
+  }
+
+
+
+  y = doscil(yaxurand);
+  output(y * yaxuenv);
+}

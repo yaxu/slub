@@ -1,0 +1,46 @@
+my $foo;
+my $bar;
+my @samples = qw[/yaxu/samples/future/Johnson.wav
+                 /yaxu/samples/future/808KICK9.wav
+                ];
+sub bang {
+    my $self = shift;
+
+    $foo ||= [map {int(rand(5)) + 1} (0 .. rand(16))];    
+    if (not defined $bar) {
+        push(@$foo, ($bar = shift @$foo));
+    }
+    if ($self->{bangs} % $bar == 0) {
+        $self->trigger({sample => $samples[$bar % @samples]
+                       }
+                      );
+        push(@$foo, ($bar = shift @$foo));
+    }
+    #$self->save('randmod');    
+    $self->modified;
+}
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./placard/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}
+
+
+sub message {
+    my ($self, $message) = @_;
+    my $code = $self->code;
+    if (not $code->[0] =~ /^\#/) {
+      unshift(@$code, '#');
+    }
+    $code->[0] = '# ' . $message;
+}
+

@@ -1,0 +1,14 @@
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 128 > 110 ? 1 : 0;
+    if ($self->{bangs} % ($foo ? 4 : 3) == 0) {
+        $self->t({sample => "drumtraks/6", accellerate => -0.00006,
+                  speed => 1,
+                  volume => 4,
+                  shape => (($self->{bangs} % 16 == 0 
+                             or $self->{bangs} % 16 == 4
+                            )  ? 1 : 0)
+                 }
+                );
+    }
+}

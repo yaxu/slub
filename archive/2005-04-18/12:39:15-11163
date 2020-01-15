@@ -1,0 +1,32 @@
+# 1
+sub bang {
+    my $self = shift;
+#    $self->line(0, $pos);
+    if ($self->{bangs} % 8 == 0) {
+        $self->t({sample => "future/0",
+                  speed => ($self->{trip} ? 0.7 : 1),
+                  loops => 0.2,
+                  volume => 4
+                 }
+                );
+        $self->{trip} = 0;
+    }
+    elsif ($self->{bangs} % 64 == 52) {
+        $self->t({sample => "future/0", loops => 0.2,
+                  volume => 4
+                 }
+                );
+
+        $self->{trip} = 1;
+    }
+
+    if ($self->{bangs} % 8 == 4 or $self->{bangs} % 8 == 2) {
+        $self->t({loops => rand(0.08),
+                  sample => "glitch/6",
+                  accellerate => 0 - rand(0.0045),
+                  volume => 0.005
+                 }
+                );
+    }
+    $self->modified;
+}

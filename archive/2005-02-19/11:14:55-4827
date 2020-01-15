@@ -1,0 +1,12 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 128 < 16) {
+        if ($self->{bangs} % ($self->{bangs} % 8) == 0) {
+            $self->t({pan => 0.5 - (1 * rand()),
+                      speed => 0.05 - (0.1 * $self->sin(5)),
+                      volume => 2
+                     }
+                    );
+        }
+    }
+}

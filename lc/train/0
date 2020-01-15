@@ -1,0 +1,13 @@
+sub bang {
+    my $self = shift;
+
+    $self->t({sample => "808/RS/0", 
+              envelope_name => "percussive",
+              loops => 1,
+              speed => (($self->{bangs} % 64 < 48) ? 1.5 : 1)
+             }
+            )
+      if $self->{bangs} % 4 == ($self->{bangs} % 32 < 20 ? 2 : 0);
+
+
+}

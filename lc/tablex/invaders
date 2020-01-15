@@ -1,0 +1,10 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 6 == 0 or $self->{bangs} % 16 == 0) {
+        my $point = ($self->{foo}++ % 4) + ($self->{p} ||= 0);
+        $self->trigger({sample => "invaders/$point", rate => 50});
+    }
+    if ($self->{bangs} % 16 == 0) {
+       $self->{p}++;
+    }
+}

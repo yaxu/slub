@@ -1,0 +1,35 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.09.27.22.12.54;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Sep 27 23:12:54 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 1 == 0) {
+        $self->play({num => 30 + ($self->sin(100)),
+                     bwfreq => 1,
+                     formfreq => $self->sin(100) * 30 + 300,
+                     ts => 2,
+                    }
+                   );
+    }
+}@

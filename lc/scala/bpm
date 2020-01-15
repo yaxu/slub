@@ -1,0 +1,34 @@
+# bpm 126
+
+sub bang {
+    my $self = shift;
+
+    $self->{bpm} ||= 126;
+
+    if ($self->{bpm} < 152) {
+      #$self->{c}->bpm_send($self->{bpm}++);
+
+    }
+
+    $self->{code}->[0] = "# bpm $self->{bpm}";
+
+    #$self->save('bpm');
+    $self->modified;
+}
+
+##
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./scala/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    $self->message("saved.");
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}

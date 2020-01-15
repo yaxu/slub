@@ -1,0 +1,33 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.11.26.18.18.31;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Nov 26 18:18:31 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@
+use YAML;
+sub bang {
+    my $self = shift;
+    $self->{perms} ||= $self->perms(space => 16, things => 4);
+    warn(Dump $self->{perms});
+    $self->code->[0] = "# hello";
+    $self->modified;
+}@

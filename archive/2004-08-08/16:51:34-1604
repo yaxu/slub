@@ -1,0 +1,14 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0) {
+        $self->play({num => 80,
+                     ts  => 100,
+                     gain => 10,
+                     browndel => 0
+                    }
+                   );
+    }
+    if ($self->{bangs} % 16 == 8) {
+        $self->trigger({sample => '/yaxu/samples/future/0'});
+    }
+}

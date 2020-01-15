@@ -1,0 +1,42 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2008.07.12.22.19.13;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Jul 12 23:19:12 2008
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# 2.0555717004551
+
+sub bang {
+    my $self = shift;
+    my $b = $self->{bangs};
+    my $foo = (CORE::sin(($b / 16) * 3.14159) + 1) / 2;
+    my $speed = 2 + 0.25 * $foo;
+    $self->t({sample => "timmono/24", loops => 1, speed => $speed})
+      if ($self->{bangs} % 4 == 0 or rand() > 0.95);
+    $self->t({sample => "timmono/24", loops => 1, speed => 1.5, 
+              pan => 0.25 - $foo
+             }
+            )
+      if $self->{bangs} % 4 == int($self->{bangs} % 32 / 8)
+         or rand() > 0.95;
+    $self->line(0, $speed);
+    $self->modified;
+}@

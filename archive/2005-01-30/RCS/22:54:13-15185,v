@@ -1,0 +1,29 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.01.30.22.54.14;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Jan 30 22:54:14 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+#    $self->t({sample => "latibro/Sound2.wav", speed => 0.5})
+#       unless $self->{bangs} % 4;
+}@

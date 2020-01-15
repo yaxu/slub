@@ -1,0 +1,54 @@
+# saved.
+
+my $tune = [-6];
+
+sub bang {
+    my $self = shift;
+
+    $self->play({num      => 140 + $tune->[$self->{bangs} % @$tune], 
+                 formfreq => 9, 
+                 bwfreq   => 7,
+                 ts       => 3 + rand(30)
+                }
+                );
+
+    if (not $self->{bangs} % 32) {
+        $tune->[rand @$tune] += int(rand(8)) - 4;
+        $self->code->[2] = ('my $tune = ['
+                            . join(', ', @$tune)
+                            . '];'
+                           );
+    }
+
+#    $self->save('acid.tapper');
+
+    $self->modified;
+}
+
+##
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./scala/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    $self->message("saved.");
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}
+
+##
+
+sub message {
+    my ($self, $message) = @_;
+    my $code = $self->code;
+    if (not $code->[0] =~ /^\#/) {
+      unshift(@$code, '#');
+    }
+    $code->[0] = '# ' . $message;
+}

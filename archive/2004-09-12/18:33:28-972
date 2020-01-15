@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0) {
+        $self->trigger({sample => 'sequential/3',
+                        ts     => 40,
+                        pan    => $self->{bar}++ % 2,
+                        gain => 30 + (90 * $self->sin(40))
+                       }
+                      );
+    }
+}

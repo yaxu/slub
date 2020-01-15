@@ -1,0 +1,54 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2005.02.19.11.26.58;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.02.19.11.18.14;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Feb 19 11:18:14 2005
+@
+
+
+1.2
+log
+@Sat Feb 19 11:26:58 2005
+@
+text
+@sub bang {
+    my $self = shift;
+    my $pan = 1;
+    if ($self->{bangs} % 3 == 0) {
+        $pan = 0;
+    }
+    elsif ($self->{bangs} % 3 == 1) {
+        $pan = -1
+    }
+    
+    if ($self->{bangs} % 32 < 3) {
+        $self->t({pan => $pan, speed => 0.05, volume => 0.5});
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d11 3
+a13 1
+    $self->t({pan => $pan, speed => 0.05, volume => 0.3});
+@

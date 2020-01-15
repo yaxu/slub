@@ -1,0 +1,33 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2006.10.17.19.49.49;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Oct 17 20:49:49 2006
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    $self->sine({freq => 400, direction => -1, ts => 0.1})
+      if $self->{bangs} % 6 == 0;
+    $self->sine({freq => 1000 + rand(10), direction => -0.1, ts => 0.1})
+      if $self->{bangs} % 4 == 0;
+    $self->sine({freq => 800 + rand(10), direction => -0.1, ts => 0.1})
+      if $self->{bangs} % 4 == 0;
+}@

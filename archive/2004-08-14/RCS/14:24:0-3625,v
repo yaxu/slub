@@ -1,0 +1,35 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.08.14.13.24.00;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Aug 14 14:24:00 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    my $point = $self->{bangs} % 16;
+    beep(800, 70) if (($self->{bangs} + 4) % 8 == 0);
+    beep(80, 50)  if $point == 0;
+    beep(81, 100) if $point == 10;
+}
+
+sub bpm {
+    140 * 4;
+}@

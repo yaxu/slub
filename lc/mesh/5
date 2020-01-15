@@ -1,0 +1,28 @@
+# 0.96875
+
+my $hits = [
+                  {x => 8, y => 3.9,
+                   speed => 0.000001, angle => 3.4,
+                   mass => 1, alpha => 1,
+                   velocity => 3
+                  },
+                  {x => 0, y => 0,
+                   speed => 0.0000005, angle => 3.4,
+                   mass => 1, alpha => 1,
+                   velocity => 3
+                  },
+
+];
+
+sub bang {
+    my $self = shift;
+
+    if ($self->{bangs} % 4 == 0) {
+        #my $foo = -1;
+        my $foo = $hits->[$self->{beep}++ % @{$hits}];
+        $self->loss(0.99999);
+        $self->tension(1);
+        $self->vector($foo);
+    }
+    $self->modified();
+}

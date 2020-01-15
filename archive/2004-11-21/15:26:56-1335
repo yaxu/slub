@@ -1,0 +1,27 @@
+sub bang {
+    my $self = shift;
+    $self->{bangs}++;
+    if ($self->{ssh}) {
+        $self->{ssh}--;
+        return;
+    }
+    if ($self->{bangs} % 4 == 0) {
+        if ($self->{bangs} % 16 == 0 and int rand(2)) {
+            $self->midi(39, 1, 20);
+        }
+        else {
+            $self->midi(41, 1, 20);
+        }
+    }
+
+    if ($self->{bangs} % 8 == 3 or not int rand(16)) {
+        $self->midi(48, 1, 40);
+    }
+
+    if ($self->{bangs} % 4 == 0) {
+#        $self->midi(70, 2, 20);
+    }
+    if ($self->{bangs} % 8 == 0 and not int rand(8)) {
+        $self->{ssh} = 2 * int rand(4);
+    }
+}

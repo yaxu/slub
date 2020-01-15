@@ -1,0 +1,42 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.10.18.20.13.34;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Oct 18 21:13:34 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@my $space = 8;
+sub bang {
+    my $self = shift;
+    if (($self->{bangs} % $space) == 0) {
+        $self->trigger({sample => "drumtraks/6",
+                        gain => 100,
+                        ts => 150
+                       }
+                      );
+    }
+    if ($self->{bangs} % 32 > 8 and (rand > 0.5)) {
+        $space-- unless $space == 1;
+    }
+
+    if ($self->{bangs} % 32 == 0) {
+        $space = 8;
+    }
+}@

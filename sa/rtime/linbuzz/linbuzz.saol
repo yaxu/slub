@@ -1,0 +1,127 @@
+
+//    Sfront, a SAOL to C translator
+//    Copyright (C) 2001 John Lazzaro
+//    This file: simple test instrument written in SAOL.
+//    Maintainers's address: lazzaro@cs.berkeley.edu;
+// 
+// This license covers also covers SASL file in this directory.
+// 
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation (Version 1, 1989).
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program; see the file COPYING.  If not, write to
+// the Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+#include <Slib/ssm.hs>
+#include <Slib/std.hs>
+
+// buzz opcode patch, driven by a MIDI controller
+// connected to the MIDI In jack on the soundcard. 
+//
+// pitch wheel adds fixed-freq vibrato
+// mod wheel changes brightness
+
+
+global { 
+  interp 0;
+  srate 44100; 
+  krate 1050; 
+  outchannels 1; 
+  send(mix; ; output_bus);
+  } 
+
+instr linbuzz (pitch, vel) preset 0 { 
+
+  // declarations
+  table mtab(lineseg,128,0,0,32,1,64,0,96, -1, 127, 0);
+  ivar fbase, envc, fpercent, offset, mean, std;   
+  ksig f, bright, volume;       // sets osc f
+  ivar attack,release, attlim;
+  ksig incr, rel, tot,mod;
+  asig y, fsmooth;    
+  asig init;
+  asig env;
+
+  // **********************
+  // computed during i-passl
+  // **********************
+
+  // statistics of curve 2 of Evolution mk-149
+
+  mean = 75.8635;
+  std = 15.9908;
+
+  // change these for envelope
+  // should be of k-rate granularity
+
+  attack = int(0.001/KTIME)*KTIME;
+  release = int(0.060/KTIME)*KTIME;
+
+  attlim = attack - 0.5*KTIME;
+
+  // turns MIDI number into 
+  // oscillator constant 
+
+  fbase = cpsmidi(pitch);
+
+  // offset in range [0, 0.4]
+
+  offset = 0.1*(min(2,max((vel-mean)/std,-2)) + 2);
+
+  vel = 0.15*(offset+0.1);
+
+  envc = vel/attack;
+
+  // **********************
+  // computed during k-pass
+  // **********************
+
+  incr = 0;
+  if (released && !rel)
+    {
+      rel = 1;
+      extend(release);
+    }
+  if ((!rel) && (itime < attlim))
+    {
+      incr = envc*ATIME;
+      tot = tot + envc*KTIME;
+    }
+  if (rel)
+    {
+      incr = -tot*ATIME/(release+2*KTIME);
+    }
+
+  // Channel volume scales std, maximum of +/- 2
+  // Wheel sets bias, between 0 and 1
+
+  bright = 0.5 + SSMmodwheel*offset;
+  fpercent = 0.005793;
+  mod = fpercent*(max(SSMbend,0)*koscil(mtab,6+krand(0.1))
+		   + max(-SSMbend,0)*koscil(mtab,5+krand(0.1)));
+
+  f = (mod + 1)*fbase;
+  
+  // **********************
+  // computed during a-pass
+  // **********************
+
+  y = buzz(f,-1,0,bright);
+  env = env + incr;
+  
+  output(env*y);
+  
+  } 
+
+instr mix (  ) { 
+  
+  output(SSMvolume*input); 
+} 	
+

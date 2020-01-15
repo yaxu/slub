@@ -1,0 +1,62 @@
+$VAR1 = [
+          undef,
+          {
+            'strength' => '6',
+            'spread' => '5',
+            'chr' => 'x',
+            'sample' => 'future1',
+            'racism' => '6',
+            'number' => '1'
+          },
+          {
+            'strength' => '10',
+            'spread' => '18',
+            'chr' => '~',
+            'sample' => 'future2',
+            'racism' => '1',
+            'number' => '2'
+          },
+          {
+            'strength' => '20',
+            'spread' => '20',
+            'chr' => '=',
+            'sample' => 'future3',
+            'racism' => '2',
+            'number' => '3'
+          },
+          {
+            'strength' => '15',
+            'spread' => '7',
+            'chr' => '-',
+            'sample' => 'future4',
+            'racism' => '1',
+            'number' => '4'
+          },
+          ${\$VAR1->[0]},
+          ${\$VAR1->[0]},
+          {
+            'strength' => '69',
+            'spread' => '32',
+            'sample' => 'future7',
+            'chr' => '%',
+            'racism' => '3',
+            'number' => '7'
+          },
+          {
+            'strength' => '40',
+            'spread' => '6',
+            'sample' => 'future8',
+            'chr' => '@',
+            'racism' => '0',
+            'number' => '8'
+          },
+          ${\$VAR1->[0]},
+          {
+            'strength' => '50',
+            'spread' => '20',
+            'sample' => 'future10',
+            'chr' => '/',
+            'racism' => '4',
+            'number' => '10'
+          }
+        ];

@@ -1,0 +1,42 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.11.18.19.27.46;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Thu Nov 18 19:27:45 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# 1512
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0) {
+        $self->midi(41);
+    }
+    $self->code->[0] = "# $self->{bangs}\n";
+    $self->modified;
+}
+
+
+
+
+
+
+
+@

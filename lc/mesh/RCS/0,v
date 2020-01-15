@@ -1,0 +1,476 @@
+head	1.25;
+access;
+symbols;
+locks
+	alex:1.25; strict;
+comment	@# @;
+
+
+1.25
+date	2008.06.06.21.56.15;	author alex;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2008.06.06.21.54.27;	author alex;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2008.06.06.21.53.22;	author alex;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2008.06.06.21.52.25;	author alex;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2008.06.06.21.51.19;	author alex;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2008.06.06.21.50.27;	author alex;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2008.06.06.21.50.04;	author alex;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2008.06.06.21.49.13;	author alex;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2008.06.06.21.46.07;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2008.06.03.15.22.33;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2008.06.03.15.21.48;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2008.06.03.15.19.49;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2008.06.03.14.23.18;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2008.06.03.14.23.11;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2008.06.03.14.22.45;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2008.06.03.13.58.52;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2008.06.03.13.58.33;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2008.06.03.13.57.36;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2008.06.03.13.35.55;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.06.03.13.35.29;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.06.03.13.33.00;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.06.03.13.32.30;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.06.03.13.30.02;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.06.03.13.28.34;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.06.03.13.26.52;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Jun  3 14:26:52 2008
+@
+
+
+1.25
+log
+@Fri Jun  6 22:56:15 2008
+@
+text
+@# hi there
+
+sub bang {
+    my $self = shift;
+
+    my $osc = 
+      $self->{meshosc} ||=
+        Net::OpenSoundControl::Client->new(Host => 'localhost', Port => 6011);
+
+    $self->line(0, "hi there");
+
+    $osc->send(['/strike',
+                'f',  5 - ($self->{bangs} % 10 + rand()), 
+                'f', $self->{bangs} % 4,
+                'f', 0.1 + ($self->{bangs} % 3)
+               ]);
+    my $foo = $self->{bangs} % 24 > 20 ? 0.3 : 0.1;
+    $osc->send(['/tension', 'f', $foo + ($self->{bangs} % 6 ? 1.1 : 1.2)]);
+    $osc->send(['/loss', 'f', 1.0]);
+    $self->modified;
+}@
+
+
+1.24
+log
+@Fri Jun  6 22:54:27 2008
+@
+text
+@d17 3
+a19 3
+    my $foo = $self->{bangs} % 24 > 20 ? 0 : 0.1;
+    $osc->send(['/tension', 'f', $foo + ($self->{bangs} % 6 ? 1 : 1.2)]);
+    $osc->send(['/loss', 'f', 1.1]);
+@
+
+
+1.23
+log
+@Fri Jun  6 22:53:22 2008
+@
+text
+@d17 2
+a18 2
+
+    $osc->send(['/tension', 'f', $self->{bangs} % 6 ? 1 : 1.2]);
+@
+
+
+1.22
+log
+@Fri Jun  6 22:52:25 2008
+@
+text
+@d15 1
+a15 1
+                'f', $self->{bangs} % 4
+@
+
+
+1.21
+log
+@Fri Jun  6 22:51:19 2008
+@
+text
+@d19 1
+a19 1
+    $osc->send(['/loss', 'f', 1]);
+@
+
+
+1.20
+log
+@Fri Jun  6 22:50:27 2008
+@
+text
+@d13 1
+a13 1
+                'f',  $self->{bangs} % 5, 
+@
+
+
+1.19
+log
+@Fri Jun  6 22:50:04 2008
+@
+text
+@d11 8
+a18 8
+#    if ($self->{bangs} % 4 == 0) {
+        $osc->send(['/strike',
+                    'f',  $self->{bangs} % 5, 
+                    'f', $self->{bangs} % 4,
+                    'f', $self->{bangs} % 4
+                   ]);
+#    }
+    $osc->send(['/tension', 'f', $self->{bangs} % 6 ? 1 : 1.1]);
+@
+
+
+1.18
+log
+@Fri Jun  6 22:49:13 2008
+@
+text
+@d12 3
+a14 1
+        $osc->send(['/strike', 'f', $self->{bangs} % 5, 'f', $self->{bangs} % 4,
+d18 1
+a18 1
+    $osc->send(['/tension', 'f', 1]);
+@
+
+
+1.17
+log
+@Fri Jun  6 22:46:07 2008
+@
+text
+@d11 3
+a13 3
+    if ($self->{bangs} % 4 == 0) {
+        $osc->send(['/strike', 'f', 8, f, 8,
+                    'f', 0.9
+d15 1
+a15 1
+    }
+d17 1
+a17 1
+#    $osc->send(['/loss', 'f', 1.1]);
+@
+
+
+1.16
+log
+@Tue Jun  3 16:22:33 2008
+@
+text
+@d11 2
+a12 2
+    if ($self->{bangs} % 8 == 0) {
+        $osc->send(['/strike', 'f', 9 - rand(18), 'f', 4.5 - rand(9),
+d16 2
+a17 2
+#    $osc->send(['/tension', 'f', 1 + rand(0.1)]);
+    $osc->send(['/loss', 'f', 1.1]);
+@
+
+
+1.15
+log
+@Tue Jun  3 16:21:48 2008
+@
+text
+@d16 1
+a16 1
+    $osc->send(['/tension', 'f', 1 + rand(0.3)]);
+@
+
+
+1.14
+log
+@Tue Jun  3 16:19:49 2008
+@
+text
+@d11 1
+a11 1
+    if ($self->{bangs} % 4 == 0) {
+d13 1
+a13 1
+                    'f', 0.6
+d16 2
+a17 2
+    $osc->send(['/tension', 'f', 1.4 + rand()]);
+    $osc->send(['/loss', 'f', 1]);
+@
+
+
+1.13
+log
+@Tue Jun  3 15:23:18 2008
+@
+text
+@d11 3
+a13 3
+    if ($self->{bangs} % 1 + abs(int($self->sin(2) * 3)) == 0) {
+        $osc->send(['/strike', 'f', 8 - rand(16), 'f', 6 - rand(12),
+                    'f', 1
+d16 2
+a17 2
+    $osc->send(['/tension', 'f', 0.5 + ($self->{bangs} % 3) / 3]);
+    $osc->send(['/loss', 'f', 2]);
+@
+
+
+1.12
+log
+@Tue Jun  3 15:23:11 2008
+@
+text
+@d13 1
+a13 1
+                    'f', 0.75
+@
+
+
+1.11
+log
+@Tue Jun  3 15:22:45 2008
+@
+text
+@d13 1
+a13 1
+                    'f', 0.5
+d16 1
+a16 1
+    $osc->send(['/tension', 'f', 1 + $self->{bangs} % 1]);
+@
+
+
+1.10
+log
+@Tue Jun  3 14:58:52 2008
+@
+text
+@d13 1
+a13 1
+                    'f', 0.5 + rand(0.5)
+d16 2
+@
+
+
+1.9
+log
+@Tue Jun  3 14:58:33 2008
+@
+text
+@d13 1
+a13 1
+                    'f', rand(1.5)
+@
+
+
+1.8
+log
+@Tue Jun  3 14:57:36 2008
+@
+text
+@d13 1
+a13 1
+                    1
+@
+
+
+1.7
+log
+@Tue Jun  3 14:35:55 2008
+@
+text
+@d12 3
+a14 1
+        $osc->send(['/strike', 'f', 8 - rand(16), 'f', 6 - rand(12)]);
+@
+
+
+1.6
+log
+@Tue Jun  3 14:35:29 2008
+@
+text
+@d11 1
+a11 1
+    if ($self->{bangs} % 1 + abs(int($self->sin(10) * 3)) == 0) {
+@
+
+
+1.5
+log
+@Tue Jun  3 14:33:00 2008
+@
+text
+@d11 1
+a11 1
+    if ($self->{bangs} % 1 == 0) {
+@
+
+
+1.4
+log
+@Tue Jun  3 14:32:30 2008
+@
+text
+@d11 1
+a11 1
+    if ($self->{bangs} % 2 == 0) {
+@
+
+
+1.3
+log
+@Tue Jun  3 14:30:02 2008
+@
+text
+@d11 2
+a12 2
+    if ($self->{bangs} % 4 == 0) {
+#        $osc->send(['/strike', 'f', 1, 'f', 1]);
+@
+
+
+1.2
+log
+@Tue Jun  3 14:28:34 2008
+@
+text
+@d8 1
+a8 1
+        Net::OpenSoundControl::Client->new(Host => 'localhost', Port => 6010);
+d15 1
+a15 1
+}
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d12 1
+a12 1
+        $osc->send(['/strike', 'f', 1, 'f', 1]);
+@

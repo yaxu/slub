@@ -1,0 +1,30 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2008.06.09.22.20.34;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Jun  9 23:20:34 2008
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0) {
+        $self->strike();
+    }
+}@

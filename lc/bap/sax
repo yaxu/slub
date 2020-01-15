@@ -1,0 +1,25 @@
+# 0
+
+my $acc = 0;
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 32 == 0) {
+        my $foo = (($self->{bangs} / 32) % 4);
+        $self->line(0, $foo); $self->modified();
+        $self->t({sample => "sax/" . (11 + ($foo * 3)), volume => 1,
+                  accellerate => ($acc ? -0.000001 : 0),
+                  pan => 1, pan_to => -1, delay => 0.2
+                 }
+                );
+    }
+    if ($self->{bangs} % 32 == 0) {
+        my $note = $self->{bangs} % 128 >= 64;
+        $self->t({sample => "sax/" . (1 + $note), volume => 1,
+                  accellerate => ($acc ? -0.000001 : 0),
+                  pan => -1, pan_to => 1, delay => 0.2
+                 }
+                );
+    }
+
+}

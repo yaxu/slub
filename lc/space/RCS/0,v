@@ -1,0 +1,417 @@
+head	1.15;
+access;
+symbols;
+locks
+	alex:1.15; strict;
+comment	@# @;
+
+
+1.15
+date	2008.04.11.16.21.56;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2008.04.11.16.20.30;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2008.04.11.16.20.00;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2008.04.11.16.19.53;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2008.04.11.16.19.19;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2008.04.11.16.18.53;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2008.04.11.16.18.36;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2008.04.11.16.17.07;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2008.04.11.16.16.43;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.04.11.16.15.35;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.04.11.16.15.00;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.04.11.16.14.51;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.04.11.16.10.59;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.04.11.16.10.53;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.04.11.16.08.57;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Apr 11 17:08:57 2008
+@
+
+
+1.15
+log
+@Fri Apr 11 17:21:56 2008
+@
+text
+@
+# 11010100
+# intensity 0.645362173111245 disorder 0.529228760075982
+
+sub bang {
+    my $self = shift;
+
+    my $intensity = ($self->{intensity} ||= 0.5);
+    my $disorder = ($self->{disorder} ||= 0.4);
+
+    $self->{rhythm} ||= 
+        $self->line(1, join('', @@{get_rhythm(8, $intensity, $disorder)}
+                           )
+                   );
+    $self->{rhythm} =~ s/(.)//;
+
+    if ($1) {
+        $self->t({sample => "gabba/0",
+                  speed => 1 + (0.025 - rand(0.05)),
+                  loops => 0.3,
+                 }
+                );
+    }
+
+    if ($self->{bangs} % 16 == 0) {
+      $disorder += rand(0.1);
+      if ($disorder > 1) { 
+        $disorder -= 1;
+      } 
+
+      $intensity += rand(0.1);
+      if ($intensity > 1) {
+        $intensity -= 1;
+      }
+    }
+
+    $self->line(2, "intensity $intensity disorder $disorder");
+    $self->modified();
+    $self->{intensity} = $intensity;
+    $self->{disorder} = $disorder;
+
+}
+
+sub get_rhythm {
+  my ($length, $intensity, $disorder) = @@_;
+  $intensity = int($intensity * $length);
+
+  my $rhythm = jumble($length, $disorder);
+
+  if ($intensity != $length / 2) {
+    $rhythm = mask($rhythm, $intensity - ($length / 2));
+  }
+  
+  return($rhythm);
+}
+
+sub jumble {
+  my($length, $intensity) = @@_;
+  my $half = $length / 2;
+
+  my $rhythm = [(1, 0) x $half];
+  my $steps = tri($half - 1);
+  
+  my $strength = $steps * $intensity;
+
+  my $offset = 1;
+
+
+ FOO:
+  while($offset < $half and $strength > 0) {
+    my $p = $offset;
+    while ($p < ($length-1)) {
+      ($rhythm->[$p], $rhythm->[$p+1]) = ($rhythm->[$p+1], $rhythm->[$p]);
+      $p += 2;
+      $strength--;
+      last FOO unless $strength > 0;
+    }
+    $offset++;
+  }
+
+  return($rhythm);
+}
+
+sub tri {
+  my $n = shift;
+  my $result = 0;
+  foreach my $i (0 .. $n) {
+    $result += $i;
+  }
+  return($result);
+}
+
+sub mask {
+  my ($rhythm, $n) = @@_;
+  
+  my $switch = 1;
+  if ($n < 0) {
+    $switch = '0';
+    $n = abs($n);
+  }
+  
+  while($n > 0) {
+    my $count = 0;
+    foreach my $i (@@$rhythm) {
+      $count++ if $i == $switch;
+    }
+    my $point = int($count / 2);
+
+    foreach my $j (0 .. (scalar(@@$rhythm) - 1)) {
+      if($rhythm->[$j] == $switch) {
+        if ($point == 0) {
+          $rhythm->[$j] = $switch ? 0 : 1;
+          last;
+        }
+        $point--;
+      }
+    }
+    --$n;
+  }
+  return($rhythm);
+}
+
+@
+
+
+1.14
+log
+@Fri Apr 11 17:20:30 2008
+@
+text
+@d2 2
+a3 2
+# 11011110
+# intensity 0.316429111053315 disorder 0.4
+d18 3
+a20 2
+        $self->t({sample => "drumtraks/2",
+                  speed => 1 + (0.025 - rand(0.05))
+@
+
+
+1.13
+log
+@Fri Apr 11 17:20:00 2008
+@
+text
+@d2 2
+a3 2
+# 11010100
+# intensity 0.600266493710355 disorder 0.4
+d25 5
+@
+
+
+1.12
+log
+@Fri Apr 11 17:19:53 2008
+@
+text
+@d3 1
+a3 1
+# intensity 0.527393210244883 disorder 0.4
+d25 1
+a25 1
+      $intensity += rand(0.01);
+@
+
+
+1.11
+log
+@Fri Apr 11 17:19:19 2008
+@
+text
+@d3 1
+a3 1
+# intensity 0.5 disorder 0.4
+d33 3
+@
+
+
+1.10
+log
+@Fri Apr 11 17:18:53 2008
+@
+text
+@d26 3
+a28 1
+      $intensity %= 1;
+@
+
+
+1.9
+log
+@Fri Apr 11 17:18:36 2008
+@
+text
+@d3 1
+a3 1
+# intensity 0 disorder 0.4
+d8 2
+a9 2
+    my $intensity = $self->{intensity} ||= 0.5;
+    my $disorder = $self->{disorder} ||= 0.4;
+@
+
+
+1.8
+log
+@Fri Apr 11 17:17:07 2008
+@
+text
+@d3 1
+a3 1
+
+d8 2
+a9 2
+    my $intensity = 0.5;
+    my $disorder = 0.4;
+d23 7
+@
+
+
+1.7
+log
+@Fri Apr 11 17:16:43 2008
+@
+text
+@d19 1
+a19 1
+                  speed => 1 + (0.05 - rand(0.1))
+@
+
+
+1.6
+log
+@Fri Apr 11 17:15:35 2008
+@
+text
+@d2 1
+a2 1
+# 11011110
+d8 2
+a9 2
+    my $intensity = rand();
+    my $disorder = 0.5;
+d16 1
+d18 4
+a21 1
+        $self->t({sample => "drumtraks/2"});
+@
+
+
+1.5
+log
+@Fri Apr 11 17:15:00 2008
+@
+text
+@d2 1
+a2 1
+# 10000100
+d15 4
+a18 3
+
+
+#    $self->t({sample => "drumtraks/0"});
+@
+
+
+1.4
+log
+@Fri Apr 11 17:14:51 2008
+@
+text
+@d1 1
+a1 1
+use Rhythmspace;
+d3 2
+@
+
+
+1.3
+log
+@Fri Apr 11 17:10:59 2008
+@
+text
+@d2 1
+a2 1
+# ARRAY(0x8af1370)
+d5 10
+a14 3
+    $self->line(1, join('', Rhythmspace::get_rhythm(0.5, 0.5)
+                       )
+               );
+d17 81
+a97 1
+}@
+
+
+1.2
+log
+@Fri Apr 11 17:10:53 2008
+@
+text
+@d5 2
+a6 1
+    $self->line(1, join('', Rhythmspace::get_rhythm(0.5, 0.5))
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 1
+a2 3
+
+
+
+d5 3
+a7 1
+    $self->code(1, "hello");
+@

@@ -1,0 +1,18 @@
+my $bing = 0;
+sub bang {
+    my $self = shift;
+
+    if ($self->{bangs} % 4 == 0 and rand() > 0.8) {
+       $bing = 8;
+    }
+    if ($self->{bangs} % ($bing ? 2 : 4) == 0) {
+        $self->play({num => 40, formfreq => 2, ts => 20,
+                     bwfreq => 10 + 40 * $self->sin(1)
+                    }
+                   );
+    }
+    if ($bing > 0) {
+       $bing--;
+    }
+    
+}

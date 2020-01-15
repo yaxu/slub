@@ -1,0 +1,30 @@
+# sample gap hits vowel
+# 0 8 3 3
+# 0 8 3 3
+# 0 8 3 3
+
+
+my $lookup;
+
+sub bang {
+    my $self = shift;
+    my $foo = 0;
+    $lookup ||= {map {$_ => $foo++} split(' ', $self->line(0))};
+
+    $foo = 1;
+    while (my $line = $self->line($foo++)) {
+        my @stuff = split(' ', $line);
+        my $sample = $stuff[$lookup->{sample}];
+        my $gap    = $self->morph($stuff[$lookup->{gap}]);
+        my $hits   = $self->morph($stuff[$lookup->{hits}]);
+        my $vowel  = $self->morph($stuff[$lookup->{vowel}]);
+        
+    }
+
+    $self->modified;
+}
+
+sub morph {
+    my $self = shift;
+    
+}

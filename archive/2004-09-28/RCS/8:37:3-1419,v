@@ -1,0 +1,58 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2004.09.28.07.37.41;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.09.28.07.37.03;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Sep 28 08:37:03 2004
+@
+
+
+1.2
+log
+@Tue Sep 28 08:37:41 2004
+@
+text
+@sub bang {
+    my $self = shift;
+    my $switch = $self->{bangs} % 32 < 16 ? 4 : 2;
+    if (($self->{bangs} % 32 < 24) and ($self->{bangs} % $switch == 0)) {
+        $self->trigger({sample => "gabba/0",
+                        rate   => 50,
+                        ts     => 100,
+                        gain   => 50
+                       }
+                      );
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@a2 2
+    $self->{seq} ||= [0, 2, 4, 6];
+    $self->{rate} ||= 0;
+a11 5
+    
+    if ($self->{bangs} % 32 == 2) {
+       $self->{rate} = 20 + ($self->{seq}->[0]);
+       push(@@{$self->{seq}}, shift(@@{$self->{seq}}));
+    }
+@

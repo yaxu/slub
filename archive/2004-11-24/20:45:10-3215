@@ -1,0 +1,67 @@
+# 0 < 59:57:0:0:52:0:0:55:61:0:0:59:56:0:0:0
+# 32
+my $init = 0;
+my $start = 50;
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 32 == 0) {
+        $self->{tune} = [$self->tune(16)] unless $init++;
+    }
+    $self->code->[0] = "# " . join(':', @{$self->{tune}});
+    my $point = shift(@{$self->{tune}});
+    push (@{$self->{tune}}, $point);
+ 
+
+    $self->code->[0] = "# $point < " . join(':', @{$self->{tune}});
+    if ($point) {
+        $self->trigger({sample => "drum/$point", #filter => 10000,
+                        browndel => 10000, gain => 2});
+    }
+    if ($self->{bangs} % 4 == 0) {
+        $self->trigger({sample => 'breaks152loud/0', filter => 500,
+                        ts => 800,
+                        gain => 300,
+                        browndel => 600
+                       }
+                      );
+    }
+    $self->modified;
+}
+
+
+sub tune {
+    my $self = shift;
+    my $size = shift;
+    my @result;
+    if ($size > 6) {
+        $size--;
+        my $split = int(($size / 2) + rand(2));
+        my @part1 = $self->tune($split);
+        my @part2 = $self->tune($size - $split);
+        my ($end1) = (grep {$_} reverse @part1);
+        my ($end2) = (grep {$_} @part2);
+        @result = (@part1, joinbits($end1, $end2), @part2);
+    }
+    else {
+        @result = $start + int(rand(12));
+        push(@result, ((0) x ($size - 1)))
+    }
+    return(@result);
+}
+
+sub joinbits {
+   my ($one, $two) = @_;
+   my $result;
+   if ($two > $one) {
+       ($one, $two) = ($two, $one);
+   }
+
+   my $difference = $one - $two;
+   if ($difference % 2 or $difference < 2) {
+       $result = $two + 3;
+   }
+   else {
+       $result = $difference / 2;
+   }
+   return($result);
+}

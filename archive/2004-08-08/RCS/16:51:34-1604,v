@@ -1,0 +1,54 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2004.08.08.15.55.40;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.08.08.15.51.34;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Aug  8 16:51:34 2004
+@
+
+
+1.2
+log
+@Sun Aug  8 16:55:40 2004
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0) {
+        $self->play({num => 80,
+                     ts  => 100,
+                     gain => 10,
+                     browndel => 0
+                    }
+                   );
+    }
+    if ($self->{bangs} % 16 == 8) {
+        $self->trigger({sample => '/yaxu/samples/future/0'});
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d11 3
+a13 1
+
+@

@@ -1,0 +1,22 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 32 == 0) {
+        $self->t({sample => "trump/1", speed => 0.25,
+                  accellerate => 0.000001,
+                  envelope_name => 'chop',
+                  vowel => 'e', loops => 2,
+                  pan => 1, pan_to => -1
+                 }
+                );
+        $self->{foo}++;
+    }
+    if ($self->{bangs} % 16 == 8) {
+        $self->t({sample => "trump/1", speed => 0.125,
+                  accellerate => -0.0000005,
+                  envelope_name => 'chop',
+                  vowel => ($self->{foo}++ % 2 ? 'a' : 'o'),
+                  pan => -1, pan_to => 1
+                 }
+                );
+    }
+}

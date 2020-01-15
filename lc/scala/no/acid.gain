@@ -1,0 +1,47 @@
+# 0.0384746057361363
+
+my $tune = [0];
+
+sub bang {
+    my $self = shift;
+    my $erm = sin($self->{bangs} / 20);
+    $self->message($erm);
+    if (!($self->{foo} % 6) or rand > 0.8) {
+      $self->play({num => 60 + $tune->[$self->{note}++ % @$tune] 
+                   + ((! ($self->{foo} % 16)) ? (int(rand(4)) * 12) : 0), 
+                   formfreq => 10,
+                   gain     => 180,
+                   bwfreq   => 20 + ($erm * 30),
+                   pan      => abs($erm),
+                   ts       => 50 + rand(10)
+                  }
+                 );
+    }
+    $self->{foo}++;
+    #$self->save('acid.gain');    
+    $self->modified;
+}
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./scala/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    $self->message("saved.");
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}
+
+sub message {
+    my ($self, $message) = @_;
+    my $code = $self->code;
+    if (not $code->[0] =~ /^\#/) {
+      unshift(@$code, '#');
+    }
+    $code->[0] = '# ' . $message;
+}

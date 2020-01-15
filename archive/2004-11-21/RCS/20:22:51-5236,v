@@ -1,0 +1,62 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2004.11.21.20.29.25;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.11.21.20.22.51;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Nov 21 20:22:51 2004
+@
+
+
+1.2
+log
+@Sun Nov 21 20:29:25 2004
+@
+text
+@my $dir = 0;
+my $foo = 0;
+my $init = 0;
+my $sample = 0;
+sub bang {
+    my $self = shift;
+    if (not $init) {
+       return unless $self->{bangs} % 16 == 0;
+       $init = 1;
+    }
+    if ($foo <= 0) {
+        $foo = (rand > 0.5 ? 8 : 2);
+        $self->trigger({sample => "latibro/$sample", ts => 100, rate => 50});
+    }
+    if ($self->{bangs} % 64 == 32) {
+        $sample += (rand > 0.5 ? -1 : 2);
+    }
+    $foo--;
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 2
+d7 4
+d12 5
+a16 2
+        $foo = 8;
+        $self->trigger({sample => "latibro/0"});
+@

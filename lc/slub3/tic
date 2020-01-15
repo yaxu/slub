@@ -1,0 +1,12 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0) {
+        $self->t({sample => "future/7",
+                  loops => 8,#1 + int($self->{bangs} % 128 / 16),
+                  speed => 3.935,
+                  accellerate => -0.00001, volume => 0.02,
+                  pan => -1
+                 }
+                );
+    }
+}

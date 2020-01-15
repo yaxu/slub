@@ -1,0 +1,10 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0) {
+       $self->t({sample => "fuckable/0", pan => 1 - (2 *$self->sin(3)),
+                 speed => 0.5,
+                 volume => 0.002
+                }
+               );
+    }
+}

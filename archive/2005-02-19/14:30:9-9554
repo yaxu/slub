@@ -1,0 +1,13 @@
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 64 > 32 ? 0 : 2;
+    if ($self->{bangs} % 16 > 12) {
+       $foo += rand(2);
+    }
+    if ($self->{bangs} % 4 == $foo) {
+       $self->t({sample => "chin/5", speed => 0.1,
+                 volume => 1
+                }
+               );
+    }
+}

@@ -1,0 +1,2083 @@
+head	1.91;
+access;
+symbols;
+locks
+	alex:1.91; strict;
+comment	@# @;
+
+
+1.91
+date	2008.12.02.23.41.55;	author alex;	state Exp;
+branches;
+next	1.90;
+
+1.90
+date	2008.12.02.21.56.00;	author alex;	state Exp;
+branches;
+next	1.89;
+
+1.89
+date	2008.11.30.10.10.33;	author alex;	state Exp;
+branches;
+next	1.88;
+
+1.88
+date	2008.11.29.15.02.22;	author alex;	state Exp;
+branches;
+next	1.87;
+
+1.87
+date	2008.11.29.11.49.31;	author alex;	state Exp;
+branches;
+next	1.86;
+
+1.86
+date	2008.11.29.11.39.24;	author alex;	state Exp;
+branches;
+next	1.85;
+
+1.85
+date	2008.11.29.11.39.16;	author alex;	state Exp;
+branches;
+next	1.84;
+
+1.84
+date	2008.11.29.11.28.17;	author alex;	state Exp;
+branches;
+next	1.83;
+
+1.83
+date	2008.11.29.10.42.58;	author alex;	state Exp;
+branches;
+next	1.82;
+
+1.82
+date	2008.11.29.10.41.05;	author alex;	state Exp;
+branches;
+next	1.81;
+
+1.81
+date	2008.11.29.10.40.22;	author alex;	state Exp;
+branches;
+next	1.80;
+
+1.80
+date	2008.11.29.10.39.19;	author alex;	state Exp;
+branches;
+next	1.79;
+
+1.79
+date	2008.11.29.10.39.10;	author alex;	state Exp;
+branches;
+next	1.78;
+
+1.78
+date	2008.11.29.10.38.46;	author alex;	state Exp;
+branches;
+next	1.77;
+
+1.77
+date	2008.11.29.10.38.09;	author alex;	state Exp;
+branches;
+next	1.76;
+
+1.76
+date	2008.11.29.10.05.28;	author alex;	state Exp;
+branches;
+next	1.75;
+
+1.75
+date	2008.11.29.10.03.29;	author alex;	state Exp;
+branches;
+next	1.74;
+
+1.74
+date	2008.11.29.10.02.35;	author alex;	state Exp;
+branches;
+next	1.73;
+
+1.73
+date	2008.11.29.10.02.00;	author alex;	state Exp;
+branches;
+next	1.72;
+
+1.72
+date	2008.11.29.10.01.27;	author alex;	state Exp;
+branches;
+next	1.71;
+
+1.71
+date	2008.11.26.10.59.47;	author alex;	state Exp;
+branches;
+next	1.70;
+
+1.70
+date	2008.11.26.10.59.15;	author alex;	state Exp;
+branches;
+next	1.69;
+
+1.69
+date	2008.08.07.19.30.43;	author alex;	state Exp;
+branches;
+next	1.68;
+
+1.68
+date	2008.08.07.19.30.29;	author alex;	state Exp;
+branches;
+next	1.67;
+
+1.67
+date	2008.07.31.20.44.13;	author alex;	state Exp;
+branches;
+next	1.66;
+
+1.66
+date	2008.07.31.19.29.39;	author alex;	state Exp;
+branches;
+next	1.65;
+
+1.65
+date	2008.07.31.19.29.31;	author alex;	state Exp;
+branches;
+next	1.64;
+
+1.64
+date	2008.07.31.19.24.36;	author alex;	state Exp;
+branches;
+next	1.63;
+
+1.63
+date	2008.06.05.17.05.16;	author alex;	state Exp;
+branches;
+next	1.62;
+
+1.62
+date	2008.04.12.20.22.38;	author alex;	state Exp;
+branches;
+next	1.61;
+
+1.61
+date	2008.04.12.20.02.29;	author alex;	state Exp;
+branches;
+next	1.60;
+
+1.60
+date	2008.04.12.20.02.25;	author alex;	state Exp;
+branches;
+next	1.59;
+
+1.59
+date	2008.04.12.20.02.22;	author alex;	state Exp;
+branches;
+next	1.58;
+
+1.58
+date	2008.04.12.20.02.16;	author alex;	state Exp;
+branches;
+next	1.57;
+
+1.57
+date	2008.04.12.20.02.09;	author alex;	state Exp;
+branches;
+next	1.56;
+
+1.56
+date	2008.04.12.20.01.37;	author alex;	state Exp;
+branches;
+next	1.55;
+
+1.55
+date	2008.04.12.20.01.28;	author alex;	state Exp;
+branches;
+next	1.54;
+
+1.54
+date	2008.02.20.19.47.24;	author alex;	state Exp;
+branches;
+next	1.53;
+
+1.53
+date	2008.02.20.19.12.54;	author alex;	state Exp;
+branches;
+next	1.52;
+
+1.52
+date	2008.02.20.19.09.11;	author alex;	state Exp;
+branches;
+next	1.51;
+
+1.51
+date	2008.02.20.19.08.00;	author alex;	state Exp;
+branches;
+next	1.50;
+
+1.50
+date	2008.02.20.19.06.30;	author alex;	state Exp;
+branches;
+next	1.49;
+
+1.49
+date	2008.02.20.19.05.58;	author alex;	state Exp;
+branches;
+next	1.48;
+
+1.48
+date	2008.02.20.19.05.28;	author alex;	state Exp;
+branches;
+next	1.47;
+
+1.47
+date	2007.07.24.19.57.23;	author alex;	state Exp;
+branches;
+next	1.46;
+
+1.46
+date	2007.05.09.21.03.02;	author alex;	state Exp;
+branches;
+next	1.45;
+
+1.45
+date	2007.05.09.19.23.43;	author alex;	state Exp;
+branches;
+next	1.44;
+
+1.44
+date	2007.05.09.19.23.43;	author alex;	state Exp;
+branches;
+next	1.43;
+
+1.43
+date	2007.05.09.19.15.18;	author alex;	state Exp;
+branches;
+next	1.42;
+
+1.42
+date	2007.05.09.19.13.16;	author alex;	state Exp;
+branches;
+next	1.41;
+
+1.41
+date	2007.05.09.19.12.18;	author alex;	state Exp;
+branches;
+next	1.40;
+
+1.40
+date	2007.05.09.19.11.41;	author alex;	state Exp;
+branches;
+next	1.39;
+
+1.39
+date	2007.05.09.19.11.13;	author alex;	state Exp;
+branches;
+next	1.38;
+
+1.38
+date	2007.05.09.19.10.17;	author alex;	state Exp;
+branches;
+next	1.37;
+
+1.37
+date	2007.05.09.18.19.57;	author alex;	state Exp;
+branches;
+next	1.36;
+
+1.36
+date	2007.05.09.18.14.53;	author alex;	state Exp;
+branches;
+next	1.35;
+
+1.35
+date	2007.05.09.18.14.44;	author alex;	state Exp;
+branches;
+next	1.34;
+
+1.34
+date	2007.05.09.18.13.44;	author alex;	state Exp;
+branches;
+next	1.33;
+
+1.33
+date	2007.02.24.23.04.38;	author alex;	state Exp;
+branches;
+next	1.32;
+
+1.32
+date	2006.09.02.21.16.48;	author alex;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	2006.09.02.21.16.39;	author alex;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	2006.09.02.21.16.22;	author alex;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	2006.09.02.21.15.59;	author alex;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	2006.09.02.21.15.50;	author alex;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	2006.09.02.21.11.30;	author alex;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	2006.07.13.19.25.14;	author alex;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2006.07.13.17.19.41;	author alex;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2006.07.13.17.06.29;	author alex;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2006.04.29.22.23.17;	author alex;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2006.04.29.22.19.07;	author alex;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2006.04.29.19.35.46;	author alex;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2006.04.02.17.57.50;	author alex;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2006.04.01.21.02.00;	author alex;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2006.04.01.20.54.09;	author alex;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2006.04.01.20.51.28;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2006.04.01.20.45.17;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2006.04.01.20.40.39;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2006.04.01.20.36.55;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2006.01.28.21.49.05;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2006.01.28.21.48.55;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2006.01.28.21.47.14;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2006.01.28.21.45.31;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2006.01.28.17.10.19;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2006.01.28.16.54.43;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2006.01.28.10.33.30;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2006.01.28.10.33.00;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2006.01.28.10.21.12;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2006.01.28.10.20.10;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2006.01.28.10.19.34;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2006.01.28.10.18.15;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.12.11.19.10.22;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Dec 11 19:10:22 2005
+@
+
+
+1.91
+log
+@Tue Dec  2 23:41:55 2008
+@
+text
+@# 968
+# 110
+# 110
+# 1228261186.21
+
+my $metro = 0;
+
+my $bpm = 110;
+use Time::HiRes;
+use Net::OpenSoundControl::Client;
+
+my $adeip = "111.112.113.4";
+my $daveip = "158.223.59.95";
+my $haskport = 6040;
+my $haskosc;
+my $adeosc;
+sub bang {
+    my $self = shift;
+    $self->line(2, $self->{tpm});
+    if ($metro) {
+        if ($self->{bangs} % 4 == 0) {
+            $self->t({sample => "drumtraks/2",
+                      speed => ($self->{bangs} % 16 == 0 ? 1.25 : 1)
+                     }
+                    );
+        }
+    }
+
+    if ($self->{bangs} % 8 == 0) {
+        $self->line(0, $self->{bangs});
+        $self->modified;
+        $self->ade();
+    }
+    if ($bpm != $self->{bpmer}) {
+#        $self->{c}->bpm_send($bpm);
+         $self->bpm($bpm);
+        $self->{bpmer} = $bpm;
+        if (not $adeosc) {
+          $adeosc = Net::OpenSoundControl::Client->new(Host => $adeip,
+                                                       Port => 1777
+                                                      );
+        }
+        if (not $haskosc) {
+          $haskosc = Net::OpenSoundControl::Client->new(Host => "127.0.0.1",
+                                                        Port => $haskport
+                                                       );
+warn("hm: $haskosc\n");
+        }
+
+        warn("send bpm change\n");
+        $adeosc->send(['/PureEvents/SetBPM',
+                       'f', $self->{tpm}
+                      ]
+                     );
+        $haskosc->send(['/bpm',
+                        'f', $self->{tpm},
+                        'f', $self->{start},
+                        'i', $self->{total_ticks}
+                       ]
+                      );
+      $self->line(3, $self->{start});
+    }
+
+    $self->vbang();
+    if ($self->{bangs} % (16 * 32) == 0) {
+        $self->vbar(4);
+    }
+}
+
+##
+
+{
+    my $daveosc;
+    my $foo;
+    sub ade {
+        my ($self) = @@_;
+        $self->line(1, $self->{bpmer});
+        if ($self->{bangs} % 16 == 0) {
+          if (not $daveosc) {
+              $daveosc =
+                 Net::OpenSoundControl::Client->new(Host => $daveip,
+                                                    Port => 4000
+                                                   );
+          }
+#         Time::HiRes::sleep(0.0002);
+          $daveosc->send(['/sync', 'i', 8, 'f', $self->{tpm}])
+             if $daveosc;
+        }
+                 
+        if (not $adeosc) {
+          $adeosc = Net::OpenSoundControl::Client->new(Host => $adeip,
+                                                       Port => 1777
+                                                      );
+        }
+        #Time::HiRes::sleep(0.1);
+        $adeosc->send(['/PureEvents/ReleasePendingEvents', 
+                       'f', $self->{tpm}
+                      ]
+                     ) if $adeosc;
+    }
+}@
+
+
+1.90
+log
+@Tue Dec  2 21:56:00 2008
+@
+text
+@d1 4
+a4 4
+# 32
+# 120
+# 120
+# 1228254938.6582
+d8 1
+a8 1
+my $bpm = 120;
+d58 1
+a58 1
+                        'i', $self->{bangs_since_change}
+@
+
+
+1.89
+log
+@Sun Nov 30 10:10:33 2008
+@
+text
+@d1 4
+a4 4
+# 16
+# 30
+# 30
+# 1227970931.78716
+@
+
+
+1.88
+log
+@Sat Nov 29 15:02:22 2008
+@
+text
+@d1 1
+a1 1
+# 208
+d8 1
+a8 1
+my $bpm = 30;
+d57 2
+a58 2
+                        'f', $self->{now},
+                        'i', $self->{bangs}
+d61 1
+a61 1
+      $self->line(3, $self->{now});
+@
+
+
+1.87
+log
+@Sat Nov 29 11:49:31 2008
+@
+text
+@d1 4
+a4 4
+# 10424
+# 120
+# 120
+# 1227958065.76005
+d8 1
+a8 1
+my $bpm = 120;
+d58 1
+a58 1
+                        'f', $self->{bangs}
+@
+
+
+1.86
+log
+@Sat Nov 29 11:39:24 2008
+@
+text
+@d1 1
+a1 1
+# 5576
+@
+
+
+1.85
+log
+@Sat Nov 29 11:39:16 2008
+@
+text
+@d1 1
+a1 1
+# 5512
+d6 1
+a6 1
+my $metro = 1;
+@
+
+
+1.84
+log
+@Sat Nov 29 11:28:17 2008
+@
+text
+@d1 1
+a1 1
+# 232
+d6 1
+a6 1
+my $metro = 0;
+d85 1
+a85 1
+#         Time::HiRes::sleep(0);
+@
+
+
+1.83
+log
+@Sat Nov 29 10:42:58 2008
+@
+text
+@d1 4
+a4 4
+# 184
+# 25
+# 25
+# 1227955267.74276
+d6 1
+a6 1
+my $metro = 1;
+d8 1
+a8 1
+my $bpm = 25;
+@
+
+
+1.82
+log
+@Sat Nov 29 10:41:05 2008
+@
+text
+@d1 4
+a4 4
+# 2008
+# 250
+# 250
+# 1227955232.19198
+d57 2
+a58 1
+                        'f', $self->{now}
+@
+
+
+1.81
+log
+@Sat Nov 29 10:40:22 2008
+@
+text
+@d1 4
+a4 4
+# 1320
+# 200
+# 200
+# 1227955157.47224
+d8 1
+a8 1
+my $bpm = 200;
+@
+
+
+1.80
+log
+@Sat Nov 29 10:39:19 2008
+@
+text
+@d1 1
+a1 1
+# 472
+d56 2
+a57 1
+                        'f', $self->{tpm}
+@
+
+
+1.79
+log
+@Sat Nov 29 10:39:10 2008
+@
+text
+@d1 4
+a4 3
+# 368
+# 190
+# 190
+d8 1
+a8 1
+my $bpm = 190;
+@
+
+
+1.78
+log
+@Sat Nov 29 10:38:46 2008
+@
+text
+@d1 1
+a1 1
+# 64
+d58 1
+a58 1
+      
+@
+
+
+1.77
+log
+@Sat Nov 29 10:38:09 2008
+@
+text
+@d1 1
+a1 1
+# 1288
+d4 1
+@
+
+
+1.76
+log
+@Sat Nov 29 10:05:28 2008
+@
+text
+@d1 3
+a3 3
+# 3488
+# 140
+# 140
+d6 1
+a6 1
+my $bpm = 140;
+@
+
+
+1.75
+log
+@Sat Nov 29 10:03:29 2008
+@
+text
+@d1 3
+a3 3
+# 2072
+# 150
+# 150
+d6 1
+a6 1
+my $bpm = 180;
+@
+
+
+1.74
+log
+@Sat Nov 29 10:02:35 2008
+@
+text
+@d1 3
+a3 3
+# 1544
+# 130
+# 130
+d6 1
+a6 1
+my $bpm = 130;
+d12 1
+a12 1
+my $haskport = 6050;
+d43 1
+a43 1
+                                                        Port => 6040
+@
+
+
+1.73
+log
+@Sat Nov 29 10:02:00 2008
+@
+text
+@d1 3
+a3 3
+# 1224
+# 150
+# 150
+d6 1
+a6 1
+my $bpm = 150;
+d45 1
+@
+
+
+1.72
+log
+@Sat Nov 29 10:01:27 2008
+@
+text
+@d1 3
+a3 3
+# 904
+# 140
+# 140
+d6 1
+a6 1
+my $bpm = 140;
+d52 4
+a55 4
+        $bpm->send(['/bpm',
+                    'f', $self->{tpm}
+                   ]
+                  );
+@
+
+
+1.71
+log
+@Wed Nov 26 10:59:47 2008
+@
+text
+@d1 1
+a1 1
+# 648
+d12 2
+d41 6
+d52 5
+@
+
+
+1.70
+log
+@Wed Nov 26 10:59:15 2008
+@
+text
+@d1 1
+a1 1
+# 336
+d63 1
+a63 1
+                 Net::OpenSoundControl::Client->new(Host => '111.112.113.2',
+@
+
+
+1.69
+log
+@Thu Aug  7 20:30:43 2008
+@
+text
+@d1 1
+a1 1
+# 9040
+d11 1
+@
+
+
+1.68
+log
+@Thu Aug  7 20:30:29 2008
+@
+text
+@d1 3
+a3 3
+# 8912
+# 180
+# 180
+d6 1
+a6 1
+my $bpm = 180;
+@
+
+
+1.67
+log
+@Thu Jul 31 21:44:13 2008
+@
+text
+@d1 4
+a4 4
+# 34600
+# 160
+# 160
+my $metro = 0;
+d6 1
+a6 1
+my $bpm = 160;
+d10 1
+d31 1
+a31 1
+	 $self->bpm($bpm);
+d33 5
+a37 5
+#        if (not $adeosc) {
+#          $adeosc = Net::OpenSoundControl::Client->new(Host => '192.168.0.1',
+#                                                       Port => 1777
+#                                                      );
+#        }
+d40 1
+a40 1
+                       'f', $self->{bpmer}
+d72 1
+a72 1
+          $adeosc = Net::OpenSoundControl::Client->new(Host => '192.168.0.5',
+d78 1
+a78 1
+                       'f', $self->{bpmer}
+@
+
+
+1.66
+log
+@Thu Jul 31 20:29:39 2008
+@
+text
+@d1 4
+a4 4
+# 2368
+# 120
+# 120
+my $metro = 1;
+d6 1
+a6 1
+my $bpm = 120;
+@
+
+
+1.65
+log
+@Thu Jul 31 20:29:31 2008
+@
+text
+@d1 1
+a1 1
+# 2304
+@
+
+
+1.64
+log
+@Thu Jul 31 20:24:36 2008
+@
+text
+@d1 1
+a1 1
+# 22080
+@
+
+
+1.63
+log
+@Thu Jun  5 18:05:16 2008
+@
+text
+@d1 1
+a1 1
+# 4992
+d3 2
+a4 1
+my $metro = 0;
+d13 1
+a13 1
+
+d30 1
+d61 1
+a61 1
+                 Net::OpenSoundControl::Client->new(Host => '158.223.59.95',
+d65 2
+a66 2
+  #       Time::HiRes::sleep(0.35);
+          $daveosc->send(['/sync', 'i', 8, 'f', $self->{bpmer}])
+d75 1
+a75 1
+        Time::HiRes::sleep(0.1);
+@
+
+
+1.62
+log
+@Sat Apr 12 21:22:38 2008
+@
+text
+@d1 2
+a2 2
+# 11232
+# 150
+d5 1
+a5 1
+my $bpm = 150;
+d28 1
+a28 1
+        $self->{c}->bpm_send($bpm);
+d59 1
+a59 1
+                 Net::OpenSoundControl::Client->new(Host => '192.168.0.2',
+@
+
+
+1.61
+log
+@Sat Apr 12 21:02:29 2008
+@
+text
+@d1 2
+a2 2
+# 1104
+# 120
+d5 1
+a5 1
+my $bpm = 120;
+d63 1
+a63 1
+#         Time::HiRes::sleep(0.1);
+@
+
+
+1.60
+log
+@Sat Apr 12 21:02:25 2008
+@
+text
+@d1 2
+a2 2
+# 1056
+# 180
+d5 1
+a5 1
+my $bpm = 180;
+@
+
+
+1.59
+log
+@Sat Apr 12 21:02:22 2008
+@
+text
+@d1 1
+a1 1
+# 1016
+@
+
+
+1.58
+log
+@Sat Apr 12 21:02:16 2008
+@
+text
+@d1 2
+a2 2
+# 928
+# 210
+d5 1
+a5 1
+my $bpm = 210;
+@
+
+
+1.57
+log
+@Sat Apr 12 21:02:09 2008
+@
+text
+@d1 1
+a1 1
+# 848
+@
+
+
+1.56
+log
+@Sat Apr 12 21:01:37 2008
+@
+text
+@d1 2
+a2 2
+# 384
+# 200
+d28 1
+a28 1
+        $self->{c}->send_bpm($bpm);
+@
+
+
+1.55
+log
+@Sat Apr 12 21:01:28 2008
+@
+text
+@d1 1
+a1 1
+# 264
+d5 1
+a5 1
+my $bpm = 200;
+@
+
+
+1.54
+log
+@Wed Feb 20 19:47:24 2008
+@
+text
+@d1 1
+a1 1
+# 26520
+d28 1
+a28 1
+        $self->bpm($bpm);
+@
+
+
+1.53
+log
+@Wed Feb 20 19:12:54 2008
+@
+text
+@d1 2
+a2 2
+# 2296
+# 157
+d5 1
+a5 1
+my $bpm = 157;
+@
+
+
+1.52
+log
+@Wed Feb 20 19:09:11 2008
+@
+text
+@d1 1
+a1 1
+# 2872
+d3 1
+a3 1
+my $metro = 1;
+@
+
+
+1.51
+log
+@Wed Feb 20 19:08:00 2008
+@
+text
+@d1 1
+a1 1
+# 2128
+@
+
+
+1.50
+log
+@Wed Feb 20 19:06:30 2008
+@
+text
+@d1 1
+a1 1
+# 1192
+d63 1
+a63 1
+#         Time::HiRes::sleep(0.2);
+@
+
+
+1.49
+log
+@Wed Feb 20 19:05:58 2008
+@
+text
+@d1 1
+a1 1
+# 856
+d63 1
+@
+
+
+1.48
+log
+@Wed Feb 20 19:05:28 2008
+@
+text
+@d1 1
+a1 1
+# 536
+d31 3
+a33 3
+          $adeosc = Net::OpenSoundControl::Client->new(Host => '192.168.0.1',
+                                                       Port => 1777
+                                                      );
+@
+
+
+1.47
+log
+@Tue Jul 24 20:57:23 2007
+@
+text
+@d1 1
+a1 1
+# 472
+d3 1
+a3 1
+my $metro = 0;
+d59 1
+a59 1
+                 Net::OpenSoundControl::Client->new(Host => '111.112.113.2',
+d68 1
+a68 1
+          $adeosc = Net::OpenSoundControl::Client->new(Host => '192.168.0.2',
+@
+
+
+1.46
+log
+@Wed May  9 22:03:02 2007
+@
+text
+@d1 3
+a3 3
+# 40
+# 133
+my $metro = 1;
+d5 1
+a5 1
+my $bpm = 133;
+d30 2
+a31 2
+        if (not $adeosc) {
+          $adeosc = Net::OpenSoundControl::Client->new(Host => '111.112.113.4',
+d34 1
+a34 1
+        }
+d68 3
+a70 3
+          $adeosc = Net::OpenSoundControl::Client->new(Host => '111.112.113.4',
+                                             Port => 1777
+                                            );
+@
+
+
+1.45
+log
+@Wed May  9 20:23:43 2007
+@
+text
+@d1 2
+a2 2
+# 2616
+# 140
+d5 1
+a5 1
+my $bpm = 140;
+@
+
+
+1.44
+log
+@Wed May  9 20:23:43 2007
+@
+text
+@d1 1
+a1 1
+# 2608
+@
+
+
+1.43
+log
+@Wed May  9 20:15:18 2007
+@
+text
+@d1 1
+a1 1
+# 1600
+d22 1
+a22 1
+    if ($self->{bangs} % 16 == 0) {
+d56 9
+a64 6
+
+        if (not $daveosc) {
+            $daveosc =
+               Net::OpenSoundControl::Client->new(Host => '111.112.113.2',
+                                                  Port => 4000
+                                                 );
+d66 1
+a66 2
+        $daveosc->send(['/sync', 'i', 8, 'f', $self->{bpmer}])
+           if $daveosc;
+@
+
+
+1.42
+log
+@Wed May  9 20:13:16 2007
+@
+text
+@d1 1
+a1 1
+# 448
+d70 1
+a70 1
+        Time::HiRes::sleep(0.11);
+@
+
+
+1.41
+log
+@Wed May  9 20:12:18 2007
+@
+text
+@d1 3
+a3 3
+# 720
+# 120
+my $metro = 0;
+d5 1
+a5 1
+my $bpm = 120;
+d60 2
+a61 2
+                                               Port => 4000
+                                              );
+@
+
+
+1.40
+log
+@Wed May  9 20:11:41 2007
+@
+text
+@d1 1
+a1 1
+# 416
+d58 2
+a59 1
+            $daveosc = Net::OpenSoundControl::Client->new(Host => '111.112.113.2',
+@
+
+
+1.39
+log
+@Wed May  9 20:11:13 2007
+@
+text
+@d1 1
+a1 1
+# 192
+d32 2
+a33 1
+                                                       Port => 1777);
+@
+
+
+1.38
+log
+@Wed May  9 20:10:17 2007
+@
+text
+@d1 1
+a1 1
+# 30736
+d64 3
+a66 3
+            $adeosc = Net::OpenSoundControl::Client->new(Host => '192.168.0.2',
+                                              Port => 1777
+                                             );
+@
+
+
+1.37
+log
+@Wed May  9 19:19:57 2007
+@
+text
+@d1 1
+a1 1
+# 6576
+d31 2
+a32 2
+            $adeosc = Net::OpenSoundControl::Client->new(Host => '192.168.0.2', Port => 1777);
+
+@
+
+
+1.36
+log
+@Wed May  9 19:14:53 2007
+@
+text
+@d1 2
+a2 2
+# 3760
+# 152
+d5 1
+a5 1
+my $bpm = 152;
+@
+
+
+1.35
+log
+@Wed May  9 19:14:44 2007
+@
+text
+@d1 1
+a1 1
+# 3664
+d61 2
+a62 1
+        $daveosc->send(['/sync', 'i', 8, 'f', $self->{bpmer}]);
+@
+
+
+1.34
+log
+@Wed May  9 19:13:44 2007
+@
+text
+@d1 1
+a1 1
+# 3056
+d55 1
+a55 1
+warn("oh\n");
+d71 1
+a71 1
+                     );
+@
+
+
+1.33
+log
+@Sat Feb 24 23:04:38 2007
+@
+text
+@d1 1
+a1 1
+# 896
+d55 7
+a61 6
+#        if (not $daveosc) {
+#            $daveosc = Audio::OSC::Client->new(Host => '111.112.113.2',
+#                                               Port => 4003
+#                                              );
+#        }
+#        $daveosc->send(['/sync', 'i', 8, 'f', $self->{bpmer}]);
+@
+
+
+1.32
+log
+@Sat Sep  2 22:16:48 2006
+@
+text
+@d1 3
+a3 3
+# 448
+# 200
+my $metro = 1;
+d5 1
+a5 1
+my $bpm = 200;
+d7 2
+d31 2
+a32 3
+            $adeosc = Audio::OSC::Client->new(Host => '192.168.0.2',
+                                              Port => 1777
+                                             );
+d62 1
+a62 1
+            $adeosc = Audio::OSC::Client->new(Host => '192.168.0.2',
+@
+
+
+1.31
+log
+@Sat Sep  2 22:16:39 2006
+@
+text
+@d1 2
+a2 2
+# 288
+# 300
+d5 1
+a5 1
+my $bpm = 300;
+@
+
+
+1.30
+log
+@Sat Sep  2 22:16:22 2006
+@
+text
+@d1 1
+a1 1
+# 144
+d29 1
+a29 1
+            $adeosc = Audio::OSC::Client->new(Host => '192.168.0.1',
+@
+
+
+1.29
+log
+@Sat Sep  2 22:15:59 2006
+@
+text
+@d1 2
+a2 2
+# 3024
+# 100
+d5 1
+a5 1
+my $bpm = 100;
+@
+
+
+1.28
+log
+@Sat Sep  2 22:15:50 2006
+@
+text
+@d1 2
+a2 2
+# 2880
+# 300
+d5 1
+a5 1
+my $bpm = 300;
+@
+
+
+1.27
+log
+@Sat Sep  2 22:11:29 2006
+@
+text
+@d1 3
+a3 3
+# 384
+# 200
+my $metro = 0;
+d5 1
+a5 1
+my $bpm = 200;
+@
+
+
+1.26
+log
+@Thu Jul 13 20:25:14 2006
+@
+text
+@d1 2
+a2 2
+# 8640
+# 110
+d5 1
+a5 1
+my $bpm = 157;
+d61 1
+a61 1
+            $adeosc = Audio::OSC::Client->new(Host => '192.168.0.1',
+@
+
+
+1.25
+log
+@Thu Jul 13 18:19:41 2006
+@
+text
+@d1 3
+a3 3
+# 7936
+# 140
+my $metro = 1;
+d5 1
+a5 1
+my $bpm = 140;
+@
+
+
+1.24
+log
+@Thu Jul 13 18:06:29 2006
+@
+text
+@d1 1
+a1 1
+# 896
+d3 1
+a3 1
+my $metro = 0;
+d33 1
+d50 1
+d54 1
+a54 1
+        if (not $daveosc) {
+d58 1
+a58 1
+        }
+d65 1
+a65 1
+        Time::HiRes::sleep(0.08);
+@
+
+
+1.23
+log
+@Sat Apr 29 23:23:17 2006
+@
+text
+@d1 1
+a1 1
+# 2176
+d53 3
+a55 3
+            $daveosc = Audio::OSC::Client->new(Host => '111.112.113.2',
+                                               Port => 4003
+                                              );
+d57 1
+a57 1
+        $daveosc->send(['/sync', 'i', 8, 'f', $self->{bpmer}]);
+@
+
+
+1.22
+log
+@Sat Apr 29 23:19:07 2006
+@
+text
+@d1 1
+a1 1
+# 544
+@
+
+
+1.21
+log
+@Sat Apr 29 20:35:46 2006
+@
+text
+@d1 2
+a2 2
+# 5600
+# 120
+d5 1
+a5 1
+my $bpm = 120;
+@
+
+
+1.20
+log
+@Sun Apr  2 18:57:50 2006
+@
+text
+@d1 1
+a1 1
+# 336
+d3 1
+a3 1
+my $metro = 1;
+d58 10
+a67 10
+        #if (not $adeosc) {
+        #    $adeosc = Audio::OSC::Client->new(Host => '192.168.0.1',
+        #                                      Port => 1777
+        #                                     );
+        #}
+        #Time::HiRes::sleep(0.08);
+        #$adeosc->send(['/PureEvents/ReleasePendingEvents', 
+        #               'f', $self->{bpmer}
+        #              ]
+        #             );
+@
+
+
+1.19
+log
+@Sat Apr  1 22:02:00 2006
+@
+text
+@d1 2
+a2 2
+# 5776
+# 180
+d5 1
+a5 1
+my $bpm = 180;
+d58 10
+a67 10
+        if (not $adeosc) {
+            $adeosc = Audio::OSC::Client->new(Host => '192.168.0.1',
+                                              Port => 1777
+                                             );
+        }
+        Time::HiRes::sleep(0.08);
+        $adeosc->send(['/PureEvents/ReleasePendingEvents', 
+                       'f', $self->{bpmer}
+                      ]
+                     );
+@
+
+
+1.18
+log
+@Sat Apr  1 21:54:09 2006
+@
+text
+@d1 2
+a2 2
+# 1248
+# 120
+d5 1
+a5 1
+my $bpm = 120;
+d7 1
+a7 1
+
+d28 9
+a48 1
+    my $adeosc;
+d63 1
+a63 1
+        Time::HiRes::sleep(0.07);
+@
+
+
+1.17
+log
+@Sat Apr  1 21:51:28 2006
+@
+text
+@d1 1
+a1 1
+# 2656
+d3 1
+a3 1
+my $metro = 0;
+d10 10
+a29 8
+    if ($metro) {
+        if ($self->{bangs} % 4 == 0) {
+            $self->t({sample => "drumtraks/2",
+                      speed => ($self->{bangs} % 16 == 0 ? 1.25 : 1)
+                     }
+                    );
+        }
+    }
+d55 1
+@
+
+
+1.16
+log
+@Sat Apr  1 21:45:17 2006
+@
+text
+@d1 1
+a1 1
+# 5600
+d3 1
+a3 1
+my $metro = 1;
+d6 1
+@
+
+
+1.15
+log
+@Sat Apr  1 21:40:39 2006
+@
+text
+@d1 2
+a2 2
+# 3248
+# 
+d40 1
+a40 1
+        $self->line(1, $self->{bpm});
+d49 1
+a49 1
+                                              Port => 1117
+@
+
+
+1.14
+log
+@Sat Apr  1 21:36:55 2006
+@
+text
+@d1 3
+a3 2
+# 1376
+# 126
+d5 1
+a5 3
+my $metro = 0;
+
+my $bpm = 140;
+d40 1
+a40 1
+        $self->line(1, $self->{tpm});
+@
+
+
+1.13
+log
+@Sat Jan 28 21:49:05 2006
+@
+text
+@d1 2
+a2 2
+# 64
+# 140
+d38 1
+d48 9
+@
+
+
+1.12
+log
+@Sat Jan 28 21:48:55 2006
+@
+text
+@d1 1
+a1 1
+# 1056
+d29 1
+a29 1
+    if ($self->{bangs} % (16 * 16) == 0) {
+@
+
+
+1.11
+log
+@Sat Jan 28 21:47:14 2006
+@
+text
+@d1 1
+a1 1
+# 112
+d30 1
+a30 1
+        $self->vbar(2);
+@
+
+
+1.10
+log
+@Sat Jan 28 21:45:31 2006
+@
+text
+@d1 1
+a1 1
+# 1312
+d29 1
+a29 1
+    if ($self->{bangs} % (16 * 8) == 0) {
+@
+
+
+1.9
+log
+@Sat Jan 28 17:10:19 2006
+@
+text
+@d1 1
+a1 1
+# 8608
+d30 1
+a30 1
+        $self->vbar();
+@
+
+
+1.8
+log
+@Sat Jan 28 16:54:43 2006
+@
+text
+@d1 1
+a1 1
+# 3824
+@
+
+
+1.7
+log
+@Sat Jan 28 10:33:30 2006
+@
+text
+@d1 2
+a2 2
+# 2944
+# 120
+d6 1
+a6 1
+my $bpm = 120;
+d28 4
+@
+
+
+1.6
+log
+@Sat Jan 28 10:33:00 2006
+@
+text
+@d1 1
+a1 1
+# 2704
+d4 1
+a4 1
+my $metro = 1;
+@
+
+
+1.5
+log
+@Sat Jan 28 10:21:12 2006
+@
+text
+@d1 2
+a2 3
+# 480
+# 126
+my $metro = 0;
+d4 3
+a6 1
+my $bpm = 126;
+d15 1
+a15 1
+    if ($bpm != $self->{bpm}) {
+d17 1
+a17 1
+        $self->{bpm} = $bpm;
+d23 1
+a23 1
+                      speed => ($self->{bangs} % 16 == 0 ? 1.5 : 1)
+d42 1
+a42 1
+        $daveosc->send(['/sync', 'i', 8, 'f', 126.0]);
+@
+
+
+1.4
+log
+@Sat Jan 28 10:20:10 2006
+@
+text
+@d1 1
+a1 1
+# 1184
+d38 1
+a38 1
+                                               Port => 4004
+@
+
+
+1.3
+log
+@Sat Jan 28 10:19:34 2006
+@
+text
+@d1 1
+a1 1
+# 880
+@
+
+
+1.2
+log
+@Sat Jan 28 10:18:15 2006
+@
+text
+@d1 1
+a1 1
+# 208
+d38 1
+a38 1
+                                               Port => 4444
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# 4016
+d37 1
+a37 1
+            $daveosc = Audio::OSC::Client->new(Host => '111.112.113.1',
+d43 1
+a43 1
+}
+@

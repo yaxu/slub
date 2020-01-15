@@ -1,0 +1,39 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2008.06.03.13.25.46;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Tue Jun  3 14:25:46 2008
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# hi there
+
+sub bang {
+    my $self = shift;
+
+    my $osc = 
+      $self->{meshosc} ||=
+        Net::OpenSoundControl::Client->new(Host => 'localhost', Port => 6010);
+
+    $self->line(0, "hi there");
+    if ($self->{bangs} % 4 == 0) {
+        $osc->send(['/strike', 'f', 1, 'f', 1]);
+    }
+    $self->modified;
+}@

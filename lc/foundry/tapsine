@@ -1,0 +1,18 @@
+# 0.874891202832196
+
+sub bang {
+    my $self = shift;
+    my $b = $self->{bangs};
+    my $foo = (CORE::sin(($b / 16) * 3.14159) + 1) / 2;
+    my $speed = 0.75 + 0.25 * $foo;
+    $self->t({sample => "drum/2", loops => 1, speed => $speed})
+      if ($self->{bangs} % 4 == 0 or rand() > 0.95);
+    $self->t({sample => "drum/2", loops => 1, speed => 1.5, 
+              pan => 0.25 - $foo
+             }
+            )
+      if $self->{bangs} % 4 == int($self->{bangs} % 32 / 8)
+         or rand() > 0.95;
+    $self->line(0, $speed);
+    $self->modified;
+}

@@ -1,0 +1,16 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0) {
+       $self->t({sample => "made/4", speed => 1.9, envelope_name => "chop"});
+    }
+    if ($self->{bangs} % 4 == 2) {
+       $self->t({sample => "made/4", speed => 1.81, envelope_name => "chop",
+pan => -1});
+    }
+    if ($self->{bangs} % 8 == 5) {
+       $self->t({sample => "made/4", speed => 1.8, delay => 0.01, 
+        envelope_name => "chop", pan => 1}
+       );
+    }
+
+}

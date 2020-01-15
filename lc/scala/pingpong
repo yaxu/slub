@@ -1,0 +1,49 @@
+# saved.
+sub bang {
+    my $self = shift;
+
+    if ($self->{bangs} % 2) {
+    $self->play({num => 60 + ($self->{bangs} % 4),
+                 formfreq => 10,
+                 bwfreq => 100,
+                 browndel => 100 * sin($self->{bangs}),
+                 pan    => 0.4 + rand(0.2)
+                }
+               );
+    } else {
+        $self->play({num => 72 + ($self->{bangs} % 4),  
+                     formfreq => 100,
+                     bwfreq => 10,
+                     offset => 0,
+                     browndel => 100 *  (1 - sin($self->{bangs})),
+                     pan    => 0.3 + rand(0.4)
+                    }
+                   );
+    }
+    #$self->save('pingpong');
+    $self->modified;
+}
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./scala/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    $self->message("saved.");
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}
+
+sub message {
+    my ($self, $message) = @_;
+    my $code = $self->code;
+    if (not $code->[0] =~ /^\#/) {
+      unshift(@$code, '#');
+    }
+    $code->[0] = '# ' . $message;
+}

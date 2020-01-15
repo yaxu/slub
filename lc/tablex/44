@@ -1,0 +1,33 @@
+my $start = 60;
+my $last;
+sub bang {
+   my $self = shift;
+   my $bangs = $self->{bangs};
+   my $seq = $self->{seq} ||= [];
+   if (not @$seq) {
+      $seq->[3] = [$last + 1];
+   }
+
+   my $now = shift @$seq;
+   if ($now and @$now) {
+       foreach my $thing (@$now) {
+           $self->play({num      => 40 + (($thing % 4) * 3),
+                        formfreq => 10,
+                        ts       => 30,
+                        browndel => (($thing % 4) * 40)
+                       }
+                      );
+
+           $self->trigger({sample => "future/4",
+                           rate   => 80,
+                           ts     => 200,
+                           browndel => (($thing % 4) * 40)
+                          }
+                         );
+           $last = $thing;
+           if ($self->{bangs} % 4) {
+               push(@{$seq->[rand(2)]}, $last);
+           }
+       }
+   }
+}

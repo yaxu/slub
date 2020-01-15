@@ -1,0 +1,8 @@
+use YAML;
+
+sub bang {
+    my $self = shift;
+    $self->{perms} ||= $self->perms(space => 16, things => 4);
+    warn(Dump $self->{perms});
+    $self->modified;
+}

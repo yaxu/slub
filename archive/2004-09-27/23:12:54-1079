@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 1 == 0) {
+        $self->play({num => 30 + ($self->sin(100)),
+                     bwfreq => 1,
+                     formfreq => $self->sin(100) * 30 + 300,
+                     ts => 2,
+                    }
+                   );
+    }
+}

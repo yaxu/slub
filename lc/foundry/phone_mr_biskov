@@ -1,0 +1,30 @@
+# Phone Mr Biskov
+
+my $v = 2;
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 64 == 0) {
+      $self->t({sample => "fuckable/0", speed => obfuscate(0.5),
+                volume => $v, delay => rand(0.01), pan => 1 - rand(2),
+               }
+              );
+    }
+    if ($self->{bangs} % 64 == 8) {
+      $self->t({sample => "fuckable/0", speed => obfuscate(0.25),
+                volume => $v, delay => rand(0.01),
+                delay2 => rand(0.1), pan => 1- rand(2)
+               }
+              );
+    }
+    if ($self->{bangs} % 64 == 24) {
+      $self->t({sample => "fuckable/0", speed => obfuscate(0.175),
+                volume => $v * 0.5, delay => rand(0.01),
+                delay2 => rand(0.1),
+               } 
+              ); 
+    } 
+}
+
+sub obfuscate {
+   return(0 - shift);
+}

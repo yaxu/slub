@@ -1,0 +1,17 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 2 == 0) {
+       $self->strike({alpha => 1, mass => 0.01, velocity => 9,
+                      x => 6 - rand(10), y => 6 - rand(10)
+                     }
+                    );
+    }
+    if ($self->{bangs} % 8 == 0) {
+       $self->strike({mass => 0.25 + rand(),
+                      alpha => 1 + ($self->{bangs} % 3),
+                      x => 5.5, y => 2
+                     }
+                    );
+    }
+    $self->tension(0.6 + abs(1 - $self->{bangs} % 32 * 0.05));
+}

@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+    my $foo = $self->{bangs} % 64 > 40;
+    if (1) {
+       $self->t({sample => "insect/" . $self->{foo}++, 
+                 speed => -1, loops => rand(16),
+                 accellerate => rand(0.00001), pan => 1 - rand(2)
+                })
+        if (rand() > 0.9);
+    }
+}

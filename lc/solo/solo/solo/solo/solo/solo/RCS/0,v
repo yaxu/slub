@@ -1,0 +1,56 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.09.30.10.52.23;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Sep 30 11:52:23 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+
+    if ($self->{bangs} % 16 < 4) {
+       my $sample = $self->{bangs} % 4;
+       $self->t({sample => "made/$sample", loops => 0.1,
+                 accellerate => -0.00001, speed => 1,
+                 delay => 0.04, volume => 0.04, 
+                 shape => 0.8
+                }
+               );
+    }
+    if ($self->{bangs} % 16 > 6) {
+       if ($self->{bangs} % 8 == 0) {
+       $self->t({sample => "future/0", loops => 1,
+                 accellerate => -0.00001, speed => 2,
+                 delay => 0.001, volume => 0.2, vowel => 'a'
+                }
+               );
+       }
+    }
+    if ($self->{bangs} % 16 == 6 or $self->{bangs} % 16 == 4) {
+        $self->t({sample => "gretsch/8", speed => -5 + rand(0.2),
+                  pan => 2 - rand(4),
+                  pan_to => 2 - rand(4),
+                  accellerate => rand(-0.0001), volume => 1
+                 }
+                );
+    }
+
+}
+@

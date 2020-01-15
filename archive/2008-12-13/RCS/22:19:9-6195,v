@@ -1,0 +1,174 @@
+head	1.6;
+access;
+symbols;
+locks
+	alex:1.6; strict;
+comment	@# @;
+
+
+1.6
+date	2008.12.13.22.35.49;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.12.13.22.31.53;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.12.13.22.31.25;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.12.13.22.30.00;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.12.13.22.28.53;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.12.13.22.19.09;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Dec 13 22:19:09 2008
+@
+
+
+1.6
+log
+@Sat Dec 13 22:35:49 2008
+@
+text
+@# 5.51881098842557
+sub bang {
+    my $self = shift;
+    my $foo = $self->{foo} ||= [];
+
+    if ($self->{bangs} % 16 == 0) {
+      shift(@@$foo);
+      if (length(@@$foo) < 8) {
+         push(@@$foo, rand(16));
+      }
+
+    }
+    if ($self->{bangs} % 1 == 0) {
+       my $point = $self->{bangs} % @@$foo;
+       $self->t({sample => "procshort/" . int($foo->[$point]),
+              cutoff => 1000, resonance => 0.9,
+              vowel => 'i', shape => 0.95
+        });
+       $self->line(0, $foo->[0]);
+    }
+    $self->modified();
+    if (($self->{bangs} % 16) =~ /2/ and rand() > 0.5) {
+        t({sample => "drumtraks/0", loops => 0.5, delay => 0.2, 
+           delay2 => rand(0.9),
+           speed => 1.8 - rand(0.4)
+          }
+         );
+    }
+    if (($self->{bangs} % 16) =~ /0/) {
+        t({sample => "off/0", loops => 1, delay => 0.2, delay2 => 0.3,
+           speed => 0.8 - rand(0.2),
+           cutoff => 100, resonance => rand(0.97)
+          }
+         );
+    }
+    
+}@
+
+
+1.5
+log
+@Sat Dec 13 22:31:53 2008
+@
+text
+@d1 1
+a1 1
+# 15.2996301705016
+d16 2
+a17 1
+
+d21 1
+a21 1
+    #$self->modified();
+@
+
+
+1.4
+log
+@Sat Dec 13 22:31:25 2008
+@
+text
+@d1 1
+a1 1
+# 2.5427883586417
+d15 2
+a16 1
+       $self->t({sample => "can/" . int($foo->[$point]) 
+@
+
+
+1.3
+log
+@Sat Dec 13 22:30:00 2008
+@
+text
+@d1 1
+a1 1
+# 11.7145277977496
+d7 1
+a7 1
+
+d30 1
+a30 1
+           cutoff => 100, resonance => 0.9
+@
+
+
+1.2
+log
+@Sat Dec 13 22:28:53 2008
+@
+text
+@d1 1
+a1 1
+# 15.597337199596
+d11 1
+a11 1
+      
+d13 3
+a15 3
+    if ($self->{bangs} % 4 == 0) {
+       my $point = 0;
+       $self->t({sample => "can/" . int($foo->[1]) 
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# 6.15140306629394
+d11 1
+a11 1
+
+d15 2
+a16 1
+       t({sample => "industrial/" . int($foo->[1]) });
+d28 3
+a30 2
+        t({sample => "mouth/0", loops => 8, delay => 0.2, delay2 => 0.1,
+           speed => rand(0.1) + 0.5
+@

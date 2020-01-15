@@ -1,0 +1,4 @@
+sub bang {
+    my $self = shift;
+    $self->play({num => 90, ts => 5}) unless $self->{bangs} % 4;
+}

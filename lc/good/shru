@@ -1,0 +1,33 @@
+# a.uze.c.
+# a.uze.c...auec..
+#     ^
+
+sub bang {
+    my $self = shift;
+    my $b= $self->{bangs};
+    my $string = $self->line(0);
+    $string .= shrink($string);
+    $self->line(1, $string);
+    $self->modified;
+    my $point = $self->{bangs} % length($string);
+    my $chr = substr($string, $point, 1);
+    return if $chr eq '.';
+
+    $self->t({sample => "drumtraks/"  . ord($chr),
+              ($self->{bangs} % 32 > 16 ? (vowel => $chr) : ()),
+              shape => 0.99,
+#              volume => 0.02,
+              cutoff => $b % 32 > 8 ? 500 : 250,
+              resonance => $b % 48 >= 32 ? 0.6 : 0.9,
+#              speed => 0.8, loops => 0.03
+             }
+            );
+    #$self->vsite($chr eq 'a' ? 0.05 : 0.1);
+    $self->line(2, ' ' x $point  . '^');
+    $self->modified;
+    #if ($self->{bangs} % 1 == 0) {
+    #   my $foo = $self->line(0);
+    #   $foo =~ s/(.)(.+)/$2$1/;
+    #   $self->line(0, $foo);
+    #}
+}

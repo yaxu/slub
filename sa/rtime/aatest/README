@@ -1,0 +1,60 @@
+
+
+This example plays streaming audio out to the audio speaker under
+Linux. Under Linux, type "make" in this directory to run the example.
+
+To test this program under Macintosh OS X, copy the Makefile.osx file
+to Makefile, and then type "make".
+
+To test this program under IRIX, HPUX, or FreeBSD, see the Makefile
+for modification details.
+
+
+
+Testing under Windows MultiMedia Extension library
+--------------------------------------------------
+
+The simplest test under Microsoft Windows uses the Windows MultiMedia
+Extension library, via the PortAudio library. First, run sfront:
+
+sfront -aout pa_win_wmme -orc aatest.saol -sco aatest.sasl -midi aatest.mid
+
+And then compile the sa.c file using either gcc:
+
+             gcc -O3 sa.c -lm -lwinmm -o sa.exe
+
+or Microsoft Visual C++:
+
+             cl sa.c winmm.lib -o sa.exe
+
+Execute the sa.exe file to stream the audio. 
+
+
+Testing under Windows DirectSound
+---------------------------------
+
+Sfront also supports the Windows DirectSound system, via the Portaudio
+library. To use DirectSound, you'll need a recent version of Developer
+Microsoft Directsound installed on your machine, available from
+
+            http://www.microsoft.com/directx/download.asp
+
+To use sfront with Directsound, first run sfront:
+
+sfront -aout pa_win_ds -orc aatest.saol -sco aatest.sasl -midi aatest.mid
+
+And then compile the sa.c file using Microsoft Visual C++:
+
+         cl sa.c dsound.lib dxguid.lib winmm.lib -o sa.exe
+
+Execute the sa.exe file to stream the audio. 
+
+If you have trouble with compilation, see this FAQ for DirectSound
+installation issues:
+
+http://msdn.microsoft.com/library/default.asp?URL=/library/techart/DirectX8faq.htm
+
+Note gcc probably won't compile DirectSound, but you can try it using:
+
+     gcc -O3 sa.c -lm -lwinmm -ldsound -ldxguid -lwinmm -o sa.exe
+

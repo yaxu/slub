@@ -1,0 +1,35 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.09.12.17.33.28;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Sep 12 18:33:28 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0) {
+        $self->trigger({sample => 'sequential/3',
+                        ts     => 40,
+                        pan    => $self->{bar}++ % 2,
+                        gain => 30 + (90 * $self->sin(40))
+                       }
+                      );
+    }
+}@

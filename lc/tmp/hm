@@ -1,0 +1,4 @@
+sub bang {
+   my $self = shift;
+   t(sample => "drum/0") unless $self->{bangs} % 4;
+}

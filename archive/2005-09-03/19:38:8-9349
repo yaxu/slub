@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 16 == 0) {
+
+        $self->t({sample => "made/3", volume => 1,
+                  delay => 0.9, delay2 => 0.90, accellerate => 0.0001
+                 }
+                );
+    }
+}
+

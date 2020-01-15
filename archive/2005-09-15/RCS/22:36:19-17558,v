@@ -1,0 +1,34 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2005.09.15.21.36.19;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Thu Sep 15 22:36:19 2005
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@use OpenGL;
+
+sub bang {
+    my $self = shift;
+    unless($self->{init}++) {
+        glpOpenWindow() unless $self->{fooz}++;
+        glMatrixMode( GL_PROJECTION ); 
+        glFrustum(-1.0, 1.0, -1.0, 1.0, 1.0, 20.0); 
+    }
+}@

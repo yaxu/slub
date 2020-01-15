@@ -1,0 +1,8 @@
+
+sub bang {
+    my $self = shift;
+    $self->code->[3] = '$self->code->[0] = \'#\';';
+    $self->modified;
+}
+
+

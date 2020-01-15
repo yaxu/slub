@@ -1,0 +1,7 @@
+object DataMod: TDataMod
+  OldCreateOrder = False
+  Left = 308
+  Top = 377
+  Height = 150
+  Width = 215
+end

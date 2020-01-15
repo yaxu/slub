@@ -1,0 +1,61 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2005.02.19.11.14.34;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.02.19.11.13.52;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Feb 19 11:13:52 2005
+@
+
+
+1.2
+log
+@Sat Feb 19 11:14:34 2005
+@
+text
+@sub bang {
+    my $self = shift;
+
+    my $foo = ($self->{bangs} % 32 > 20 ? 3 : 2);
+    my $bar = ($self->{bangs} % 32 < 12 ? 1.5 : 1);
+    if ($self->{bangs} % 8 == $foo) {
+        $self->t({sample => "bubble/0", volume => 5, speed => $bar,
+                  envelope_name => 'valley'
+                 })
+    }
+    if ($self->{bangs} % 8 == $foo + 1) {
+        $self->t({sample => "bubble/4", volume => 3, speed => 1.5 - $bar,
+                  envelope_name => 'valley'
+                 })
+    }
+    if ($self->{bangs} % 8 == $foo + 3) {
+        $self->t({sample => "bubble/0", volume => 4, speed =>  1.4 - $bar,
+                  envelope_name => 'tri'
+                 })
+    }
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d12 1
+a12 1
+        $self->t({sample => "bubble/0", volume => 3, speed => 2 - $bar,
+@

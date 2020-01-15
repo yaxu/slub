@@ -1,0 +1,11 @@
+sub bang {
+    my $self = shift;
+    $self->{foo} ||= 8;
+    $self->t({sample => "chin/0", volume => 100,
+              loops => 1,
+             }
+            ) unless $self->{bangs} % $self->{foo};
+    if ($self->{bangs} % 32 == 0) {
+       $self->{foo} = 3 + int(rand(4));
+    }
+}

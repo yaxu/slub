@@ -1,0 +1,35 @@
+head	1.1;
+access;
+symbols;
+locks
+	alex:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2004.09.29.23.16.27;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Thu Sep 30 00:16:27 2004
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0) {
+        $self->trigger({sample => "sequential/8",
+                        ts => 10,
+                        gain => 30,
+                        browndel => 10 + (40 * $self->sin(100))
+                       }
+                      )
+    }
+}@

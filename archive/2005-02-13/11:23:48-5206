@@ -1,0 +1,9 @@
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 6 == 0) {
+       $self->t({sample => "future/0"});
+    }
+    if ($self->{bangs} % 8 == 0) {
+       $self->t({sample => "future/3", pan => 0.1, shape => 0.7});
+    }
+}

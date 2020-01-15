@@ -1,0 +1,448 @@
+head	1.19;
+access;
+symbols;
+locks
+	alex:1.19; strict;
+comment	@# @;
+
+
+1.19
+date	2005.09.04.17.58.45;	author alex;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2005.09.04.17.56.10;	author alex;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2005.08.29.22.42.26;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2005.06.03.18.27.59;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2005.06.03.18.24.34;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2005.06.03.18.24.22;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2005.06.03.18.24.11;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2005.06.03.18.22.48;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2005.06.03.18.22.31;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2005.06.03.18.22.24;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2005.06.03.18.21.27;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2005.06.03.14.56.08;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2005.04.18.21.03.08;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2005.04.18.20.57.34;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2005.04.18.20.50.15;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.04.18.19.38.55;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.04.18.18.48.06;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.04.18.18.47.02;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.04.18.18.43.19;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mon Apr 18 19:43:17 2005
+@
+
+
+1.19
+log
+@Sun Sep  4 18:58:45 2005
+@
+text
+@# <<s>^
+# ><^i
+# >p<^
+# 20
+sub bang {
+    my $self = shift;
+
+    my $foo = $self->{bangs} % 32 > 28 ? 3: 2;
+
+    if ($self->{bangs} % $foo == 0) {
+       $self->foo(1);
+       $self->foo(0);
+       $self->foo(2);    
+    }
+
+    unless ($self->{bangs} % 16) {
+        $self->t({sample => 'newnotes/0', volume => 0.1,
+                  speed => 0.4, accellerate => 0.00001, loops => 8,
+                 }
+                );
+    }
+}
+
+sub foo {
+   my $self = shift;
+   my $point = shift;
+        my $code = $self->code->[$point];
+        $code =~ s/(\S)(\S+)/$2$1/;
+        $self->code->[$point] = $code;
+        $self->modified;
+        my $num = $self->{"num$point"};
+        if ($1 eq '>') {
+            $num += 12;
+        }
+        elsif ($1 eq '<') {
+            $num -= 12;
+        }
+        elsif ($1 eq '^') {
+            if ($self->{bangs} % 128 > 90) {
+                $num = 30;
+            }
+            else {
+                $num = 20;
+            }
+        }
+        elsif ($1 eq '+') {
+            $num += 3;
+        }
+        elsif ($1 eq '-') {
+            $num -= 3;
+        }
+        else {
+            $num += ord($1);
+        }
+
+        $self->t({speed => ($num % 36) + 30, sample => "sine/5",
+                  scale => "equal",
+                  duration => 300000,
+                  volume => 0.2, pan => 1- rand(2),
+                  envelope_name => $self->{foo}++ % 2 ? 'chop' : 'percussive',
+#                  delay => 0.2
+                 }
+                );
+        $self->{"num$point"} = $num;
+    }@
+
+
+1.18
+log
+@Sun Sep  4 18:56:10 2005
+@
+text
+@d60 2
+a61 2
+                  envelope_name => 'percussion',
+#                  delay => 0.01
+@
+
+
+1.17
+log
+@Mon Aug 29 23:42:26 2005
+@
+text
+@d1 1
+a1 1
+# <s>^<
+d58 4
+a61 4
+                  duration => 100000,
+                  volume => 0.1, pan => 1- rand(2),
+                  envelope_name => 'valley',
+                  delay => 0.3
+@
+
+
+1.16
+log
+@Fri Jun  3 19:27:59 2005
+@
+text
+@d1 3
+a3 3
+# s>^<<
+# <^i>
+# p<^>
+d15 7
+d58 4
+a61 3
+                  duration => 80000,
+                  volume => 0.005, pan => 1- rand(2),
+                  envelope_name => 'tri'
+@
+
+
+1.15
+log
+@Fri Jun  3 19:24:34 2005
+@
+text
+@d2 2
+a3 2
+# i><^
+# ^>p<
+@
+
+
+1.14
+log
+@Fri Jun  3 19:24:22 2005
+@
+text
+@d1 1
+a1 1
+# <s>^<
+@
+
+
+1.13
+log
+@Fri Jun  3 19:24:11 2005
+@
+text
+@d1 3
+a3 3
+# >^<<s
+# ><^i
+# >p<^
+@
+
+
+1.12
+log
+@Fri Jun  3 19:22:48 2005
+@
+text
+@d1 3
+a3 3
+# ^<<s>
+# ^i><
+# <^>p
+d53 1
+@
+
+
+1.11
+log
+@Fri Jun  3 19:22:31 2005
+@
+text
+@d1 3
+a3 3
+# <s>^<
+# i><^
+# ^>p<
+@
+
+
+1.10
+log
+@Fri Jun  3 19:22:24 2005
+@
+text
+@d51 2
+a52 2
+                  duration => 100000,
+                  volume => 0.006, pan => 1- rand(2),
+@
+
+
+1.9
+log
+@Fri Jun  3 19:21:27 2005
+@
+text
+@d1 3
+a3 3
+# <<s>^
+# ^i><
+# <^>p
+d49 1
+a49 1
+        $self->t({speed => ($num % 24) + 30, sample => "sine/5",
+d51 1
+a51 1
+                  duration => 40000,
+@
+
+
+1.8
+log
+@Fri Jun  3 15:56:08 2005
+@
+text
+@d2 2
+a3 2
+# <^i>
+# p<^>
+d49 4
+a52 3
+        $self->t({speed => $num, sample => "sine/5", scale => "equal",
+                  duration => 3000, vowel => 'a',
+                  volume => 2,
+@
+
+
+1.7
+log
+@Mon Apr 18 22:03:08 2005
+@
+text
+@d1 3
+a3 3
+# <s>^<
+# ><^i
+# >p<^
+d50 2
+a51 2
+                  duration => 30000, vowel => 'a',
+                  volume => 0.01,
+@
+
+
+1.6
+log
+@Mon Apr 18 21:57:34 2005
+@
+text
+@d1 3
+a3 3
+# >^<<s
+# i><^
+# ^>p<
+d50 2
+a51 2
+                  duration => 300000, vowel => 'a',
+                  volume => 0.01, shape => 0.9
+@
+
+
+1.5
+log
+@Mon Apr 18 21:50:15 2005
+@
+text
+@d1 1
+a1 1
+# <s>^<
+@
+
+
+1.4
+log
+@Mon Apr 18 20:38:55 2005
+@
+text
+@d1 3
+a3 3
+# s>^<><
+# ^4<+<j<
+# >>>^<$
+d7 1
+d50 2
+a51 1
+                  duration => 3000, vowel => 'o', shape => 0.9
+@
+
+
+1.3
+log
+@Mon Apr 18 19:48:06 2005
+@
+text
+@d48 2
+a49 2
+        $self->t({speed => $num, sample => "sine/2", scale => "equal",
+                  duration => 100000, vowel => 'a', shape => 0.5
+@
+
+
+1.2
+log
+@Mon Apr 18 19:47:02 2005
+@
+text
+@d1 3
+a3 3
+# >^<><s
+# <+<j<^4
+# >>^<$>
+d49 1
+a49 1
+                  duration => 100000,# accellerate => -0.0001
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# s>^<><
+d3 2
+a4 2
+# >>>^<$
+# 44
+d47 3
+a49 3
+$self->line(3, $num);
+        $self->t({speed => $num, sample => "sine/1", scale => "equal",
+                  loops => 100
+@

@@ -1,0 +1,153 @@
+head	1.4;
+access;
+symbols;
+locks
+	alex:1.4; strict;
+comment	@# @;
+
+
+1.4
+date	2005.09.04.17.55.03;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.09.04.17.40.09;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.09.04.17.37.43;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.09.04.17.36.20;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sun Sep  4 18:36:20 2005
+@
+
+
+1.4
+log
+@Sun Sep  4 18:55:03 2005
+@
+text
+@# 8
+# 8
+my @@foo = (0,4,7,8,12, 16);
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 128 == 0) {
+        if (not defined $self->{left} or rand()> 0.7) {
+            $self->{left} = $foo[rand @@foo];
+        }
+        if (not defined $self->{right} or rand()> 0.7) {
+            $self->{right} = $foo[rand @@foo];
+        }
+        $self->line(0, $self->{left});
+        $self->line(1, $self->{right});
+        $self->modified;
+        $self->t({sample => "sax/$self->{left}", speed => 2, volume => 0.8,
+                  accellerate => -0.000001, loops => 0.5, pan => 0.5,
+                  delay => 0.01, shape => 0.9
+                 }
+                );
+        $self->t({sample => "sax/$self->{right}", speed => 2, volume => 0.8,
+                  accellerate => -0.000001, loops => 0.6, pan => -0.5,
+                  delay => 0.01, shape => 0.9
+                 }
+                );
+        $self->t({speed => 42, sample => "sine/5",
+                  scale => "equal",
+                  duration => 600000,
+                  volume => 3, pan => 1 - rand(2),
+                  envelope_name => 'valley',
+                  delay => 0.3, shape => 0.9, accellerate => -0.00001
+                 }
+                );
+        
+    }
+}@
+
+
+1.3
+log
+@Sun Sep  4 18:40:09 2005
+@
+text
+@d1 3
+a3 3
+# 0
+# 1
+my @@foo = (0,1,2,3);
+d7 1
+a7 1
+    if ($self->{bangs} % 8 == 4) {
+d16 4
+a19 8
+            $self->t({sample => "sax/$self->{left}", speed => 1, volume => 0.8,
+                      accellerate => -0.0000001, loops => 0.5, pan => 0.9,
+                      delay => 0.1
+                     }
+                    );
+        $self->t({sample => "sax/$self->{right}", speed => 1, volume => 0.8,
+                  accellerate => -0.00000007, loops => 0.6, pan => -0.9,
+                  delay => 0.1
+d22 14
+@
+
+
+1.2
+log
+@Sun Sep  4 18:37:43 2005
+@
+text
+@d1 2
+d8 1
+a8 1
+        if (not defined $self->{left} or rand()> 0.95) {
+d11 1
+a11 1
+        if (not defined $self->{right} or rand()> 0.95) {
+d14 5
+a18 4
+        if ($self->{bangs} % 8 == 4) {
+            $self->t({sample => "sax/$self->{left}", speed => 6, volume => 0.2,
+                      accellerate => -0.000007, loops => 0.5, pan => 0.9,
+                  
+d21 3
+a23 2
+        $self->t({sample => "sax/$self->{right}", speed => 7, volume => 0.2,
+                  accellerate => -0.000007, loops => 0.6, pan => -0.9
+a25 1
+        }
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@a4 6
+    if (not defined $self->{left} or rand()> 0.95) {
+        $self->{left} = $foo[rand @@foo];
+    }
+    if (not defined $self->{right} or rand()> 0.95) {
+        $self->{right} = $foo[rand @@foo];
+    }
+d6 13
+a18 5
+        $self->t({sample => "sax/1", speed => 6, volume => 0.2,
+                  accellerate => -0.000007, loops => 0.5, pan => 0.9
+                 }
+                );
+        $self->t({sample => "sax/3", speed => 7, volume => 0.2,
+d22 1
+@

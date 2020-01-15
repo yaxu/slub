@@ -1,0 +1,103 @@
+# 1117617660 1118827260 1118335860
+# 1118334782
+
+my ($foo, $max, $min, $seq, $range, $size, %lookup);
+
+sub init {
+    my $self = shift;
+    $self->{foo} ||= test();
+    $foo = $self->{foo};
+    #my $min = $foo->[0]->[0];
+    $max = $foo->[-1]->[0];
+    $min = ($max - (60 * 60 * 24 * 14));
+    warn("size: " . scalar(@$foo) . "\n");
+    @$seq = grep {$_->[0] > $min} @$seq;
+    warn("size now: " . scalar(@$foo) . "\n");
+    $range = $max - $min;
+    warn("$min $max\n");
+    $seq = [@$foo];
+    $size = 64;
+}
+
+use YAML;
+sub bang {
+    my $self = shift;
+
+    if (not $foo) {
+        $self->init();
+    }
+
+    if (($self->{bangs} % $size) == 0) {
+        $seq = [@$foo];
+    }
+    my $point = ($self->{bangs} % $size) / $size;
+    my $now = $min + ($range * $point);
+    $self->line(1, $seq->[0]->[0]);
+    while (@$seq && ($seq->[0]->[0] < $now)) {
+        my $this = shift @$seq;
+        warn($this->[1]);
+        if (not exists $lookup{$this->[1]}) {
+           $lookup{$this->[1]} = new_sound();
+        }
+        warn(Dump $lookup{$this->[1]});
+        $self->t($lookup{$this->[1]});
+    }
+
+    $self->line(0, "$min $max $now");
+    $self->modified;
+}
+
+sub test {
+    use LWP::Simple;
+    use DateTime;
+    open(FH, "</home/alex/Desktop/export");
+    my $foo = join('', <FH>);
+    my $result = {};
+    while ($foo =~ /xmlUrl="([^\"]+)"/gs) {
+       warn($1);
+       my $remote = $1;
+       my $data = get($remote);
+       warn("data: $data\n");
+       while ($data =~ m,<dc:date>([^<]+)</dc:date>,gs) {
+           my $date = $1;
+           my ($year, $month, $day, $hour, $minute, $second,
+               $offsethour, $offsetmin) = 
+              ($date =~ /(\d+)-(\d+)-(\d+)T(\d+):(\d+):(\d+)\+(\d+):(\d+)/);
+           my $d;
+           eval {
+              $d = DateTime->new( year   => $year,
+                                  month  => $month,
+                                  day    => $day,
+                                  hour   => $hour,
+                                  minute => $minute,
+                                  second => $second,
+                                  time_zone => sprintf("+%02d%02d",
+                                                       $offsethour, $offsetmin
+                                                      )
+                                );
+           };
+           next if $@;
+           push(@{$result->{$remote}}, $d->epoch);
+           warn("$d\n");
+       }
+    }
+    my @sorted;
+    while (my ($key, $value) = each %$result) {
+        foreach my $epoch (@$value) {
+            push @sorted, [$epoch, $key];
+        }
+    }
+    @sorted = sort {$a->[0] <=> $b->[0]} @sorted;
+    return(\@sorted);
+}
+
+sub new_sound {
+  my @sets = qw( gabba can sid diphone future bottle );
+  my @vowels = (qw(a e i o u), undef, undef, undef);
+  return({sample => ($sets[rand @sets] . '/' . int(rand(32))),
+          speed  => (0.75 + rand(0.5)),
+          pan    => (1 - rand(2)),
+          vowel  => $vowels[rand @vowels],
+         }
+        );
+}

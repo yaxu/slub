@@ -1,0 +1,412 @@
+head	1.16;
+access;
+symbols;
+locks
+	alex:1.16; strict;
+comment	@# @;
+
+
+1.16
+date	2005.09.30.15.12.33;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2005.09.30.13.24.27;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2005.09.30.13.16.09;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2005.09.30.12.01.31;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2005.09.30.11.58.24;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2005.09.30.11.57.00;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2005.09.30.11.55.29;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2005.09.30.11.55.26;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2005.09.30.11.55.03;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2005.09.30.11.54.44;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2005.09.30.11.54.38;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2005.09.30.11.52.47;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.09.30.11.50.53;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.09.30.11.34.30;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.09.30.10.56.25;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.09.30.10.45.24;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fri Sep 30 11:45:24 2005
+@
+
+
+1.16
+log
+@Fri Sep 30 16:12:33 2005
+@
+text
+@# 1
+# 543
+# o
+
+my @@mults = (0.1, 0.4, 0.2, 1);
+my @@vowels = qw(a e i o u);
+my $fixedvowel = 'no';
+my $sampleno = 3;
+
+my $fun = 6;
+
+sub bang {
+    my $self = shift;
+    $self->{mult} ||= 0.5;
+    $self->{vowel} ||= 'a';
+
+    my $point = $self->{bangs} % 32;    
+    
+    my $mod = ($self->{bangs} % 64) % $fun;
+    if ($point % ($mod + 1) == 0) {
+        $self->t({sample => "bass/$sampleno",
+                  volume => 0.2,
+                  speed => ($self->{toggle} ? 0.7 : 1) + 
+                           ($self->{bangs} % 8 + 1) * $self->{mult},
+                  delay => 0.001, accellerate => -0.00001, 
+                  vowel => ($fixedvowel || $self->{vowel})
+                 }
+                );
+    }
+    if (rand() > 0.95) {
+       $self->{toggle} = ! $self->{toggle};
+    }
+    if ($self->{bangs} % 8 == 0) {
+#        $self->{multpoint} += (1- rand(2));
+        $self->{multpoint}++;
+        $self->{mult} = $mults[int($self->{multpoint}) % @@mults];
+
+    }
+
+    if ($self->{bangs} % 16 == 0) {
+       $self->{vowel} = $vowels[rand @@vowels];
+    }
+
+
+    $self->line(0, $self->{mult});
+    $self->line(1, $self->{multpoint});
+    $self->line(2, $self->{vowel});
+
+    $self->modified;
+  }@
+
+
+1.15
+log
+@Fri Sep 30 14:24:27 2005
+@
+text
+@d1 3
+a3 3
+# 0.2
+# 7494.72749872965
+# a
+d23 2
+a24 1
+                  speed => 1 + ($self->{bangs} % 8 + 1) * $self->{mult},
+d30 3
+@
+
+
+1.14
+log
+@Fri Sep 30 14:16:09 2005
+@
+text
+@d2 2
+a3 2
+# 6842.72749872965
+# o
+d7 1
+a7 1
+my $fixedvowel = 'i';
+d10 1
+a10 1
+my $fun = 8;
+@
+
+
+1.13
+log
+@Fri Sep 30 13:01:31 2005
+@
+text
+@d1 2
+a2 2
+# 0.4
+# 913.727498729648
+d7 1
+a7 1
+my $fixedvowel = 'non';
+d10 1
+a10 1
+my $fun = 6;
+d22 1
+@
+
+
+1.12
+log
+@Fri Sep 30 12:58:24 2005
+@
+text
+@d1 3
+a3 3
+# 0.1
+# 520.727498729648
+# a
+d7 5
+d19 1
+a19 1
+    my $mod = ($self->{bangs} % 64) % 4;
+d21 1
+a21 1
+        $self->t({sample => "bass/1",
+d24 1
+a24 1
+                  vowel => $self->{vowel}
+a33 4
+    if ($self->{bangs} % 8 == 0) {
+#        $self->{multpoint} += (1- rand(2));
+        $self->{multpoint}++;
+        $self->{mult} = $mults[int($self->{multpoint}) % @@mults];
+d35 2
+@
+
+
+1.11
+log
+@Fri Sep 30 12:57:00 2005
+@
+text
+@d2 2
+a3 1
+# 344.727498729648
+d6 1
+d10 2
+d13 1
+a13 1
+
+d18 2
+a19 1
+                  delay => 0.001, accellerate => -0.00001, vowel => 'a'
+d29 8
+d39 2
+@
+
+
+1.10
+log
+@Fri Sep 30 12:55:29 2005
+@
+text
+@d2 1
+a2 1
+# 152.727498729648
+d10 2
+a11 1
+    if ($point % 4 == 0) {
+@
+
+
+1.9
+log
+@Fri Sep 30 12:55:26 2005
+@
+text
+@d1 2
+a2 2
+# 1
+# 147.727498729648
+@
+
+
+1.8
+log
+@Fri Sep 30 12:55:03 2005
+@
+text
+@d1 2
+a2 2
+# 0.2
+# 98.7274987296478
+d13 1
+a13 1
+                  delay => 0.01, accellerate => -0.00001
+@
+
+
+1.7
+log
+@Fri Sep 30 12:54:44 2005
+@
+text
+@d2 1
+a2 1
+# 58.7274987296478
+@
+
+
+1.6
+log
+@Fri Sep 30 12:54:38 2005
+@
+text
+@d2 1
+a2 1
+# 46.7274987296478
+@
+
+
+1.5
+log
+@Fri Sep 30 12:52:47 2005
+@
+text
+@d1 2
+a2 2
+# 0.1
+# -6.54681823747939
+d4 1
+a4 1
+my @@mults = (0.1, 0.4, 0.2);
+d13 1
+a13 1
+                  delay => 0.01, loops => 3
+d17 3
+a19 2
+    if ($self->{bangs} % 16 == 0) {
+        $self->{multpoint} += (1- rand(2));
+d26 1
+a26 1
+}@
+
+
+1.4
+log
+@Fri Sep 30 12:50:52 2005
+@
+text
+@d2 1
+a2 1
+# 0.535108828924699
+d4 1
+a4 1
+my @@mults = (0.1, 0.4, 0.2, 2, 3, 0.3);
+d10 4
+a13 5
+    if ($point % 2 == 0 and rand() < 0.8) {
+        $self->t({sample => "bass/0",
+                  speed => 1 + ($self->{bangs} % 4 + 1) * $self->{mult},
+                  delay => 0.01,
+                  shape => 0.99
+@
+
+
+1.3
+log
+@Fri Sep 30 12:34:30 2005
+@
+text
+@d1 4
+d7 8
+a14 6
+    if ($self->{bangs} % 64 == 0) {
+        $self->t({sample => "sine/4",
+                  loops => 90,
+                  speed => 4.1,
+                  accellerate => -0.00006, delay => 0.1, delay2  => 0.2,
+                  shape => 0.9, volume => 0.02
+d18 8
+@
+
+
+1.2
+log
+@Fri Sep 30 11:56:25 2005
+@
+text
+@a4 6
+                  loops => 80,
+                  speed => 4,
+                  accellerate => -0.00001
+                 }
+                );
+        $self->t({sample => "sine/4",
+d7 2
+a8 1
+                  accellerate => -0.00001
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 11
+a13 5
+    if ($self->{bangs} % 8 == 2) {
+        $self->t({sample => "gretsch/8", speed => -5 + rand(0.2), 
+                  pan => 2 - rand(4),
+                  pan_to => 2 - rand(4),
+                  accellerate => rand(-0.0001)
+@

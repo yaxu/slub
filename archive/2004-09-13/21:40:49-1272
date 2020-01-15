@@ -1,0 +1,23 @@
+sub bang {
+    my $self = shift;
+    $self->{foo} ||= 4;
+    $self->{longevity} ||= 0.7;
+    if ($self->{bangs} % $self->{foo} == 0 and $self->{on}) {
+        $self->trigger({sample   => "yeah/11",
+                        ts       => 80,
+                        rate     => 90,
+                        gain     => 90,
+                        browndel => $self->{browndel}
+                       }
+                      );
+        if (rand() > $self->{longevity}) {
+            $self->{on} = 0;
+        }
+    }
+    if ($self->{bangs} % 16 == 0 and rand() > 0.7) {
+        $self->{on} = 1;
+        $self->{foo} = 4 * (1 + rand(3));
+        $self->{browndel} = rand(30);
+        $self->{longevity} = 0.5 + rand(0.7);
+    }
+}

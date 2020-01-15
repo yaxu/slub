@@ -1,0 +1,13 @@
+my $foo = 0.05;
+
+sub bang {
+    my $self = shift;
+    $self->t({sample => "gabba/0", loops => $foo, shape => 1, speed => 0.5})
+        if $self->{bangs} % 8 == 0;
+    $self->t({sample => "drum/0", loops => $foo, shape => 1, speed => 0.5})
+        if $self->{bangs} % 8 == 4;
+
+    $self->t({sample => "drumtraks/0", loops => 0})
+        if $self->{bangs} % 8 == 4;
+
+}

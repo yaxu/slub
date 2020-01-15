@@ -1,0 +1,63 @@
+head	1.2;
+access;
+symbols;
+locks
+	alex:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2006.04.29.22.49.50;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2006.04.29.22.49.00;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Apr 29 23:49:00 2006
+@
+
+
+1.2
+log
+@Sat Apr 29 23:49:50 2006
+@
+text
+@sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 4 == 0) {
+       $self->t({sample => "made/4", speed => 1.9, envelope_name => "chop"});
+    }
+    if ($self->{bangs} % 4 == 2) {
+       $self->t({sample => "made/4", speed => 1.81, envelope_name => "chop",
+pan => -1});
+    }
+    if ($self->{bangs} % 8 == 5) {
+       $self->t({sample => "made/4", speed => 1.8, delay => 0.01, 
+        envelope_name => "chop", pan => 1}
+       );
+    }
+
+}@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d4 1
+a4 1
+       $self->t({sample => "made/4", speed => 0.9, envelope_name => "chop"});
+d7 2
+a8 1
+       $self->t({sample => "made/4", speed => 1.1, envelope_name => "chop"});
+d11 3
+a13 2
+       $self->t({sample => "made/4", speed => 0.8, delay => 0.01, 
+        envelope_name => "chop"});
+@

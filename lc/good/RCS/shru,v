@@ -1,0 +1,955 @@
+head	1.49;
+access;
+symbols;
+locks
+	alex:1.49; strict;
+comment	@# @;
+
+
+1.49
+date	2008.12.05.11.44.03;	author alex;	state Exp;
+branches;
+next	1.48;
+
+1.48
+date	2008.08.06.16.07.27;	author alex;	state Exp;
+branches;
+next	1.47;
+
+1.47
+date	2008.08.06.16.06.33;	author alex;	state Exp;
+branches;
+next	1.46;
+
+1.46
+date	2008.08.06.16.06.16;	author alex;	state Exp;
+branches;
+next	1.45;
+
+1.45
+date	2008.08.05.11.32.44;	author alex;	state Exp;
+branches;
+next	1.44;
+
+1.44
+date	2008.08.04.19.01.09;	author alex;	state Exp;
+branches;
+next	1.43;
+
+1.43
+date	2008.08.04.18.58.28;	author alex;	state Exp;
+branches;
+next	1.42;
+
+1.42
+date	2008.08.04.18.58.24;	author alex;	state Exp;
+branches;
+next	1.41;
+
+1.41
+date	2008.08.04.18.58.11;	author alex;	state Exp;
+branches;
+next	1.40;
+
+1.40
+date	2008.08.04.18.56.16;	author alex;	state Exp;
+branches;
+next	1.39;
+
+1.39
+date	2008.08.04.18.55.51;	author alex;	state Exp;
+branches;
+next	1.38;
+
+1.38
+date	2008.08.02.21.32.30;	author alex;	state Exp;
+branches;
+next	1.37;
+
+1.37
+date	2008.08.02.21.31.45;	author alex;	state Exp;
+branches;
+next	1.36;
+
+1.36
+date	2008.08.02.21.31.24;	author alex;	state Exp;
+branches;
+next	1.35;
+
+1.35
+date	2008.08.02.21.28.18;	author alex;	state Exp;
+branches;
+next	1.34;
+
+1.34
+date	2008.07.26.23.21.15;	author alex;	state Exp;
+branches;
+next	1.33;
+
+1.33
+date	2008.07.12.20.23.14;	author alex;	state Exp;
+branches;
+next	1.32;
+
+1.32
+date	2008.06.05.13.40.54;	author alex;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	2008.06.05.13.40.54;	author alex;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	2008.06.05.13.37.53;	author alex;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	2008.06.05.13.37.51;	author alex;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	2008.06.05.13.37.40;	author alex;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	2008.04.12.16.26.04;	author alex;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	2008.02.20.19.59.48;	author alex;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2007.07.10.23.18.05;	author alex;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2007.07.10.23.14.11;	author alex;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2007.07.10.23.14.10;	author alex;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2007.04.26.12.25.35;	author alex;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2007.04.26.12.25.25;	author alex;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2007.01.14.21.41.37;	author alex;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2007.01.14.21.41.32;	author alex;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2007.01.14.21.36.10;	author alex;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2007.01.04.23.16.05;	author alex;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2007.01.04.23.09.40;	author alex;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2007.01.04.23.09.37;	author alex;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2007.01.04.23.09.35;	author alex;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2007.01.04.23.04.25;	author alex;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2007.01.04.23.03.51;	author alex;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2007.01.04.23.03.33;	author alex;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2007.01.04.23.03.28;	author alex;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2007.01.04.23.02.32;	author alex;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2006.08.20.18.47.20;	author alex;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2006.07.13.18.51.58;	author alex;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2006.05.19.20.46.58;	author alex;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2006.03.26.23.13.46;	author alex;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2006.01.28.17.10.56;	author alex;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2006.01.28.17.03.12;	author alex;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2006.01.28.17.00.27;	author alex;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2006.01.28.10.33.27;	author alex;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sat Jan 28 10:33:27 2006
+@
+
+
+1.49
+log
+@Fri Dec  5 11:44:03 2008
+@
+text
+@# a.uze.c.
+# a.uze.c...auec..
+#     ^
+
+sub bang {
+    my $self = shift;
+    my $b= $self->{bangs};
+    my $string = $self->line(0);
+    $string .= shrink($string);
+    $self->line(1, $string);
+    $self->modified;
+    my $point = $self->{bangs} % length($string);
+    my $chr = substr($string, $point, 1);
+    return if $chr eq '.';
+
+    $self->t({sample => "drumtraks/"  . ord($chr),
+              ($self->{bangs} % 32 > 16 ? (vowel => $chr) : ()),
+              shape => 0.99,
+#              volume => 0.02,
+              cutoff => $b % 32 > 8 ? 500 : 250,
+              resonance => $b % 48 >= 32 ? 0.6 : 0.9,
+#              speed => 0.8, loops => 0.03
+             }
+            );
+    #$self->vsite($chr eq 'a' ? 0.05 : 0.1);
+    $self->line(2, ' ' x $point  . '^');
+    $self->modified;
+    #if ($self->{bangs} % 1 == 0) {
+    #   my $foo = $self->line(0);
+    #   $foo =~ s/(.)(.+)/$2$1/;
+    #   $self->line(0, $foo);
+    #}
+}@
+
+
+1.48
+log
+@Wed Aug  6 17:07:27 2008
+@
+text
+@d1 2
+a2 2
+# a.t.etu.
+# a.t.etu...ateu..
+d19 1
+a19 1
+              volume => 0.02,
+d22 1
+a22 1
+              speed => 0.8, loops => 0.03
+@
+
+
+1.47
+log
+@Wed Aug  6 17:06:33 2008
+@
+text
+@d3 1
+a3 1
+# ^
+d18 1
+a18 1
+#              shape => 0.99,
+d22 1
+a22 1
+              speed => 0.8, loops => 0.4
+@
+
+
+1.46
+log
+@Wed Aug  6 17:06:16 2008
+@
+text
+@d3 1
+a3 1
+#       ^
+d18 2
+a19 2
+              shape => 0.99,
+               volume => 0.02,
+@
+
+
+1.45
+log
+@Tue Aug  5 12:32:44 2008
+@
+text
+@d18 2
+a19 1
+              shape => 0.99, volume => 0.02,
+@
+
+
+1.44
+log
+@Mon Aug  4 20:01:09 2008
+@
+text
+@d1 3
+a3 3
+# a.u.e.u.
+# a.u.e.u...aueu..
+#            ^
+@
+
+
+1.43
+log
+@Mon Aug  4 19:58:28 2008
+@
+text
+@d3 1
+a3 1
+# ^
+@
+
+
+1.42
+log
+@Mon Aug  4 19:58:24 2008
+@
+text
+@d3 1
+a3 1
+#       ^
+@
+
+
+1.41
+log
+@Mon Aug  4 19:58:11 2008
+@
+text
+@d3 1
+a3 1
+#           ^
+@
+
+
+1.40
+log
+@Mon Aug  4 19:56:16 2008
+@
+text
+@d1 2
+a2 2
+# a...e...
+# a...e.....a.e...
+d19 2
+a20 2
+              cutoff => $b % 32 > 8 ? 2000 : 4000,
+              resonance => $b % 48 >= 32 ? 0.6 : 0.2,
+@
+
+
+1.39
+log
+@Mon Aug  4 19:55:51 2008
+@
+text
+@d3 1
+a3 1
+#     ^
+d21 1
+a21 1
+              speed => 0.8
+@
+
+
+1.38
+log
+@Sat Aug  2 22:32:30 2008
+@
+text
+@d3 1
+a3 1
+# ^
+d16 1
+a16 1
+    $self->t({sample => "psr/"  . ord($chr),
+@
+
+
+1.37
+log
+@Sat Aug  2 22:31:45 2008
+@
+text
+@d1 2
+a2 2
+# a...c...
+# a...c.....a.c...
+d17 1
+a17 1
+#              ($self->{bangs} % 32 > 16 ? (vowel => $chr) : ()),
+@
+
+
+1.36
+log
+@Sat Aug  2 22:31:24 2008
+@
+text
+@d1 2
+a2 2
+# a...e...
+# a...e.....a.e...
+@
+
+
+1.35
+log
+@Sat Aug  2 22:28:18 2008
+@
+text
+@d1 3
+a3 3
+# af.ebaa.
+# af.ebaa...a.ba..
+#       ^
+@
+
+
+1.34
+log
+@Sun Jul 27 00:21:15 2008
+@
+text
+@d2 2
+a3 2
+# af.ebaa...ab.a..
+# ^
+d9 1
+a9 1
+    $string .= reverse(shrink($string));
+@
+
+
+1.33
+log
+@Sat Jul 12 21:23:14 2008
+@
+text
+@d1 3
+a3 3
+# a..eb.a.
+# a..eb.a...a.ba..
+#              ^
+d9 1
+a9 1
+    $string .= shrink($string);
+d17 1
+a17 1
+              ($self->{bangs} % 32 > 16 ? (vowel => $chr) : ()),
+d20 2
+a21 1
+              resonance => $b % 48 >= 32 ? 0.6 : 0.2
+@
+
+
+1.32
+log
+@Thu Jun  5 14:40:54 2008
+@
+text
+@d2 2
+a3 2
+# a..eb.a...ab.a..
+#       ^
+d9 1
+a9 1
+    $string .= reverse(shrink($string));
+d18 1
+a18 1
+              shape => 0.99, volume => 0.05,
+@
+
+
+1.31
+log
+@Thu Jun  5 14:40:54 2008
+@
+text
+@d3 1
+a3 1
+#     ^
+@
+
+
+1.30
+log
+@Thu Jun  5 14:37:53 2008
+@
+text
+@d1 3
+a3 3
+# a.zeb.e.
+# a.zeb.e...azbe..
+#              ^
+d9 1
+a9 2
+    $string .= shrink($string);
+
+d17 1
+@
+
+
+1.29
+log
+@Thu Jun  5 14:37:51 2008
+@
+text
+@d3 1
+a3 1
+#            ^
+a17 1
+              vowel => $chr,
+@
+
+
+1.28
+log
+@Thu Jun  5 14:37:40 2008
+@
+text
+@d2 2
+a3 2
+# a!zeb!e!!!ebza!!
+#    ^
+d9 1
+a9 2
+    $string .= reverse(shrink($string));
+    $string =~ s/\./!/g;
+@
+
+
+1.27
+log
+@Sat Apr 12 17:26:04 2008
+@
+text
+@d1 4
+a4 4
+# a...b...
+# a...b.....a.b...
+#     ^
+my @@v = ('i', 'e', '', '', '', '', '','');
+d9 3
+a11 1
+    $string .= shrink($string);
+d19 1
+a19 1
+#              vowel => $v[rand @@v], loops => 1 + rand(0.9),
+@
+
+
+1.26
+log
+@Wed Feb 20 19:59:47 2008
+@
+text
+@d3 1
+a3 1
+# ^
+d17 1
+a17 1
+              vowel => $v[rand @@v], loops => 1 + rand(0.9),
+@
+
+
+1.25
+log
+@Wed Jul 11 00:18:05 2007
+@
+text
+@d17 1
+a17 1
+              #vowel => $v[rand @@v], loops => 1 + rand(0.9),
+@
+
+
+1.24
+log
+@Wed Jul 11 00:14:11 2007
+@
+text
+@d3 1
+a3 1
+#     ^
+d16 1
+a16 1
+    $self->t({sample => "drumtraks/"  . ord($chr),
+@
+
+
+1.23
+log
+@Wed Jul 11 00:14:10 2007
+@
+text
+@d3 1
+a3 1
+#             ^
+@
+
+
+1.22
+log
+@Thu Apr 26 13:25:35 2007
+@
+text
+@d3 1
+a3 1
+# ^
+d15 1
+d23 1
+a23 1
+    $self->vsite($chr eq 'a' ? 0.05 : 0.1);
+@
+
+
+1.21
+log
+@Thu Apr 26 13:25:25 2007
+@
+text
+@d1 2
+a2 2
+# a...
+# a....a..
+@
+
+
+1.20
+log
+@Sun Jan 14 21:41:37 2007
+@
+text
+@d1 3
+a3 3
+# a...d...
+# a...d.....a.d...
+#     ^
+d17 1
+a17 1
+              shape => 0.99, volume => 0.15,
+@
+
+
+1.19
+log
+@Sun Jan 14 21:41:32 2007
+@
+text
+@d1 3
+a3 3
+# a...d.d.
+# a...d.d...a.dd..
+#           ^
+@
+
+
+1.18
+log
+@Sun Jan 14 21:36:10 2007
+@
+text
+@d1 3
+a3 3
+# a...d...
+# a...d.....a.d...
+# ^
+@
+
+
+1.17
+log
+@Thu Jan  4 23:16:05 2007
+@
+text
+@d1 3
+a3 3
+# a.a.a.a.d...d...
+# a.a.a.a.d...d.......aaaad.d.....
+#             ^
+d17 1
+a17 1
+              shape => 0.99, volume => 0.65,
+@
+
+
+1.16
+log
+@Thu Jan  4 23:09:40 2007
+@
+text
+@d3 1
+a3 1
+#                           ^
+@
+
+
+1.15
+log
+@Thu Jan  4 23:09:37 2007
+@
+text
+@d3 1
+a3 1
+#                       ^
+@
+
+
+1.14
+log
+@Thu Jan  4 23:09:35 2007
+@
+text
+@d3 1
+a3 1
+# ^
+@
+
+
+1.13
+log
+@Thu Jan  4 23:04:25 2007
+@
+text
+@d1 3
+a3 3
+# a...d...
+# a...d.....a.d...
+#             ^
+@
+
+
+1.12
+log
+@Thu Jan  4 23:03:51 2007
+@
+text
+@d3 1
+a3 1
+#     ^
+@
+
+
+1.11
+log
+@Thu Jan  4 23:03:33 2007
+@
+text
+@d3 1
+a3 1
+#             ^
+d17 1
+a17 1
+              shape => rand(3), volume => 0.65,
+@
+
+
+1.10
+log
+@Thu Jan  4 23:03:28 2007
+@
+text
+@d17 1
+a17 1
+#             shape => rand(3), volume => 0.65,
+@
+
+
+1.9
+log
+@Thu Jan  4 23:02:32 2007
+@
+text
+@d3 1
+a3 1
+# ^
+d18 2
+a19 1
+              cutoff => $b % 32 > 8 ? 2000 : 4000, resonance => 0.6
+@
+
+
+1.8
+log
+@Sun Aug 20 19:47:20 2006
+@
+text
+@d3 1
+a3 1
+#             ^
+d7 1
+d17 2
+a18 1
+              shape => rand(3), volume => 0.65
+@
+
+
+1.7
+log
+@Thu Jul 13 19:51:58 2006
+@
+text
+@d3 1
+a3 1
+# ^
+d16 1
+a16 1
+              shape => rand(0.9), volume => 0.65
+@
+
+
+1.6
+log
+@Fri May 19 21:46:58 2006
+@
+text
+@d3 1
+a3 1
+#     ^
+d9 1
+a9 1
+    $self->line(1, $string);n
+@
+
+
+1.5
+log
+@Mon Mar 27 00:13:46 2006
+@
+text
+@d9 1
+a9 1
+    $self->line(1, $string);
+d16 1
+a16 1
+              shape => rand(0.9), volume => 0.5
+@
+
+
+1.4
+log
+@Sat Jan 28 17:10:56 2006
+@
+text
+@d15 2
+a16 2
+              volume => 1, vowel => $v[rand @@v], loops => 1 + rand(0.9),
+              shape => rand(0.9), volume => 1.1
+@
+
+
+1.3
+log
+@Sat Jan 28 17:03:12 2006
+@
+text
+@d3 1
+a3 1
+# ^
+@
+
+
+1.2
+log
+@Sat Jan 28 17:00:27 2006
+@
+text
+@d3 1
+a3 1
+#     ^
+d19 1
+a19 1
+    $self->vsite();
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d19 1
+@

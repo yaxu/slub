@@ -1,0 +1,13 @@
+
+This example lets you play pentatonic scales by using the ASCII
+keyboard on your machine.  Under Linux, just type "make" in this
+directory to run the example.
+
+To test this program under Macintosh OS X, copy the Makefile.osx file
+to Makefile, and then type "make".
+
+To test this program under IRIX, HPUX, or FreeBSD, see the Makefile
+for modification details.
+
+The ascii driver isn't compatible with Windows, so this example
+doesn't work.

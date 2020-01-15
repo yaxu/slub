@@ -1,0 +1,249 @@
+#         
+#    O    
+#  ./z\.  
+#   ( )   
+#         
+
+my $set = 'gabba';
+my $crackle = 100;
+my $gain = 100;
+my $ts = 30;
+my @yseq;
+
+my $sounds = {head => {sample => 0,
+                       mod => 6
+                      },
+              body => {sample => 1,
+                       mod => 4
+                       },
+              arms => {sample => 2,
+                       mod => 3
+                      },
+              legs => {sample => 3,
+                       mod => 4
+                       }
+             };
+
+my $current = {head => ['default'],
+               body => ['default'],
+               arms => ['wave'],
+               legs => ['default'],
+              };
+
+my $bodyparts =
+  {
+   head => {default => [['','   O   ']],
+            leftright => [['','   O   '],
+                          ['','   o   '],
+                         ]
+           },
+   body => {
+            default => [['','','   Z   ']],
+            spin => [
+                     ['','','   Z   '],
+                     ['','','   z   '],
+                     ['','','   Z   '],
+                     ['','','   z   '],
+                     ['','','   Z   '],
+                     ['','','   Z   '],
+                     ['','','   Z   '],
+                     ['','','   Z   '],
+                    ]
+           },
+   arms => {
+            default => [['',
+                         '       ',
+                         ' ./ \. '
+                        ]
+                       ],
+            flap => [
+                     ['',
+                      '       ',
+                      ' ./ \. '
+                              ],
+                     ['','.__ __. ',
+                     ],
+                    ],
+            feelie => [
+                       ['',
+                        '       ',
+                        ' ./ \. '
+                       ],
+                       ['',
+                        '       ',
+                        ' ,/ \, '
+                       ],
+                    ],
+            curl => [
+                     ['       ',
+                      '       ',
+                      ' ./ \. '
+                     ],
+                     ['       ',
+                      '.__    ',
+                      '    \. '
+                     ],
+                     ['   .   ',
+                      '  (    ',
+                      '    \. '
+                     ],
+                     ['       ',
+                      '.__    ',
+                      '    \. '
+                     ],
+                     ['       ',
+                      '       ',
+                      ' ./ \. '
+                     ],
+                     ['',
+                      '    __.',
+                      ' ./    '
+                     ],
+                     ['   .   ',
+                      '    )  ',
+                      ' ./    '
+                     ],
+                     ['',
+                      '    __.',
+                      ' ./    '
+                     ],
+                    ],
+            wave => [
+                     ['   .   ',
+                      '.__ )  ',
+                     ],
+                     ['     . ',
+                      '.__ /  ',
+                     ],
+                     [' .     ',
+                      '  \ __.',
+                     ],
+                     ['   .   ',
+                      '  ( __.',
+                     ],
+                     [' .     ',
+                      '  \ __.',
+                     ],
+                     ['     . ',
+                      '.__ /  ',
+                     ],
+                    ]
+           },
+   legs  => {
+             default => [['','','','  / \  ']],
+             wobble => [['','','','  / \ '],
+                        ['','','','  ( )  '],
+                        ['','','','  / \  '],
+                        ['','','','  ) (  ']
+                       ],
+             strut => [
+                       ['','','','  ( \  '],
+                       ['','','','  / )  ']
+                      ]
+            }
+  };
+
+
+sub on_interpret {
+    my $self = shift;
+    $self->init_samples($set);
+    change();
+}
+
+##
+
+sub bang {
+    my $self = shift;
+
+    #$self->save("cephalic");
+    my $tick = $self->{bangs};
+
+    foreach my $y (0 .. 4) {
+        $self->code->[$y] = '#         ';
+    }
+    my $samples = $self->{samples};
+    while (my ($part, $positions) = each %$bodyparts) {
+        my $position = $positions->{$current->{$part}->[0]};
+        my $point = $tick % @$position;
+
+        unless ($part eq 'default') {
+            unless ($point % $sounds->{$part}->{mod}) {
+               $self->trigger({sample => $samples->[$sounds->{$part}->{sample} 
+                                                    % $samples
+                                                   ],
+                               ts      => $ts,
+                               crackle => $crackle,
+                               gain    => $gain,
+                              }
+                             );
+            }
+        }
+        
+        my $to_place = $position->[$point];
+        $self->place($to_place);
+    }
+    $self->modified;
+}
+
+##
+
+sub place {
+    my ($self, $position) = @_;
+    my $y = 0;
+    foreach my $line (@$position) {
+        my $x = 0;
+        foreach my $x (0 .. (length($line) - 1)) {
+            if (substr($self->{code}->[$y], $x + 2, 1) eq ' ') {
+                substr($self->{code}->[$y], $x + 2, 1, substr($line, $x, 1));
+            }
+        }
+        ++$y;
+    }
+}
+
+##
+
+sub change {
+    my $self = shift;
+    while (my ($part, $positions) = each %$bodyparts) {
+        my @names = keys %$positions;
+        $current->{$part} = [$names[rand @names]];
+    }
+}
+
+##
+
+sub down {
+    my $self = shift;
+    push @yseq, $yseq[-1] + 1
+      if $yseq[-1] < 20;
+}
+
+##
+
+sub up {
+    my $self = shift;
+    push @yseq, $yseq[-1] - 1
+      if $yseq[-1] > 0;
+}
+
+##
+
+sub save {
+    my $self = shift;
+    my $fn = shift;
+    if (not open(FH, ">./scala/$fn")) {
+      $self->message("couldn't write to $fn");
+    }
+    else {
+        print(FH join("\n", @{$self->code}));
+        print(FH "\n");
+        close(FH);
+    }
+    #$self->message("saved.");
+    $self->code->[1] =~ s/(\d+)/$1 + 1/e;
+}
+
+##
+
+1;

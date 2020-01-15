@@ -1,0 +1,18 @@
+sub bang {
+    my $self = shift;
+    $self->{foo} ||= 1;
+    if ($self->{bangs} % 64 == 0) {
+       $self->{foo} -= 0.1;
+       $self->{foo} = 1 if $self->{foo} < 0.5;
+    }
+    $self->t({sample => "made/4", volume => 0.001, delay => 0.9,
+              delay2 => 0.4, loops => 1, speed => $self->{foo},
+             }
+            )
+        if $self->{bangs} % 16 == 12;
+    $self->t({sample => "made/2", volume => 0.001})
+        if $self->{bangs} % 16 == 6;
+    $self->t({sample => "made/0", volume => 0.001})
+        if $self->{bangs} % 16 == 0;
+
+}

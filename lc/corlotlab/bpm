@@ -1,0 +1,8 @@
+my $bpm = 200;
+sub bang {
+    my $self = shift;
+    unless ($self->{foo} == $bpm) {
+      $self->bpm($bpm);
+      $self->{foo} = $bpm;
+    }
+}

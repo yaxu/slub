@@ -1,0 +1,17 @@
+# 1512
+
+sub bang {
+    my $self = shift;
+    if ($self->{bangs} % 8 == 0) {
+        $self->midi(41);
+    }
+    $self->code->[0] = "# $self->{bangs}\n";
+    $self->modified;
+}
+
+
+
+
+
+
+

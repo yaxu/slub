@@ -1,0 +1,17 @@
+sub bang {
+    my $self = shift;
+    $self->{seq} ||= [0, 2, 4, 6];
+    $self->{rate} ||= 0;
+    if (($self->{bangs} % 32 < 16) and ($self->{bangs} % 3 == 0)) {
+        $self->trigger({sample => "latibro/0",
+                        rate   => $self->{rate},
+                        ts     => 150,
+                       }
+                      );
+    }
+    
+    if ($self->{bangs} % 32 == 2) {
+       $self->{rate} = 20 + ($self->{seq}->[0]);
+       push(@{$self->{seq}}, shift(@{$self->{seq}}));
+    }
+}
